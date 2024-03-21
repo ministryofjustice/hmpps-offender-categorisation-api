@@ -1,6 +1,6 @@
 {
   "role": {
-    "name": "hmpps-template-kotlin"
+    "name": "offender-categorisation-api"
   },
   "customDimensions": {
     "service.version": "${BUILD_NUMBER}"

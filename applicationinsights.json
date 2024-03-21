@@ -1,6 +1,6 @@
 {
   "role": {
-    "name": "hmpps-template-kotlin"
+    "name": "offender-categorisation-api"
   },
   "customDimensions": {
     "service.version": "${BUILD_NUMBER}"
@@ -23,7 +23,7 @@
           "attributes": [
             {
               "key": "http.url",
-              "value": "https?://[^/]+/health.*",
+              "value": "http.+/ping|http.+/health|http.+/info",
               "matchType": "regexp"
             }
           ],
