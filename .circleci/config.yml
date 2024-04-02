@@ -14,8 +14,15 @@ parameters:
 jobs:
   validate:
     executor:
-      name: hmpps/java
-      tag: "21.0"
+      name: hmpps/java_postgres
+      jdk_tag: "21.0"
+      postgres_tag: "16"
+      postgres_db: "form-builder"
+      postgres_username: "form-builder"
+      postgres_password: "form-builder"
+    environment:
+      _JAVA_OPTIONS: -Xmx800m -XX:ParallelGCThreads=2 -XX:ConcGCThreads=2 -XX:ParallelGCThreads=2 -Djava.util.concurrent.ForkJoinPool.common.parallelism=2 -Dorg.gradle.daemon=false
+
     steps:
       - checkout
       - restore_cache:
@@ -78,7 +85,7 @@ workflows:
           pipeline_number: <<pipeline.number>>
           context:
             - hmpps-common-vars
-            - hmpps-hdc-api-preprod
+            - hmpps-cat-api-preprod
           requires:
             - request-preprod-approval
           helm_timeout: 5m
