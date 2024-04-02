@@ -10,3 +10,22 @@ hmpps:
     token:
       url: http://localhost:8090/auth/oauth/token
     url: http://localhost:8090/auth
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/form-builder
+    username: form-builder
+    password: form-builder
+
+  flyway:
+    locations: classpath:/migration/common,/migration/{vendor}
+    url: jdbc:postgresql://localhost:5432/form-builder
+    user: form-builder
+    password: form-builder
+    enabled: true
+
+  main:
+    allow-bean-definition-overriding: true
+
+  jpa:
+    show-sql: true
