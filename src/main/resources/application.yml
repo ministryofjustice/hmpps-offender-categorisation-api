@@ -28,8 +28,8 @@ spring:
         registration:
           hmpps-auth:
             provider: hmpps-auth
-            client-id: ${system.client.id}
-            client-secret: ${system.client.secret}
+            client-id: ${api.client.admin.id}
+            client-secret: ${api.client.admin.secret}
             authorization-grant-type: client_credentials
         provider:
           hmpps-auth:

@@ -1,22 +1,17 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.integration
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.microsoft.applicationinsights.TelemetryClient
-import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
-import org.springframework.boot.test.mock.mockito.SpyBean
 import org.springframework.http.HttpHeaders
-import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.jdbc.Sql
+import org.springframework.test.context.DynamicPropertyRegistry
+import org.springframework.test.context.DynamicPropertySource
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.reactive.server.WebTestClient
-import uk.gov.justice.digital.hmpps.hmppshdcapi.integration.wiremock.OAuthMockServer
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.JwtAuthHelper
+import uk.gov.justice.hmpps.hmppsoffendercategorisationapi.config.PostgresContainer
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
@@ -27,44 +22,30 @@ abstract class IntegrationTestBase {
   @Autowired
   lateinit var webTestClient: WebTestClient
 
-
   @Autowired
   protected lateinit var jwtAuthHelper: JwtAuthHelper
 
-  @SpyBean
-  protected lateinit var telemetryClient: TelemetryClient
-
-  @Autowired
-  protected lateinit var objectMapper: ObjectMapper
-
   companion object {
+    private val pgContainer = PostgresContainer.instance
 
-    @JvmField
-    val hmppsAuthMockServer = OAuthMockServer()
-
-    @BeforeAll
     @JvmStatic
-    fun startMocks() {
-      hmppsAuthMockServer.start()
-      hmppsAuthMockServer.stubGrantToken()
+    @DynamicPropertySource
+    fun properties(registry: DynamicPropertyRegistry) {
+      pgContainer?.run {
+        registry.add("spring.datasource.url", pgContainer::getJdbcUrl)
+        registry.add("spring.datasource.username", pgContainer::getUsername)
+        registry.add("spring.datasource.password", pgContainer::getPassword)
+        registry.add("spring.datasource.placeholders.database_update_password", pgContainer::getPassword)
+        registry.add("spring.datasource.placeholders.database_read_only_password", pgContainer::getPassword)
+        registry.add("spring.flyway.url", pgContainer::getJdbcUrl)
+        registry.add("spring.flyway.user", pgContainer::getUsername)
+        registry.add("spring.flyway.password", pgContainer::getPassword)
+      }
     }
-
-    @AfterAll
-    @JvmStatic
-    fun stopMocks() {
-      hmppsAuthMockServer.stop()
-    }
-  }
-
-  init {
-    // Resolves an issue where Wiremock keeps previous sockets open from other tests causing connection resets
-    System.setProperty("http.keepAlive", "false")
   }
 
   protected fun setAuthorisation(
     user: String = "test-client",
     roles: List<String> = listOf(),
   ): (HttpHeaders) -> Unit = jwtAuthHelper.setAuthorisation(user, roles)
-
-  protected fun jsonString(any: Any) = objectMapper.writeValueAsString(any) as String
 }

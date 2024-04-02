@@ -23,6 +23,8 @@ class AuthAwareTokenConverter : Converter<Jwt, AbstractAuthenticationToken> {
   private fun findPrincipal(claims: Map<String, Any?>): String {
     return if (claims.containsKey("user_name")) {
       claims["user_name"] as String
+    } else if (claims.containsKey("user_id")) {
+      claims["user_id"] as String
     } else {
       claims["client_id"] as String
     }
