@@ -13,6 +13,31 @@ spring:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
 
+  profiles:
+    include: stdout
+    group:
+      dev:
+        - "localstack"
+      test:
+        - "localstack"
+        - "stdout"
+
+  security:
+    oauth2:
+      client:
+        registration:
+          hmpps-auth:
+            provider: hmpps-auth
+            client-id: ${system.client.id}
+            client-secret: ${system.client.secret}
+            authorization-grant-type: client_credentials
+        provider:
+          hmpps-auth:
+            token-uri: ${hmpps.auth.token.url}
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${hmpps.auth.url}/.well-known/jwks.json
+
 server:
   port: 8080
   servlet:
@@ -26,6 +51,12 @@ server:
   shutdown: graceful
   error:
     include-message: always
+
+logging:
+  level:
+    org.springframework: INFO
+    org.springframework.security: INFO
+    uk.gov.justice.hmpps: INFO
 
 management:
   endpoints:
