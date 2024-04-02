@@ -13,8 +13,22 @@ import org.springframework.web.servlet.resource.NoResourceFoundException
 
 @RestControllerAdvice
 class HmppsOffenderCategorisationApiExceptionHandler {
+  @ExceptionHandler(AccessDeniedException::class)
+  fun handleAccessDeniedException(e: AccessDeniedException): ResponseEntity<ErrorResponse> {
+    log.info("Access denied exception: {}", e.message)
+    return ResponseEntity
+      .status(HttpStatus.FORBIDDEN)
+      .body(
+        ErrorResponse(
+          status = HttpStatus.FORBIDDEN.value(),
+          userMessage = "Authentication problem. Check token and roles - ${e.message}",
+          developerMessage = e.message,
+        ),
+      )
+  }
+
   @ExceptionHandler(ValidationException::class)
-  fun handleValidationException(e: ValidationException): ResponseEntity<ErrorResponse> = ResponseEntity
+  fun handleValidationException(e: Exception): ResponseEntity<ErrorResponse> = ResponseEntity
     .status(BAD_REQUEST)
     .body(
       ErrorResponse(
@@ -25,15 +39,15 @@ class HmppsOffenderCategorisationApiExceptionHandler {
     ).also { log.info("Validation exception: {}", e.message) }
 
   @ExceptionHandler(NoResourceFoundException::class)
-  fun handleNoResourceFoundException(e: NoResourceFoundException): ResponseEntity<ErrorResponse> = ResponseEntity
+  fun handleValidationException(e: NoResourceFoundException): ResponseEntity<ErrorResponse> = ResponseEntity
     .status(NOT_FOUND)
     .body(
       ErrorResponse(
         status = NOT_FOUND,
-        userMessage = "No resource found failure: ${e.message}",
+        userMessage = "Validation failure: ${e.message}",
         developerMessage = e.message,
       ),
-    ).also { log.info("No resource found exception: {}", e.message) }
+    ).also { log.info("Validation exception: {}", e.message) }
 
   @ExceptionHandler(Exception::class)
   fun handleException(e: Exception): ResponseEntity<ErrorResponse> = ResponseEntity
