@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: 'jdbc:h2:mem:pathfinder-db;MODE=PostgreSQL'
+    url: 'jdbc:h2:mem:form-builder;MODE=PostgreSQL'
     username: sa
     password:
 
@@ -19,10 +19,6 @@ spring:
       enabled: true
   jpa:
     show-sql: true
-
-graceful:
-  shutdown:
-    enabled: false
 
 # It won't use this, as the resource server uses a local file for its JWT public key but it needs a value.
 hmpps:

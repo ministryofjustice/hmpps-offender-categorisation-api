@@ -13,5 +13,5 @@ hmpps:
 api:
   client:
     admin:
-      id: christian-ruffy-1
-      secret: hBo+T(D52UeM*LU=en;oI!h!k+oBok.YV!D0m!KJGuxKE90J+a4T:mS!9IV0
+      id: todo
+      secret: todo

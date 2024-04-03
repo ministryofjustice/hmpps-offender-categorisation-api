@@ -104,7 +104,7 @@ workflows:
           slack_channel_name: << pipeline.parameters.releases-slack-channel >>
           context:
             - hmpps-common-vars
-            - hmpps-hdc-api-prod
+            - hmpps-cat-api-prod
           requires:
             - request-prod-approval
           helm_timeout: 5m
