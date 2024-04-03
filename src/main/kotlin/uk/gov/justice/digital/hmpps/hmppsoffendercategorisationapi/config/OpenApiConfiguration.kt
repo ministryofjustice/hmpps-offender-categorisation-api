@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.hmppshdcapi.config
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config
 
 import io.swagger.v3.oas.models.OpenAPI
 import io.swagger.v3.oas.models.info.Contact

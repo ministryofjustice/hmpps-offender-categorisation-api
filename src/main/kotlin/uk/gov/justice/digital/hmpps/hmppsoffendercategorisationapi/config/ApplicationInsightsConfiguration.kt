@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.hmppshdcapi.config
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config
 
 import com.microsoft.applicationinsights.TelemetryClient
 import org.springframework.context.annotation.Bean

@@ -11,7 +11,7 @@ import org.springframework.test.context.DynamicPropertySource
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.reactive.server.WebTestClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.JwtAuthHelper
-import uk.gov.justice.hmpps.hmppsoffendercategorisationapi.config.PostgresContainer
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.PostgresContainer
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)

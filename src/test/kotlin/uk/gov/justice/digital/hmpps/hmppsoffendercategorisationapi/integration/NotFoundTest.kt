@@ -1,7 +1,7 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.integration
 
 import org.junit.jupiter.api.Test
-import uk.gov.justice.digital.hmpps.hmppshdcapi.config.ROLE_HDC_ADMIN
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.ROLE_HDC_ADMIN
 
 class NotFoundTest : IntegrationTestBase() {
 

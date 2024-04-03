@@ -1,4 +1,4 @@
-package uk.gov.justice.hmpps.hmppsoffendercategorisationapi.config
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

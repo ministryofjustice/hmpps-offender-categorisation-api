@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.hmppshdcapi.config
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.cache.CacheManager

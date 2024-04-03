@@ -1,4 +1,4 @@
-package uk.gov.justice.hmpps.hmppsoffendercategorisationapi.config
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config
 
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.containers.wait.strategy.Wait

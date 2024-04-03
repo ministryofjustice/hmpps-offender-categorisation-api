@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.hmppshdcapi.config
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config
 
 import org.springframework.core.convert.converter.Converter
 import org.springframework.security.authentication.AbstractAuthenticationToken
