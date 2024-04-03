@@ -11,9 +11,9 @@ object PostgresContainer {
     if (checkPostgresRunning().not()) {
       PostgreSQLContainer<Nothing>("postgres").apply {
         withEnv("HOSTNAME_EXTERNAL", "localhost")
-        withDatabaseName("pathfinder_int_db")
-        withUsername("pathfinder")
-        withPassword("pathfinder")
+        withDatabaseName("form-builder_int_db")
+        withUsername("form-builder")
+        withPassword("form-builder")
         setWaitStrategy(Wait.forListeningPort())
         withReuse(true)
 
