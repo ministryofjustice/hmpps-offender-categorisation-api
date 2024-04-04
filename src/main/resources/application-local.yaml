@@ -13,5 +13,5 @@ hmpps:
 api:
   client:
     admin:
-      id: todo
-      secret: todo
+      id: [ID]
+      secret: [SECRET]
