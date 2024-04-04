@@ -28,10 +28,10 @@ generic-service:
   #     [name of environment variable as seen by app]: [key of kubernetes secret to load]
 
   namespace_secrets:
-    hmpps-offender-categorisation-api:
+    offender-categorisation-api:
       APPINSIGHTS_INSTRUMENTATIONKEY: "APPINSIGHTS_INSTRUMENTATIONKEY"
-      SYSTEM_CLIENT_ID: "SYSTEM_CLIENT_ID"
-      SYSTEM_CLIENT_SECRET: "SYSTEM_CLIENT_SECRET"
+      API_CLIENT_ADMIN_ID: "API_CLIENT_ADMIN_ID"
+      API_CLIENT_ADMIN_SECRET: "API_CLIENT_ADMIN_SECRET"
     dps-rds-instance-output:
       DB_SERVER: "rds_instance_address"
       DB_NAME: "database_name"
