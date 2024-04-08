@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: 'jdbc:h2:mem:form-builder;MODE=PostgreSQL'
+    username: sa
+    password:
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          public-key-location: classpath:local-public-key.pub
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration/common
+
+  h2:
+    console:
+      enabled: true
+  jpa:
+    show-sql: true
+
+# It won't use this, as the resource server uses a local file for its JWT public key but it needs a value.
+hmpps:
+  auth:
+    url: https://sign-in-dev.hmpps.service.justice.gov.uk/auth
+
+manage:
+  users:
+    api:
+      url: http://dummy.value

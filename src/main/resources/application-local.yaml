@@ -1,0 +1,17 @@
+server:
+  shutdown: immediate
+
+management.endpoint:
+  health.cache.time-to-live: 0
+  info.cache.time-to-live: 0
+
+hmpps:
+  auth:
+    url: http://localhost:8090/auth
+
+# Update to your personal token with correct permissions
+api:
+  client:
+    admin:
+      id: [ID]
+      secret: [SECRET]
