@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import kotlinx.serialization.Serializable
 import java.time.ZonedDateTime
 
 /*
@@ -14,6 +15,7 @@ import java.time.ZonedDateTime
       "escapeListAlerts": [],// REDACT as is from Nomis
       "escapeRiskAlerts": [],// REDACT as is from Nomis
  */
+@Serializable
 data class Violence(
   val nomsId: String?,
   val riskType: String?,

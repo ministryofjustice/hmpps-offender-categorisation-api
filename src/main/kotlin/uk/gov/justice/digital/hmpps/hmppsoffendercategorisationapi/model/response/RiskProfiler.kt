@@ -1,11 +1,14 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import io.hypersistence.utils.hibernate.type.json.JsonType
 import jakarta.persistence.Column
+import kotlinx.serialization.Serializable
 import org.hibernate.annotations.Type
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.Violence
 import java.time.ZonedDateTime
 
+@Serializable
 data class RiskProfiler(
   val offenderNo: String,
 
@@ -32,5 +35,6 @@ data class RiskProfiler(
 
   val violence: Violence?,
 
-  val executeDateTime: ZonedDateTime
+  // datetime
+  val executeDateTime: String
 )

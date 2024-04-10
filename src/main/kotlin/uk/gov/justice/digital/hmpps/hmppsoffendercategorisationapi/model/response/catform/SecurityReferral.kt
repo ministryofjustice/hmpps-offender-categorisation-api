@@ -1,20 +1,22 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform
 
-import java.time.ZonedDateTime
+import kotlinx.serialization.SerialName
 
 class SecurityReferral(
 
-  val id: Long = -1,
+  val id: String?,
 
+  @SerialName("offender_no")
   val offenderNo: String,
 
-  val userId: String = "",
+  @SerialName("offender_no")
+  val prisonId: String?,
 
-  val prisonId: String,
+  val status: String?,
 
-  val status: String,
+  @SerialName("raised_date")
+  val raisedDate: String?,
 
-  val raisedDate: ZonedDateTime? = null,
-
-  val processedDate: ZonedDateTime? = null,
+  @SerialName("processed_date")
+  val processedDate: String,
 )

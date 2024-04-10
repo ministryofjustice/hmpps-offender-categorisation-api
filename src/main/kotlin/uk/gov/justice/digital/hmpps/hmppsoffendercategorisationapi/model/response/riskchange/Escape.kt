@@ -1,12 +1,6 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.Table
-import java.time.ZonedDateTime
+import kotlinx.serialization.Serializable
 
 /*
       "activeEscapeList": false,// REDACT as is from Nomis
@@ -14,6 +8,7 @@ import java.time.ZonedDateTime
       "escapeListAlerts": [],// REDACT as is from Nomis
       "escapeRiskAlerts": [],// REDACT as is from Nomis
  */
+@Serializable
 data class Escape(
   val nomsId: String?,
   val riskType: String?,

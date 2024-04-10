@@ -1,14 +1,28 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange
 
-import java.time.ZonedDateTime
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class RiskChange (
-  val id:Long,
+
+  val id: String,
+
+  @SerialName("old_profile")
   val oldProfile: Profile?,
+
+  @SerialName("new_profile")
   val newProfile: Profile?,
+
+  @SerialName("offender_no")
   val offenderNo: String,
-  val userId: String,
+
+  @SerialName("prison_id")
   val prisonId: String,
+
   val status: String,
-  val raisedDate: ZonedDateTime
+
+  // datetime
+  @SerialName("raised_date")
+  val raisedDate: String
 )

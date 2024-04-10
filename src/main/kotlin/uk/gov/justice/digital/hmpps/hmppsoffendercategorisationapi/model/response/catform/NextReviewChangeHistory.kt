@@ -1,19 +1,28 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.time.ZonedDateTime
 import java.util.Date
 
+@Serializable
 class NextReviewChangeHistory(
 
-  val id: Long = -1,
+  val id: String?,
 
-  val bookingId: Long,
+  @SerialName("booking_id")
+  val bookingId: Long?,
 
-  val nextReviewDate: Date,
+  @SerialName("offender_no")
+  val offenderNo: String?,
 
-  val reason: String,
+  // date
+  @SerialName("next_review_date")
+  val nextReviewDate: String?,
 
-  val changeDate: ZonedDateTime? = null,
+  val reason: String?,
 
-  val changedBy: String = "",
+  // datetime
+  @SerialName("change_date")
+  val changeDate: String?,
 )
