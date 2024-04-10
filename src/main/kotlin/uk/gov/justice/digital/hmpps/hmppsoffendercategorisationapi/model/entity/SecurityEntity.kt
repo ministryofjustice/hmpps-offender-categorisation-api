@@ -13,13 +13,13 @@ import java.time.ZonedDateTime
  */
 @Entity
 @Table(name = "security_referral")
-class SecurityReferralEntity(
+class SecurityEntity(
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   val id: Long = -1,
 
   @Column(name = "offender_no")
-  val offenderNo: Long,
+  val offenderNo: String,
 
   /**
    * REDACTED
@@ -28,7 +28,7 @@ class SecurityReferralEntity(
   val userId: String = "",
 
   @Column(name = "prison_id")
-  val prisonId: Long,
+  val prisonId: String,
 
   /*
   Security referral status enum
@@ -36,7 +36,7 @@ class SecurityReferralEntity(
   val status: String,
 
   @Column(name = "raised_date")
-  val raisedDate:  ZonedDateTime? = null,
+  val raisedDate: ZonedDateTime? = null,
 
   @Column(name = "processed_date")
   val processedDate: ZonedDateTime? = null,

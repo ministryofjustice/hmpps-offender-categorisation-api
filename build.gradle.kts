@@ -23,6 +23,8 @@ dependencies {
   implementation("io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations:2.1.0")
   implementation("io.hypersistence:hypersistence-utils-hibernate-60:3.7.3")
 
+  implementation("com.vladmihalcea:hibernate-types-60:2.21.1")
+
   implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:0.2.2")
 
   // Database dependencies

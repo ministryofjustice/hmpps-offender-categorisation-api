@@ -9,9 +9,6 @@ import jakarta.persistence.Table
 import java.sql.Date
 import java.time.ZonedDateTime
 
-/**
- * Audit Entity
- */
 @Entity
 @Table(name = "lite_category")
 class LiteCategoryEntity(
@@ -29,7 +26,7 @@ class LiteCategoryEntity(
   val offenderNo: String,
 
   @Column(name = "prison_id")
-  val prisonId: Long,
+  val prisonId: String,
 
   @Column(name = "created_date")
   val createdDate: ZonedDateTime? = null,

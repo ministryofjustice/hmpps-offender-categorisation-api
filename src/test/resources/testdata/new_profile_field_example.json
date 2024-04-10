@@ -1,0 +1,34 @@
+{
+  "soc": {
+    "nomsId": "G0048VL",
+    "riskType": "SOC",
+    "transferToSecurity": true,
+    "provisionalCategorisation": "C"
+  },
+  "escape": {
+    "nomsId": "G0048VL",
+    "riskType": "ESCAPE",
+    "activeEscapeList": false,
+    "activeEscapeRisk": false,
+    "escapeListAlerts": [],
+    "escapeRiskAlerts": [],
+    "provisionalCategorisation": "C"
+  },
+  "violence": {
+    "nomsId": "G0048VL",
+    "riskType": "VIOLENCE",
+    "displayAssaults": true,
+    "numberOfAssaults": 1,
+    "notifySafetyCustodyLead": false,
+    "numberOfSeriousAssaults": 0,
+    "provisionalCategorisation": "C",
+    "veryHighRiskViolentOffender": false
+  },
+  "extremism": {
+    "nomsId": "G0048VL",
+    "riskType": "EXTREMISM",
+    "notifyRegionalCTLead": false,
+    "increasedRiskOfExtremism": false,
+    "provisionalCategorisation": "C"
+  }
+}
