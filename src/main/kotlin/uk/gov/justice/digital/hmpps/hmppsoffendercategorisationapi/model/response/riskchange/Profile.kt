@@ -6,11 +6,11 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 @Serializable
 data class Profile(
 
-  val soc: RedactedSection?,
+  val soc: RedactedSection? = null,
 
-  val escape: Escape?,
+  val escape: Escape? = null,
 
-  val violence: Violence?,
+  val violence: Violence? = null,
 
-  val extremism: RedactedSection?
+  val extremism: RedactedSection? = null
 )

@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class LifeProfile(
-  val life: Boolean,
-  val nomsId: String,
-  val riskType: String,
-  val provisionalCategorisation: String
+  val life: Boolean? = null,
+  val nomsId: String? = null,
+  val riskType: String? = null,
+  val provisionalCategorisation: String? = null
 )

@@ -17,13 +17,13 @@ import java.time.ZonedDateTime
  */
 @Serializable
 data class Violence(
-  val nomsId: String?,
-  val riskType: String?,
-  val displayAssaults: Boolean?,
-  val numberOfAssaults: Int?,
-  val notifySafetyCustodyLead: Boolean?,
-  val numberOfSeriousAssaults: Int?,
-  val numberOfNonSeriousAssaults: Int?,
-  val provisionalCategorisation: String?,
-  val veryHighRiskViolentOffender: Boolean?,
+  val nomsId: String? = null,
+  val riskType: String? = null,
+  val displayAssaults: Boolean? = null,
+  val numberOfAssaults: Int? = null,
+  val notifySafetyCustodyLead: Boolean? = null,
+  val numberOfSeriousAssaults: Int? = null,
+  val numberOfNonSeriousAssaults: Int? = null,
+  val provisionalCategorisation: String? = null,
+  val veryHighRiskViolentOffender: Boolean? = null,
 )

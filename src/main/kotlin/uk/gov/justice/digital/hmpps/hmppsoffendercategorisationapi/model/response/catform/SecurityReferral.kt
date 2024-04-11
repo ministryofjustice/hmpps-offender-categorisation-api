@@ -1,7 +1,9 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform
 
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 class SecurityReferral(
 
   val id: String?,
@@ -9,7 +11,7 @@ class SecurityReferral(
   @SerialName("offender_no")
   val offenderNo: String,
 
-  @SerialName("offender_no")
+  @SerialName("prison_id")
   val prisonId: String?,
 
   val status: String?,

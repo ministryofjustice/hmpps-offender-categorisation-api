@@ -9,20 +9,20 @@ data class RiskChange (
   val id: String,
 
   @SerialName("old_profile")
-  val oldProfile: Profile?,
+  val oldProfile: Profile? = null,
 
   @SerialName("new_profile")
-  val newProfile: Profile?,
+  val newProfile: Profile? = null,
 
   @SerialName("offender_no")
-  val offenderNo: String,
+  val offenderNo: String? = null,
 
   @SerialName("prison_id")
-  val prisonId: String,
+  val prisonId: String? = null,
 
-  val status: String,
+  val status: String? = null,
 
   // datetime
   @SerialName("raised_date")
-  val raisedDate: String
+  val raisedDate: String? = null
 )

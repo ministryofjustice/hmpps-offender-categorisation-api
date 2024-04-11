@@ -11,19 +11,19 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 
 @Serializable
 data class RiskProfile(
-  val history: RedactedSection?,
+  val history: RedactedSection? = null,
 
   val offences: List<String>? = emptyList(),
 
-  val socProfile: RedactedSection?,
+  val socProfile: RedactedSection? = null,
 
-  val lifeProfile: LifeProfile,
+  val lifeProfile: LifeProfile? = null,
 
-  val escapeProfile: Escape,
+  val escapeProfile: Escape? = null,
 
-  val violenceProfile: Violence,
+  val violenceProfile: Violence? = null,
 
-  val extremismProfile: RedactedSection?,
+  val extremismProfile: RedactedSection? = null,
 )
 
 

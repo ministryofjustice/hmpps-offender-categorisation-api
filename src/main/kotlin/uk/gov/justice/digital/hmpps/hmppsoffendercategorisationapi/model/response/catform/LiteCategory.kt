@@ -9,44 +9,44 @@ data class LiteCategory(
 
   val category: String,
 
-  val supervisorCategory: String,
+  val supervisorCategory: String? = null,
 
   @SerialName("offender_no")
-  val offenderNo: String?,
+  val offenderNo: String? = null,
 
   @SerialName("prison_id")
-  val prisonId: String,
+  val prisonId: String? = null,
 
   // datetime
   @SerialName("created_date")
-  val createdDate: String?,
+  val createdDate: String? = null,
 
   // datetime
   @SerialName("approved_date")
-  val approvedDate: String?,
+  val approvedDate: String? = null,
 
   @SerialName("assessment_committee")
-  val assessmentCommittee: String,
+  val assessmentCommittee: String? = null,
 
   @SerialName("assessment_comment")
-  val assessmentComment: String,
+  val assessmentComment: String? = null,
 
   // date
   @SerialName("next_review_date")
-  val nextReviewDate: String?,
+  val nextReviewDate: String? = null,
 
   @SerialName("placement_prison_id")
-  val placementPrisonId: String,
+  val placementPrisonId: String? = null,
 
   @SerialName("approved_committee")
-  val approvedCommittee: String,
+  val approvedCommittee: String? = null,
 
   @SerialName("approved_placement_prison_id")
-  val approvedPlacementPrisonId: String,
+  val approvedPlacementPrisonId: String? = null,
 
   @SerialName("approved_placement_comment")
-  val approvedPlacementComment: String,
+  val approvedPlacementComment: String? = null,
 
   @SerialName("approved_comment")
-  val approvedComment: String,
+  val approvedComment: String? = null,
 )

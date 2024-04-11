@@ -8,21 +8,21 @@ import java.util.Date
 @Serializable
 class NextReviewChangeHistory(
 
-  val id: String?,
+  val id: String? = null,
 
   @SerialName("booking_id")
-  val bookingId: Long?,
+  val bookingId: String? = null,
 
   @SerialName("offender_no")
-  val offenderNo: String?,
+  val offenderNo: String? = null,
 
   // date
   @SerialName("next_review_date")
-  val nextReviewDate: String?,
+  val nextReviewDate: String? = null,
 
-  val reason: String?,
+  val reason: String? = null,
 
   // datetime
   @SerialName("change_date")
-  val changeDate: String?,
+  val changeDate: String? = null,
 )

@@ -17,7 +17,7 @@ import java.time.ZonedDateTime
  */
 @Serializable
 data class Extremism(
-  val nomsId: String?,
-  val riskType: String?,
-  val provisionalCategorisation: String?,
+  val nomsId: String? = null,
+  val riskType: String? = null,
+  val provisionalCategorisation: String? = null,
 )
