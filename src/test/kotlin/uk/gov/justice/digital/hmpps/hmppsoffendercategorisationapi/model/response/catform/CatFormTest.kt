@@ -28,4 +28,28 @@ class CatFormTest: BaseSarUnitTest()  {
 
     println(result)
   }
+
+  @Test
+  fun `should deserialise form_response`() {
+
+    val formResponse = Companion.jsonStringToMap(Companion.loadTestData("/form/form_response.json"))
+
+    val result = Json.encodeToString(formResponse)
+    val expectedResult = Companion.loadExpectedOutput("form_response.json")
+    println(result)
+
+    assert(result == expectedResult)
+  }
+
+  @Test
+  fun `should deserialise form_response with recat section`() {
+
+    val formResponse = Companion.jsonStringToMap(Companion.loadTestData("/form/form_response_recat.json"))
+
+    val result = Json.encodeToString(formResponse)
+    val expectedResult = Companion.loadExpectedOutput("form_response_recat.json")
+    println(result)
+
+    assert(result == expectedResult)
+  }
 }

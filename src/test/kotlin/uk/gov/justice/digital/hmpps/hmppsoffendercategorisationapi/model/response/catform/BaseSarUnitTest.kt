@@ -1,5 +1,8 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform
 
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonObject
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.riskprofile.LifeProfile
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.common.RedactedSection
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.Escape
@@ -24,6 +27,12 @@ open class BaseSarUnitTest {
     fun loadExpectedOutput(filename: String): String {
       val inputStream: InputStream = File("src/test/resources/expectedoutput/$filename").inputStream()
       return inputStream.bufferedReader().use { it.readText() }
+    }
+
+    fun jsonStringToMap(json: String): Map<String, JsonElement> {
+      val data = Json.parseToJsonElement(json)
+      require(data is JsonObject) { "Only Json Objects can be converted to a Map!" }
+      return data
     }
 
     protected val riskProfile = RiskProfile(
@@ -59,7 +68,7 @@ open class BaseSarUnitTest {
     protected val catForm = CatForm(
       id = "1598",
       formResponse = FormResponse(
-        id = 1,
+        ratings = null,
       ),
       bookingId = "771697",
       status = "APPROVED",
