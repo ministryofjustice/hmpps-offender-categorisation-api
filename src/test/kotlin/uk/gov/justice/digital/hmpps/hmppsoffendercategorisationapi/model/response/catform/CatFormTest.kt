@@ -5,12 +5,14 @@ import kotlinx.serialization.json.Json
 import org.junit.jupiter.api.Test
 class CatFormTest: BaseSarUnitTest()  {
   @Test
-  fun `should match acceptance criteria test data`() {
+  fun `should match acceptance criteria example response data`() {
 
-    val str = Json.encodeToString(catForm)
+    val result = Json.encodeToString(catForm)
+    val expectedResult = Companion.loadExpectedOutput("catForm.json")
 
-    System.out.println(str)
+    println(result)
 
+    assert(result == expectedResult)
   }
 
   @Test

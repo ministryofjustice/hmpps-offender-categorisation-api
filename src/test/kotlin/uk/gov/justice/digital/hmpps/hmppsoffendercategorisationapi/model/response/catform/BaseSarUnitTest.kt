@@ -11,8 +11,6 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.Violence
 import java.io.File
 import java.io.InputStream
-import java.time.LocalDate.now
-import java.time.ZonedDateTime
 
 
 open class BaseSarUnitTest {
@@ -67,25 +65,23 @@ open class BaseSarUnitTest {
     @JvmStatic
     protected val catForm = CatForm(
       id = "1598",
-      formResponse = FormResponse(
-        ratings = null,
-      ),
+      formResponse = Companion.jsonStringToMap(Companion.loadTestData("/form/form_response.json")),
       bookingId = "771697",
       status = "APPROVED",
-      referredDateTime = ZonedDateTime.now().toString(),
+      referredDate = "2023-03-21 15:08:50.982 +0000",
       sequenceNo = "1",
       riskProfile = riskProfile,
       prisonId = "WMI",
       offenderNo = "G8105VR",
-      startDate = ZonedDateTime.now().toString(),
-      securityReviewedDate = ZonedDateTime.now().toString(),
-      approvalDate = now().toString(),
+      startDate = "2023-03-21 15:09:00.266 +0000",
+      securityReviewedDate = "2023-03-21 15:09:00.266 +0000",
+      approvalDate = "2023-03-21",
       catType = "INITIAL",
       nomisSequenceNo = "1900-01-19",
-      assessmentDate = now().toString(),
-      reviewReason = now().toString(),
-      dueByDate = now().toString(),
-      cancelledDate = now().toString(),
+      assessmentDate = "2023-03-21",
+      reviewReason = "MANUAL",
+      dueByDate = "1977-12-16",
+      cancelledDate = "1977-12-17",
     )
 
     @JvmStatic
