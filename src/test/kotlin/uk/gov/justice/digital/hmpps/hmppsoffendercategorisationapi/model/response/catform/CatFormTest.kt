@@ -18,7 +18,7 @@ class CatFormTest: BaseSarUnitTest()  {
 
     val riskProfileObj =
       Json{ ignoreUnknownKeys = true }.decodeFromString<RiskProfile>(
-        Companion.loadTestData("risk_profile.json")
+        Companion.loadTestData("/form/risk_profile.json")
       )
 
     val result = Json.encodeToString(riskProfileObj)

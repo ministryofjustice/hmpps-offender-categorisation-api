@@ -1,12 +1,10 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform
 
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.Test
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.riskprofile.LifeProfile
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.common.RedactedSection
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.Escape
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.Profile
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.RiskChange
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.Violence
 import java.io.File
 import java.io.InputStream
@@ -18,12 +16,12 @@ open class BaseSarUnitTest {
 
   protected companion object {
 
-    fun loadTestData(filename: String) : String {
-      val inputStream: InputStream = File("src/test/resources/tabledata/form/$filename").inputStream()
+    fun loadTestData(filename: String): String {
+      val inputStream: InputStream = File("src/test/resources/testdata/$filename").inputStream()
       return inputStream.bufferedReader().use { it.readText() }
     }
 
-    fun loadExpectedOutput(filename: String) : String {
+    fun loadExpectedOutput(filename: String): String {
       val inputStream: InputStream = File("src/test/resources/expectedoutput/$filename").inputStream()
       return inputStream.bufferedReader().use { it.readText() }
     }
@@ -79,6 +77,49 @@ open class BaseSarUnitTest {
       reviewReason = now().toString(),
       dueByDate = now().toString(),
       cancelledDate = now().toString(),
+    )
+
+    @JvmStatic
+    protected val riskChange = RiskChange(
+      id = "1",
+      oldProfile = Profile(
+        soc = null,
+        escape = Escape(
+          nomsId = "G0048VL",
+          riskType = "ESCAPE",
+          provisionalCategorisation = "C",
+        ),
+        violence = Violence(
+          nomsId = "G0048VL",
+          riskType = "VIOLENCE",
+          displayAssaults = true,
+          numberOfAssaults = 0,
+          provisionalCategorisation = "C",
+          veryHighRiskViolentOffender = false,
+        ),
+        extremism = null,
+      ),
+      newProfile = Profile(
+        soc = null,
+        escape = Escape(
+          nomsId = "G0048VL",
+          riskType = "ESCAPE",
+          provisionalCategorisation = "C",
+        ),
+        violence = Violence(
+          nomsId = "G0048VL",
+          riskType = "VIOLENCE",
+          displayAssaults = true,
+          numberOfAssaults = 0,
+          provisionalCategorisation = "C",
+          veryHighRiskViolentOffender = false,
+        ),
+        extremism = null,
+      ),
+      offenderNo = "",
+      prisonId = "BAI",
+      status = "REVIEWED_FIRST",
+      raisedDate = "2019-09-18 10:45:34.166 +0100"
     )
   }
 }
