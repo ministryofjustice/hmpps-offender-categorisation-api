@@ -7,5 +7,5 @@ data class LifeProfile(
   val life: Boolean? = null,
   val nomsId: String? = null,
   val riskType: String? = null,
-  val provisionalCategorisation: String? = null
+  val provisionalCategorisation: String? = null,
 )

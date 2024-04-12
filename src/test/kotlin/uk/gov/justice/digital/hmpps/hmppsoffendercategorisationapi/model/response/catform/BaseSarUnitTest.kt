@@ -12,7 +12,6 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 import java.io.File
 import java.io.InputStream
 
-
 open class BaseSarUnitTest {
 
   protected companion object {
@@ -33,6 +32,32 @@ open class BaseSarUnitTest {
       return data
     }
 
+    @JvmStatic
+    protected val violenceProfile = Violence(
+      nomsId = "G8105VR",
+      riskType = "VIOLENCE",
+      displayAssaults = false,
+      numberOfAssaults = 0,
+      notifySafetyCustodyLead = false,
+      numberOfSeriousAssaults = 0,
+      provisionalCategorisation = "C",
+      numberOfNonSeriousAssaults = 0,
+      veryHighRiskViolentOffender = false,
+    )
+
+    @JvmStatic
+    protected val riskProfilerViolence = Violence(
+      nomsId = "G2194GK",
+      riskType = "VIOLENCE",
+      displayAssaults = false,
+      numberOfAssaults = 0,
+      notifySafetyCustodyLead = false,
+      numberOfSeriousAssaults = 0,
+      provisionalCategorisation = "C",
+      numberOfNonSeriousAssaults = 0,
+      veryHighRiskViolentOffender = false,
+    )
+
     protected val riskProfile = RiskProfile(
       history = RedactedSection(),
       offences = null,
@@ -48,24 +73,14 @@ open class BaseSarUnitTest {
         riskType = "ESCAPE",
         provisionalCategorisation = "C",
       ),
-      violenceProfile = Violence(
-        nomsId = "G8105VR",
-        riskType = "VIOLENCE",
-        displayAssaults = false,
-        numberOfAssaults = 0,
-        notifySafetyCustodyLead = false,
-        numberOfSeriousAssaults = 0,
-        provisionalCategorisation = "C",
-        numberOfNonSeriousAssaults = 0,
-        veryHighRiskViolentOffender = false,
-      ),
+      violenceProfile,
       extremismProfile = RedactedSection(),
     )
 
     @JvmStatic
     protected val catForm = CatForm(
       id = "1598",
-      formResponse = Companion.jsonStringToMap(Companion.loadTestData("/form/form_response.json")),
+      formResponse = jsonStringToMap(loadTestData("/form/form_response.json")),
       bookingId = "771697",
       status = "APPROVED",
       referredDate = "2023-03-21 15:08:50.982 +0000",
@@ -85,10 +100,40 @@ open class BaseSarUnitTest {
     )
 
     @JvmStatic
+    protected val security = SecurityReferral(
+      id = "2",
+      offenderNo = "G2550VO",
+      prisonId = "LPI",
+      status = "REFERRED",
+      raisedDate = "2019-09-19 13:33:21.123 +0100",
+      processedDate = "2019-09-19 13:36:46.335 +0100",
+    )
+
+    @JvmStatic
+    protected val liteCategory = LiteCategory(
+      sequence = "5",
+      category = "U",
+      supervisorCategory = "U",
+      offenderNo = "G0089UO",
+      prisonId = "LPI",
+      createdDate = "2020-05-18 13:58:42.435 +0100",
+      approvedDate = "2020-05-18 01:00:00.000 +0100",
+      assessmentCommittee = "OCA",
+      assessmentComment = "Testing the creation of an unsentenced",
+      nextReviewDate = "2020-11-18",
+      placementPrisonId = "ASI",
+      approvedCommittee = "OCA",
+      approvedPlacementPrisonId = "ASI",
+      approvedPlacementComment = "approved placement comment",
+      approvedComment = "approval comment",
+
+
+      )
+
+    @JvmStatic
     protected val riskChange = RiskChange(
       id = "1",
       oldProfile = Profile(
-        soc = null,
         escape = Escape(
           nomsId = "G0048VL",
           riskType = "ESCAPE",
@@ -102,10 +147,9 @@ open class BaseSarUnitTest {
           provisionalCategorisation = "C",
           veryHighRiskViolentOffender = false,
         ),
-        extremism = null,
       ),
       newProfile = Profile(
-        soc = null,
+        soc = RedactedSection(),
         escape = Escape(
           nomsId = "G0048VL",
           riskType = "ESCAPE",
@@ -119,12 +163,12 @@ open class BaseSarUnitTest {
           provisionalCategorisation = "C",
           veryHighRiskViolentOffender = false,
         ),
-        extremism = null,
+        extremism = RedactedSection(),
       ),
       offenderNo = "",
       prisonId = "BAI",
       status = "REVIEWED_FIRST",
-      raisedDate = "2019-09-18 10:45:34.166 +0100"
+      raisedDate = "2019-09-18 10:45:34.166 +0100",
     )
   }
 }

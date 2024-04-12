@@ -13,5 +13,5 @@ data class CategorisationTool(
   val riskChange: RiskChange? = null,
   val security: SecurityReferral? = null,
   val nextReviewChangeHistory: NextReviewChangeHistory? = null,
-  val liteCategory: LiteCategory? = null
+  val liteCategory: LiteCategory? = null,
 )

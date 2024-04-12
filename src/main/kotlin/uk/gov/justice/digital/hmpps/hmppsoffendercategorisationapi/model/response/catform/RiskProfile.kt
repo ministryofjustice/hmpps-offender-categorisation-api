@@ -1,9 +1,7 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform
 
-import com.nimbusds.jose.shaded.gson.JsonObject
-import io.hypersistence.utils.hibernate.type.json.JsonType
 import kotlinx.serialization.Serializable
-import org.hibernate.annotations.Type
+import kotlinx.serialization.json.JsonElement
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.riskprofile.LifeProfile
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.common.RedactedSection
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.Escape
@@ -13,7 +11,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 data class RiskProfile(
   val history: RedactedSection? = null,
 
-  val offences: List<String>? = emptyList(),
+  val offences: List<Map<String, JsonElement>>? = emptyList(),
 
   val socProfile: RedactedSection? = null,
 

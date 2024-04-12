@@ -3,5 +3,4 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respon
 import kotlinx.serialization.Serializable
 
 @Serializable
-class RedactedSection {
-}
+class RedactedSection

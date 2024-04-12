@@ -1,40 +1,34 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response
 
-import com.fasterxml.jackson.annotation.JsonFormat
-import io.hypersistence.utils.hibernate.type.json.JsonType
-import jakarta.persistence.Column
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.hibernate.annotations.Type
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.common.RedactedSection
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.Violence
-import java.time.ZonedDateTime
 
 @Serializable
 data class RiskProfiler(
+
+  @SerialName("offender_no")
   val offenderNo: String,
 
   /**
-   * empty json definition
+   * Redacted - empty json definition
    */
-  @Type(JsonType::class)
-  @Column(columnDefinition = "jsonb")
-  val escape: String?,
+  val escape: RedactedSection?,
 
   /**
-   * empty json definition
+   * Redacted - empty json definition
    */
-  @Type(JsonType::class)
-  @Column(columnDefinition = "jsonb")
-  val extremism: String?,
+  val extremism: RedactedSection?,
 
   /**
-   * empty json definition
+   * Redacted - empty json definition
    */
-  @Type(JsonType::class)
-  @Column(columnDefinition = "jsonb")
-  val soc: String?,
+  val soc: RedactedSection?,
 
   val violence: Violence?,
 
   // datetime
-  val executeDateTime: String
+  @SerialName("execute_date_time")
+  val executeDateTime: String,
 )

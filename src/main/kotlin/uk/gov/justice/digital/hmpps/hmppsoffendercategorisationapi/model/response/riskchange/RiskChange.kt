@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RiskChange (
+data class RiskChange(
 
   val id: String,
 
@@ -24,5 +24,5 @@ data class RiskChange (
 
   // datetime
   @SerialName("raised_date")
-  val raisedDate: String? = null
+  val raisedDate: String? = null,
 )

@@ -11,7 +11,10 @@ import java.util.UUID
 @Component
 class JwtAuthHelper(private val keyPair: KeyPair) {
 
-  fun setAuthorisation(user: String = "hmpps-offender-categorisation-api-admin", roles: List<String> = listOf()): (HttpHeaders) -> Unit {
+  fun setAuthorisation(
+    user: String = "hmpps-offender-categorisation-api-admin",
+    roles: List<String> = listOf(),
+  ): (HttpHeaders) -> Unit {
     val token = createJwt(subject = user, scope = listOf("read"), expiryTime = Duration.ofHours(1L), roles = roles)
     return { it.set(HttpHeaders.AUTHORIZATION, "Bearer $token") }
   }

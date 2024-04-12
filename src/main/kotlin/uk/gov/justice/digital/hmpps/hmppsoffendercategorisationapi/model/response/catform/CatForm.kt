@@ -10,7 +10,7 @@ data class CatForm(
   val id: String?,
 
   @SerialName("form_response")
-  val formResponse: Map<String,JsonElement>,
+  val formResponse: Map<String, JsonElement>,
 
   @SerialName("booking_id")
   val bookingId: String?,
@@ -64,5 +64,5 @@ data class CatForm(
 
   // date
   @SerialName("cancelled_date")
-  val cancelledDate: String?
+  val cancelledDate: String?,
 )

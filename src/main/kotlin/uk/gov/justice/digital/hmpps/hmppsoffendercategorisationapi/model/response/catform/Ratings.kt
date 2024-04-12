@@ -3,6 +3,6 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respon
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Ratings (
-  val id: String? = null
+data class Ratings(
+  val id: String? = null,
 )

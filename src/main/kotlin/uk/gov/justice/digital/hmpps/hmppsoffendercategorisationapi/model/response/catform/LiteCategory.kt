@@ -49,4 +49,5 @@ data class LiteCategory(
 
   @SerialName("approved_comment")
   val approvedComment: String? = null,
+  val sequence: String,
 )

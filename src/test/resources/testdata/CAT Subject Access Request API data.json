@@ -1,0 +1,441 @@
+{
+    "categorisationTool": {
+    "catForm": {
+        "id": "1598",
+        "form_response": {
+            "ratings": {
+                "escapeRating": {
+                    "escapeCatB": "No",
+                    "escapeCatBText": "dets ",
+                    "escapeOtherEvidence": "Yes",
+                    "escapeOtherEvidenceText": "escape risk"
+                },
+                "securityBack": {
+                    "catB": "No"
+                },
+                "securityInput": {
+                    "securityInputNeeded": "Yes",
+                    "securityInputNeededText": "security info"
+                },
+                "furtherCharges": {
+                    "furtherCharges": "Yes",
+                    "furtherChargesCatB": "No",
+                    "furtherChargesText": "some minor offences"
+                },
+                "nextReviewDate": {
+                    "date": "19/06/2023",
+                    "indeterminate": "false"
+                },
+                "violenceRating": {
+                    "seriousThreat": "No",
+                    "seriousThreatText" : "details",
+                    "highRiskOfViolence": "No",
+                    "highRiskOfViolenceText": "details"
+                },
+                "extremismRating": {
+                    "previousTerrorismOffences": "Yes",
+                    "previousTerrorismOffencesText": "terror info"
+                },
+                "offendingHistory": {
+                    "previousConvictions": "No",
+                    "previousConvictionsText": "details"
+                }
+            },
+            "security": {
+                "review": {
+                    "securityReview": "nothing to report"
+                }
+            },
+            "supervisor": {
+                "review": {
+                    "proposedCategory": "C",
+                    "otherInformationText": "DGDG",
+                    "supervisorOverriddenCategory": "B",
+                    "supervisorCategoryAppropriate": "No",
+                    "supervisorOverriddenCategoryText": "DFFG",
+                    "previousOverrideCategoryText": "hjkh"
+                },
+                "confirmBack": {
+                    "isRead": true,
+                    "messageText": "placeholder",
+                    "confirmation": "Yes",
+                    "supervisorName": "Simon Williams"
+                }
+            },
+            "categoriser": {
+                "review": {},
+                "provisionalCategory": {
+                    "suggestedCategory": "B",
+                    "overriddenCategory": "D",
+                    "categoryAppropriate": "No",
+                    "otherInformationText": "",
+                    "overriddenCategoryText": "some stuff"
+                }
+            },
+            "openConditions": {
+                "tprs": {
+                    "tprsSelected": "Yes"
+                },
+                "riskLevels": {
+                    "likelyToAbscond": "Yes",
+                    "likelyToAbscondText":"Details"
+                },
+                "riskOfHarm": {
+                    "seriousHarm": "Yes",
+                    "harmManaged":"Yes",
+                    "harmManagedText":"Details"
+                },
+                "furtherCharges": {
+                    "furtherCharges": "Yes",
+                    "furtherChargesText":"Details",
+                    "increasedRisk":"Yes"
+                },
+                "sexualOffences": {
+                    "haveTheyBeenEverConvicted": "Yes",
+                    "canTheRiskBeManaged": "Yes",
+                    "howTheRiskCanBeManaged": "details"
+                },
+                "foreignNational": {
+                    "isForeignNational": "Yes",
+                    "formCompleted":"Yes",
+                    "dueDeported" : "Yes",
+                    "exhaustedAppeal" : "Yes"
+
+                },
+                "previousSentences": {
+                    "releasedLastFiveYears": "No",
+                    "sevenOrMoreYears" : "Yes"
+                },
+                "earliestReleaseDate": {
+                    "threeOrMoreYears": "No",
+                    "justify": "Yes",
+                    "justifyText" : "details"
+                },
+                "victimContactScheme": {
+                    "vcsOptedFor": "No",
+                    "contactedVLO": "Yes",
+                    "vloResponseText": "details"
+                },
+                "notRecommended": {
+                    "stillRefer": "No"
+                },
+                "provisionalCategory": {
+                    "suggestedCategory": "C",
+                    "overriddenCategory": "D",
+                    "openConditionsCategoryAppropriate": "No",
+                    "otherInformationText": "",
+                    "overriddenCategoryText": "some stuff"
+                },
+                "openConditionsNotSuitable": {}
+            },
+            "recat": {
+                "riskAssessment" : {
+                    "lowerCategory":"Details",
+                    "higherCategory":"Details",
+                    "otherRelevant":"Yes",
+                    "otherRelevantText":"details"
+
+                },
+                "higherSecurityReview" : {
+                    "behaviour":"details",
+                    "steps":"details",
+                    "transfer":"Yes",
+                    "transferText":"Details",
+                    "conditions":"Details"
+                },
+                "miniHigherSecurityReview":{
+                  "conditions":"details"
+                },
+                "decision": {
+                    "category": "C"
+                },
+                "oasysInput": {
+                    "date": "27/04/2022",
+                    "oasysRelevantInfo": "Yes",
+                    "oasysInputText":"Details"
+                },
+                "securityInput": {
+                    "securityNoteNeeded": "No",
+                    "securityInputNeeded": "Yes",
+                    "securityInputNeededText":"details"
+                },
+                "securityBack": {},
+                "review": {},
+                "nextReviewDate": {
+                    "date": "20/04/2024",
+                    "indeterminate": "true"
+                },
+                "riskProfileChangeDetail":{
+                    "confirmation":"Yes"
+                },
+                "fasttrackEligibility": {
+                    "earlyCatD":"Yes",
+                    "increaseCategory":"Yes"
+                },
+                "fasttrackRemain": {
+                    "remainCatC":"Yes"
+                },
+                "fasttrackProgress" : {
+                    "progressText":"details"
+                },
+                "prisonerBackground": {
+                    "offenceDetails": "fgh"
+                }
+            },
+            "openConditionsRequested": true
+        },
+        "booking_id": "771697",
+        "user_id": "OFADERO_GEN",
+        "status": "APPROVED",
+        "assigned_user_id": "OFADERO_GEN",
+        "referred_date": "2023-03-21 15:08:50.982 +0000",
+        "referred_by": "OFADERO_GEN",
+        "sequence_no": "1",
+        "risk_profile": {
+            "history": {
+                "catAType": null,
+                "finalCat": null,
+                "catAEndYear": null,
+                "releaseYear": null,
+                "catAStartYear": null
+            },
+            "offences": [
+                {
+                    "caseId": 953207,
+                    "bookingId": 771697,
+                    "courtDate": "1977-10-21",
+                    "mostSerious": true,
+                    "offenceCode": "COML025",
+                    "statuteCode": "COML",
+                    "primaryResultCode": "1002",
+                    "offenceDescription": "Murder - victim one year of age or older",
+                    "primaryResultConviction": true,
+                    "primaryResultDescription": "Imprisonment",
+                    "secondaryResultConviction": false
+                },
+                {
+                    "caseId": 953207,
+                    "bookingId": 771697,
+                    "courtDate": "1977-10-21",
+                    "mostSerious": false,
+                    "offenceCode": "SX03017",
+                    "statuteCode": "SX03",
+                    "primaryResultCode": "1002",
+                    "offenceDescription": "Assault a girl under 13 by touching - SOA 2003",
+                    "primaryResultConviction": true,
+                    "primaryResultDescription": "Imprisonment",
+                    "secondaryResultConviction": false
+                }
+            ],
+            "socProfile": {
+                "nomsId": "G8105VR",
+                "riskType": "SOC",
+                "transferToSecurity": false,
+                "provisionalCategorisation": "C"
+            },
+            "lifeProfile": {
+                "life": true,
+                "nomsId": "G8105VR",
+                "riskType": "LIFE",
+                "provisionalCategorisation": "B"
+            },
+            "escapeProfile": {
+                "nomsId": "G8105VR",
+                "riskType": "ESCAPE",
+                "activeEscapeList": false,
+                "activeEscapeRisk": false,
+                "escapeListAlerts": [],
+                "escapeRiskAlerts": [],
+                "provisionalCategorisation": "C"
+            },
+            "violenceProfile": {
+                "nomsId": "G8105VR",
+                "riskType": "VIOLENCE",
+                "displayAssaults": false,
+                "numberOfAssaults": 0,
+                "notifySafetyCustodyLead": false,
+                "numberOfSeriousAssaults": 0,
+                "provisionalCategorisation": "C",
+                "numberOfNonSeriousAssaults": 0,
+                "veryHighRiskViolentOffender": false
+            },
+            "extremismProfile": {
+                "nomsId": "G8105VR",
+                "riskType": "EXTREMISM",
+                "notifyRegionalCTLead": false,
+                "increasedRiskOfExtremism": false,
+                "provisionalCategorisation": "C"
+            }
+        },
+        "prison_id": "WMI",
+        "offender_no": "G8105VR",
+        "start_date": "2023-03-21 15:08:03.399 +0000",
+        "security_reviewed_by": "OFADERO_GEN",
+        "security_reviewed_date": "2023-03-21 15:09:00.266 +0000",
+        "approval_date": "2023-03-21",
+        "cat_type": "INITIAL",
+        "nomis_sequence_no": "1900-01-19",
+        "assessment_date": "2023-03-21",
+        "approved_by": "OFADERO_GEN",
+        "assessed_by": "OFADERO_GEN",
+        "review_reason": "MANUAL",
+        "due_by_date": "1977-12-16",
+        "cancelled_date": "1977-12-17",
+        "cancelled_by": "OFADERO_GEN"
+    },
+    "riskChange": {
+        "id": "1",
+        "old_profile": {
+            "soc": {
+                "nomsId": "G0048VL",
+                "riskType": "SOC",
+                "transferToSecurity": false,
+                "provisionalCategorisation": "C"
+            },
+            "escape": {
+                "nomsId": "G0048VL",
+                "riskType": "ESCAPE",
+                "activeEscapeList": false,
+                "activeEscapeRisk": false,
+                "escapeListAlerts": [],
+                "escapeRiskAlerts": [],
+                "provisionalCategorisation": "C"
+            },
+            "violence": {
+                "nomsId": "G0048VL",
+                "riskType": "VIOLENCE",
+                "displayAssaults": true,
+                "numberOfAssaults": 0,
+                "notifySafetyCustodyLead": false,
+                "numberOfSeriousAssaults": 0,
+                "provisionalCategorisation": "C",
+                "veryHighRiskViolentOffender": false
+            },
+            "extremism": {
+                "nomsId": "G0048VL",
+                "riskType": "EXTREMISM",
+                "notifyRegionalCTLead": false,
+                "increasedRiskOfExtremism": false,
+                "provisionalCategorisation": "C"
+            }
+        },
+        "new_profile": {
+            "soc": {
+                "nomsId": "G0048VL",
+                "riskType": "SOC",
+                "transferToSecurity": false,
+                "provisionalCategorisation": "C"
+            },
+            "escape": {
+            "nomsId": "G0048VL",
+            "riskType": "ESCAPE",
+            "activeEscapeList": false,
+            "activeEscapeRisk": false,
+            "escapeListAlerts": [],
+            "escapeRiskAlerts": [],
+            "provisionalCategorisation": "C"
+            },
+            "violence": {
+                "nomsId": "G0048VL",
+                "riskType": "VIOLENCE",
+                "displayAssaults": true,
+                "numberOfAssaults": 0,
+                "notifySafetyCustodyLead": false,
+                "numberOfSeriousAssaults": 0,
+                "provisionalCategorisation": "C",
+                "veryHighRiskViolentOffender": false
+            },
+            "extremism": {
+                "nomsId": "G0048VL",
+                "riskType": "EXTREMISM",
+                "notifyRegionalCTLead": false,
+                "increasedRiskOfExtremism": false,
+                "provisionalCategorisation": "C"
+            }
+        },
+        "offender_no": "G0048VL",
+        "user_id": "LBENNETT_GEN",
+        "prison_id": "BAI",
+        "status": "REVIEWED_FIRST",
+        "raised_date": "2019-09-18 10:45:34.166 +0100"
+    },
+    "security": {
+        "id": "2",
+        "offender_no": "G2550VO",
+        "user_id": "SRENDELL_GEN",
+        "prison_id": "LPI",
+        "status": "REFERRED",
+        "raised_date": "2019-09-19 13:33:21.123 +0100",
+        "processed_date": "2019-09-19 13:36:46.335 +0100"
+    },
+    "nextReviewChangeHistory": {
+        "id": "1",
+        "booking_id": "1146373",
+        "offender_no": "G7919UD",
+        "next_review_date": "2021-12-12",
+        "reason": "testing",
+        "change_date": "2021-09-22 10:25:44.395 +0100",
+        "changed_by": "CGLYNN_ADM"
+    },
+    "liteCategory": {
+        "sequence": "5",
+        "category": "U",
+        "supervisor_category": "U",
+        "offender_no": "G0089UO",
+        "prison_id": "LPI",
+        "created_date": "2020-05-18 13:58:42.435 +0100",
+        "approved_date": "2020-05-18 01:00:00.000 +0100",
+        "assessed_by": "LBENNETT_GEN",
+        "approved_by": "CT_SUP",
+        "assessment_committee": "OCA",
+        "assessment_comment": "Testing the creation of an unsentenced",
+        "next_review_date": "2020-11-18",
+        "placement_prison_id": "ASI",
+        "approved_committee": "OCA",
+        "approved_placement_prison_id": "ASI",
+        "approved_placement_comment": "approved placement comment",
+        "approved_comment": "approval comment"
+    }
+},
+
+"riskProfiler": {
+    "offender_no":"G2194GK",
+"escape":
+{
+    "nomsId":"G2194GK",
+    "provisionalCategorisation":"C",
+    "activeEscapeList":false,
+    "activeEscapeRisk":false,
+    "escapeRiskAlerts":[],
+    "escapeListAlerts":[],
+    "riskType":"ESCAPE"
+},
+"extremism":{
+    "nomsId":"G2194GK",
+    "provisionalCategorisation":"C",
+    "notifyRegionalCTLead":false,
+    "increasedRiskOfExtremism":false,
+    "riskType":"EXTREMISM"
+},
+"soc" :{
+    "nomsId":"G2194GK",
+    "provisionalCategorisation":"C",
+    "transferToSecurity":false,
+    "riskType":"SOC"
+    },
+
+"violence":{
+    "nomsId":"G2194GK",
+    "provisionalCategorisation":"C",
+    "veryHighRiskViolentOffender":false,
+    "notifySafetyCustodyLead":false,
+    "displayAssaults":false,
+    "numberOfAssaults":0,
+    "numberOfSeriousAssaults":0,
+    "numberOfNonSeriousAssaults":0,
+    "riskType":"VIOLENCE"
+},
+"execute_date_time": "2021-07-27 02:18:22.10621"
+}
+}
+        
