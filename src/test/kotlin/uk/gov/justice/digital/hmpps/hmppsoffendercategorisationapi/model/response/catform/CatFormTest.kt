@@ -18,7 +18,6 @@ class CatFormTest : BaseSarUnitTest() {
 
   @Test
   fun `should deserialise risk_profile json field to object class`() {
-
     val riskProfileObj =
       Json { ignoreUnknownKeys = true }.decodeFromString<RiskProfile>(
         Companion.loadTestData("/form/risk_profile.json"),
@@ -34,7 +33,6 @@ class CatFormTest : BaseSarUnitTest() {
 
   @Test
   fun `should deserialise form_response`() {
-
     val formResponse = Companion.jsonStringToMap(Companion.loadTestData("/form/form_response.json"))
 
     val result = Json.encodeToString(formResponse)
@@ -46,7 +44,6 @@ class CatFormTest : BaseSarUnitTest() {
 
   @Test
   fun `should deserialise form_response with recat section`() {
-
     val formResponse = Companion.jsonStringToMap(Companion.loadTestData("/form/form_response_recat.json"))
 
     val result = Json.encodeToString(formResponse)
