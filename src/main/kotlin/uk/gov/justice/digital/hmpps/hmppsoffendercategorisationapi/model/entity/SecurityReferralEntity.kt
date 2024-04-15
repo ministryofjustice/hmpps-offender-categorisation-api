@@ -13,7 +13,7 @@ import java.time.ZonedDateTime
  */
 @Entity
 @Table(name = "security_referral")
-class SecurityEntity(
+class SecurityReferralEntity(
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   val id: Long = -1,

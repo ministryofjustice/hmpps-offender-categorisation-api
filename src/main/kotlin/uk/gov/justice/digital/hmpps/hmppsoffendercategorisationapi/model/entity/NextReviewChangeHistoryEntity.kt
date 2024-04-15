@@ -17,8 +17,11 @@ class NextReviewChangeHistoryEntity(
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   val id: Long = -1,
 
+  @Column(name = "offender_no")
+  val offenderNo: String,
+
   @Column(name = "booking_id")
-  val bookingId: Long,
+  val bookingId: String,
 
   @Column(name = "next_review_date")
   val nextReviewDate: Date,
