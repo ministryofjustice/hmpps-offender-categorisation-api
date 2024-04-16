@@ -18,7 +18,7 @@ import java.io.InputStream
 
 open class BaseSarUnitTest {
 
-  protected companion object {
+  companion object {
 
     fun loadTestData(filename: String): String {
       val inputStream: InputStream = File("src/test/resources/testdata/$filename").inputStream()

@@ -38,6 +38,7 @@ fun transform(riskChange: RiskChangeEntity): RiskChange {
       bookingId = entity.bookingId,
       reason = entity.reason,
       offenderNo = entity.offenderNo,
+      nextReviewDate = entity.nextReviewDate.toString(),
       changeDate = entity.changeDate.toString(),
     )
   }
@@ -85,12 +86,12 @@ fun transform(riskChange: RiskChangeEntity): RiskChange {
       formResponse = entity.formResponse?.let { json.decodeFromString<Map<String, JsonElement>>(it) },
       riskProfile = entity.riskProfile?.let { json.decodeFromString<RiskProfile>(it) },
 
-      cancelledDate = entity.cancelledDate.toString(),
-      approvalDate = entity.approvalDate.toString(),
-      securityReviewedDate = entity.securityReviewedDate.toString(),
-      assessmentDate = entity.assessmentDate.toString(),
-      startDate = entity.startDate.toString(),
-      referredDate = entity.referredDate.toString(),
+      cancelledDate = entity.cancelledDate,
+      approvalDate = entity.approvalDate,
+      securityReviewedDate = entity.securityReviewedDate,
+      assessmentDate = entity.assessmentDate,
+      startDate = entity.startDate,
+      referredDate = entity.referredDate,
       nomisSequenceNo = entity.nomisSequenceNo,
       catType = entity.catType,
       sequenceNo = entity.sequenceNo
