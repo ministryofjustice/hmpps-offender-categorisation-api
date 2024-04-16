@@ -6,9 +6,10 @@ import org.junit.jupiter.api.Test
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.common.RedactedSection
 
 class SarResponseTest : CategorisationToolTest() {
+  private val json = Json { ignoreUnknownKeys = true }
+
   @Test
   fun `should build response to match response defined in acceptance criteria`() {
-
     val sarResponse = Json.encodeToString(sarResponse)
 
     val expectedResult = loadExpectedOutput("sar_response.json")
@@ -18,11 +19,8 @@ class SarResponseTest : CategorisationToolTest() {
     assert(sarResponse == expectedResult)
   }
 
-  private val json = Json { ignoreUnknownKeys = true }
-
   @Test
   fun `should deserialise payload from acceptance criteria`() {
-
     val sarResponseObj =
       json.decodeFromString<SarResponse>(
         loadTestData("CAT Subject Access Request API data.json"),
@@ -37,14 +35,12 @@ class SarResponseTest : CategorisationToolTest() {
 
   @Test
   fun `should allow empty json for sar response`() {
-
     val emptyResponse = Json.encodeToString(SarResponse())
 
     assert(emptyResponse == "{}")
   }
 
   protected companion object {
-
     protected val sarResponse = SarResponse(
       categorisationTool,
       riskProfiler = RiskProfiler(

@@ -6,7 +6,7 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.jdbc.Sql
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.RepositoryTest
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.ResourceTest
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.BaseSarUnitTest
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.FormRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.LiteCategoryRepository
@@ -14,7 +14,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.Ne
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.RiskChangeRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.SecurityReferralRepository
 
-class TransformersTest : RepositoryTest() {
+class TransformersTest : ResourceTest() {
   @Autowired
   lateinit var riskChangeRepository: RiskChangeRepository
 

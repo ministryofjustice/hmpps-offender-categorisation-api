@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.jdbc.Sql
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.RepositoryTest
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.ResourceTest
 
-class NextReviewChangeHistoryRepositoryTest : RepositoryTest() {
+class NextReviewChangeHistoryRepositoryTest : ResourceTest() {
   @Autowired
   lateinit var repository: NextReviewChangeHistoryRepository
 

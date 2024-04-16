@@ -11,4 +11,4 @@ import org.springframework.test.context.jdbc.SqlMergeMode
 @Transactional
 @SqlMergeMode(SqlMergeMode.MergeMode.MERGE)
 @Sql("classpath:repository/reset.sql")
-abstract class RepositoryTest
+abstract class ResourceTest

@@ -4,9 +4,9 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.jdbc.Sql
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.RepositoryTest
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.ResourceTest
 
-class FormRepositoryTest : RepositoryTest() {
+class FormRepositoryTest : ResourceTest() {
   @Autowired
   lateinit var repository: FormRepository
 
