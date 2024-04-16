@@ -28,7 +28,6 @@ class SubjectAccessRequestService(
     fromDate: LocalDate?,
     toDate: LocalDate?,
   ): HmppsSubjectAccessRequestContent? {
-
     return HmppsSubjectAccessRequestContent(
       content = SarResponse(
         categorisationTool = CategorisationTool(
