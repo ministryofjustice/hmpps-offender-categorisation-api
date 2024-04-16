@@ -3,6 +3,7 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respon
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.junit.jupiter.api.Test
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.BaseSarUnitTest
 
 class CatFormTest : BaseSarUnitTest() {
   @Test
@@ -16,10 +17,12 @@ class CatFormTest : BaseSarUnitTest() {
     assert(result == expectedResult)
   }
 
+  private val json = Json { ignoreUnknownKeys = true }
+
   @Test
   fun `should deserialise risk_profile json field to object class`() {
     val riskProfileObj =
-      Json { ignoreUnknownKeys = true }.decodeFromString<RiskProfile>(
+      json.decodeFromString<RiskProfile>(
         Companion.loadTestData("/form/risk_profile.json"),
       )
 

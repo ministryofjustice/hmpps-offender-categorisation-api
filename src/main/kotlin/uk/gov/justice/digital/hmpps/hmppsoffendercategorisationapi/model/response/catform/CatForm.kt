@@ -7,62 +7,62 @@ import kotlinx.serialization.json.JsonElement
 @Serializable
 data class CatForm(
 
-  val id: String?,
+  val id: String? = null,
 
   @SerialName("form_response")
-  val formResponse: Map<String, JsonElement>,
+  val formResponse: Map<String, JsonElement>? = null,
 
   @SerialName("booking_id")
-  val bookingId: String?,
+  val bookingId: String? = null,
 
-  val status: String?,
+  val status: String? = null,
 
   @SerialName("referred_date")
   // datetime
-  val referredDate: String?,
+  val referredDate: String? = null,
 
   @SerialName("sequence_no")
-  val sequenceNo: String?,
+  val sequenceNo: String? = null,
 
   @SerialName("risk_profile")
-  val riskProfile: RiskProfile?,
+  val riskProfile: RiskProfile? = null,
 
   @SerialName("prison_id")
-  val prisonId: String?,
+  val prisonId: String? = null,
 
   @SerialName("offender_no")
-  val offenderNo: String?,
+  val offenderNo: String? = null,
 
   // datetime
   @SerialName("start_date")
-  val startDate: String?,
+  val startDate: String? = null,
 
   // datetime
   @SerialName("security_reviewed_date")
-  val securityReviewedDate: String?,
+  val securityReviewedDate: String? = null,
 
   // datetime
   @SerialName("approval_date")
-  val approvalDate: String?,
+  val approvalDate: String? = null,
 
   @SerialName("cat_type")
-  val catType: String?,
+  val catType: String? = null,
 
   @SerialName("nomis_sequence_no")
-  val nomisSequenceNo: String?,
+  val nomisSequenceNo: String? = null,
 
   // date
   @SerialName("assessment_date")
-  val assessmentDate: String?,
+  val assessmentDate: String? = null,
 
   @SerialName("review_reason")
-  val reviewReason: String?,
+  val reviewReason: String? = null,
 
   // date
   @SerialName("due_by_date")
-  val dueByDate: String?,
+  val dueByDate: String? = null,
 
   // date
   @SerialName("cancelled_date")
-  val cancelledDate: String?,
+  val cancelledDate: String? = null,
 )

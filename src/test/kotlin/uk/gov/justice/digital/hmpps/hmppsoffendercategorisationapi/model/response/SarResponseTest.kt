@@ -1,10 +1,8 @@
-package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response
 
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.junit.jupiter.api.Test
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.RiskProfiler
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.SarResponse
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.common.RedactedSection
 
 class SarResponseTest : CategorisationToolTest() {
@@ -20,11 +18,13 @@ class SarResponseTest : CategorisationToolTest() {
     assert(sarResponse == expectedResult)
   }
 
+  private val json = Json { ignoreUnknownKeys = true }
+
   @Test
   fun `should deserialise payload from acceptance criteria`() {
 
     val sarResponseObj =
-      Json { ignoreUnknownKeys = true }.decodeFromString<SarResponse>(
+      json.decodeFromString<SarResponse>(
         loadTestData("CAT Subject Access Request API data.json"),
       )
 

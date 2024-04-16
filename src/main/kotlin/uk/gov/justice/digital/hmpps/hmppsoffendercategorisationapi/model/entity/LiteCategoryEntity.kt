@@ -69,4 +69,6 @@ class LiteCategoryEntity(
 
   @Column(name = "approved_comment")
   val approvedComment: String,
-)
+
+  val sequence: String,
+  )

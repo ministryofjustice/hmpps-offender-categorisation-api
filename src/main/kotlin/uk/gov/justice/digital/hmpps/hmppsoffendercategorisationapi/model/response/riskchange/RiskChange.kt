@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class RiskChange(
 
-  val id: String,
+  val id: String? = null,
 
   @SerialName("old_profile")
   val oldProfile: Profile? = null,

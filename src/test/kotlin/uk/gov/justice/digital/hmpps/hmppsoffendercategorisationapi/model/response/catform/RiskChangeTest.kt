@@ -3,13 +3,16 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respon
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.junit.jupiter.api.Test
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.BaseSarUnitTest
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.RiskChange
 
 class RiskChangeTest : BaseSarUnitTest() {
+  private val json = Json { ignoreUnknownKeys = true }
+
   @Test
   fun `should match acceptance criteria test data`() {
 
-    val str = Json { ignoreUnknownKeys = true }.encodeToString(riskChange)
+    val str = json.encodeToString(riskChange)
 
     println(str)
 

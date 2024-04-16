@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 class SecurityReferral(
 
-  val id: String?,
+  val id: String? = null,
 
   @SerialName("offender_no")
   val offenderNo: String,
