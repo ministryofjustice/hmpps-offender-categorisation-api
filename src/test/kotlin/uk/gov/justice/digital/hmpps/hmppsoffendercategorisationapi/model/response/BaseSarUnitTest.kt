@@ -17,9 +17,7 @@ import java.io.File
 import java.io.InputStream
 
 open class BaseSarUnitTest {
-
   companion object {
-
     fun loadTestData(filename: String): String {
       val inputStream: InputStream = File("src/test/resources/testdata/$filename").inputStream()
       return inputStream.bufferedReader().use { it.readText() }
@@ -130,9 +128,7 @@ open class BaseSarUnitTest {
       approvedPlacementPrisonId = "ASI",
       approvedPlacementComment = "approved placement comment",
       approvedComment = "approval comment",
-
-
-      )
+    )
 
     @JvmStatic
     protected val riskChange = RiskChange(

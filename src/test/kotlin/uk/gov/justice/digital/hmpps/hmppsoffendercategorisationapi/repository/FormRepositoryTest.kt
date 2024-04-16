@@ -14,7 +14,6 @@ class FormRepositoryTest : RepositoryTest() {
   @Sql("classpath:repository/form.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   fun `Should Find by Offender No`() {
-
     val securityReferral = repository.findByOffenderNo("G8105VR")
 
     Assertions.assertThat(securityReferral.cancelledBy).isEqualTo("SRENDELL_GEN")

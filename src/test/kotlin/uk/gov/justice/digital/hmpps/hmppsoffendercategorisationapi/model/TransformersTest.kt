@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.jdbc.Sql
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.RepositoryTest
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.BaseSarUnitTest
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.*
-
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.FormRepository
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.LiteCategoryRepository
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.NextReviewChangeHistoryRepository
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.RiskChangeRepository
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.SecurityReferralRepository
 
 class TransformersTest : RepositoryTest() {
   @Autowired

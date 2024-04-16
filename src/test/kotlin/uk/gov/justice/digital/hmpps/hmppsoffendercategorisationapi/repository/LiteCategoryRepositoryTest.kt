@@ -14,7 +14,6 @@ class LiteCategoryRepositoryTest : RepositoryTest() {
   @Sql("classpath:repository/lite_category.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   fun `Should Find by Offender No`() {
-
     val securityReferral = repository.findByOffenderNo("G0089UO")
 
     Assertions.assertThat(securityReferral.assessedBy).isEqualTo("LBENNETT_GEN")

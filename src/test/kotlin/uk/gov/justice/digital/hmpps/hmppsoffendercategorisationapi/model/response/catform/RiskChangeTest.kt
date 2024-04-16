@@ -11,16 +11,13 @@ class RiskChangeTest : BaseSarUnitTest() {
 
   @Test
   fun `should match acceptance criteria test data`() {
-
     val str = json.encodeToString(riskChange)
 
     println(str)
-
   }
 
   @Test
   fun `should deserialise risk_change table with only old and new profile json blob field to object class`() {
-
     val riskProfileObj =
       Json { ignoreUnknownKeys = true }.decodeFromString<RiskChange>(
         Companion.loadTestData("tables/risk_change_table.json"),
@@ -29,10 +26,8 @@ class RiskChangeTest : BaseSarUnitTest() {
     val result = Json.encodeToString(riskProfileObj)
     val expectedResult = Companion.loadExpectedOutput("risk_change_table.json")
 
-
     println(result)
 
     assert(result == expectedResult)
-
   }
 }

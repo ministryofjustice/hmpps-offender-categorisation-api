@@ -5,7 +5,11 @@ import org.springframework.transaction.annotation.Transactional
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.CategorisationTool
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.SarResponse
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.transform
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.*
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.FormRepository
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.LiteCategoryRepository
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.NextReviewChangeHistoryRepository
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.RiskChangeRepository
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.SecurityReferralRepository
 import uk.gov.justice.hmpps.kotlin.sar.HmppsPrisonSubjectAccessRequestService
 import uk.gov.justice.hmpps.kotlin.sar.HmppsSubjectAccessRequestContent
 import java.time.LocalDate
@@ -19,11 +23,6 @@ class SubjectAccessRequestService(
   private val liteCategoryRepository: LiteCategoryRepository,
   private val formRepository: FormRepository,
 ) : HmppsPrisonSubjectAccessRequestService {
-
-  companion object {
-    val minDate: LocalDate = LocalDate.EPOCH
-    val maxDate: LocalDate = LocalDate.now()
-  }
 
   override fun getPrisonContentFor(
     prn: String,

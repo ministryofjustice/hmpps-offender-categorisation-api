@@ -8,7 +8,6 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 class CatFormTest : BaseSarUnitTest() {
   @Test
   fun `should match acceptance criteria example response data`() {
-
     val result = Json.encodeToString(catForm)
     val expectedResult = Companion.loadExpectedOutput("catForm.json")
 
@@ -30,8 +29,6 @@ class CatFormTest : BaseSarUnitTest() {
     val expectedResult = Companion.loadExpectedOutput("risk_profile.json")
 
     assert(result == expectedResult)
-
-    println(result)
   }
 
   @Test
