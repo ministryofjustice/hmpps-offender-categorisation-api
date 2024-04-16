@@ -2,12 +2,9 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respon
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import java.time.ZonedDateTime
-import java.util.Date
 
 @Serializable
 class NextReviewChangeHistory(
-
   val id: String? = null,
 
   @SerialName("booking_id")

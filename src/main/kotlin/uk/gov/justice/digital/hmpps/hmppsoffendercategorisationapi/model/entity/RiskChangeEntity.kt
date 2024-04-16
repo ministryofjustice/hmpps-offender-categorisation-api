@@ -37,12 +37,8 @@ class RiskChangeEntity(
   @Column(name = "prison_id")
   val prisonId: String,
 
-  /*
-Security referral status enum
- */
   val status: String,
 
   @Column(name = "raised_date")
   val raisedDate: ZonedDateTime? = null,
-
-  )
+)

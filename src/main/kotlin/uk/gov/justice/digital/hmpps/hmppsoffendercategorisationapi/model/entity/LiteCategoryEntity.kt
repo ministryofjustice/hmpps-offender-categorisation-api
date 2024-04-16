@@ -71,4 +71,4 @@ class LiteCategoryEntity(
   val approvedComment: String,
 
   val sequence: String,
-  )
+)

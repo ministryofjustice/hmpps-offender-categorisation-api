@@ -23,5 +23,3 @@ data class RiskProfile(
 
   val extremismProfile: RedactedSection? = null,
 )
-
-

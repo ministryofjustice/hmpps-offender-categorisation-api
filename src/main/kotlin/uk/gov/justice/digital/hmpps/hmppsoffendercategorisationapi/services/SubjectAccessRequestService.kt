@@ -23,7 +23,6 @@ class SubjectAccessRequestService(
   private val liteCategoryRepository: LiteCategoryRepository,
   private val formRepository: FormRepository,
 ) : HmppsPrisonSubjectAccessRequestService {
-
   override fun getPrisonContentFor(
     prn: String,
     fromDate: LocalDate?,
