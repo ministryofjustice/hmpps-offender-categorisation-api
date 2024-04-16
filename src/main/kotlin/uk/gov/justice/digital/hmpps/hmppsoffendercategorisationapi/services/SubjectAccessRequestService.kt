@@ -38,7 +38,7 @@ class SubjectAccessRequestService(
           catForm = transform(formRepository.findByOffenderNo(prn)),
         ),
         riskProfiler = null,
-      )
+      ),
     )
   }
 }
