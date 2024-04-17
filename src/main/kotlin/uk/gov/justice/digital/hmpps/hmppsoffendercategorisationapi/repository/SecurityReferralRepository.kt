@@ -6,5 +6,5 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.
 
 @Repository
 interface SecurityReferralRepository : JpaRepository<SecurityReferralEntity, Long> {
-  abstract fun findByOffenderNo(offenderNo: String): SecurityReferralEntity
+  fun findByOffenderNo(offenderNo: String): SecurityReferralEntity?
 }

@@ -6,5 +6,5 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.
 
 @Repository
 interface FormRepository : JpaRepository<FormEntity, Long> {
-  abstract fun findByOffenderNo(offenderNo: String): FormEntity
+  fun findByOffenderNo(offenderNo: String): FormEntity?
 }

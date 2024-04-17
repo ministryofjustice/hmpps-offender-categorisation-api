@@ -30,7 +30,7 @@ class SubjectAccessRequestService(
   ): HmppsSubjectAccessRequestContent? {
     return HmppsSubjectAccessRequestContent(
       content =
-        SarResponse(
+      SarResponse(
         categorisationTool = CategorisationTool(
           security = transform(securityReferralRepository.findByOffenderNo(prn)),
           liteCategory = transform(liteCategoryRepository.findByOffenderNo(prn)),

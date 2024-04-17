@@ -6,5 +6,5 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.
 
 @Repository
 interface RiskChangeRepository : JpaRepository<RiskChangeEntity, Long> {
-  abstract fun findByOffenderNo(offenderNo: String): RiskChangeEntity
+  fun findByOffenderNo(offenderNo: String): RiskChangeEntity?
 }

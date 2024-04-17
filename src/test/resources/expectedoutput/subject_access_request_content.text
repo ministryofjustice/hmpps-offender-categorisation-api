@@ -1,0 +1,161 @@
+{
+    "categorisationTool": {
+        "catForm": {
+            "form_response": {
+                "recat": {
+                    "decision": {
+                        "category": "B"
+                    },
+                    "securityBack": {},
+                    "securityInput": {
+                        "securityInputNeeded": "Yes",
+                        "securityInputNeededText": "text from recat"
+                    },
+                    "nextReviewDate": {
+                        "date": "2/8/2019"
+                    },
+                    "riskAssessment": {
+                        "lowerCategory": "lower text",
+                        "otherRelevant": "Yes",
+                        "higherCategory": "higher text",
+                        "otherRelevantText": "rel info"
+                    },
+                    "prisonerBackground": {
+                        "offenceDetails": "offence details text"
+                    },
+                    "higherSecurityReview": {
+                        "steps": "steps text",
+                        "transfer": "Yes",
+                        "behaviour": "higher security text",
+                        "conditions": "security conditions",
+                        "transferText": "manage text"
+                    }
+                },
+                "security": {
+                    "review": {
+                        "securityReview": "security review text"
+                    }
+                },
+                "supervisor": {
+                    "review": {
+                        "proposedCategory": "B",
+                        "otherInformationText": "other rel info",
+                        "supervisorCategoryAppropriate": "Yes"
+                    }
+                },
+                "openConditionsRequested": false
+            },
+            "booking_id": "0",
+            "status": "APPROVED",
+            "referred_date": "2019-04-02 13:48:11.06+01",
+            "sequence_no": "1",
+            "risk_profile": {
+                "history": {},
+                "socProfile": {},
+                "escapeProfile": {
+                    "nomsId": "G4143VX",
+                    "riskType": "ESCAPE",
+                    "provisionalCategorisation": "C"
+                },
+                "violenceProfile": {
+                    "nomsId": "G4143VX",
+                    "riskType": "VIOLENCE",
+                    "displayAssaults": false,
+                    "numberOfAssaults": 0,
+                    "notifySafetyCustodyLead": false,
+                    "numberOfSeriousAssaults": 0,
+                    "provisionalCategorisation": "C",
+                    "veryHighRiskViolentOffender": false
+                },
+                "extremismProfile": {}
+            },
+            "prison_id": "NMI",
+            "offender_no": "GXXXX",
+            "start_date": "2019-05-09 13:26:28.99+01",
+            "security_reviewed_date": "2019-06-25 10:55:53.353+01",
+            "approval_date": "2019-06-25",
+            "cat_type": "INITIAL",
+            "nomis_sequence_no": "0",
+            "assessment_date": "2019-07-16",
+            "review_reason": "DUE",
+            "due_by_date": "2017-04-01",
+            "cancelled_date": "2019-11-25 11:24:12.768+00"
+        },
+        "riskChange": {
+            "old_profile": {
+                "soc": {},
+                "escape": {
+                    "nomsId": "G0048VL",
+                    "riskType": "ESCAPE",
+                    "provisionalCategorisation": "C"
+                },
+                "violence": {
+                    "nomsId": "G0048VL",
+                    "riskType": "VIOLENCE",
+                    "displayAssaults": true,
+                    "numberOfAssaults": 0,
+                    "notifySafetyCustodyLead": false,
+                    "numberOfSeriousAssaults": 0,
+                    "provisionalCategorisation": "C",
+                    "veryHighRiskViolentOffender": false
+                },
+                "extremism": {}
+            },
+            "new_profile": {
+                "soc": {},
+                "escape": {
+                    "nomsId": "G0048VL",
+                    "riskType": "ESCAPE",
+                    "provisionalCategorisation": "C"
+                },
+                "violence": {
+                    "nomsId": "G0048VL",
+                    "riskType": "VIOLENCE",
+                    "displayAssaults": true,
+                    "numberOfAssaults": 1,
+                    "notifySafetyCustodyLead": false,
+                    "numberOfSeriousAssaults": 0,
+                    "provisionalCategorisation": "C",
+                    "veryHighRiskViolentOffender": false
+                },
+                "extremism": {}
+            },
+            "offender_no": "GXXXX",
+            "prison_id": "1000",
+            "status": "NEW",
+            "raised_date": "2019-09-18T09:45:34.166Z"
+        },
+        "security": {
+            "offender_no": "GXXXX",
+            "prison_id": "LPI",
+            "status": "REFERRED",
+            "raised_date": "2019-09-19T12:33:21.123Z",
+            "processed_date": "2019-09-19T12:36:46.335Z"
+        },
+        "nextReviewChangeHistory": {
+            "booking_id": "1146373",
+            "offender_no": "GXXXX",
+            "next_review_date": "2021-12-12",
+            "reason": "testing",
+            "change_date": "2021-09-22T09:25:44.395Z"
+        },
+        "liteCategory": {
+            "bookingId": 0,
+            "category": "U",
+            "supervisorCategory": "U",
+            "offender_no": "GXXXX",
+            "prison_id": "LPI",
+            "created_date": "2020-05-18T12:58:42.435Z",
+            "approved_date": "2020-05-18T00:00Z",
+            "assessment_committee": "OCA",
+            "assessment_comment": "Testing the creation of an unsentenced",
+            "next_review_date": "2020-11-18",
+            "placement_prison_id": "ASI",
+            "approved_committee": "OCA",
+            "approved_placement_prison_id": "ASI",
+            "approved_placement_comment": "approved placement comment",
+            "approved_comment": "approval comment",
+            "sequence": "5"
+        }
+    }
+}

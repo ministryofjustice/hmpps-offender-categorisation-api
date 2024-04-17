@@ -16,6 +16,6 @@ class LiteCategoryRepositoryTest : ResourceTest() {
   fun `Should Find by Offender No`() {
     val securityReferral = repository.findByOffenderNo("G0089UO")
 
-    Assertions.assertThat(securityReferral.assessedBy).isEqualTo("LBENNETT_GEN")
+    Assertions.assertThat(securityReferral?.assessedBy).isEqualTo("LBENNETT_GEN")
   }
 }

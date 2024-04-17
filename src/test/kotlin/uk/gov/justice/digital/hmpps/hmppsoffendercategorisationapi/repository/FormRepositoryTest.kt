@@ -16,6 +16,6 @@ class FormRepositoryTest : ResourceTest() {
   fun `Should Find by Offender No`() {
     val securityReferral = repository.findByOffenderNo("G8105VR")
 
-    Assertions.assertThat(securityReferral.cancelledBy).isEqualTo("SRENDELL_GEN")
+    Assertions.assertThat(securityReferral?.cancelledBy).isEqualTo("SRENDELL_GEN")
   }
 }
