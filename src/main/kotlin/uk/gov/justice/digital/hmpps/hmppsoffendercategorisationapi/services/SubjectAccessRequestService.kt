@@ -29,7 +29,8 @@ class SubjectAccessRequestService(
     toDate: LocalDate?,
   ): HmppsSubjectAccessRequestContent? {
     return HmppsSubjectAccessRequestContent(
-      content = SarResponse(
+      content =
+        SarResponse(
         categorisationTool = CategorisationTool(
           security = transform(securityReferralRepository.findByOffenderNo(prn)),
           liteCategory = transform(liteCategoryRepository.findByOffenderNo(prn)),
