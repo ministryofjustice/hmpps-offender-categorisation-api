@@ -19,7 +19,7 @@ class JwtAuthHelper(private val keyPair: KeyPair) {
     return { it.set(HttpHeaders.AUTHORIZATION, "Bearer $token") }
   }
 
-  private fun createJwt(
+  fun createJwt(
     subject: String?,
     scope: List<String>? = listOf(),
     roles: List<String>? = listOf(),
