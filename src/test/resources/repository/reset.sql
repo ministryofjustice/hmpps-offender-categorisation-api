@@ -113,6 +113,20 @@ CREATE TABLE public.risk_change (
                                     raised_date timestamptz NOT NULL
 );
 
+DROP IF EXISTS TABLE public.security_referral;
+
+CREATE TABLE public.security_referral (
+                                          id serial4 NOT NULL,
+                                          offender_no varchar(255) NOT NULL,
+                                          user_id varchar(255) NOT NULL,
+                                          prison_id varchar(6) NOT NULL,
+                                          status public.security_referral_status_enum NOT NULL DEFAULT 'NEW'::security_referral_status_enum,
+                                          raised_date timestamptz NOT NULL,
+                                          processed_date timestamptz NULL,
+                                          CONSTRAINT security_referral_offender_no_unique UNIQUE (offender_no),
+                                          CONSTRAINT security_referral_pkey PRIMARY KEY (id)
+);
+CREATE INDEX security_referral_prison_id_index ON public.security_referral USING btree (prison_id);
 --DELETE FROM risk_change;
 --DELETE FROM form;
 --DELETE FROM lite_category;
