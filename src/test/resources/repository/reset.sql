@@ -1,8 +1,15 @@
 
 -- Drop table
 DROP TABLE IF EXISTS public.form;
+DROP TABLE IF EXISTS public.lite_category;
+DROP TABLE IF EXISTS public.security_referral;
+DROP TABLE IF EXISTS public.risk_change;
+DROP TABLE IF EXISTS public.next_review_change_history;
+DROP TABLE IF EXISTS public.risk_change;
 
 DROP TYPE IF EXISTS public.review_reason_enum;
+DROP TYPE IF EXISTS public.cat_type_enum;
+DROP TYPE IF EXISTS public.security_referral_status_enum;
 
 CREATE TYPE public.review_reason_enum AS ENUM (
 	'DUE',
@@ -10,13 +17,9 @@ CREATE TYPE public.review_reason_enum AS ENUM (
 	'MANUAL',
 	'RISK_CHANGE');
 
-DROP TYPE IF EXISTS public.cat_type_enum;
-
 CREATE TYPE public.cat_type_enum AS ENUM (
 	'INITIAL',
 	'RECAT');
-
-DROP TYPE IF EXISTS public.security_referral_status_enum;
 
 CREATE TYPE public.security_referral_status_enum AS ENUM (
 	'NEW',
@@ -52,8 +55,6 @@ CREATE TABLE public.form (
                              cancelled_by varchar(255) NULL
 );
 
-DROP TABLE IF EXISTS public.lite_category;
-
 CREATE TABLE public.lite_category (
                                       booking_id int8 NOT NULL,
                                       "sequence" int4 NOT NULL,
@@ -75,8 +76,6 @@ CREATE TABLE public.lite_category (
                                       approved_comment varchar(240) NULL
 );
 
-DROP TABLE IF EXISTS public.risk_change;
-
 CREATE TABLE public.risk_change (
                                     id serial4 NOT NULL,
                                     old_profile jsonb NOT NULL,
@@ -87,8 +86,6 @@ CREATE TABLE public.risk_change (
                                     status varchar(20) NOT NULL DEFAULT 'NEW'::character varying,
                                     raised_date timestamptz NOT NULL
 );
-
-DROP TABLE IF EXISTS public.next_review_change_history;
 
 CREATE TABLE public.next_review_change_history (
                                                    id serial4 NOT NULL,
@@ -100,8 +97,6 @@ CREATE TABLE public.next_review_change_history (
                                                    changed_by varchar(255) NOT NULL
 );
 
-DROP TABLE IF EXISTS public.risk_change;
-
 CREATE TABLE public.risk_change (
                                     id serial4 NOT NULL,
                                     old_profile jsonb NOT NULL,
@@ -112,8 +107,6 @@ CREATE TABLE public.risk_change (
                                     status varchar(20) NOT NULL DEFAULT 'NEW'::character varying,
                                     raised_date timestamptz NOT NULL
 );
-
-DROP TABLE IF EXISTS public.security_referral;
 
 CREATE TABLE public.security_referral (
                                           id serial4 NOT NULL,
