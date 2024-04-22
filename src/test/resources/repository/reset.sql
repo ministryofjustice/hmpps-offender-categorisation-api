@@ -1,6 +1,6 @@
 
 -- Drop table
-DROP TABLE public.form;
+DROP TABLE IF EXISTS public.form;
 
 CREATE TABLE public.form (
                              id serial4 NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE public.form (
                              cancelled_by varchar(255) NULL
 );
 
-DROP TABLE public.lite_category;
+DROP TABLE IF EXISTS public.lite_category;
 
 CREATE TABLE public.lite_category (
                                       booking_id int8 NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE public.lite_category (
                                       approved_comment varchar(240) NULL
 );
 
-DROP TABLE public.risk_change;
+DROP TABLE IF EXISTS public.risk_change;
 
 CREATE TABLE public.risk_change (
                                     id serial4 NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE public.risk_change (
                                     raised_date timestamptz NOT NULL
 );
 
-DROP TABLE public.next_review_change_history;
+DROP TABLE IF EXISTS public.next_review_change_history;
 
 CREATE TABLE public.next_review_change_history (
                                                    id serial4 NOT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE public.next_review_change_history (
                                                    changed_by varchar(255) NOT NULL
 );
 
-DROP TABLE public.risk_change;
+DROP TABLE IF EXISTS public.risk_change;
 
 CREATE TABLE public.risk_change (
                                     id serial4 NOT NULL,
