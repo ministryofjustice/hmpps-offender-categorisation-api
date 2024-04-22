@@ -8,7 +8,7 @@ import org.springframework.test.context.jdbc.Sql
 class SubjectAccessRequestIntegrationTest : IntegrationTestBase() {
   @Nested
   @DisplayName("/subject-access-request")
-  @Sql(scripts = ["classpath:repository/reset.sql, classpath:repository/subject_access_request_service_data.sql"], executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
+  @Sql(scripts = ["classpath:repository/reset.sql, repository/subject_access_request_service_data.sql"], executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
   inner class SubjectAccessRequestEndpoint {
 
     @Nested
