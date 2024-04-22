@@ -1,8 +1,8 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response
 
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.CatForm
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.LiteCategory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.RiskProfile
@@ -18,6 +18,9 @@ import java.io.InputStream
 
 open class BaseSarUnitTest {
   companion object {
+
+    val json = jacksonObjectMapper()
+
     fun loadTestData(filename: String): String {
       val inputStream: InputStream = File("src/test/resources/testdata/$filename").inputStream()
       return inputStream.bufferedReader().use { it.readText() }
@@ -28,9 +31,8 @@ open class BaseSarUnitTest {
       return inputStream.bufferedReader().use { it.readText() }
     }
 
-    fun jsonStringToMap(json: String): Map<String, JsonElement> {
-      val data = Json.parseToJsonElement(json)
-      require(data is JsonObject) { "Only Json Objects can be converted to a Map!" }
+    fun jsonStringToMap(json: String): Map<String, Any> {
+      val data = ObjectMapper().readValue<MutableMap<String, Any>>(json)
       return data
     }
 
@@ -62,7 +64,7 @@ open class BaseSarUnitTest {
 
     protected val riskProfile = RiskProfile(
       history = RedactedSection(),
-      offences = null,
+      offences = emptyList(),
       socProfile = RedactedSection(),
       lifeProfile = LifeProfile(
         life = true,

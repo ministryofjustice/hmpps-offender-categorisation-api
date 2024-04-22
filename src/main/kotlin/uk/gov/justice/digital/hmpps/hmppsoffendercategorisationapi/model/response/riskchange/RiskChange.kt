@@ -1,28 +1,30 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonInclude
+import com.fasterxml.jackson.annotation.JsonProperty
 
-@Serializable
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class RiskChange(
 
   val id: String? = null,
 
-  @SerialName("old_profile")
+  @JsonProperty("old_profile")
   val oldProfile: Profile? = null,
 
-  @SerialName("new_profile")
+  @JsonProperty("new_profile")
   val newProfile: Profile? = null,
 
-  @SerialName("offender_no")
+  @JsonProperty("offender_no")
   val offenderNo: String? = null,
 
-  @SerialName("prison_id")
+  @JsonProperty("prison_id")
   val prisonId: String? = null,
 
   val status: String? = null,
 
   // datetime
-  @SerialName("raised_date")
+  @JsonProperty("raised_date")
   val raisedDate: String? = null,
 )

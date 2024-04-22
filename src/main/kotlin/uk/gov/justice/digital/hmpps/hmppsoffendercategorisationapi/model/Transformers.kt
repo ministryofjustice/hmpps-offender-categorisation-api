@@ -1,7 +1,7 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model
 
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonElement
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.FormEntity
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.LiteCategoryEntity
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.NextReviewChangeHistoryEntity
@@ -14,6 +14,8 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.SecurityReferral
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.Profile
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.RiskChange
+
+val objectMapper = jacksonObjectMapper()
 
 fun transform(securityReferral: SecurityReferralEntity?): SecurityReferral? {
   if (securityReferral != null) {
@@ -29,8 +31,6 @@ fun transform(securityReferral: SecurityReferralEntity?): SecurityReferral? {
   return null
 }
 
-private val json = Json { ignoreUnknownKeys = true }
-
 fun transform(riskChange: RiskChangeEntity?): RiskChange? {
   if (riskChange != null) {
     return RiskChange(
@@ -38,8 +38,8 @@ fun transform(riskChange: RiskChangeEntity?): RiskChange? {
       raisedDate = riskChange.raisedDate.toString(),
       offenderNo = riskChange.offenderNo,
       status = riskChange.status,
-      oldProfile = riskChange.oldProfile?.let { json.decodeFromString<Profile>(it) },
-      newProfile = riskChange.newProfile?.let { json.decodeFromString<Profile>(it) },
+      oldProfile = riskChange.oldProfile?.let { objectMapper.readValue<Profile>(it) },
+      newProfile = riskChange.newProfile?.let { objectMapper.readValue<Profile>(it) },
     )
   }
 
@@ -69,7 +69,6 @@ fun transform(entity: NextReviewChangeHistoryEntity?): NextReviewChangeHistory? 
 fun transform(entity: LiteCategoryEntity?): LiteCategory? {
   if (entity != null) {
     return LiteCategory(
-      bookingId = entity.bookingId,
       prisonId = entity.prisonId,
       offenderNo = entity.offenderNo,
       category = entity.category,
@@ -108,8 +107,8 @@ fun transform(entity: FormEntity?): CatForm? {
       reviewReason = entity.reviewReason,
       dueByDate = entity.dueByDate,
 
-      formResponse = entity.formResponse?.let { json.decodeFromString<Map<String, JsonElement>>(it) },
-      riskProfile = entity.riskProfile?.let { json.decodeFromString<RiskProfile>(it) },
+      formResponse = entity.formResponse?.let { objectMapper.readValue<Map<String, Any>>(it) },
+      riskProfile = entity.riskProfile?.let { objectMapper.readValue<RiskProfile>(it) },
 
       cancelledDate = entity.cancelledDate,
       approvalDate = entity.approvalDate,

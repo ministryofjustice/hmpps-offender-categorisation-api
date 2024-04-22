@@ -1,24 +1,23 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.fasterxml.jackson.annotation.JsonInclude
+import com.fasterxml.jackson.annotation.JsonProperty
 
-@Serializable
+@JsonInclude(JsonInclude.Include.NON_NULL)
 class SecurityReferral(
-
   val id: String? = null,
 
-  @SerialName("offender_no")
+  @JsonProperty("offender_no")
   val offenderNo: String,
 
-  @SerialName("prison_id")
+  @JsonProperty("prison_id")
   val prisonId: String?,
 
   val status: String?,
 
-  @SerialName("raised_date")
+  @JsonProperty("raised_date")
   val raisedDate: String?,
 
-  @SerialName("processed_date")
+  @JsonProperty("processed_date")
   val processedDate: String,
 )

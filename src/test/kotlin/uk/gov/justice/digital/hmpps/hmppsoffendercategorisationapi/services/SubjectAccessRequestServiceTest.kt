@@ -1,7 +1,6 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services
 
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.mock
@@ -35,13 +34,13 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
   @Autowired
   lateinit var formRepository: FormRepository
 
+  val json = jacksonObjectMapper()
+
   private val liteCategoryRepositoryMock = mock<LiteCategoryRepository>()
   private val riskChangeRepositoryMock = mock<RiskChangeRepository>()
   private val securityReferralRepositoryMock = mock<SecurityReferralRepository>()
   private val formRepositoryMock = mock<FormRepository>()
   private val nextReviewChangeHistoryRepositoryMock = mock<NextReviewChangeHistoryRepository>()
-
-  private val json = Json { prettyPrint = true }
 
   @Test
   @Sql("classpath:repository/subject_access_request_service_data.sql")
@@ -56,8 +55,8 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
     )
 
     val response = subjectAccessRequestService.getPrisonContentFor("GXXXX", now(), now())
-
-    assertThat(json.encodeToString(response?.content as SarResponse)).isEqualTo(BaseSarUnitTest.loadExpectedOutput("/subject_access_request_content.text"))
+    println(json.writeValueAsString(response?.content as SarResponse))
+    assertThat(json.writerWithDefaultPrettyPrinter().writeValueAsString(response.content as SarResponse)).isEqualTo(BaseSarUnitTest.loadExpectedOutput("/subject_access_request_content.json"))
   }
 
   @Test
@@ -72,7 +71,7 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
 
     val response = subjectAccessRequestService.getPrisonContentFor("GNOTFOUND", now(), now())
 
-    assertThat(Json.encodeToString(response?.content as SarResponse)).isEqualTo("{\"categorisationTool\":{}}")
+    assertThat(json.writeValueAsString(response?.content as SarResponse)).isEqualTo("{\"categorisationTool\":{}}")
   }
 
   @Test
@@ -92,8 +91,8 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
     )
 
     val response = subjectAccessRequestService.getPrisonContentFor("GRED", now(), now())
-    assertThat(Json.encodeToString(response?.content as SarResponse)).isEqualTo("{\"categorisationTool\":{}}")
-    println(Json.encodeToString(response.content as SarResponse))
+    assertThat(json.writeValueAsString(response?.content as SarResponse)).isEqualTo("{\"categorisationTool\":{}}")
+    println(json.writeValueAsString(response.content as SarResponse))
   }
 
   private companion object {

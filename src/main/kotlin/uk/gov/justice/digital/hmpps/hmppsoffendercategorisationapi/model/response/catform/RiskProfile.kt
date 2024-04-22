@@ -1,17 +1,16 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform
 
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.JsonElement
+import com.fasterxml.jackson.annotation.JsonInclude
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.riskprofile.LifeProfile
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.common.RedactedSection
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.Escape
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.Violence
 
-@Serializable
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class RiskProfile(
   val history: RedactedSection? = null,
 
-  val offences: List<Map<String, JsonElement>>? = emptyList(),
+  val offences: List<Map<String, Any>>? = emptyList(),
 
   val socProfile: RedactedSection? = null,
 

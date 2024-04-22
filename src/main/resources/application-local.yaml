@@ -7,11 +7,11 @@ management.endpoint:
 
 hmpps:
   auth:
-    url: http://localhost:8090/auth
+    url: https://sign-in-dev.hmpps.service.justice.gov.uk/auth
 
 # Update to your personal token with correct permissions
 api:
   client:
     admin:
-      id: [ID]
-      secret: [SECRET]
+      id: pathfinder-admin-1
+      secret: 7jxJA(PeqmmxGaOgADad6qWiYpe-P7!a%6H+OedG8i6!T;LE!*J&S+I-C(;7

@@ -1,7 +1,6 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model
 
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -30,6 +29,8 @@ class TransformersTest : ResourceTest() {
   @Autowired
   lateinit var formRepository: FormRepository
 
+  val json = jacksonObjectMapper()
+
   @Test
   @Sql("classpath:repository/risk_change.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
@@ -37,8 +38,7 @@ class TransformersTest : ResourceTest() {
     val riskChange = transform(riskChangeRepository.findByOffenderNo("G0048VL"))
 
     val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/risk_change.json")
-
-    Assertions.assertThat(Json.encodeToString(riskChange)).isEqualTo(expectedResult)
+    Assertions.assertThat(json.writeValueAsString(riskChange)).isEqualTo(expectedResult)
   }
 
   @Test
@@ -49,7 +49,7 @@ class TransformersTest : ResourceTest() {
 
     val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/security_referral.json")
 
-    Assertions.assertThat(Json.encodeToString(securityReferral)).isEqualTo(expectedResult)
+    Assertions.assertThat(json.writeValueAsString(securityReferral)).isEqualTo(expectedResult)
   }
 
   @Test
@@ -60,7 +60,7 @@ class TransformersTest : ResourceTest() {
 
     val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/next_review_change_history.json")
 
-    Assertions.assertThat(Json.encodeToString(nextReviewChangeHistory)).isEqualTo(expectedResult)
+    Assertions.assertThat(json.writeValueAsString(nextReviewChangeHistory)).isEqualTo(expectedResult)
   }
 
   @Test
@@ -71,7 +71,7 @@ class TransformersTest : ResourceTest() {
 
     val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/lite_category.json")
 
-    Assertions.assertThat(Json.encodeToString(liteCategory)).isEqualTo(expectedResult)
+    Assertions.assertThat(json.writeValueAsString(liteCategory)).isEqualTo(expectedResult)
   }
 
   @Test
@@ -82,6 +82,6 @@ class TransformersTest : ResourceTest() {
 
     val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/form.json")
 
-    Assertions.assertThat(Json.encodeToString(form)).isEqualTo(expectedResult)
+    Assertions.assertThat(json.writeValueAsString(form)).isEqualTo(expectedResult)
   }
 }

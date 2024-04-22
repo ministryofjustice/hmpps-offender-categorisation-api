@@ -3,6 +3,7 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.integration
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.springframework.test.context.jdbc.Sql
 
 class SubjectAccessRequestIntegrationTest : IntegrationTestBase() {
   @Nested
@@ -38,32 +39,32 @@ class SubjectAccessRequestIntegrationTest : IntegrationTestBase() {
     @Nested
     inner class HappyPath {
       @Test
+      @Sql("classpath:repository/subject_access_request_service_data.sql")
+      @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
       fun `should return data if prisoner exists`() {
         // saveRestrictedPatient(prisonerNumber = "A12345", commentText = "Prisoner was released to hospital")
 
-        webTestClient.get().uri("/subject-access-request?prn=A12345")
+        webTestClient.get().uri("/subject-access-request?prn=GXXXX")
           .headers(setHeaders(roles = listOf("ROLE_SAR_DATA_ACCESS")))
           .exchange()
           .expectStatus().isOk
           .expectBody()
-          .jsonPath("$.content.prisonerNumber").isEqualTo("A12345")
-          .jsonPath("$.content.supportingPrisonId").isEqualTo("MDI")
-          .jsonPath("$.content.hospitalLocationCode").isEqualTo("HAZLWD")
-          .jsonPath("$.content.dischargeTime").isEqualTo("2020-10-09T00:00:00")
-          .jsonPath("$.content.commentText").isEqualTo("Prisoner was released to hospital")
+          .consumeWith(System.out::println)
+          .jsonPath("$.content.categorisationTool.catForm.offender_no").isEqualTo("GXXXX")
       }
 
       @Test
+      @Sql("classpath:repository/subject_access_request_service_data.sql")
+      @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
       fun `should omit data if none exists`() {
-      //  saveRestrictedPatient(prisonerNumber = "A12345")
-
         webTestClient.get().uri("/subject-access-request?prn=A12345")
           .headers(setHeaders(roles = listOf("ROLE_SAR_DATA_ACCESS")))
           .exchange()
           .expectStatus().isOk
           .expectBody()
-          .jsonPath("$.content.prisonerNumber").isEqualTo("A12345")
-          .jsonPath("$.content.commentText").doesNotHaveJsonPath()
+          .consumeWith(System.out::println)
+          .jsonPath("$.content.categorisationTool").hasJsonPath()
+          .jsonPath("$.content.categorisationTool").isEmpty()
       }
     }
   }

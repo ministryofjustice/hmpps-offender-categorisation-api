@@ -1,11 +1,10 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange
 
-import kotlinx.serialization.Serializable
+import com.fasterxml.jackson.annotation.JsonInclude
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.common.RedactedSection
 
-@Serializable
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class Profile(
-
   val soc: RedactedSection = RedactedSection(),
 
   val escape: Escape? = null,

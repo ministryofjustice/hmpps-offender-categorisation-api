@@ -1,6 +1,8 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.common
 
-import kotlinx.serialization.Serializable
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonInclude
 
-@Serializable
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 class RedactedSection

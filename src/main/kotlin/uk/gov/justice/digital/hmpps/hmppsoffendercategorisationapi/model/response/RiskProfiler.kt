@@ -1,14 +1,14 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.fasterxml.jackson.annotation.JsonInclude
+import com.fasterxml.jackson.annotation.JsonProperty
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.common.RedactedSection
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.Violence
 
-@Serializable
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class RiskProfiler(
 
-  @SerialName("offender_no")
+  @JsonProperty("offender_no")
   val offenderNo: String,
 
   /**
@@ -29,6 +29,6 @@ data class RiskProfiler(
   val violence: Violence?,
 
   // datetime
-  @SerialName("execute_date_time")
+  @JsonProperty("execute_date_time")
   val executeDateTime: String,
 )

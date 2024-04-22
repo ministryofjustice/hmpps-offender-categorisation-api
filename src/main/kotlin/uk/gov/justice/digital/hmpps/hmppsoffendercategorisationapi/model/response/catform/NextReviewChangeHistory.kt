@@ -1,25 +1,25 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.fasterxml.jackson.annotation.JsonInclude
+import com.fasterxml.jackson.annotation.JsonProperty
 
-@Serializable
+@JsonInclude(JsonInclude.Include.NON_NULL)
 class NextReviewChangeHistory(
   val id: String? = null,
 
-  @SerialName("booking_id")
+  @JsonProperty("booking_id")
   val bookingId: String? = null,
 
-  @SerialName("offender_no")
+  @JsonProperty("offender_no")
   val offenderNo: String? = null,
 
   // date
-  @SerialName("next_review_date")
+  @JsonProperty("next_review_date")
   val nextReviewDate: String? = null,
 
   val reason: String? = null,
 
   // datetime
-  @SerialName("change_date")
+  @JsonProperty("change_date")
   val changeDate: String? = null,
 )

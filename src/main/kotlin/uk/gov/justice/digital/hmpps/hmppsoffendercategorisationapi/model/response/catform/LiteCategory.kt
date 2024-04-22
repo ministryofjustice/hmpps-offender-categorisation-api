@@ -1,53 +1,51 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.fasterxml.jackson.annotation.JsonInclude
+import com.fasterxml.jackson.annotation.JsonProperty
 
-@Serializable
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class LiteCategory(
-  val bookingId: Long = -1,
-
   val category: String,
 
   val supervisorCategory: String? = null,
 
-  @SerialName("offender_no")
+  @JsonProperty("offender_no")
   val offenderNo: String? = null,
 
-  @SerialName("prison_id")
+  @JsonProperty("prison_id")
   val prisonId: String? = null,
 
   // datetime
-  @SerialName("created_date")
+  @JsonProperty("created_date")
   val createdDate: String? = null,
 
   // datetime
-  @SerialName("approved_date")
+  @JsonProperty("approved_date")
   val approvedDate: String? = null,
 
-  @SerialName("assessment_committee")
+  @JsonProperty("assessment_committee")
   val assessmentCommittee: String? = null,
 
-  @SerialName("assessment_comment")
+  @JsonProperty("assessment_comment")
   val assessmentComment: String? = null,
 
   // date
-  @SerialName("next_review_date")
+  @JsonProperty("next_review_date")
   val nextReviewDate: String? = null,
 
-  @SerialName("placement_prison_id")
+  @JsonProperty("placement_prison_id")
   val placementPrisonId: String? = null,
 
-  @SerialName("approved_committee")
+  @JsonProperty("approved_committee")
   val approvedCommittee: String? = null,
 
-  @SerialName("approved_placement_prison_id")
+  @JsonProperty("approved_placement_prison_id")
   val approvedPlacementPrisonId: String? = null,
 
-  @SerialName("approved_placement_comment")
+  @JsonProperty("approved_placement_comment")
   val approvedPlacementComment: String? = null,
 
-  @SerialName("approved_comment")
+  @JsonProperty("approved_comment")
   val approvedComment: String? = null,
   val sequence: String,
 )

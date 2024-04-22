@@ -1,8 +1,8 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response
 
-import kotlinx.serialization.Serializable
+import com.fasterxml.jackson.annotation.JsonInclude
 
-@Serializable
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class SarResponse(
   val categorisationTool: CategorisationTool? = null,
 

@@ -1,60 +1,59 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.JsonElement
+import com.fasterxml.jackson.annotation.JsonInclude
+import com.fasterxml.jackson.annotation.JsonProperty
 
-@Serializable
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class CatForm(
   val id: String? = null,
 
-  @SerialName("form_response")
-  val formResponse: Map<String, JsonElement>? = null,
+  @JsonProperty("form_response")
+  val formResponse: Map<String, Any>? = null,
 
-  @SerialName("booking_id")
+  @JsonProperty("booking_id")
   val bookingId: String? = null,
 
   val status: String? = null,
 
-  @SerialName("referred_date")
+  @JsonProperty("referred_date")
   val referredDate: String? = null,
 
-  @SerialName("sequence_no")
+  @JsonProperty("sequence_no")
   val sequenceNo: String? = null,
 
-  @SerialName("risk_profile")
+  @JsonProperty("risk_profile")
   val riskProfile: RiskProfile? = null,
 
-  @SerialName("prison_id")
+  @JsonProperty("prison_id")
   val prisonId: String? = null,
 
-  @SerialName("offender_no")
+  @JsonProperty("offender_no")
   val offenderNo: String? = null,
 
-  @SerialName("start_date")
+  @JsonProperty("start_date")
   val startDate: String? = null,
 
-  @SerialName("security_reviewed_date")
+  @JsonProperty("security_reviewed_date")
   val securityReviewedDate: String? = null,
 
-  @SerialName("approval_date")
+  @JsonProperty("approval_date")
   val approvalDate: String? = null,
 
-  @SerialName("cat_type")
+  @JsonProperty("cat_type")
   val catType: String? = null,
 
-  @SerialName("nomis_sequence_no")
+  @JsonProperty("nomis_sequence_no")
   val nomisSequenceNo: String? = null,
 
-  @SerialName("assessment_date")
+  @JsonProperty("assessment_date")
   val assessmentDate: String? = null,
 
-  @SerialName("review_reason")
+  @JsonProperty("review_reason")
   val reviewReason: String? = null,
 
-  @SerialName("due_by_date")
+  @JsonProperty("due_by_date")
   val dueByDate: String? = null,
 
-  @SerialName("cancelled_date")
+  @JsonProperty("cancelled_date")
   val cancelledDate: String? = null,
 )
