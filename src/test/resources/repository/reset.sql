@@ -5,7 +5,6 @@ DROP TABLE IF EXISTS public.lite_category;
 DROP TABLE IF EXISTS public.security_referral;
 DROP TABLE IF EXISTS public.risk_change;
 DROP TABLE IF EXISTS public.next_review_change_history;
-DROP TABLE IF EXISTS public.risk_change;
 
 DROP TYPE IF EXISTS public.review_reason_enum;
 DROP TYPE IF EXISTS public.cat_type_enum;
@@ -74,17 +73,6 @@ CREATE TABLE public.lite_category (
                                       approved_placement_prison_id varchar(6) NULL,
                                       approved_placement_comment varchar(240) NULL,
                                       approved_comment varchar(240) NULL
-);
-
-CREATE TABLE public.risk_change (
-                                    id serial4 NOT NULL,
-                                    old_profile jsonb NOT NULL,
-                                    new_profile jsonb NOT NULL,
-                                    offender_no varchar(255) NOT NULL,
-                                    user_id varchar(255) NULL,
-                                    prison_id varchar(6) NOT NULL,
-                                    status varchar(20) NOT NULL DEFAULT 'NEW'::character varying,
-                                    raised_date timestamptz NOT NULL
 );
 
 CREATE TABLE public.next_review_change_history (
