@@ -113,7 +113,7 @@ CREATE TABLE public.risk_change (
                                     raised_date timestamptz NOT NULL
 );
 
-DROP IF EXISTS TABLE public.security_referral;
+DROP TABLE IF EXISTS public.security_referral;
 
 CREATE TABLE public.security_referral (
                                           id serial4 NOT NULL,
