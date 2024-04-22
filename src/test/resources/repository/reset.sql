@@ -1,6 +1,99 @@
-DELETE FROM risk_change;
-DELETE FROM form;
-DELETE FROM lite_category;
-DELETE FROM security_referral;
-DELETE FROM lite_category;
-DELETE FROM next_review_change_history;
+
+-- Drop table
+DROP TABLE public.form;
+
+CREATE TABLE public.form (
+                             id serial4 NOT NULL,
+                             form_response jsonb NULL,
+                             booking_id int8 NOT NULL,
+                             user_id varchar(32) NULL,
+                             status varchar(20) NULL,
+                             assigned_user_id varchar(32) NULL,
+                             referred_date timestamptz NULL,
+                             referred_by varchar(32) NULL,
+                             sequence_no int4 NOT NULL DEFAULT 1,
+                             risk_profile jsonb NULL,
+                             prison_id varchar(6) NOT NULL DEFAULT 'XXX'::character varying,
+                             offender_no varchar(10) NOT NULL DEFAULT 'unknown'::character varying,
+                             start_date timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+                             security_reviewed_by varchar(32) NULL,
+                             security_reviewed_date timestamptz NULL,
+                             approval_date date NULL,
+                             cat_type public.cat_type_enum NOT NULL DEFAULT 'INITIAL'::cat_type_enum,
+                             nomis_sequence_no int4 NULL,
+                             assessment_date date NULL,
+                             approved_by varchar(255) NULL,
+                             assessed_by varchar(255) NULL,
+                             review_reason public.review_reason_enum NULL,
+                             due_by_date date NULL,
+                             cancelled_date timestamptz NULL,
+                             cancelled_by varchar(255) NULL
+);
+
+DROP TABLE public.lite_category;
+
+CREATE TABLE public.lite_category (
+                                      booking_id int8 NOT NULL,
+                                      "sequence" int4 NOT NULL,
+                                      category varchar(6) NOT NULL,
+                                      supervisor_category varchar(6) NULL,
+                                      offender_no varchar(255) NOT NULL,
+                                      prison_id varchar(6) NOT NULL,
+                                      created_date timestamptz NOT NULL,
+                                      approved_date timestamptz NULL,
+                                      assessed_by varchar(255) NOT NULL,
+                                      approved_by varchar(255) NULL,
+                                      assessment_committee varchar(12) NOT NULL,
+                                      assessment_comment varchar(4000) NULL,
+                                      next_review_date date NOT NULL,
+                                      placement_prison_id varchar(6) NULL,
+                                      approved_committee varchar(12) NULL,
+                                      approved_placement_prison_id varchar(6) NULL,
+                                      approved_placement_comment varchar(240) NULL,
+                                      approved_comment varchar(240) NULL
+);
+
+DROP TABLE public.risk_change;
+
+CREATE TABLE public.risk_change (
+                                    id serial4 NOT NULL,
+                                    old_profile jsonb NOT NULL,
+                                    new_profile jsonb NOT NULL,
+                                    offender_no varchar(255) NOT NULL,
+                                    user_id varchar(255) NULL,
+                                    prison_id varchar(6) NOT NULL,
+                                    status varchar(20) NOT NULL DEFAULT 'NEW'::character varying,
+                                    raised_date timestamptz NOT NULL
+);
+
+DROP TABLE public.next_review_change_history;
+
+CREATE TABLE public.next_review_change_history (
+                                                   id serial4 NOT NULL,
+                                                   booking_id int8 NULL,
+                                                   offender_no varchar(10) NOT NULL,
+                                                   next_review_date date NOT NULL,
+                                                   reason text NOT NULL,
+                                                   change_date timestamptz NOT NULL,
+                                                   changed_by varchar(255) NOT NULL
+);
+
+DROP TABLE public.risk_change;
+
+CREATE TABLE public.risk_change (
+                                    id serial4 NOT NULL,
+                                    old_profile jsonb NOT NULL,
+                                    new_profile jsonb NOT NULL,
+                                    offender_no varchar(255) NOT NULL,
+                                    user_id varchar(255) NULL,
+                                    prison_id varchar(6) NOT NULL,
+                                    status varchar(20) NOT NULL DEFAULT 'NEW'::character varying,
+                                    raised_date timestamptz NOT NULL
+);
+
+--DELETE FROM risk_change;
+--DELETE FROM form;
+--DELETE FROM lite_category;
+--DELETE FROM security_referral;
+--DELETE FROM lite_category;
+--DELETE FROM next_review_change_history;
