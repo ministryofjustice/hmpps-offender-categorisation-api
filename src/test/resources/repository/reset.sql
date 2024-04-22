@@ -2,6 +2,28 @@
 -- Drop table
 DROP TABLE IF EXISTS public.form;
 
+DROP TYPE IF EXISTS public.review_reason_enum;
+
+CREATE TYPE public.review_reason_enum AS ENUM (
+	'DUE',
+	'AGE',
+	'MANUAL',
+	'RISK_CHANGE');
+
+DROP TYPE IF EXISTS public.cat_type_enum;
+
+CREATE TYPE public.cat_type_enum AS ENUM (
+	'INITIAL',
+	'RECAT');
+
+DROP TYPE IF EXISTS public.security_referral_status_enum;
+
+CREATE TYPE public.security_referral_status_enum AS ENUM (
+	'NEW',
+	'REFERRED',
+	'COMPLETED',
+	'CANCELLED');
+
 CREATE TABLE public.form (
                              id serial4 NOT NULL,
                              form_response jsonb NULL,
