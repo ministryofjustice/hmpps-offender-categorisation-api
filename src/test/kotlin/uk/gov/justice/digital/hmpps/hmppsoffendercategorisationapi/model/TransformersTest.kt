@@ -10,6 +10,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.FormRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.LiteCategoryRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.NextReviewChangeHistoryRepository
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.PreviousProfileRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.RiskChangeRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.SecurityReferralRepository
 
@@ -28,6 +29,9 @@ class TransformersTest : ResourceTest() {
 
   @Autowired
   lateinit var formRepository: FormRepository
+
+  @Autowired
+  lateinit var previousProfileRepository: PreviousProfileRepository
 
   val json = jacksonObjectMapper()
 
@@ -83,5 +87,16 @@ class TransformersTest : ResourceTest() {
     val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/form.json")
 
     Assertions.assertThat(json.writeValueAsString(form)).isEqualTo(expectedResult)
+  }
+
+  @Test
+  @Sql("classpath:repository/risk_profiler.sql")
+  @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+  fun `Should transform risk profiler data to response`() {
+    val riskProfiler = transform(previousProfileRepository.findByOffenderNo("G8105VR"))
+
+    val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/form.json")
+
+    Assertions.assertThat(json.writeValueAsString(riskProfiler)).isEqualTo(expectedResult)
   }
 }

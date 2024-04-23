@@ -2,18 +2,17 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.FormEntity
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.LiteCategoryEntity
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.NextReviewChangeHistoryEntity
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.RiskChangeEntity
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.SecurityReferralEntity
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.*
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.RiskProfiler
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.CatForm
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.LiteCategory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.NextReviewChangeHistory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.RiskProfile
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.SecurityReferral
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.common.RedactedSection
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.Profile
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.RiskChange
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.Violence
 
 val objectMapper = jacksonObjectMapper()
 
@@ -119,6 +118,24 @@ fun transform(entity: FormEntity?): CatForm? {
       nomisSequenceNo = entity.nomisSequenceNo,
       catType = entity.catType,
       sequenceNo = entity.sequenceNo,
+    )
+  }
+
+  return null
+}
+
+/**
+ * soc, escape, extremism is REDACTED
+ */
+fun transform(entity: PreviousProfile?): RiskProfiler? {
+  if (entity != null) {
+    return RiskProfiler(
+      offenderNo = entity.offenderNo,
+      soc = RedactedSection(),
+      escape = RedactedSection(),
+      extremism = RedactedSection(),
+      violence = entity.violence?.let { objectMapper.readValue<Violence>(it) },
+      executeDateTime = entity.executeDateTime.toString()
     )
   }
 
