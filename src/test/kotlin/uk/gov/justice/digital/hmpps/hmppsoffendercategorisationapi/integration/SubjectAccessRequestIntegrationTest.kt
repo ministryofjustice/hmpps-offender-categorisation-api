@@ -51,10 +51,11 @@ class SubjectAccessRequestIntegrationTest : IntegrationTestBase() {
           .jsonPath("$.content.categorisationTool.catForm.offender_no").isEqualTo("GXXXX")
       }
 
+      @Sql("classpath:repository/subject_access_request_service_data.sql")
       @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
       @Test
       fun `should omit data if none exists`() {
-        webTestClient.get().uri("/subject-access-request?prn=A12345")
+        webTestClient.get().uri("/subject-access-request?prn=GBBBB")
           .headers(setHeaders(roles = listOf("ROLE_SAR_DATA_ACCESS")))
           .exchange()
           .expectBody()
