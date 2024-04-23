@@ -8,7 +8,6 @@ import org.springframework.test.context.jdbc.Sql
 class SubjectAccessRequestIntegrationTest : IntegrationTestBase() {
   @Nested
   @DisplayName("/subject-access-request")
-  @Sql(scripts = ["classpath:repository/reset.sql, repository/subject_access_request_service_data.sql"], executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
   inner class SubjectAccessRequestEndpoint {
 
     @Nested
@@ -39,10 +38,10 @@ class SubjectAccessRequestIntegrationTest : IntegrationTestBase() {
 
     @Nested
     inner class HappyPath {
+      @Sql("classpath:repository/subject_access_request_service_data.sql")
+      @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
       @Test
       fun `should return data if prisoner exists`() {
-        // saveRestrictedPatient(prisonerNumber = "A12345", commentText = "Prisoner was released to hospital")
-
         webTestClient.get().uri("/subject-access-request?prn=GXXXX")
           .headers(setHeaders(roles = listOf("ROLE_SAR_DATA_ACCESS")))
           .exchange()
@@ -52,6 +51,7 @@ class SubjectAccessRequestIntegrationTest : IntegrationTestBase() {
           .jsonPath("$.content.categorisationTool.catForm.offender_no").isEqualTo("GXXXX")
       }
 
+      @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
       @Test
       fun `should omit data if none exists`() {
         webTestClient.get().uri("/subject-access-request?prn=A12345")
