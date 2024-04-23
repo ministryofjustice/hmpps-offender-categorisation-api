@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS public.lite_category;
 DROP TABLE IF EXISTS public.security_referral;
 DROP TABLE IF EXISTS public.risk_change;
 DROP TABLE IF EXISTS public.next_review_change_history;
+DROP TABLE IF EXISTS public.PREVIOUS_PROFILE;
 
 DROP TYPE IF EXISTS public.review_reason_enum;
 DROP TYPE IF EXISTS public.cat_type_enum;
@@ -96,6 +97,16 @@ CREATE TABLE public.risk_change (
                                     raised_date timestamptz NOT NULL
 );
 
+CREATE TABLE PREVIOUS_PROFILE (
+    id serial4 NOT NULL,
+    OFFENDER_NO       VARCHAR(10) PRIMARY KEY,
+    ESCAPE            TEXT,
+    EXTREMISM         TEXT,
+    SOC               TEXT,
+    VIOLENCE          TEXT,
+    EXECUTE_DATE_TIME TIMESTAMP   NOT NULL
+);
+
 CREATE TABLE public.security_referral (
                                           id serial4 NOT NULL,
                                           offender_no varchar(255) NOT NULL,
@@ -108,19 +119,6 @@ CREATE TABLE public.security_referral (
                                           CONSTRAINT security_referral_pkey PRIMARY KEY (id)
 );
 CREATE INDEX security_referral_prison_id_index ON public.security_referral USING btree (prison_id);
-
-DROP TABLE IF EXISTS public.PREVIOUS_PROFILE;
-
-CREATE TABLE PREVIOUS_PROFILE
-(
-    id serial4 NOT NULL,
-    OFFENDER_NO       VARCHAR(10) PRIMARY KEY,
-    ESCAPE            TEXT,
-    EXTREMISM         TEXT,
-    SOC               TEXT,
-    VIOLENCE          TEXT,
-    EXECUTE_DATE_TIME TIMESTAMP   NOT NULL
-);
 
 --DELETE FROM risk_change;
 --DELETE FROM form;
