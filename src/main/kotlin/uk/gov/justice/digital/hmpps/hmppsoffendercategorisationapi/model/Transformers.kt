@@ -127,7 +127,7 @@ fun transform(entity: FormEntity?): CatForm? {
 /**
  * soc, escape, extremism is REDACTED
  */
-fun transform(entity: PreviousProfile?): RiskProfiler? {
+fun transform(entity: PreviousProfileEntity?): RiskProfiler? {
   if (entity != null) {
     return RiskProfiler(
       offenderNo = entity.offenderNo,
