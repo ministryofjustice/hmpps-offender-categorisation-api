@@ -57,12 +57,14 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
       riskChangeRepository,
       liteCategoryRepository,
       formRepository,
-      previousProfileRepository
+      previousProfileRepository,
     )
 
     val response = subjectAccessRequestService.getPrisonContentFor("GXXXX", now(), now())
     println(json.writeValueAsString(response?.content as SarResponse))
-    assertThat(json.writerWithDefaultPrettyPrinter().writeValueAsString(response.content as SarResponse)).isEqualTo(BaseSarUnitTest.loadExpectedOutput("/subject_access_request_content.json"))
+    assertThat(json.writerWithDefaultPrettyPrinter().writeValueAsString(response.content as SarResponse)).isEqualTo(
+      BaseSarUnitTest.loadExpectedOutput("/subject_access_request_content.json"),
+    )
   }
 
   @Test
@@ -73,7 +75,7 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
       riskChangeRepository,
       liteCategoryRepository,
       formRepository,
-      previousProfileRepository
+      previousProfileRepository,
     )
 
     val response = subjectAccessRequestService.getPrisonContentFor("GNOTFOUND", now(), now())
@@ -96,7 +98,7 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
       riskChangeRepositoryMock,
       liteCategoryRepositoryMock,
       formRepositoryMock,
-      previousProfileRepositoryMock
+      previousProfileRepositoryMock,
     )
 
     val response = subjectAccessRequestService.getPrisonContentFor("GRED", now(), now())

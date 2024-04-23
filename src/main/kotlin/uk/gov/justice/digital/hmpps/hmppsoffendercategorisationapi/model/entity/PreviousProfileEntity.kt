@@ -9,7 +9,6 @@ import java.time.ZonedDateTime
 @Entity
 @Table(name = "PREVIOUS_PROFILE")
 class PreviousProfileEntity(
-
   @Id
   val id: Long,
 
@@ -26,5 +25,4 @@ class PreviousProfileEntity(
 
   @Column(name = "EXECUTE_DATE_TIME")
   val executeDateTime: ZonedDateTime? = null,
-
 )

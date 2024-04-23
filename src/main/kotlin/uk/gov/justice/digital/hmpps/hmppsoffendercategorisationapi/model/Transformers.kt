@@ -2,7 +2,12 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.*
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.FormEntity
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.LiteCategoryEntity
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.NextReviewChangeHistoryEntity
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.PreviousProfileEntity
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.RiskChangeEntity
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.SecurityReferralEntity
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.RiskProfiler
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.CatForm
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.LiteCategory
@@ -134,8 +139,8 @@ fun transform(entity: PreviousProfileEntity?): RiskProfiler? {
       soc = RedactedSection(),
       escape = RedactedSection(),
       extremism = RedactedSection(),
-      violence = entity.violence?.let { objectMapper.readValue<Violence>(it) },
-      executeDateTime = entity.executeDateTime.toString()
+      violence = entity.violence.let { objectMapper.readValue<Violence>(it) },
+      executeDateTime = entity.executeDateTime.toString(),
     )
   }
 

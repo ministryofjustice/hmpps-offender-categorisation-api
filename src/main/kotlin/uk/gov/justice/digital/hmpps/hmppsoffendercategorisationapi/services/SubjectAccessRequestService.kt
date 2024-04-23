@@ -8,8 +8,8 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.transfo
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.FormRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.LiteCategoryRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.NextReviewChangeHistoryRepository
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.RiskChangeRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.PreviousProfileRepository
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.RiskChangeRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.SecurityReferralRepository
 import uk.gov.justice.hmpps.kotlin.sar.HmppsPrisonSubjectAccessRequestService
 import uk.gov.justice.hmpps.kotlin.sar.HmppsSubjectAccessRequestContent
