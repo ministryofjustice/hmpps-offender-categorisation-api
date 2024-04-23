@@ -13,6 +13,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.FormRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.LiteCategoryRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.NextReviewChangeHistoryRepository
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.PreviousProfileRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.RiskChangeRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.SecurityReferralRepository
 import java.time.LocalDate.now
@@ -34,12 +35,16 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
   @Autowired
   lateinit var formRepository: FormRepository
 
+  @Autowired
+  lateinit var previousProfileRepository: PreviousProfileRepository
+
   val json = jacksonObjectMapper()
 
   private val liteCategoryRepositoryMock = mock<LiteCategoryRepository>()
   private val riskChangeRepositoryMock = mock<RiskChangeRepository>()
   private val securityReferralRepositoryMock = mock<SecurityReferralRepository>()
   private val formRepositoryMock = mock<FormRepository>()
+  private val previousProfileRepositoryMock = mock<PreviousProfileRepository>()
   private val nextReviewChangeHistoryRepositoryMock = mock<NextReviewChangeHistoryRepository>()
 
   @Test
@@ -52,6 +57,7 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
       riskChangeRepository,
       liteCategoryRepository,
       formRepository,
+      previousProfileRepository
     )
 
     val response = subjectAccessRequestService.getPrisonContentFor("GXXXX", now(), now())
@@ -67,6 +73,7 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
       riskChangeRepository,
       liteCategoryRepository,
       formRepository,
+      previousProfileRepository
     )
 
     val response = subjectAccessRequestService.getPrisonContentFor("GNOTFOUND", now(), now())
@@ -81,6 +88,7 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
     whenever(riskChangeRepositoryMock.findByOffenderNo(OFFENDER_NO)).thenReturn(null)
     whenever(nextReviewChangeHistoryRepositoryMock.findByOffenderNo(OFFENDER_NO)).thenReturn(null)
     whenever(securityReferralRepositoryMock.findByOffenderNo(OFFENDER_NO)).thenReturn(null)
+    whenever(previousProfileRepositoryMock.findByOffenderNo(OFFENDER_NO)).thenReturn(null)
 
     val subjectAccessRequestService = SubjectAccessRequestService(
       securityReferralRepositoryMock,
@@ -88,6 +96,7 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
       riskChangeRepositoryMock,
       liteCategoryRepositoryMock,
       formRepositoryMock,
+      previousProfileRepositoryMock
     )
 
     val response = subjectAccessRequestService.getPrisonContentFor("GRED", now(), now())

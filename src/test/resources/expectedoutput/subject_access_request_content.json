@@ -157,5 +157,23 @@
       "approved_comment" : "approval comment",
       "sequence" : "5"
     }
+  },
+  "riskProfiler" : {
+    "offender_no" : "GXXXX",
+    "escape" : { },
+    "extremism" : { },
+    "soc" : { },
+    "violence" : {
+      "nomsId" : "G2194GK",
+      "riskType" : "VIOLENCE",
+      "displayAssaults" : false,
+      "numberOfAssaults" : 0,
+      "notifySafetyCustodyLead" : false,
+      "numberOfSeriousAssaults" : 0,
+      "numberOfNonSeriousAssaults" : 0,
+      "provisionalCategorisation" : "C",
+      "veryHighRiskViolentOffender" : false
+    },
+    "execute_date_time" : "2021-09-22T10:25:44.395Z"
   }
 }

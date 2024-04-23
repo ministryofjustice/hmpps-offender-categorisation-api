@@ -9,6 +9,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.Fo
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.LiteCategoryRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.NextReviewChangeHistoryRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.RiskChangeRepository
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.PreviousProfileRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.SecurityReferralRepository
 import uk.gov.justice.hmpps.kotlin.sar.HmppsPrisonSubjectAccessRequestService
 import uk.gov.justice.hmpps.kotlin.sar.HmppsSubjectAccessRequestContent
@@ -22,6 +23,7 @@ class SubjectAccessRequestService(
   private val riskChangeRepository: RiskChangeRepository,
   private val liteCategoryRepository: LiteCategoryRepository,
   private val formRepository: FormRepository,
+  private val previousProfileRepository: PreviousProfileRepository,
 ) : HmppsPrisonSubjectAccessRequestService {
   override fun getPrisonContentFor(
     prn: String,
@@ -38,7 +40,7 @@ class SubjectAccessRequestService(
           nextReviewChangeHistory = transform(nextReviewChangeHistoryRepository.findByOffenderNo(prn)),
           catForm = transform(formRepository.findByOffenderNo(prn)),
         ),
-        riskProfiler = null,
+        riskProfiler = transform(previousProfileRepository.findByOffenderNo(prn)),
       ),
     )
   }

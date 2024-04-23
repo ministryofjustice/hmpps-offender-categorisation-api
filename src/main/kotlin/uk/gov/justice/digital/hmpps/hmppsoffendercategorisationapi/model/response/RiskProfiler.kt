@@ -9,26 +9,26 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 data class RiskProfiler(
 
   @JsonProperty("offender_no")
-  val offenderNo: String,
+  val offenderNo: String? = null,
 
   /**
    * Redacted - empty json definition
    */
-  val escape: RedactedSection?,
+  val escape: RedactedSection? = RedactedSection(),
 
   /**
    * Redacted - empty json definition
    */
-  val extremism: RedactedSection?,
+  val extremism: RedactedSection? = RedactedSection(),
 
   /**
    * Redacted - empty json definition
    */
-  val soc: RedactedSection?,
+  val soc: RedactedSection? = RedactedSection(),
 
-  val violence: Violence?,
+  val violence: Violence? = null,
 
   // datetime
   @JsonProperty("execute_date_time")
-  val executeDateTime: String,
+  val executeDateTime: String?,
 )
