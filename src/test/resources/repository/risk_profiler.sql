@@ -1,3 +1,3 @@
-INSERT INTO public.next_review_change_history
+INSERT INTO public.PREVIOUS_PROFILE
 (OFFENDER_NO, ESCAPE, EXTREMISM, SOC, VIOLENCE, EXECUTE_DATE_TIME)
-VALUES('G8105VR', '{}', '{}', '{}, '{}', 2021-09-22 10:25:44.395 +0100');
+VALUES('G8105VR', '{}', '{}', '{}', '{}', '2021-09-22 10:25:44.395 +0100');

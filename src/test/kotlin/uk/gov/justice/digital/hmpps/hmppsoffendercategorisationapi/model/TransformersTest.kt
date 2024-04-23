@@ -95,7 +95,7 @@ class TransformersTest : ResourceTest() {
   fun `Should transform risk profiler data to response`() {
     val riskProfiler = transform(previousProfileRepository.findByOffenderNo("G8105VR"))
 
-    val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/form.json")
+    val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/risk_profiler.json")
 
     Assertions.assertThat(json.writeValueAsString(riskProfiler)).isEqualTo(expectedResult)
   }
