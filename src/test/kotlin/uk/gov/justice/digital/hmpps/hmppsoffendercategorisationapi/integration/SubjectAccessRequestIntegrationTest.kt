@@ -37,9 +37,9 @@ class SubjectAccessRequestIntegrationTest : IntegrationTestBase() {
     }
 
     @Nested
+    @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
+    @Sql(scripts = ["classpath:repository/subject_access_request_service_data.sql"], executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
     inner class HappyPath {
-      @Sql("classpath:repository/subject_access_request_service_data.sql")
-      @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
       @Test
       fun `should return data if prisoner exists`() {
         webTestClient.get().uri("/subject-access-request?prn=GXXXX")
@@ -51,8 +51,6 @@ class SubjectAccessRequestIntegrationTest : IntegrationTestBase() {
           .jsonPath("$.content.categorisationTool.catForm.offender_no").isEqualTo("GXXXX")
       }
 
-      @Sql("classpath:repository/subject_access_request_service_data.sql")
-      @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
       @Test
       fun `should omit data if none exists`() {
         webTestClient.get().uri("/subject-access-request?prn=GBBBB")

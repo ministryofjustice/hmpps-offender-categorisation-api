@@ -30,5 +30,5 @@ data class RiskProfiler(
 
   // datetime
   @JsonProperty("execute_date_time")
-  val executeDateTime: String?,
+  val executeDateTime: String? = null,
 )
