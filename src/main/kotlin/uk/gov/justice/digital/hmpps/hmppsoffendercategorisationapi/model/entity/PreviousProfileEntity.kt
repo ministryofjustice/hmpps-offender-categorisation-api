@@ -11,8 +11,8 @@ import java.time.ZonedDateTime
 /**
  *  Hacking aroudn the old school data model
  */
-data class OffenderNo (
-  val offenderNo: String = ""
+data class OffenderNo(
+  val offenderNo: String = "",
 ) : Serializable
 
 @Entity
