@@ -98,13 +98,12 @@ CREATE TABLE public.risk_change (
 );
 
 CREATE TABLE PREVIOUS_PROFILE (
-    id serial4 NOT NULL,
     OFFENDER_NO       VARCHAR(10) PRIMARY KEY,
     ESCAPE            TEXT,
     EXTREMISM         TEXT,
     SOC               TEXT,
     VIOLENCE          TEXT,
-    EXECUTE_DATE_TIME TIMESTAMP   NOT NULL
+    EXECUTE_DATE_TIME TIMESTAMP NOT NULL
 );
 
 CREATE TABLE public.security_referral (

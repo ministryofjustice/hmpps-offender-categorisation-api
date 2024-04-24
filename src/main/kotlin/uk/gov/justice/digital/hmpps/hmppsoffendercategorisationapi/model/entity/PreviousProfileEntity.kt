@@ -3,15 +3,24 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
+import jakarta.persistence.IdClass
 import jakarta.persistence.Table
+import java.io.Serializable
 import java.time.ZonedDateTime
 
+/**
+ *  Hacking aroudn the old school data model
+ */
+data class OffenderNo (
+  val offenderNo: String = ""
+) : Serializable
+
 @Entity
+@IdClass(OffenderNo::class)
 @Table(name = "PREVIOUS_PROFILE")
 class PreviousProfileEntity(
-  @Id
-  val id: Long,
 
+  @Id
   @Column(name = "OFFENDER_NO")
   val offenderNo: String,
 
