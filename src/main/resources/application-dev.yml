@@ -23,9 +23,5 @@ spring:
 # It won't use this, as the resource server uses a local file for its JWT public key but it needs a value.
 hmpps:
   auth:
-    url: https://sign-in-dev.hmpps.service.justice.gov.uk/auth
-
-manage:
-  users:
-    api:
-      url: http://dummy.value
+    token:
+      url: "https://sign-in-dev.hmpps.service.justice.gov.uk/auth/oauth/token"
