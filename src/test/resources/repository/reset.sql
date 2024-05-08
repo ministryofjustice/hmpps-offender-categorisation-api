@@ -1,5 +1,3 @@
-DROP SCHEMA IF EXISTS risk_profiler;
-CREATE SCHEMA risk_profiler;
 
 -- Drop table
 DROP TABLE IF EXISTS public.form;
@@ -12,6 +10,9 @@ DROP TABLE IF EXISTS risk_profiler.PREVIOUS_PROFILE;
 DROP TYPE IF EXISTS public.review_reason_enum;
 DROP TYPE IF EXISTS public.cat_type_enum;
 DROP TYPE IF EXISTS public.security_referral_status_enum;
+
+DROP SCHEMA IF EXISTS risk_profiler;
+CREATE SCHEMA risk_profiler;
 
 CREATE TYPE public.review_reason_enum AS ENUM (
 	'DUE',
