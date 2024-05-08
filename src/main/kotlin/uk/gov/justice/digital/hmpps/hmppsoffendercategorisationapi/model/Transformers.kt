@@ -2,12 +2,12 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.FormEntity
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.LiteCategoryEntity
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.NextReviewChangeHistoryEntity
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.PreviousProfileEntity
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.RiskChangeEntity
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.SecurityReferralEntity
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.FormEntity
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.LiteCategoryEntity
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.NextReviewChangeHistoryEntity
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.riskprofiler.PreviousProfileEntity
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.RiskChangeEntity
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.SecurityReferralEntity
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.RiskProfiler
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.CatForm
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.LiteCategory

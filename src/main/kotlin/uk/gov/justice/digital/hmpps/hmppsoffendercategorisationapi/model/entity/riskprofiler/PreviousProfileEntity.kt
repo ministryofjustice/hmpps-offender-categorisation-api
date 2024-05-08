@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.riskprofiler
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -17,7 +17,7 @@ data class OffenderNo(
 
 @Entity
 @IdClass(OffenderNo::class)
-@Table(name = "PREVIOUS_PROFILE")
+@Table(name = "PREVIOUS_PROFILE", schema = "risk_profiler")
 class PreviousProfileEntity(
 
   @Id

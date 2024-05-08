@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.jdbc.Sql
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.ResourceTest
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.NextReviewChangeHistoryRepository
 
 class NextReviewChangeHistoryRepositoryTest : ResourceTest() {
   @Autowired

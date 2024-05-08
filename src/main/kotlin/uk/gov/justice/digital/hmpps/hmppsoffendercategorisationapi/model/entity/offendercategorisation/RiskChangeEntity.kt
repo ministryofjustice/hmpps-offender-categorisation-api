@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation
 
 import io.hypersistence.utils.hibernate.type.json.JsonType
 import jakarta.persistence.Column
@@ -11,7 +11,7 @@ import org.hibernate.annotations.Type
 import java.time.ZonedDateTime
 
 @Entity
-@Table(name = "risk_change")
+@Table(name = "risk_change", schema = "public")
 class RiskChangeEntity(
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

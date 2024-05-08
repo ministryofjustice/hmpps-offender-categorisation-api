@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -10,7 +10,7 @@ import java.sql.Date
 import java.time.ZonedDateTime
 
 @Entity
-@Table(name = "next_review_change_history")
+@Table(name = "next_review_change_history", schema = "public")
 class NextReviewChangeHistoryEntity(
 
   @Id

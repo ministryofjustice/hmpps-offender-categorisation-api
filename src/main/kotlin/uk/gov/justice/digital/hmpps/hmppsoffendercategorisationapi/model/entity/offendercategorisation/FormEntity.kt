@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation
 
 import com.vladmihalcea.hibernate.type.json.JsonType
 import jakarta.persistence.Column
@@ -14,7 +14,7 @@ import org.hibernate.annotations.Type
  *  assessed_by, security_reviewed_by cancelled_by all ** REACTED **
  */
 @Entity
-@Table(name = "form")
+@Table(name = "form", schema = "public")
 class FormEntity(
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -12,7 +12,7 @@ import java.time.ZonedDateTime
  * security referral table
  */
 @Entity
-@Table(name = "security_referral")
+@Table(name = "security_referral", schema = "public")
 class SecurityReferralEntity(
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
