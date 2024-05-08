@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
