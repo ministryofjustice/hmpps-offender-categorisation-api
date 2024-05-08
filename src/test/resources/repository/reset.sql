@@ -1,3 +1,5 @@
+DROP SCHEMA IF EXISTS risk_profiler;
+CREATE SCHEMA risk_profiler;
 
 -- Drop table
 DROP TABLE IF EXISTS public.form;
