@@ -68,6 +68,6 @@ VALUES('{"recat":{"decision":{"category":"B"},"securityBack":{},"securityInput":
        '2019-11-25 11:24:12.768',
        'SRENDELL_GEN');
 
-INSERT INTO public.PREVIOUS_PROFILE
+INSERT INTO risk_profiler.PREVIOUS_PROFILE
 (OFFENDER_NO, ESCAPE, EXTREMISM, SOC, VIOLENCE, EXECUTE_DATE_TIME)
 VALUES('GXXXX', '{}', '{}', '{}', '{"nomsId": "G2194GK", "provisionalCategorisation": "C", "veryHighRiskViolentOffender": false, "notifySafetyCustodyLead": false, "displayAssaults": false, "numberOfAssaults": 0, "numberOfSeriousAssaults": 0, "numberOfNonSeriousAssaults": 0,"riskType": "VIOLENCE"}', '2021-09-22 10:25:44.395 +0100');
