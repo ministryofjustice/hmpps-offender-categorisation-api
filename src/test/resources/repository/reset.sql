@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS public.lite_category;
 DROP TABLE IF EXISTS public.security_referral;
 DROP TABLE IF EXISTS public.risk_change;
 DROP TABLE IF EXISTS public.next_review_change_history;
-DROP TABLE IF EXISTS public.PREVIOUS_PROFILE;
+DROP TABLE IF EXISTS risk_profiler.PREVIOUS_PROFILE;
 
 DROP TYPE IF EXISTS public.review_reason_enum;
 DROP TYPE IF EXISTS public.cat_type_enum;
@@ -97,7 +97,7 @@ CREATE TABLE public.risk_change (
                                     raised_date timestamptz NOT NULL
 );
 
-CREATE TABLE PREVIOUS_PROFILE (
+CREATE TABLE risk_profiler.PREVIOUS_PROFILE (
     OFFENDER_NO       VARCHAR(10) PRIMARY KEY,
     ESCAPE            TEXT,
     EXTREMISM         TEXT,
