@@ -46,19 +46,6 @@ spring:
       pool-name: cat-DB-CP
       connectionTimeout: 1000
       validationTimeout: 500
-      jdbc-url: 'jdbc:postgresql://${DB_SERVER}/${DB_NAME}'
-
-  second-datasource:
-    url: 'jdbc:postgresql://${DB_SERVER}/risk_profiler'
-    username: ${DB_USER}
-    password: ${DB_PASS}
-    jpa.database-platform: org.hibernate.dialect.PostgreSQLDialect
-    hikari:
-      pool-name: rp-DB-CP
-      connectionTimeout: 1000
-      validationTimeout: 500
-      jdbc-url: 'jdbc:postgresql://${DB_SERVER}/risk_profiler'
-
   jpa:
     open-in-view: false
     properties:
