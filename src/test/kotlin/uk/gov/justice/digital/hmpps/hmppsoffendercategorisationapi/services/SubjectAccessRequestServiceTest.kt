@@ -49,7 +49,6 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
 
   @Test
   @Sql("classpath:repository/subject_access_request_service_data.sql")
-  @Sql("classpath:repository/previous_profile.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   fun `should build response to match response defined in acceptance criteria`() {
     val subjectAccessRequestService = SubjectAccessRequestService(
