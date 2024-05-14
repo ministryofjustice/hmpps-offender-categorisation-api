@@ -78,6 +78,9 @@ class FormEntity(
   @Column(name = "cancelled_date")
   val cancelledDate: String,
 
+  /**
+   * REDACTED
+   */
   @Column(name = "cancelled_by")
   val cancelledBy: String,
 )

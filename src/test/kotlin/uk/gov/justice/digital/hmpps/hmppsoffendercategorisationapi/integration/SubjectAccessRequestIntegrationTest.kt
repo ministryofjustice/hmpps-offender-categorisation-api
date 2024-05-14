@@ -56,11 +56,7 @@ class SubjectAccessRequestIntegrationTest : IntegrationTestBase() {
         webTestClient.get().uri("/subject-access-request?prn=GBBBB")
           .headers(setHeaders(roles = listOf("ROLE_SAR_DATA_ACCESS")))
           .exchange()
-          .expectStatus().isOk
-          .expectBody()
-          .consumeWith(System.out::println)
-          .jsonPath("$.content.categorisationTool").hasJsonPath()
-          .jsonPath("$.content.categorisationTool").isEmpty()
+          .expectStatus().isNoContent
       }
     }
   }

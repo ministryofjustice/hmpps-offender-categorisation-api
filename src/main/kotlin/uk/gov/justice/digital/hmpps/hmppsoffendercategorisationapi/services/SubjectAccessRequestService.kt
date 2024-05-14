@@ -30,6 +30,13 @@ class SubjectAccessRequestService(
     fromDate: LocalDate?,
     toDate: LocalDate?,
   ): HmppsSubjectAccessRequestContent? {
+
+    val catFormEntity = formRepository.findTopByOffenderNoOrderBySequenceNoAsc(prn)
+
+    if (catFormEntity == null) {
+      return null // returns 204 no content - see acceptance criteria si-841
+    }
+
     return HmppsSubjectAccessRequestContent(
       content =
       SarResponse(
@@ -38,7 +45,7 @@ class SubjectAccessRequestService(
           liteCategory = transform(liteCategoryRepository.findByOffenderNo(prn)),
           riskChange = transform(riskChangeRepository.findByOffenderNo(prn)),
           nextReviewChangeHistory = transform(nextReviewChangeHistoryRepository.findByOffenderNo(prn)),
-          catForm = transform(formRepository.findByOffenderNo(prn)),
+          catForm = transform(catFormEntity),
         ),
         riskProfiler = transform(previousProfileRepository.findByOffenderNo(prn)),
       ),

@@ -99,7 +99,7 @@ fun transform(entity: LiteCategoryEntity?): LiteCategory? {
 }
 
 /**
- * cancelledBy is REDACTED
+ * userId, cancelledBy is REDACTED
  */
 fun transform(entity: FormEntity?): CatForm? {
   if (entity != null) {

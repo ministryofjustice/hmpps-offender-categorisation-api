@@ -82,7 +82,7 @@ class TransformersTest : ResourceTest() {
   @Sql("classpath:repository/form.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   fun `Should transform form data to response`() {
-    val form = transform(formRepository.findByOffenderNo("G8105VR"))
+    val form = transform(formRepository.findTopByOffenderNoOrderBySequenceNoAsc("G8105VR"))
 
     val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/form.json")
 
