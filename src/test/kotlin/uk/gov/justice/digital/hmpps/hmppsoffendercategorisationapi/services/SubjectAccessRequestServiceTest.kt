@@ -80,13 +80,13 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
 
     val response = subjectAccessRequestService.getPrisonContentFor("GNOTFOUND", now(), now())
 
-    assertThat(json.writeValueAsString(response?.content as SarResponse)).isEqualTo("{\"categorisationTool\":{}}")
+    assertThat(response).isEqualTo(null)
   }
 
   @Test
   fun `should build response with empty data`() {
     whenever(liteCategoryRepositoryMock.findByOffenderNo(OFFENDER_NO)).thenReturn(null)
-    whenever(formRepositoryMock.findByOffenderNo(OFFENDER_NO)).thenReturn(null)
+    whenever(formRepositoryMock.findTopByOffenderNoOrderBySequenceNoAsc(OFFENDER_NO)).thenReturn(null)
     whenever(riskChangeRepositoryMock.findByOffenderNo(OFFENDER_NO)).thenReturn(null)
     whenever(nextReviewChangeHistoryRepositoryMock.findByOffenderNo(OFFENDER_NO)).thenReturn(null)
     whenever(securityReferralRepositoryMock.findByOffenderNo(OFFENDER_NO)).thenReturn(null)
@@ -102,8 +102,7 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
     )
 
     val response = subjectAccessRequestService.getPrisonContentFor("GRED", now(), now())
-    assertThat(json.writeValueAsString(response?.content as SarResponse)).isEqualTo("{\"categorisationTool\":{}}")
-    println(json.writeValueAsString(response.content as SarResponse))
+    assertThat(response).isEqualTo(null)
   }
 
   private companion object {
