@@ -30,7 +30,6 @@ class SubjectAccessRequestService(
     fromDate: LocalDate?,
     toDate: LocalDate?,
   ): HmppsSubjectAccessRequestContent? {
-
     val catFormEntity = formRepository.findTopByOffenderNoOrderBySequenceNoAsc(prn)
 
     if (catFormEntity == null) {

@@ -1,6 +1,5 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response
 
-import org.junit.jupiter.api.Test
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.NextReviewChangeHistory
 
 open class CategorisationToolTest : BaseSarUnitTest() {
