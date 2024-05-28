@@ -4,12 +4,6 @@ import org.junit.jupiter.api.Test
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.NextReviewChangeHistory
 
 open class CategorisationToolTest : BaseSarUnitTest() {
-  @Test
-  fun `should match acceptance criteria test data`() {
-    val str = json.writeValueAsString(categorisationTool)
-
-    System.out.println(str)
-  }
 
   protected companion object {
     @JvmStatic
