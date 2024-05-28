@@ -4,46 +4,35 @@
 [![Docker Repository on Quay](https://quay.io/repository/hmpps/hmpps-offender-categorisation-api/status "Docker Repository on Quay")](https://quay.io/repository/hmpps/hmpps-offender-categorisation-api)
 [![API docs](https://img.shields.io/badge/API_docs_-view-85EA2D.svg?logo=swagger)](https://hmpps-offender-categorisation-api-dev.hmpps.service.justice.gov.uk/webjars/swagger-ui/index.html?configUrl=/v3/api-docs)
 
-This is a skeleton project from which to create new kotlin projects from.
+This is a Spring Boot application, written in Kotlin, providing data
+access to support the [Offender Categorisation application](https://github.com/ministryofjustice/offender-categorisation).
 
-# Instructions
+## Setup
 
-If this is a HMPPS project then the project will be created as part of bootstrapping - 
-see https://github.com/ministryofjustice/dps-project-bootstrap.
+Start the postrgres form-builder database and localstack from the offender categorisation project. Create a run configuration and apply the following environment variables:
 
-## Creating a CloudPlatform namespace
+DB_SERVER=localhost;DB_NAME=form-builder;DB_USER=form-builder;DB_PASS=form-builder 
 
-When deploying to a new namespace, you may wish to use this template kotlin project namespace as the basis for your new namespace:
+You may need to create the Risk Profiler schema. Best way would be to run the reset.sql test script to create the schema and the previous_profile database table that is used to gather data for SAR.
 
-<https://github.com/ministryofjustice/cloud-platform-environments/tree/main/namespaces/live.cloud-platform.service.justice.gov.uk/hmpps-offender-categorisation-api>
+Set active profile to local and set the user id an token for api.client.admin.id property
 
-Copy this folder, update all the existing namespace references, and submit a PR to the CloudPlatform team. Further instructions from the CloudPlatform team can be found here: <https://user-guide.cloud-platform.service.justice.gov.uk/#cloud-platform-user-guide>
+## Target Users
 
-## Renaming from Hmpps Offender Categorisation Api - github Actions
+User requires role ROLE_SAR_DATA_ACCESS to access SAR information. Without the role a 401 will be returned
 
-Once the new repository is deployed. Navigate to the repository in github, and select the `Actions` tab.
-Click the link to `Enable Actions on this repository`.
+## Rest API
 
-Find the Action workflow named: `rename-project-create-pr` and click `Run workflow`.  This workflow will
-execute the `rename-project.bash` and create Pull Request for you to review.  Review the PR and merge.
+The current service exposes only SAR GET Rest Endpoint. This endpoint is standardised in uk.gov.justice.hmpps.kotlin.sar.HmppsPrisonSubjectAccessRequestService which is part of uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter dependency - see build.gradle.kts). 
 
-Note: ideally this workflow would run automatically however due to a recent change github Actions are not
-enabled by default on newly created repos. There is no way to enable Actions other then to click the button in the UI.
-If this situation changes we will update this project so that the workflow is triggered during the bootstrap project.
-Further reading: <https://github.community/t/workflow-isnt-enabled-in-repos-generated-from-template/136421>
+# Dev endpoints
 
-## Manually renaming from Hmpps Offender Categorisation Api
+Open API specification - https://hmpps-offender-categorisation-api-dev.hmpps.service.justice.gov.uk/swagger-ui/index.html?configUrl=/v3/api-docs
 
-Run the `rename-project.bash` and create a PR.
+Health - https://hmpps-offender-categorisation-api-dev.hmpps.service.justice.gov.uk/health
 
-The `rename-project.bash` script takes a single argument - the name of the project and calculates from it:
-* The main class name (project name converted to pascal case) 
-* The project description (class name with spaces between the words)
-* The main package name (project name with hyphens removed)
+SAR Request - https://hmpps-offender-categorisation-api-dev.hmpps.service.justice.gov.uk/subject-access-request?prn=5555
 
-It then performs a search and replace and directory renames so the project is ready to be used.
+## Automated Tests
 
-## Filling in the `productId`
-
-To allow easy identification of an application, the product Id of the overall product should be set in `values.yaml`. 
-The Service Catalogue contains a list of these IDs and is currently in development here https://developer-portal.hmpps.service.justice.gov.uk/products
+All unit and integration tests should run straight out of the box.

@@ -1,5 +1,12 @@
 version: 2.1
 
+feature_branch: &feature_branch
+  filters:
+    branches:
+      ignore:
+        - /^renovate-.*$/
+        - main
+
 orbs:
   hmpps: ministryofjustice/hmpps@8
 
@@ -7,6 +14,9 @@ parameters:
   alerts-slack-channel:
     type: string
     default: dps_sed_alerts
+  nonprod-releases-slack-channel:
+    type: string
+    default: sed-nonprod-releases
   releases-slack-channel:
     type: string
     default: dps-releases
@@ -14,8 +24,15 @@ parameters:
 jobs:
   validate:
     executor:
-      name: hmpps/java
-      tag: "21.0"
+      name: hmpps/java_postgres
+      jdk_tag: "21.0"
+      postgres_tag: "14"
+      postgres_db: "form-builder"
+      postgres_username: "form-builder"
+      postgres_password: "form-builder"
+    environment:
+      _JAVA_OPTIONS: -Xmx800m -XX:ParallelGCThreads=2 -XX:ConcGCThreads=2 -XX:ParallelGCThreads=2 -Djava.util.concurrent.ForkJoinPool.common.parallelism=2 -Dorg.gradle.daemon=false
+
     steps:
       - checkout
       - restore_cache:
@@ -43,6 +60,27 @@ workflows:
               ignore: /.*/
       - hmpps/helm_lint:
           name: helm_lint
+      - request-dev-approval:
+          <<: *feature_branch
+          type: approval
+          requires:
+            - validate
+            - helm_lint
+      - hmpps/build_multiplatform_docker:
+          <<: *feature_branch
+          name: feature_branch_build_docker
+          requires:
+            - request-dev-approval
+      - hmpps/deploy_env:
+          <<: *feature_branch
+          name: feature_branch_deploy_dev
+          env: "dev"
+          slack_notification: true
+          slack_channel_name: << pipeline.parameters.nonprod-releases-slack-channel >>
+          context:
+            - hmpps-common-vars
+          requires:
+            - feature_branch_build_docker
       - hmpps/build_multiplatform_docker:
           name: build_docker
           filters:
@@ -52,9 +90,8 @@ workflows:
       - hmpps/deploy_env:
           name: deploy_dev
           env: "dev"
-          jira_update: true
-          pipeline_id: <<pipeline.id>>
-          pipeline_number: <<pipeline.number>>
+          slack_notification: true
+          slack_channel_name: << pipeline.parameters.nonprod-releases-slack-channel >>
           context: hmpps-common-vars
           filters:
             branches:
@@ -64,43 +101,34 @@ workflows:
             - validate
             - build_docker
             - helm_lint
-          helm_timeout: 5m
-#      - request-preprod-approval:
-#          type: approval
-#          requires:
-#            - deploy_dev
-#      - hmpps/deploy_env:
-#          name: deploy_preprod
-#          env: "preprod"
-#          jira_update: true
-#          jira_env_type: staging
-#          pipeline_id: <<pipeline.id>>
-#          pipeline_number: <<pipeline.number>>
-#          context:
-#            - hmpps-common-vars
-#            - hmpps-offender-categorisation-api-preprod
-#          requires:
-#            - request-preprod-approval
-#          helm_timeout: 5m
-#      - request-prod-approval:
-#          type: approval
-#          requires:
-#            - deploy_preprod
-#      - hmpps/deploy_env:
-#          name: deploy_prod
-#          env: "prod"
-#          jira_update: true
-#          jira_env_type: production
-#          pipeline_id: <<pipeline.id>>
-#          pipeline_number: <<pipeline.number>>
-#          slack_notification: true
-#          slack_channel_name: << pipeline.parameters.releases-slack-channel >>
-#          context:
-#            - hmpps-common-vars
-#            - hmpps-offender-categorisation-api-prod
-#          requires:
-#            - request-prod-approval
-#          helm_timeout: 5m
+      - request-preprod-approval:
+          type: approval
+          requires:
+            - deploy_dev
+      - hmpps/deploy_env:
+          name: deploy_preprod
+          env: "preprod"
+          slack_notification: true
+          slack_channel_name: << pipeline.parameters.nonprod-releases-slack-channel >>
+          context:
+            - hmpps-common-vars
+            - offender-categorisation-api-preprod
+          requires:
+            - request-preprod-approval
+      - request-prod-approval:
+          type: approval
+          requires:
+            - deploy_preprod
+      - hmpps/deploy_env:
+          name: deploy_prod
+          env: "prod"
+          slack_notification: true
+          slack_channel_name: << pipeline.parameters.releases-slack-channel >>
+          context:
+            - hmpps-common-vars
+            - offender-categorisation-api-prod
+          requires:
+            - request-prod-approval
 
   security:
     triggers:

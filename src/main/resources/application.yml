@@ -13,6 +13,55 @@ spring:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
 
+  profiles:
+    include: stdout
+    group:
+      dev:
+        - "localstack"
+      test:
+        - "localstack"
+        - "stdout"
+
+  security:
+    oauth2:
+      client:
+        registration:
+          hmpps-auth:
+            provider: hmpps-auth
+            client-id: ${system.client.id}
+            client-secret: ${system.client.secret}
+            authorization-grant-type: client_credentials
+        provider:
+          hmpps-auth:
+            token-uri: ${hmpps.auth.token.url}
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${hmpps.auth.url}/.well-known/jwks.json
+
+  datasource:
+    url: 'jdbc:postgresql://${DB_SERVER}/${DB_NAME}'
+    username: ${DB_USER}
+    password: ${DB_PASS}
+    hikari:
+      pool-name: cat-DB-CP
+      connectionTimeout: 1000
+      validationTimeout: 500
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+  flyway:
+    enabled: false
+  sql:
+    init:
+      continue-on-error: true
+
 server:
   port: 8080
   servlet:
@@ -26,6 +75,12 @@ server:
   shutdown: graceful
   error:
     include-message: always
+
+logging:
+  level:
+    org.springframework: INFO
+    org.springframework.security: INFO
+    uk.gov.justice.hmpps: INFO
 
 management:
   endpoints:

@@ -1,0 +1,16 @@
+server:
+  shutdown: immediate
+
+management.endpoint:
+  health.cache.time-to-live: 0
+  info.cache.time-to-live: 0
+
+hmpps:
+  auth:
+    url: https://sign-in-dev.hmpps.service.justice.gov.uk/auth
+
+# Update to your personal token with correct permissions
+system:
+  client:
+      id: offender-categorisation-api
+      secret: clientsecret

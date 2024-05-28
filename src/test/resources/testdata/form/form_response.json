@@ -1,0 +1,91 @@
+{
+  "history": {
+    "catAType": null,
+    "finalCat": null,
+    "catAEndYear": null,
+    "releaseYear": null,
+    "catAStartYear": null
+  },
+  "ratings": {
+    "escapeRating": {
+      "escapeCatB": "No",
+      "escapeCatBText": "",
+      "escapeOtherEvidence": "No",
+      "escapeOtherEvidenceText": ""
+    },
+    "securityBack": {
+      "catB": "No"
+    },
+    "violenceRating": {
+      "seriousThreat": "No",
+      "seriousThreatText": "",
+      "highRiskOfViolence": "No",
+      "highRiskOfViolenceText": ""
+    },
+    "extremismRating": {
+      "previousTerrorismOffences": "No",
+      "previousTerrorismOffencesText": ""
+    },
+    "offendingHistory": {
+      "furtherCharges": "No",
+      "furtherChargesText": "",
+      "previousConvictions": "No",
+      "offendingHistoryCatB": "",
+      "previousConvictionsText": ""
+    }
+  },
+  "security": {
+    "review": {
+      "securityReview": "Security information held on this prisoner, which c"
+    }
+  },
+  "socProfile": {
+    "nomsId": "G6816VN",
+    "riskType": "SOC",
+    "transferToSecurity": true,
+    "provisionalCategorisation": "C"
+  },
+  "supervisor": {
+    "review": {
+      "proposedCategory": "C",
+      "supervisorCategoryAppropriate": "Yes",
+      "supervisorOverriddenCategoryText": ""
+    }
+  },
+  "categoriser": {
+    "review": {},
+    "provisionalCategory": {
+      "suggestedCategory": "C",
+      "overriddenCategory": "",
+      "categoryAppropriate": "Yes",
+      "otherInformationText": "",
+      "overriddenCategoryText": ""
+    }
+  },
+  "escapeProfile": {
+    "nomsId": "G6816VN",
+    "riskType": "ESCAPE",
+    "activeEscapeList": false,
+    "activeEscapeRisk": false,
+    "escapeListAlerts": [],
+    "escapeRiskAlerts": [],
+    "provisionalCategorisation": "C"
+  },
+  "violenceProfile": {
+    "nomsId": "G6816VN",
+    "riskType": "VIOLENCE",
+    "displayAssaults": false,
+    "numberOfAssaults": 0,
+    "notifySafetyCustodyLead": false,
+    "numberOfSeriousAssaults": 0,
+    "provisionalCategorisation": "C",
+    "veryHighRiskViolentOffender": false
+  },
+  "extremismProfile": {
+    "nomsId": "G6816VN",
+    "riskType": "EXTREMISM",
+    "notifyRegionalCTLead": true,
+    "increasedRiskOfExtremism": false,
+    "provisionalCategorisation": "C"
+  }
+}
