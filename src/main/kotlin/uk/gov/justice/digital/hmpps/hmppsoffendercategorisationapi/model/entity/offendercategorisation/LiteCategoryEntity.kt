@@ -15,7 +15,7 @@ class LiteCategoryEntity(
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "booking_id")
-  val bookingId: Long = -1,
+  val bookingId: Long = 0,
 
   val category: String,
 

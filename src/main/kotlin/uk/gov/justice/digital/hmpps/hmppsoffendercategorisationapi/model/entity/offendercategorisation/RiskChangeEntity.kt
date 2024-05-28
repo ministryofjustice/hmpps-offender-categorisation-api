@@ -15,7 +15,7 @@ import java.time.ZonedDateTime
 class RiskChangeEntity(
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  val id: Long = -1,
+  val id: Long = 0,
 
   @Type(JsonType::class)
   @Column(columnDefinition = "jsonb", name = "old_profile")

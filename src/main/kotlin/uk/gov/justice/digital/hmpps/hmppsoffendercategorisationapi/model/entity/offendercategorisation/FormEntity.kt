@@ -18,14 +18,14 @@ import org.hibernate.annotations.Type
 class FormEntity(
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  val id: Long = -1,
+  val id: Long = 0,
 
   @Type(JsonType::class)
   @Column(columnDefinition = "jsonb", name = "form_response")
   val formResponse: String? = null,
 
   @Column(name = "booking_id")
-  val bookingId: Long = -1,
+  val bookingId: Long = 0,
 
   /**
    * REDACTED
