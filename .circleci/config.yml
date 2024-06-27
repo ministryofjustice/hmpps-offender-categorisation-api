@@ -1,10 +1,18 @@
 version: 2.1
 
-feature_branch: &feature_branch
+develop_branch: &develop_branch
   filters:
     branches:
       ignore:
         - /^renovate-.*$/
+        - main
+      only:
+        - develop
+
+main_branch: &main_branch
+  filters:
+    branches:
+      only:
         - main
 
 orbs:
@@ -60,52 +68,30 @@ workflows:
               ignore: /.*/
       - hmpps/helm_lint:
           name: helm_lint
-      - request-dev-approval:
-          <<: *feature_branch
-          type: approval
+      - hmpps/build_multiplatform_docker:
+          <<: *develop_branch
+          name: develop_branch_build_docker
           requires:
             - validate
             - helm_lint
-      - hmpps/build_multiplatform_docker:
-          <<: *feature_branch
-          name: feature_branch_build_docker
-          requires:
-            - request-dev-approval
       - hmpps/deploy_env:
-          <<: *feature_branch
-          name: feature_branch_deploy_dev
+          <<: *develop_branch
+          name: develop_branch_deploy_dev
           env: "dev"
           slack_notification: true
           slack_channel_name: << pipeline.parameters.nonprod-releases-slack-channel >>
           context:
             - hmpps-common-vars
           requires:
-            - feature_branch_build_docker
+            - develop_branch_build_docker
       - hmpps/build_multiplatform_docker:
+          <<: *main_branch
           name: build_docker
-          filters:
-            branches:
-              only:
-                - main
-      - hmpps/deploy_env:
-          name: deploy_dev
-          env: "dev"
-          slack_notification: true
-          slack_channel_name: << pipeline.parameters.nonprod-releases-slack-channel >>
-          context: hmpps-common-vars
-          filters:
-            branches:
-              only:
-                - main
           requires:
             - validate
-            - build_docker
             - helm_lint
-      - request-preprod-approval:
-          type: approval
-          requires:
-            - deploy_dev
       - hmpps/deploy_env:
+          <<: *main_branch
           name: deploy_preprod
           env: "preprod"
           slack_notification: true
@@ -114,12 +100,14 @@ workflows:
             - hmpps-common-vars
             - offender-categorisation-api-preprod
           requires:
-            - request-preprod-approval
+            - build_docker
       - request-prod-approval:
+          <<: *main_branch
           type: approval
           requires:
             - deploy_preprod
       - hmpps/deploy_env:
+          <<: *main_branch
           name: deploy_prod
           env: "prod"
           slack_notification: true
@@ -168,5 +156,3 @@ workflows:
           context:
             - veracode-credentials
             - hmpps-common-vars
-
-
