@@ -98,7 +98,7 @@ workflows:
           slack_channel_name: << pipeline.parameters.nonprod-releases-slack-channel >>
           context:
             - hmpps-common-vars
-            - offender-categorisation-api-preprod
+            - offender-categorisation-preprod
           requires:
             - build_docker
       - request-prod-approval:
@@ -114,7 +114,7 @@ workflows:
           slack_channel_name: << pipeline.parameters.releases-slack-channel >>
           context:
             - hmpps-common-vars
-            - offender-categorisation-api-prod
+            - offender-categorisation-prod
           requires:
             - request-prod-approval
 
