@@ -18,6 +18,7 @@ spring:
     password: form-builder
 
   flyway:
+    baselineOnMigrate: true
     locations: classpath:/migration/common,/migration/{vendor}
     url: jdbc:postgresql://localhost:5432/form-builder
     user: form-builder

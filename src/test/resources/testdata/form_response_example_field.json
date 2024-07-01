@@ -1,0 +1,47 @@
+{
+  "ratings": {
+    "escapeRating": {
+      "escapeCatB": "No",
+      "escapeOtherEvidence": "No"
+    },
+    "securityInput": {
+      "securityInputNeeded": "No"
+    },
+    "furtherCharges": {
+      "furtherCharges": "No"
+    },
+    "violenceRating": {
+      "seriousThreat": "No",
+      "highRiskOfViolence": "No"
+    },
+    "extremismRating": {
+      "previousTerrorismOffences": "No",
+      "previousTerrorismOffencesText": ""
+    },
+    "offendingHistory": {
+      "previousConvictions": "No"
+    }
+  },
+  "categoriser": {
+    "review": {},
+    "provisionalCategory": {
+      "suggestedCategory": "C",
+      "overriddenCategory": "B",
+      "categoryAppropriate": "No",
+      "otherInformationText": "othere rele 2",
+      "overriddenCategoryText": "to a B"
+    }
+  },
+  "openConditions": {
+    "foreignNational": {
+      "dueDeported": "Yes",
+      "formCompleted": "Yes",
+      "exhaustedAppeal": "Yes",
+      "isForeignNational": "Yes"
+    },
+    "earliestReleaseDate": {
+      "threeOrMoreYears": "No"
+    }
+  },
+  "openConditionsRequested": false
+}

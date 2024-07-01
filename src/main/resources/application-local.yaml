@@ -7,11 +7,5 @@ management.endpoint:
 
 hmpps:
   auth:
-    url: http://localhost:8090/auth
+    url: https://sign-in-dev.hmpps.service.justice.gov.uk/auth
 
-# Update to your personal token with correct permissions
-api:
-  client:
-    admin:
-      id: [ID]
-      secret: [SECRET]

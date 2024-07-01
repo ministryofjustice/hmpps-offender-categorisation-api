@@ -1,0 +1,1 @@
+This directory contains snippets of json from the original payload ticket (See CAT Subject Access Request API data.json) they are used in unit tests to deserialise in to response objects and ensure all redacted fields are removed
