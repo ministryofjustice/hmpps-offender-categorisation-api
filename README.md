@@ -7,9 +7,10 @@
 This is a Spring Boot application, written in Kotlin, providing data
 access to support the [Offender Categorisation application](https://github.com/ministryofjustice/offender-categorisation).
 
+
 ## Setup
 
-Start the postrgres form-builder database and localstack from the offender categorisation project. Create a run configuration and apply the following environment variables:
+Start the postgres form-builder database and localstack from the offender categorisation project. Create a run configuration and apply the following environment variables:
 
 DB_SERVER=localhost;DB_NAME=form-builder;DB_USER=form-builder;DB_PASS=form-builder 
 
