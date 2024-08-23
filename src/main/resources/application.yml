@@ -2,6 +2,10 @@ info.app:
   name: Hmpps Offender Categorisation Api
   version: 1.0
 
+hmpps:
+  sar:
+    additionalAccessRole: SAR_DATA_ACCESS
+
 spring:
   application:
     name: hmpps-offender-categorisation-api
