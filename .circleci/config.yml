@@ -34,7 +34,7 @@ jobs:
     executor:
       name: hmpps/java_postgres
       jdk_tag: "21.0"
-      postgres_tag: "14"
+      postgres_tag: "16"
       postgres_db: "form-builder"
       postgres_username: "form-builder"
       postgres_password: "form-builder"
@@ -120,6 +120,12 @@ workflows:
 
   security:
     triggers:
+      #      - schedule:
+      #    cron: "30 * * * *"
+      #    filters:
+      #      branches:
+      #        only:
+      #          - develop
       - schedule:
           cron: "10 5 * * 1-5"
           filters:
