@@ -1,8 +1,8 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "5.15.4"
-  kotlin("plugin.spring") version "1.9.23"
-  kotlin("plugin.jpa") version "1.9.23"
-  kotlin("plugin.serialization") version "1.9.23"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "6.0.1"
+  kotlin("plugin.spring") version "2.0.0"
+  kotlin("plugin.jpa") version "2.0.0"
+  kotlin("plugin.serialization") version "2.0.0"
 }
 
 configurations {
