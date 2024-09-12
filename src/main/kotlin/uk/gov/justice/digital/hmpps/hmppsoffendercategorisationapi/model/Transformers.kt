@@ -129,23 +129,11 @@ fun transform(entity: FormEntity?): CatForm? {
  */
 fun transform(entity: PreviousProfileEntity?): RiskProfiler? {
   if (entity != null) {
-
-    val violenceConvert = entity.violence.let { objectMapper.readValue<Violence>(it) }
-
     return RiskProfiler(
       soc = RedactedSection(),
       escape = RedactedSection(),
       extremism = RedactedSection(),
-      violence = Violence(
-        riskType = violenceConvert.riskType,
-        numberOfAssaults = violenceConvert.numberOfAssaults,
-        displayAssaults = violenceConvert.displayAssaults,
-        provisionalCategorisation = violenceConvert.provisionalCategorisation,
-        veryHighRiskViolentOffender = violenceConvert.veryHighRiskViolentOffender,
-        numberOfSeriousAssaults = violenceConvert.numberOfSeriousAssaults,
-        numberOfNonSeriousAssaults = violenceConvert.numberOfNonSeriousAssaults,
-        notifySafetyCustodyLead = violenceConvert.notifySafetyCustodyLead
-      ),
+      violence = entity.violence.let { objectMapper.readValue<Violence>(it) },
       executeDateTime = entity.executeDateTime.toString(),
     )
   }
