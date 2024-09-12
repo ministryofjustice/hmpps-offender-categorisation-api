@@ -1,6 +1,7 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform
 
 import com.fasterxml.jackson.module.kotlin.readValue
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.BaseSarUnitTest
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.RiskChange
@@ -19,6 +20,6 @@ class RiskChangeTest : BaseSarUnitTest() {
 
     println(result)
 
-    assert(result == expectedResult)
+    Assertions.assertThat(result).isEqualTo(expectedResult)
   }
 }

@@ -41,7 +41,6 @@ class SarResponseTest : CategorisationToolTest() {
     protected val sarResponse = SarResponse(
       categorisationTool,
       riskProfiler = RiskProfiler(
-        offenderNo = "G2194GK",
         escape = RedactedSection(),
         extremism = RedactedSection(),
         soc = RedactedSection(),

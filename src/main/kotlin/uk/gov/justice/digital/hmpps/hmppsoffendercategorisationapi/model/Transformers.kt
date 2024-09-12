@@ -26,7 +26,6 @@ fun transform(securityReferral: SecurityReferralEntity?): SecurityReferral? {
     return SecurityReferral(
       prisonId = securityReferral.prisonId,
       raisedDate = securityReferral.raisedDate.toString(),
-      offenderNo = securityReferral.offenderNo,
       status = securityReferral.status,
       processedDate = securityReferral.processedDate.toString(),
     )
@@ -40,7 +39,6 @@ fun transform(riskChange: RiskChangeEntity?): RiskChange? {
     return RiskChange(
       prisonId = riskChange.prisonId,
       raisedDate = riskChange.raisedDate.toString(),
-      offenderNo = riskChange.offenderNo,
       status = riskChange.status,
       oldProfile = riskChange.oldProfile?.let { objectMapper.readValue<Profile>(it) },
       newProfile = riskChange.newProfile?.let { objectMapper.readValue<Profile>(it) },
@@ -58,7 +56,6 @@ fun transform(entity: NextReviewChangeHistoryEntity?): NextReviewChangeHistory? 
     return NextReviewChangeHistory(
       bookingId = entity.bookingId,
       reason = entity.reason,
-      offenderNo = entity.offenderNo,
       nextReviewDate = entity.nextReviewDate.toString(),
       changeDate = entity.changeDate.toString(),
     )
@@ -74,7 +71,6 @@ fun transform(entity: LiteCategoryEntity?): LiteCategory? {
   if (entity != null) {
     return LiteCategory(
       prisonId = entity.prisonId,
-      offenderNo = entity.offenderNo,
       category = entity.category,
       sequence = entity.sequence,
 
@@ -105,7 +101,6 @@ fun transform(entity: FormEntity?): CatForm? {
   if (entity != null) {
     return CatForm(
       prisonId = entity.prisonId,
-      offenderNo = entity.offenderNo,
       status = entity.status,
       bookingId = entity.bookingId.toString(),
       reviewReason = entity.reviewReason,
@@ -134,12 +129,23 @@ fun transform(entity: FormEntity?): CatForm? {
  */
 fun transform(entity: PreviousProfileEntity?): RiskProfiler? {
   if (entity != null) {
+
+    val violenceConvert = entity.violence.let { objectMapper.readValue<Violence>(it) }
+
     return RiskProfiler(
-      offenderNo = entity.offenderNo,
       soc = RedactedSection(),
       escape = RedactedSection(),
       extremism = RedactedSection(),
-      violence = entity.violence.let { objectMapper.readValue<Violence>(it) },
+      violence = Violence(
+        riskType = violenceConvert.riskType,
+        numberOfAssaults = violenceConvert.numberOfAssaults,
+        displayAssaults = violenceConvert.displayAssaults,
+        provisionalCategorisation = violenceConvert.provisionalCategorisation,
+        veryHighRiskViolentOffender = violenceConvert.veryHighRiskViolentOffender,
+        numberOfSeriousAssaults = violenceConvert.numberOfSeriousAssaults,
+        numberOfNonSeriousAssaults = violenceConvert.numberOfNonSeriousAssaults,
+        notifySafetyCustodyLead = violenceConvert.notifySafetyCustodyLead
+      ),
       executeDateTime = entity.executeDateTime.toString(),
     )
   }

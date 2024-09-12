@@ -46,9 +46,6 @@ class SubjectAccessRequestIntegrationTest : IntegrationTestBase() {
           .headers(setHeaders(roles = listOf("ROLE_SAR_DATA_ACCESS")))
           .exchange()
           .expectStatus().isOk
-          .expectBody()
-          .consumeWith(System.out::println)
-          .jsonPath("$.content.categorisationTool.catForm.offender_no").isEqualTo("GXXXX")
       }
 
       @Test

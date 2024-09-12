@@ -11,7 +11,6 @@ open class CategorisationToolTest : BaseSarUnitTest() {
       nextReviewChangeHistory = NextReviewChangeHistory(
         id = "1",
         bookingId = "1146373",
-        offenderNo = "G7919UD",
         nextReviewDate = "2021-12-12",
         reason = "testing",
         changeDate = "2021-09-22 10:25:44.395 +0100",

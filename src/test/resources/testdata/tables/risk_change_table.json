@@ -2,13 +2,11 @@
   "id": "1",
   "old_profile": {
     "soc": {
-      "nomsId": "G0048VL",
       "riskType": "SOC",
       "transferToSecurity": false,
       "provisionalCategorisation": "C"
     },
     "escape": {
-      "nomsId": "G0048VL",
       "riskType": "ESCAPE",
       "activeEscapeList": false,
       "activeEscapeRisk": false,
@@ -17,7 +15,6 @@
       "provisionalCategorisation": "C"
     },
     "violence": {
-      "nomsId": "G0048VL",
       "riskType": "VIOLENCE",
       "displayAssaults": true,
       "numberOfAssaults": 0,
@@ -27,7 +24,6 @@
       "veryHighRiskViolentOffender": false
     },
     "extremism": {
-      "nomsId": "G0048VL",
       "riskType": "EXTREMISM",
       "notifyRegionalCTLead": false,
       "increasedRiskOfExtremism": false,
@@ -36,13 +32,11 @@
   },
   "new_profile": {
     "soc": {
-      "nomsId": "G0048VL",
       "riskType": "SOC",
       "transferToSecurity": false,
       "provisionalCategorisation": "C"
     },
     "escape": {
-      "nomsId": "G0048VL",
       "riskType": "ESCAPE",
       "activeEscapeList": false,
       "activeEscapeRisk": false,
@@ -51,7 +45,6 @@
       "provisionalCategorisation": "C"
     },
     "violence": {
-      "nomsId": "G0048VL",
       "riskType": "VIOLENCE",
       "displayAssaults": true,
       "numberOfAssaults": 0,
@@ -61,14 +54,12 @@
       "veryHighRiskViolentOffender": false
     },
     "extremism": {
-      "nomsId": "G0048VL",
       "riskType": "EXTREMISM",
       "notifyRegionalCTLead": false,
       "increasedRiskOfExtremism": false,
       "provisionalCategorisation": "C"
     }
   },
-  "offender_no": "G0048VL",
   "user_id": "LBENNETT_GEN",
   "prison_id": "BAI",
   "status": "REVIEWED_FIRST",

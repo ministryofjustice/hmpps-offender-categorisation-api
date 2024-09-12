@@ -10,9 +10,6 @@ class NextReviewChangeHistory(
   @JsonProperty("booking_id")
   val bookingId: String? = null,
 
-  @JsonProperty("offender_no")
-  val offenderNo: String? = null,
-
   // date
   @JsonProperty("next_review_date")
   val nextReviewDate: String? = null,

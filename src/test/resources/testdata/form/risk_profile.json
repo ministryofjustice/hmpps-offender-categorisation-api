@@ -7,13 +7,11 @@
     "catAStartYear": null
   },
   "socProfile": {
-    "nomsId": "G4143VX",
     "riskType": "SOC",
     "transferToSecurity": false,
     "provisionalCategorisation": "C"
   },
   "escapeProfile": {
-    "nomsId": "G4143VX",
     "riskType": "ESCAPE",
     "activeEscapeList": false,
     "activeEscapeRisk": false,
@@ -22,7 +20,6 @@
     "provisionalCategorisation": "C"
   },
   "violenceProfile": {
-    "nomsId": "G4143VX",
     "riskType": "VIOLENCE",
     "displayAssaults": false,
     "numberOfAssaults": 0,
@@ -32,7 +29,6 @@
     "veryHighRiskViolentOffender": false
   },
   "extremismProfile": {
-    "nomsId": "G4143VX",
     "riskType": "EXTREMISM",
     "notifyRegionalCTLead": false,
     "increasedRiskOfExtremism": false,

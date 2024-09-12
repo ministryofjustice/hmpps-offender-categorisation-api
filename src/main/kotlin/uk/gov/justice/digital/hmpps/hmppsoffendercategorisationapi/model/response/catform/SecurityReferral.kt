@@ -7,9 +7,6 @@ import com.fasterxml.jackson.annotation.JsonProperty
 class SecurityReferral(
   val id: String? = null,
 
-  @JsonProperty("offender_no")
-  val offenderNo: String,
-
   @JsonProperty("prison_id")
   val prisonId: String?,
 

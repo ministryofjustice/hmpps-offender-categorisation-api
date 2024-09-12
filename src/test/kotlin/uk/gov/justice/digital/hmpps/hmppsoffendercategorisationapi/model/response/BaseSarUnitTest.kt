@@ -38,7 +38,6 @@ open class BaseSarUnitTest {
 
     @JvmStatic
     protected val violenceProfile = Violence(
-      nomsId = "G8105VR",
       riskType = "VIOLENCE",
       displayAssaults = false,
       numberOfAssaults = 0,
@@ -51,7 +50,6 @@ open class BaseSarUnitTest {
 
     @JvmStatic
     protected val riskProfilerViolence = Violence(
-      nomsId = "G2194GK",
       riskType = "VIOLENCE",
       displayAssaults = false,
       numberOfAssaults = 0,
@@ -68,12 +66,10 @@ open class BaseSarUnitTest {
       socProfile = RedactedSection(),
       lifeProfile = LifeProfile(
         life = true,
-        nomsId = "G8105VR",
         riskType = "LIFE",
         provisionalCategorisation = "B",
       ),
       escapeProfile = Escape(
-        nomsId = "G8105VR",
         riskType = "ESCAPE",
         provisionalCategorisation = "C",
       ),
@@ -91,7 +87,6 @@ open class BaseSarUnitTest {
       sequenceNo = "1",
       riskProfile = riskProfile,
       prisonId = "WMI",
-      offenderNo = "G8105VR",
       startDate = "2023-03-21 15:09:00.266 +0000",
       securityReviewedDate = "2023-03-21 15:09:00.266 +0000",
       approvalDate = "2023-03-21",
@@ -106,7 +101,6 @@ open class BaseSarUnitTest {
     @JvmStatic
     protected val security = SecurityReferral(
       id = "2",
-      offenderNo = "G2550VO",
       prisonId = "LPI",
       status = "REFERRED",
       raisedDate = "2019-09-19 13:33:21.123 +0100",
@@ -118,7 +112,6 @@ open class BaseSarUnitTest {
       sequence = "5",
       category = "U",
       supervisorCategory = "U",
-      offenderNo = "G0089UO",
       prisonId = "LPI",
       createdDate = "2020-05-18 13:58:42.435 +0100",
       approvedDate = "2020-05-18 01:00:00.000 +0100",
@@ -137,12 +130,10 @@ open class BaseSarUnitTest {
       id = "1",
       oldProfile = Profile(
         escape = Escape(
-          nomsId = "G0048VL",
           riskType = "ESCAPE",
           provisionalCategorisation = "C",
         ),
         violence = Violence(
-          nomsId = "G0048VL",
           riskType = "VIOLENCE",
           displayAssaults = true,
           numberOfAssaults = 0,
@@ -153,12 +144,10 @@ open class BaseSarUnitTest {
       newProfile = Profile(
         soc = RedactedSection(),
         escape = Escape(
-          nomsId = "G0048VL",
           riskType = "ESCAPE",
           provisionalCategorisation = "C",
         ),
         violence = Violence(
-          nomsId = "G0048VL",
           riskType = "VIOLENCE",
           displayAssaults = true,
           numberOfAssaults = 0,
@@ -167,7 +156,6 @@ open class BaseSarUnitTest {
         ),
         extremism = RedactedSection(),
       ),
-      offenderNo = "",
       prisonId = "BAI",
       status = "REVIEWED_FIRST",
       raisedDate = "2019-09-18 10:45:34.166 +0100",

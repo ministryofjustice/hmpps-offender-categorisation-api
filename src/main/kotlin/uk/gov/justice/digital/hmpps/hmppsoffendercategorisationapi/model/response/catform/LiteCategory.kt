@@ -9,9 +9,6 @@ data class LiteCategory(
 
   val supervisorCategory: String? = null,
 
-  @JsonProperty("offender_no")
-  val offenderNo: String? = null,
-
   @JsonProperty("prison_id")
   val prisonId: String? = null,
 

@@ -7,10 +7,6 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class RiskProfiler(
-
-  @JsonProperty("offender_no")
-  val offenderNo: String? = null,
-
   /**
    * Redacted - empty json definition
    */

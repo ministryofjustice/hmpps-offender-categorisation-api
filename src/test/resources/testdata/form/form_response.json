@@ -40,7 +40,6 @@
     }
   },
   "socProfile": {
-    "nomsId": "G6816VN",
     "riskType": "SOC",
     "transferToSecurity": true,
     "provisionalCategorisation": "C"
@@ -63,7 +62,6 @@
     }
   },
   "escapeProfile": {
-    "nomsId": "G6816VN",
     "riskType": "ESCAPE",
     "activeEscapeList": false,
     "activeEscapeRisk": false,
@@ -72,7 +70,6 @@
     "provisionalCategorisation": "C"
   },
   "violenceProfile": {
-    "nomsId": "G6816VN",
     "riskType": "VIOLENCE",
     "displayAssaults": false,
     "numberOfAssaults": 0,
@@ -82,7 +79,6 @@
     "veryHighRiskViolentOffender": false
   },
   "extremismProfile": {
-    "nomsId": "G6816VN",
     "riskType": "EXTREMISM",
     "notifyRegionalCTLead": true,
     "increasedRiskOfExtremism": false,

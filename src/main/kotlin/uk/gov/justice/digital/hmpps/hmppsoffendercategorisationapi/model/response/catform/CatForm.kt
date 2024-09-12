@@ -27,9 +27,6 @@ data class CatForm(
   @JsonProperty("prison_id")
   val prisonId: String? = null,
 
-  @JsonProperty("offender_no")
-  val offenderNo: String? = null,
-
   @JsonProperty("start_date")
   val startDate: String? = null,
 

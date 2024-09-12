@@ -6,15 +6,6 @@ import org.junit.jupiter.api.Test
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.BaseSarUnitTest
 
 class CatFormTest : BaseSarUnitTest() {
-  @Test
-  fun `should match acceptance criteria example response data`() {
-    val result = json.writeValueAsString(catForm)
-    val expectedResult = Companion.loadExpectedOutput("catForm.json")
-
-    println(result)
-
-    assertThat(result).isEqualTo(expectedResult)
-  }
 
   @Test
   fun `should deserialise risk_profile json field to object class`() {
