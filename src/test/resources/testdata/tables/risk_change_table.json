@@ -19,7 +19,6 @@
     "violence": {
       "nomsId": "G0048VL",
       "riskType": "VIOLENCE",
-      "displayAssaults": true,
       "numberOfAssaults": 0,
       "notifySafetyCustodyLead": false,
       "numberOfSeriousAssaults": 0,
@@ -53,7 +52,6 @@
     "violence": {
       "nomsId": "G0048VL",
       "riskType": "VIOLENCE",
-      "displayAssaults": true,
       "numberOfAssaults": 0,
       "notifySafetyCustodyLead": false,
       "numberOfSeriousAssaults": 0,

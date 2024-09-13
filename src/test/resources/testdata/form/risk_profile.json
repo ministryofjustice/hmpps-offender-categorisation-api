@@ -24,7 +24,6 @@
   "violenceProfile": {
     "nomsId": "G4143VX",
     "riskType": "VIOLENCE",
-    "displayAssaults": false,
     "numberOfAssaults": 0,
     "notifySafetyCustodyLead": false,
     "numberOfSeriousAssaults": 0,
