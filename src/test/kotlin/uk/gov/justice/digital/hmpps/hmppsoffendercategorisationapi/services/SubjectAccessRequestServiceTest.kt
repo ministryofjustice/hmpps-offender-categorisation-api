@@ -63,7 +63,7 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
     val response = subjectAccessRequestService.getPrisonContentFor("GXXXX", now(), now())
     println(json.writeValueAsString(response?.content as SarResponse))
     assertThat(json.writerWithDefaultPrettyPrinter().writeValueAsString(response.content as SarResponse)).isEqualTo(
-      BaseSarUnitTest.loadExpectedOutput("/subject_access_request_content.json"),
+      BaseSarUnitTest.loadExpectedOutput("/subject_access_request_content_v2.json"),
     )
   }
 

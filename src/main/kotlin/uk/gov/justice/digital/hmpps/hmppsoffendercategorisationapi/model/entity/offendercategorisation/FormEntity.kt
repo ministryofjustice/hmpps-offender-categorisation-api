@@ -24,6 +24,9 @@ class FormEntity(
   @Column(columnDefinition = "jsonb", name = "form_response")
   val formResponse: String? = null,
 
+  /**
+   * REDACTED
+   */
   @Column(name = "booking_id")
   val bookingId: Long = 0,
 
@@ -38,6 +41,9 @@ class FormEntity(
   @Column(name = "referred_date")
   val referredDate: String = "",
 
+  /**
+   * REDACTED
+   */
   @Column(name = "sequence_no")
   val sequenceNo: String = "",
 
@@ -63,6 +69,9 @@ class FormEntity(
   @Column(name = "cat_type")
   val catType: String,
 
+  /**
+   * REDACTED
+   */
   @Column(name = "nomis_sequence_no")
   val nomisSequenceNo: String,
 

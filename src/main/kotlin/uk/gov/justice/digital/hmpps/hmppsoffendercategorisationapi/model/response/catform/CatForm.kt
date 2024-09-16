@@ -10,16 +10,10 @@ data class CatForm(
   @JsonProperty("form_response")
   val formResponse: Map<String, Any>? = null,
 
-  @JsonProperty("booking_id")
-  val bookingId: String? = null,
-
   val status: String? = null,
 
   @JsonProperty("referred_date")
   val referredDate: String? = null,
-
-  @JsonProperty("sequence_no")
-  val sequenceNo: String? = null,
 
   @JsonProperty("risk_profile")
   val riskProfile: RiskProfile? = null,
@@ -41,9 +35,6 @@ data class CatForm(
 
   @JsonProperty("cat_type")
   val catType: String? = null,
-
-  @JsonProperty("nomis_sequence_no")
-  val nomisSequenceNo: String? = null,
 
   @JsonProperty("assessment_date")
   val assessmentDate: String? = null,

@@ -7,9 +7,6 @@ import com.fasterxml.jackson.annotation.JsonProperty
 class NextReviewChangeHistory(
   val id: String? = null,
 
-  @JsonProperty("booking_id")
-  val bookingId: String? = null,
-
   @JsonProperty("offender_no")
   val offenderNo: String? = null,
 

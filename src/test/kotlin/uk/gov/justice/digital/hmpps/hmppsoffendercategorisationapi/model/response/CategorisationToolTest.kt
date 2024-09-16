@@ -10,7 +10,6 @@ open class CategorisationToolTest : BaseSarUnitTest() {
       catForm = catForm,
       nextReviewChangeHistory = NextReviewChangeHistory(
         id = "1",
-        bookingId = "1146373",
         offenderNo = "G7919UD",
         nextReviewDate = "2021-12-12",
         reason = "testing",

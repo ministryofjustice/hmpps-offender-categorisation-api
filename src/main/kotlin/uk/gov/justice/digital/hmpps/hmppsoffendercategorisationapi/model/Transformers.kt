@@ -56,7 +56,6 @@ fun transform(riskChange: RiskChangeEntity?): RiskChange? {
 fun transform(entity: NextReviewChangeHistoryEntity?): NextReviewChangeHistory? {
   if (entity != null) {
     return NextReviewChangeHistory(
-      bookingId = entity.bookingId,
       reason = entity.reason,
       offenderNo = entity.offenderNo,
       nextReviewDate = entity.nextReviewDate.toString(),
@@ -107,7 +106,6 @@ fun transform(entity: FormEntity?): CatForm? {
       prisonId = entity.prisonId,
       offenderNo = entity.offenderNo,
       status = entity.status,
-      bookingId = entity.bookingId.toString(),
       reviewReason = entity.reviewReason,
       dueByDate = entity.dueByDate,
 
@@ -120,9 +118,7 @@ fun transform(entity: FormEntity?): CatForm? {
       assessmentDate = entity.assessmentDate,
       startDate = entity.startDate,
       referredDate = entity.referredDate,
-      nomisSequenceNo = entity.nomisSequenceNo,
       catType = entity.catType,
-      sequenceNo = entity.sequenceNo,
     )
   }
 

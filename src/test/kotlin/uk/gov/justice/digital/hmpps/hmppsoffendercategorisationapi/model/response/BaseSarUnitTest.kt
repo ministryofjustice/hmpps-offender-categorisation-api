@@ -40,7 +40,6 @@ open class BaseSarUnitTest {
     protected val violenceProfile = Violence(
       nomsId = "G8105VR",
       riskType = "VIOLENCE",
-      displayAssaults = false,
       numberOfAssaults = 0,
       notifySafetyCustodyLead = false,
       numberOfSeriousAssaults = 0,
@@ -53,7 +52,6 @@ open class BaseSarUnitTest {
     protected val riskProfilerViolence = Violence(
       nomsId = "G2194GK",
       riskType = "VIOLENCE",
-      displayAssaults = false,
       numberOfAssaults = 0,
       notifySafetyCustodyLead = false,
       numberOfSeriousAssaults = 0,
@@ -85,10 +83,8 @@ open class BaseSarUnitTest {
     protected val catForm = CatForm(
       id = "1598",
       formResponse = jsonStringToMap(loadTestData("/form/form_response.json")),
-      bookingId = "771697",
       status = "APPROVED",
       referredDate = "2023-03-21 15:08:50.982 +0000",
-      sequenceNo = "1",
       riskProfile = riskProfile,
       prisonId = "WMI",
       offenderNo = "G8105VR",
@@ -96,7 +92,6 @@ open class BaseSarUnitTest {
       securityReviewedDate = "2023-03-21 15:09:00.266 +0000",
       approvalDate = "2023-03-21",
       catType = "INITIAL",
-      nomisSequenceNo = "1900-01-19",
       assessmentDate = "2023-03-21",
       reviewReason = "MANUAL",
       dueByDate = "1977-12-16",
@@ -144,7 +139,6 @@ open class BaseSarUnitTest {
         violence = Violence(
           nomsId = "G0048VL",
           riskType = "VIOLENCE",
-          displayAssaults = true,
           numberOfAssaults = 0,
           provisionalCategorisation = "C",
           veryHighRiskViolentOffender = false,
@@ -160,7 +154,6 @@ open class BaseSarUnitTest {
         violence = Violence(
           nomsId = "G0048VL",
           riskType = "VIOLENCE",
-          displayAssaults = true,
           numberOfAssaults = 0,
           provisionalCategorisation = "C",
           veryHighRiskViolentOffender = false,

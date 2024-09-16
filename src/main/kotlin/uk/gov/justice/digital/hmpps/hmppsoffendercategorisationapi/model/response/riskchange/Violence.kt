@@ -5,14 +5,16 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respon
       "activeEscapeRisk": false,// REDACT as is from Nomis
       "escapeListAlerts": [],// REDACT as is from Nomis
       "escapeRiskAlerts": [],// REDACT as is from Nomis
+      "displayAssaults: boolean // REDACT
  */
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Violence(
   val nomsId: String? = null,
   val riskType: String? = null,
-  val displayAssaults: Boolean? = null,
   val numberOfAssaults: Int? = null,
   val notifySafetyCustodyLead: Boolean? = null,
   val numberOfSeriousAssaults: Int? = null,
