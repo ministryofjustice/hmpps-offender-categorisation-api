@@ -28,7 +28,6 @@ class HmppsOffenderCategorisationApiExceptionHandler {
       )
   }
 
-
   @ExceptionHandler(AccessDeniedException::class)
   fun handleAccessDeniedException(e: AccessDeniedException): ResponseEntity<ErrorResponse> {
     log.info("Access denied exception: {}", e.message)
