@@ -38,8 +38,8 @@ class TransformersTest : ResourceTest() {
   @Test
   @Sql("classpath:repository/risk_change.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-  fun `Should transform risk change data to response`() {
-    val riskChange = transform(riskChangeRepository.findByOffenderNo("G0048VL"))
+  fun `Should select latest risk change record and transform data to response`() {
+    val riskChange = transform(riskChangeRepository.findFirstByOffenderNoOrderByRaisedDateDesc("G0048VL"))
 
     val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/risk_change.json")
     Assertions.assertThat(json.writeValueAsString(riskChange)).isEqualTo(expectedResult)

@@ -87,7 +87,7 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
   fun `should build response with empty data`() {
     whenever(liteCategoryRepositoryMock.findByOffenderNo(OFFENDER_NO)).thenReturn(null)
     whenever(formRepositoryMock.findTopByOffenderNoOrderBySequenceNoAsc(OFFENDER_NO)).thenReturn(null)
-    whenever(riskChangeRepositoryMock.findByOffenderNo(OFFENDER_NO)).thenReturn(null)
+    whenever(riskChangeRepositoryMock.findFirstByOffenderNoOrderByRaisedDateDesc(OFFENDER_NO)).thenReturn(null)
     whenever(nextReviewChangeHistoryRepositoryMock.findByOffenderNo(OFFENDER_NO)).thenReturn(null)
     whenever(securityReferralRepositoryMock.findByOffenderNo(OFFENDER_NO)).thenReturn(null)
     whenever(previousProfileRepositoryMock.findByOffenderNo(OFFENDER_NO)).thenReturn(null)

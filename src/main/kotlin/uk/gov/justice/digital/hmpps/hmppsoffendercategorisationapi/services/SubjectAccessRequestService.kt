@@ -42,7 +42,7 @@ class SubjectAccessRequestService(
         categorisationTool = CategorisationTool(
           security = transform(securityReferralRepository.findByOffenderNo(prn)),
           liteCategory = transform(liteCategoryRepository.findByOffenderNo(prn)),
-          riskChange = transform(riskChangeRepository.findByOffenderNo(prn)),
+          riskChange = transform(riskChangeRepository.findFirstByOffenderNoOrderByRaisedDateDesc(prn)),
           nextReviewChangeHistory = transform(nextReviewChangeHistoryRepository.findByOffenderNo(prn)),
           catForm = transform(catFormEntity),
         ),
