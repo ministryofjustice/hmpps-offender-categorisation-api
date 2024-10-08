@@ -140,7 +140,7 @@
       "reason" : "testing",
       "change_date" : "2021-09-22T09:25:44.395Z"
     },
-    "liteCategory" : {
+    "liteCategory" : [{
       "category" : "U",
       "supervisorCategory" : "U",
       "offender_no" : "GXXXX",
@@ -156,7 +156,7 @@
       "approved_placement_comment" : "approved placement comment",
       "approved_comment" : "approval comment",
       "sequence" : "5"
-    }
+    }]
   },
   "riskProfiler" : {
     "offender_no" : "GXXXX",

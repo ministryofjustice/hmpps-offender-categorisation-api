@@ -8,26 +8,11 @@ class SarResponseTest : CategorisationToolTest() {
 
   @Test
   fun `should build response to match response defined in acceptance criteria`() {
-    val sarResponse = json.writeValueAsString(sarResponse)
+    val response = json.writerWithDefaultPrettyPrinter().writeValueAsString(sarResponse)
 
     val expectedResult = loadExpectedOutput("sar_response.json")
 
-    println(sarResponse)
-
-    assertThat(sarResponse).isEqualTo(expectedResult)
-  }
-
-  fun `should deserialise payload from acceptance criteria`() {
-    val sarResponseObj =
-      json.writeValueAsString(
-        loadTestData("CAT Subject Access Request API data.json"),
-      )
-
-    val expectedResult = loadExpectedOutput("sar_response_from_acceptance_criteria.json")
-
-    val result = json.writeValueAsString(sarResponseObj)
-    println(result)
-    assertThat(result).isEqualTo(expectedResult)
+    assertThat(response).isEqualTo(expectedResult)
   }
 
   @Test

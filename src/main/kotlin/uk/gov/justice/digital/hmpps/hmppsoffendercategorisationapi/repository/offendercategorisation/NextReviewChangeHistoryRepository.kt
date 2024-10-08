@@ -6,5 +6,5 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.
 
 @Repository
 interface NextReviewChangeHistoryRepository : JpaRepository<NextReviewChangeHistoryEntity, Long> {
-  fun findByOffenderNo(offenderNo: String): NextReviewChangeHistoryEntity?
+  fun findByOffenderNo(offenderNo: String): List<NextReviewChangeHistoryEntity>?
 }

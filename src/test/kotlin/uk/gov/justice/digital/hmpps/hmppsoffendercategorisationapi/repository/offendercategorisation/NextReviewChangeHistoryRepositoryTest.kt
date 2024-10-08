@@ -17,6 +17,6 @@ class NextReviewChangeHistoryRepositoryTest : ResourceTest() {
   fun `Should Find by Offender No`() {
     val nextReviewChangeHistory = repository.findByOffenderNo("G7919UD")
 
-    assertThat(nextReviewChangeHistory?.reason).isEqualTo("testing")
+    assertThat(nextReviewChangeHistory?.first()?.reason).isEqualTo("testing")
   }
 }

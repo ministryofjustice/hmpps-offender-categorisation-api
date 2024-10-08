@@ -35,16 +35,23 @@ fun transform(securityReferral: SecurityReferralEntity?): SecurityReferral? {
   return null
 }
 
-fun transform(riskChange: RiskChangeEntity?): RiskChange? {
+fun transformRiskChangeList(riskChange: List<RiskChangeEntity>?): List<RiskChange>? {
   if (riskChange != null) {
-    return RiskChange(
-      prisonId = riskChange.prisonId,
-      raisedDate = riskChange.raisedDate.toString(),
-      offenderNo = riskChange.offenderNo,
-      status = riskChange.status,
-      oldProfile = riskChange.oldProfile?.let { objectMapper.readValue<Profile>(it) },
-      newProfile = riskChange.newProfile?.let { objectMapper.readValue<Profile>(it) },
-    )
+    val response = ArrayList<RiskChange>()
+
+    riskChange.forEach {
+        response.add(
+          RiskChange(
+            prisonId = it.prisonId,
+            raisedDate = it.raisedDate.toString(),
+            offenderNo = it.offenderNo,
+            status = it.status,
+            oldProfile = it.oldProfile?.let { objectMapper.readValue<Profile>(it) },
+            newProfile = it.newProfile?.let { objectMapper.readValue<Profile>(it) },
+          )
+        )
+      }
+    return response
   }
 
   return null
@@ -53,14 +60,22 @@ fun transform(riskChange: RiskChangeEntity?): RiskChange? {
 /**
  * changedBy is REDACTED
  */
-fun transform(entity: NextReviewChangeHistoryEntity?): NextReviewChangeHistory? {
+fun transformNextReviewChangeHistoryList(entity: List<NextReviewChangeHistoryEntity>?): List<NextReviewChangeHistory>? {
   if (entity != null) {
-    return NextReviewChangeHistory(
-      reason = entity.reason,
-      offenderNo = entity.offenderNo,
-      nextReviewDate = entity.nextReviewDate.toString(),
-      changeDate = entity.changeDate.toString(),
-    )
+    val response = ArrayList<NextReviewChangeHistory>()
+
+    entity.forEach{
+        response.add(
+        NextReviewChangeHistory(
+          reason = it.reason,
+          offenderNo = it.offenderNo,
+          nextReviewDate = it.nextReviewDate.toString(),
+          changeDate = it.changeDate.toString(),
+          )
+        )
+    }
+
+    return response
   }
 
   return null

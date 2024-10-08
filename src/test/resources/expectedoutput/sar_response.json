@@ -1,1 +1,224 @@
-{"categorisationTool":{"catForm":{"id":"1598","form_response":{"history":{"catAType":null,"finalCat":null,"catAEndYear":null,"releaseYear":null,"catAStartYear":null},"ratings":{"escapeRating":{"escapeCatB":"No","escapeCatBText":"","escapeOtherEvidence":"No","escapeOtherEvidenceText":""},"securityBack":{"catB":"No"},"violenceRating":{"seriousThreat":"No","seriousThreatText":"","highRiskOfViolence":"No","highRiskOfViolenceText":""},"extremismRating":{"previousTerrorismOffences":"No","previousTerrorismOffencesText":""},"offendingHistory":{"furtherCharges":"No","furtherChargesText":"","previousConvictions":"No","offendingHistoryCatB":"","previousConvictionsText":""}},"security":{"review":{"securityReview":"Security information held on this prisoner, which c"}},"socProfile":{"nomsId":"G6816VN","riskType":"SOC","transferToSecurity":true,"provisionalCategorisation":"C"},"supervisor":{"review":{"proposedCategory":"C","supervisorCategoryAppropriate":"Yes","supervisorOverriddenCategoryText":""}},"categoriser":{"review":{},"provisionalCategory":{"suggestedCategory":"C","overriddenCategory":"","categoryAppropriate":"Yes","otherInformationText":"","overriddenCategoryText":""}},"escapeProfile":{"nomsId":"G6816VN","riskType":"ESCAPE","activeEscapeList":false,"activeEscapeRisk":false,"escapeListAlerts":[],"escapeRiskAlerts":[],"provisionalCategorisation":"C"},"violenceProfile":{"nomsId":"G6816VN","riskType":"VIOLENCE","numberOfAssaults":0,"notifySafetyCustodyLead":false,"numberOfSeriousAssaults":0,"provisionalCategorisation":"C","veryHighRiskViolentOffender":false},"extremismProfile":{"nomsId":"G6816VN","riskType":"EXTREMISM","notifyRegionalCTLead":true,"increasedRiskOfExtremism":false,"provisionalCategorisation":"C"}},"status":"APPROVED","referred_date":"2023-03-21 15:08:50.982 +0000","risk_profile":{"history":{},"offences":[],"socProfile":{},"lifeProfile":{"life":true,"nomsId":"G8105VR","riskType":"LIFE","provisionalCategorisation":"B"},"escapeProfile":{"nomsId":"G8105VR","riskType":"ESCAPE","provisionalCategorisation":"C"},"violenceProfile":{"nomsId":"G8105VR","riskType":"VIOLENCE","numberOfAssaults":0,"notifySafetyCustodyLead":false,"numberOfSeriousAssaults":0,"numberOfNonSeriousAssaults":0,"provisionalCategorisation":"C","veryHighRiskViolentOffender":false},"extremismProfile":{}},"prison_id":"WMI","offender_no":"G8105VR","start_date":"2023-03-21 15:09:00.266 +0000","security_reviewed_date":"2023-03-21 15:09:00.266 +0000","approval_date":"2023-03-21","cat_type":"INITIAL","assessment_date":"2023-03-21","review_reason":"MANUAL","due_by_date":"1977-12-16","cancelled_date":"1977-12-17"},"riskChange":{"id":"1","old_profile":{"soc":{},"escape":{"nomsId":"G0048VL","riskType":"ESCAPE","provisionalCategorisation":"C"},"violence":{"nomsId":"G0048VL","riskType":"VIOLENCE","numberOfAssaults":0,"provisionalCategorisation":"C","veryHighRiskViolentOffender":false},"extremism":{}},"new_profile":{"soc":{},"escape":{"nomsId":"G0048VL","riskType":"ESCAPE","provisionalCategorisation":"C"},"violence":{"nomsId":"G0048VL","riskType":"VIOLENCE","numberOfAssaults":0,"provisionalCategorisation":"C","veryHighRiskViolentOffender":false},"extremism":{}},"offender_no":"","prison_id":"BAI","status":"REVIEWED_FIRST","raised_date":"2019-09-18 10:45:34.166 +0100"},"security":{"id":"2","offender_no":"G2550VO","prison_id":"LPI","status":"REFERRED","raised_date":"2019-09-19 13:33:21.123 +0100","processed_date":"2019-09-19 13:36:46.335 +0100"},"nextReviewChangeHistory":{"id":"1","offender_no":"G7919UD","next_review_date":"2021-12-12","reason":"testing","change_date":"2021-09-22 10:25:44.395 +0100"},"liteCategory":{"category":"U","supervisorCategory":"U","offender_no":"G0089UO","prison_id":"LPI","created_date":"2020-05-18 13:58:42.435 +0100","approved_date":"2020-05-18 01:00:00.000 +0100","assessment_committee":"OCA","assessment_comment":"Testing the creation of an unsentenced","next_review_date":"2020-11-18","placement_prison_id":"ASI","approved_committee":"OCA","approved_placement_prison_id":"ASI","approved_placement_comment":"approved placement comment","approved_comment":"approval comment","sequence":"5"}},"riskProfiler":{"offender_no":"G2194GK","escape":{},"extremism":{},"soc":{},"violence":{"nomsId":"G2194GK","riskType":"VIOLENCE","numberOfAssaults":0,"notifySafetyCustodyLead":false,"numberOfSeriousAssaults":0,"numberOfNonSeriousAssaults":0,"provisionalCategorisation":"C","veryHighRiskViolentOffender":false},"execute_date_time":"2021-07-27 02:18:22.10621"}}
+{
+  "categorisationTool" : {
+    "catForm" : {
+      "id" : "1598",
+      "form_response" : {
+        "history" : {
+          "catAType" : null,
+          "finalCat" : null,
+          "catAEndYear" : null,
+          "releaseYear" : null,
+          "catAStartYear" : null
+        },
+        "ratings" : {
+          "escapeRating" : {
+            "escapeCatB" : "No",
+            "escapeCatBText" : "",
+            "escapeOtherEvidence" : "No",
+            "escapeOtherEvidenceText" : ""
+          },
+          "securityBack" : {
+            "catB" : "No"
+          },
+          "violenceRating" : {
+            "seriousThreat" : "No",
+            "seriousThreatText" : "",
+            "highRiskOfViolence" : "No",
+            "highRiskOfViolenceText" : ""
+          },
+          "extremismRating" : {
+            "previousTerrorismOffences" : "No",
+            "previousTerrorismOffencesText" : ""
+          },
+          "offendingHistory" : {
+            "furtherCharges" : "No",
+            "furtherChargesText" : "",
+            "previousConvictions" : "No",
+            "offendingHistoryCatB" : "",
+            "previousConvictionsText" : ""
+          }
+        },
+        "security" : {
+          "review" : {
+            "securityReview" : "Security information held on this prisoner, which c"
+          }
+        },
+        "socProfile" : {
+          "nomsId" : "G6816VN",
+          "riskType" : "SOC",
+          "transferToSecurity" : true,
+          "provisionalCategorisation" : "C"
+        },
+        "supervisor" : {
+          "review" : {
+            "proposedCategory" : "C",
+            "supervisorCategoryAppropriate" : "Yes",
+            "supervisorOverriddenCategoryText" : ""
+          }
+        },
+        "categoriser" : {
+          "review" : { },
+          "provisionalCategory" : {
+            "suggestedCategory" : "C",
+            "overriddenCategory" : "",
+            "categoryAppropriate" : "Yes",
+            "otherInformationText" : "",
+            "overriddenCategoryText" : ""
+          }
+        },
+        "escapeProfile" : {
+          "nomsId" : "G6816VN",
+          "riskType" : "ESCAPE",
+          "activeEscapeList" : false,
+          "activeEscapeRisk" : false,
+          "escapeListAlerts" : [ ],
+          "escapeRiskAlerts" : [ ],
+          "provisionalCategorisation" : "C"
+        },
+        "violenceProfile" : {
+          "nomsId" : "G6816VN",
+          "riskType" : "VIOLENCE",
+          "numberOfAssaults" : 0,
+          "notifySafetyCustodyLead" : false,
+          "numberOfSeriousAssaults" : 0,
+          "provisionalCategorisation" : "C",
+          "veryHighRiskViolentOffender" : false
+        },
+        "extremismProfile" : {
+          "nomsId" : "G6816VN",
+          "riskType" : "EXTREMISM",
+          "notifyRegionalCTLead" : true,
+          "increasedRiskOfExtremism" : false,
+          "provisionalCategorisation" : "C"
+        }
+      },
+      "status" : "APPROVED",
+      "referred_date" : "2023-03-21 15:08:50.982 +0000",
+      "risk_profile" : {
+        "history" : { },
+        "offences" : [ ],
+        "socProfile" : { },
+        "lifeProfile" : {
+          "life" : true,
+          "nomsId" : "G8105VR",
+          "riskType" : "LIFE",
+          "provisionalCategorisation" : "B"
+        },
+        "escapeProfile" : {
+          "nomsId" : "G8105VR",
+          "riskType" : "ESCAPE",
+          "provisionalCategorisation" : "C"
+        },
+        "violenceProfile" : {
+          "nomsId" : "G8105VR",
+          "riskType" : "VIOLENCE",
+          "numberOfAssaults" : 0,
+          "notifySafetyCustodyLead" : false,
+          "numberOfSeriousAssaults" : 0,
+          "numberOfNonSeriousAssaults" : 0,
+          "provisionalCategorisation" : "C",
+          "veryHighRiskViolentOffender" : false
+        },
+        "extremismProfile" : { }
+      },
+      "prison_id" : "WMI",
+      "offender_no" : "G8105VR",
+      "start_date" : "2023-03-21 15:09:00.266 +0000",
+      "security_reviewed_date" : "2023-03-21 15:09:00.266 +0000",
+      "approval_date" : "2023-03-21",
+      "cat_type" : "INITIAL",
+      "assessment_date" : "2023-03-21",
+      "review_reason" : "MANUAL",
+      "due_by_date" : "1977-12-16",
+      "cancelled_date" : "1977-12-17"
+    },
+    "riskChange" : [ {
+      "id" : "1",
+      "old_profile" : {
+        "soc" : { },
+        "escape" : {
+          "nomsId" : "G0048VL",
+          "riskType" : "ESCAPE",
+          "provisionalCategorisation" : "C"
+        },
+        "violence" : {
+          "nomsId" : "G0048VL",
+          "riskType" : "VIOLENCE",
+          "numberOfAssaults" : 0,
+          "provisionalCategorisation" : "C",
+          "veryHighRiskViolentOffender" : false
+        },
+        "extremism" : { }
+      },
+      "new_profile" : {
+        "soc" : { },
+        "escape" : {
+          "nomsId" : "G0048VL",
+          "riskType" : "ESCAPE",
+          "provisionalCategorisation" : "C"
+        },
+        "violence" : {
+          "nomsId" : "G0048VL",
+          "riskType" : "VIOLENCE",
+          "numberOfAssaults" : 0,
+          "provisionalCategorisation" : "C",
+          "veryHighRiskViolentOffender" : false
+        },
+        "extremism" : { }
+      },
+      "offender_no" : "",
+      "prison_id" : "BAI",
+      "status" : "REVIEWED_FIRST",
+      "raised_date" : "2019-09-18 10:45:34.166 +0100"
+    } ],
+    "security" : {
+      "id" : "2",
+      "offender_no" : "G2550VO",
+      "prison_id" : "LPI",
+      "status" : "REFERRED",
+      "raised_date" : "2019-09-19 13:33:21.123 +0100",
+      "processed_date" : "2019-09-19 13:36:46.335 +0100"
+    },
+    "nextReviewChangeHistory" : [ {
+      "id" : "1",
+      "offender_no" : "G7919UD",
+      "next_review_date" : "2021-12-12",
+      "reason" : "testing",
+      "change_date" : "2021-09-22 10:25:44.395 +0100"
+    } ],
+    "liteCategory" : {
+      "category" : "U",
+      "supervisorCategory" : "U",
+      "offender_no" : "G0089UO",
+      "prison_id" : "LPI",
+      "created_date" : "2020-05-18 13:58:42.435 +0100",
+      "approved_date" : "2020-05-18 01:00:00.000 +0100",
+      "assessment_committee" : "OCA",
+      "assessment_comment" : "Testing the creation of an unsentenced",
+      "next_review_date" : "2020-11-18",
+      "placement_prison_id" : "ASI",
+      "approved_committee" : "OCA",
+      "approved_placement_prison_id" : "ASI",
+      "approved_placement_comment" : "approved placement comment",
+      "approved_comment" : "approval comment",
+      "sequence" : "5"
+    }
+  },
+  "riskProfiler" : {
+    "offender_no" : "G2194GK",
+    "escape" : { },
+    "extremism" : { },
+    "soc" : { },
+    "violence" : {
+      "nomsId" : "G2194GK",
+      "riskType" : "VIOLENCE",
+      "numberOfAssaults" : 0,
+      "notifySafetyCustodyLead" : false,
+      "numberOfSeriousAssaults" : 0,
+      "numberOfNonSeriousAssaults" : 0,
+      "provisionalCategorisation" : "C",
+      "veryHighRiskViolentOffender" : false
+    },
+    "execute_date_time" : "2021-07-27 02:18:22.10621"
+  }
+}

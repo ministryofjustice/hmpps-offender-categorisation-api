@@ -17,6 +17,6 @@ class RiskChangeRepositoryTest : ResourceTest() {
   fun `Should Find by Offender No`() {
     val riskChange = repository.findByOffenderNo("G0048VL")
 
-    assertThat(riskChange?.userId).isEqualTo("LBENNETT_GEN")
+    assertThat(riskChange?.first()?.userId).isEqualTo("LBENNETT_GEN")
   }
 }
