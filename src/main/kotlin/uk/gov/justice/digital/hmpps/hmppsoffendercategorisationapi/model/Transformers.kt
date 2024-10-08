@@ -40,17 +40,17 @@ fun transformRiskChangeList(riskChange: List<RiskChangeEntity>?): List<RiskChang
     val response = ArrayList<RiskChange>()
 
     riskChange.forEach {
-        response.add(
-          RiskChange(
-            prisonId = it.prisonId,
-            raisedDate = it.raisedDate.toString(),
-            offenderNo = it.offenderNo,
-            status = it.status,
-            oldProfile = it.oldProfile?.let { objectMapper.readValue<Profile>(it) },
-            newProfile = it.newProfile?.let { objectMapper.readValue<Profile>(it) },
-          )
-        )
-      }
+      response.add(
+        RiskChange(
+          prisonId = it.prisonId,
+          raisedDate = it.raisedDate.toString(),
+          offenderNo = it.offenderNo,
+          status = it.status,
+          oldProfile = it.oldProfile?.let { objectMapper.readValue<Profile>(it) },
+          newProfile = it.newProfile?.let { objectMapper.readValue<Profile>(it) },
+        ),
+      )
+    }
     return response
   }
 
@@ -64,15 +64,15 @@ fun transformNextReviewChangeHistoryList(entity: List<NextReviewChangeHistoryEnt
   if (entity != null) {
     val response = ArrayList<NextReviewChangeHistory>()
 
-    entity.forEach{
-        response.add(
+    entity.forEach {
+      response.add(
         NextReviewChangeHistory(
           reason = it.reason,
           offenderNo = it.offenderNo,
           nextReviewDate = it.nextReviewDate.toString(),
           changeDate = it.changeDate.toString(),
-          )
-        )
+        ),
+      )
     }
 
     return response

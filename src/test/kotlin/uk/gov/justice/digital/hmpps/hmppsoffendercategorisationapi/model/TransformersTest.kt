@@ -39,7 +39,7 @@ class TransformersTest : ResourceTest() {
   @Sql("classpath:repository/risk_change.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   fun `Should transform risk change data to response`() {
-    val riskChange = transform(riskChangeRepository.findByOffenderNo("G0048VL"))
+    val riskChange = transformRiskChangeList(riskChangeRepository.findByOffenderNo("G0048VL"))
 
     val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/risk_change.json")
     Assertions.assertThat(json.writeValueAsString(riskChange)).isEqualTo(expectedResult)
@@ -60,7 +60,8 @@ class TransformersTest : ResourceTest() {
   @Sql("classpath:repository/next_review_change_history.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   fun `Should transform next review change history data to response`() {
-    val nextReviewChangeHistory = transform(nextReviewChangeHistoryRepository.findByOffenderNo("G7919UD"))
+    val nextReviewChangeHistory =
+      transformNextReviewChangeHistoryList(nextReviewChangeHistoryRepository.findByOffenderNo("G7919UD"))
 
     val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/next_review_change_history.json")
 
