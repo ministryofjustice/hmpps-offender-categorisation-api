@@ -39,7 +39,7 @@ class TransformersTest : ResourceTest() {
   @Sql("classpath:repository/risk_change.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   fun `Should transform risk change data to response`() {
-    val riskChange = transformRiskChangeList(riskChangeRepository.findByOffenderNo("G0048VL"))
+    val riskChange = transformRiskChange(riskChangeRepository.findByOffenderNoOrderByRaisedDateDesc("G0048VL"))
 
     val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/risk_change.json")
     Assertions.assertThat(json.writeValueAsString(riskChange)).isEqualTo(expectedResult)
@@ -49,7 +49,7 @@ class TransformersTest : ResourceTest() {
   @Sql("classpath:repository/security_referral.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   fun `Should transform security referral data to response`() {
-    val securityReferral = transform(securityReferralRepository.findByOffenderNo("G2550VO"))
+    val securityReferral = transformSecurityReferral(securityReferralRepository.findByOffenderNoOrderByRaisedDateDesc("G2550VO"))
 
     val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/security_referral.json")
 
@@ -61,7 +61,7 @@ class TransformersTest : ResourceTest() {
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   fun `Should transform next review change history data to response`() {
     val nextReviewChangeHistory =
-      transformNextReviewChangeHistoryList(nextReviewChangeHistoryRepository.findByOffenderNo("G7919UD"))
+      transformNextReviewChangeHistory(nextReviewChangeHistoryRepository.findByOffenderNo("G7919UD"))
 
     val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/next_review_change_history.json")
 
@@ -72,7 +72,7 @@ class TransformersTest : ResourceTest() {
   @Sql("classpath:repository/lite_category.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   fun `Should transform list category data to response`() {
-    val liteCategory = transform(liteCategoryRepository.findByOffenderNo("G0089UO"))
+    val liteCategory = transformLiteCategory(liteCategoryRepository.findByOffenderNoOrderBySequenceDesc("G0089UO"))
 
     val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/lite_category.json")
 

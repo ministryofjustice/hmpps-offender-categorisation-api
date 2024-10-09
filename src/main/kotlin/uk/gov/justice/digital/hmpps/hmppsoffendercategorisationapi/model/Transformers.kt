@@ -21,21 +21,29 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 
 val objectMapper = jacksonObjectMapper()
 
-fun transform(securityReferral: SecurityReferralEntity?): SecurityReferral? {
+fun transformSecurityReferral(securityReferral: List<SecurityReferralEntity>?): List<SecurityReferral>? {
   if (securityReferral != null) {
-    return SecurityReferral(
-      prisonId = securityReferral.prisonId,
-      raisedDate = securityReferral.raisedDate.toString(),
-      offenderNo = securityReferral.offenderNo,
-      status = securityReferral.status,
-      processedDate = securityReferral.processedDate.toString(),
-    )
+    val response = ArrayList<SecurityReferral>()
+
+    securityReferral.forEach {
+      response.add(
+        SecurityReferral(
+          prisonId = it.prisonId,
+          raisedDate = it.raisedDate.toString(),
+          offenderNo = it.offenderNo,
+          status = it.status,
+          processedDate = it.processedDate.toString(),
+        ),
+      )
+    }
+
+    return response
   }
 
   return null
 }
 
-fun transformRiskChangeList(riskChange: List<RiskChangeEntity>?): List<RiskChange>? {
+fun transformRiskChange(riskChange: List<RiskChangeEntity>?): List<RiskChange>? {
   if (riskChange != null) {
     val response = ArrayList<RiskChange>()
 
@@ -60,7 +68,7 @@ fun transformRiskChangeList(riskChange: List<RiskChangeEntity>?): List<RiskChang
 /**
  * changedBy is REDACTED
  */
-fun transformNextReviewChangeHistoryList(entity: List<NextReviewChangeHistoryEntity>?): List<NextReviewChangeHistory>? {
+fun transformNextReviewChangeHistory(entity: List<NextReviewChangeHistoryEntity>?): List<NextReviewChangeHistory>? {
   if (entity != null) {
     val response = ArrayList<NextReviewChangeHistory>()
 
@@ -84,29 +92,37 @@ fun transformNextReviewChangeHistoryList(entity: List<NextReviewChangeHistoryEnt
 /**
  * assessedBy,approvedBy is REDACTED
  */
-fun transform(entity: LiteCategoryEntity?): LiteCategory? {
+fun transformLiteCategory(entity: List<LiteCategoryEntity>?): List<LiteCategory>? {
   if (entity != null) {
-    return LiteCategory(
-      prisonId = entity.prisonId,
-      offenderNo = entity.offenderNo,
-      category = entity.category,
-      sequence = entity.sequence,
+    val response = ArrayList<LiteCategory>()
 
-      approvedDate = entity.approvedDate.toString(),
-      approvedComment = entity.approvedComment,
-      approvedCommittee = entity.approvedCommittee,
+    entity.forEach {
+      response.add(
+        LiteCategory(
+          prisonId = it.prisonId,
+          offenderNo = it.offenderNo,
+          category = it.category,
+          sequence = it.sequence,
 
-      assessmentComment = entity.assessmentComment,
-      assessmentCommittee = entity.assessmentCommittee,
+          approvedDate = it.approvedDate.toString(),
+          approvedComment = it.approvedComment,
+          approvedCommittee = it.approvedCommittee,
 
-      approvedPlacementPrisonId = entity.approvedPlacementPrisonId,
-      approvedPlacementComment = entity.approvedPlacementComment,
+          assessmentComment = it.assessmentComment,
+          assessmentCommittee = it.assessmentCommittee,
 
-      nextReviewDate = entity.nextReviewDate.toString(),
-      createdDate = entity.createdDate.toString(),
-      supervisorCategory = entity.supervisorCategory,
-      placementPrisonId = entity.placementPrisonId,
-    )
+          approvedPlacementPrisonId = it.approvedPlacementPrisonId,
+          approvedPlacementComment = it.approvedPlacementComment,
+
+          nextReviewDate = it.nextReviewDate.toString(),
+          createdDate = it.createdDate.toString(),
+          supervisorCategory = it.supervisorCategory,
+          placementPrisonId = it.placementPrisonId,
+        ),
+      )
+
+      return response
+    }
   }
 
   return null

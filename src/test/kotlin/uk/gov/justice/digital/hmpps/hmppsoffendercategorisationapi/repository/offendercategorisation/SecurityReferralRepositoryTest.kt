@@ -15,8 +15,8 @@ class SecurityReferralRepositoryTest : ResourceTest() {
   @Sql("classpath:repository/security_referral.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = AFTER_TEST_METHOD)
   fun `Should Find by Offender No`() {
-    val securityReferral = repository.findByOffenderNo("G2550VO")
+    val securityReferral = repository.findByOffenderNoOrderByRaisedDateDesc("G2550VO")
 
-    assertThat(securityReferral?.userId).isEqualTo("LBENNETT_GEN")
+    assertThat(securityReferral?.first()?.userId).isEqualTo("LBENNETT_GEN")
   }
 }

@@ -171,14 +171,14 @@
       "status" : "REVIEWED_FIRST",
       "raised_date" : "2019-09-18 10:45:34.166 +0100"
     } ],
-    "security" : {
+    "security" : [ {
       "id" : "2",
       "offender_no" : "G2550VO",
       "prison_id" : "LPI",
       "status" : "REFERRED",
       "raised_date" : "2019-09-19 13:33:21.123 +0100",
       "processed_date" : "2019-09-19 13:36:46.335 +0100"
-    },
+    } ],
     "nextReviewChangeHistory" : [ {
       "id" : "1",
       "offender_no" : "G7919UD",
@@ -186,7 +186,7 @@
       "reason" : "testing",
       "change_date" : "2021-09-22 10:25:44.395 +0100"
     } ],
-    "liteCategory" : {
+    "liteCategory" : [ {
       "category" : "U",
       "supervisorCategory" : "U",
       "offender_no" : "G0089UO",
@@ -202,7 +202,7 @@
       "approved_placement_comment" : "approved placement comment",
       "approved_comment" : "approval comment",
       "sequence" : "5"
-    }
+    } ]
   },
   "riskProfiler" : {
     "offender_no" : "G2194GK",
