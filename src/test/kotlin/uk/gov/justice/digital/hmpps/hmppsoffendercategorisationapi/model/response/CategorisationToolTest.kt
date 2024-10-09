@@ -9,7 +9,7 @@ open class CategorisationToolTest : BaseSarUnitTest() {
       catForm,
       security = listOf(security),
       liteCategory = listOf(liteCategory),
-      nextReviewChangeHistory  = listOf(nextReviewChangeHistory),
+      nextReviewChangeHistory = listOf(nextReviewChangeHistory),
       riskChange = listOf(riskChange),
     )
   }
