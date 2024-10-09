@@ -5,6 +5,10 @@ import org.springframework.transaction.annotation.Transactional
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.CategorisationTool
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.SarResponse
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.transform
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.transformLiteCategory
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.transformNextReviewChangeHistory
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.transformRiskChange
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.transformSecurityReferral
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.FormRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.LiteCategoryRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.NextReviewChangeHistoryRepository
@@ -40,10 +44,10 @@ class SubjectAccessRequestService(
       content =
       SarResponse(
         categorisationTool = CategorisationTool(
-          security = transform(securityReferralRepository.findByOffenderNo(prn)),
-          liteCategory = transform(liteCategoryRepository.findByOffenderNo(prn)),
-          riskChange = transform(riskChangeRepository.findFirstByOffenderNoOrderByRaisedDateDesc(prn)),
-          nextReviewChangeHistory = transform(nextReviewChangeHistoryRepository.findByOffenderNo(prn)),
+          security = transformSecurityReferral(securityReferralRepository.findByOffenderNoOrderByRaisedDateDesc(prn)),
+          liteCategory = transformLiteCategory(liteCategoryRepository.findByOffenderNoOrderBySequenceDesc(prn)),
+          riskChange = transformRiskChange(riskChangeRepository.findByOffenderNoOrderByRaisedDateDesc(prn)),
+          nextReviewChangeHistory = transformNextReviewChangeHistory(nextReviewChangeHistoryRepository.findByOffenderNo(prn)),
           catForm = transform(catFormEntity),
         ),
         riskProfiler = transform(previousProfileRepository.findByOffenderNo(prn)),

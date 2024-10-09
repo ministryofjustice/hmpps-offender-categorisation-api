@@ -14,9 +14,9 @@ class RiskChangeRepositoryTest : ResourceTest() {
   @Test
   @Sql("classpath:repository/risk_change.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = AFTER_TEST_METHOD)
-  fun `Should Find First by Offender No Order By Raised Date`() {
-    val riskChange = repository.findFirstByOffenderNoOrderByRaisedDateDesc("G0048VL")
+  fun `Should Find by Offender No`() {
+    val riskChange = repository.findByOffenderNoOrderByRaisedDateDesc("G0048VL")
 
-    assertThat(riskChange?.prisonId).isEqualTo("3")
+    assertThat(riskChange?.first()?.userId).isEqualTo("LBENNETT_GEN")
   }
 }

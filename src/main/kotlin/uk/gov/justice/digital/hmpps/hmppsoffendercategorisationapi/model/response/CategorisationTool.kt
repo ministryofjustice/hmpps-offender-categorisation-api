@@ -10,8 +10,8 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class CategorisationTool(
   val catForm: CatForm? = null,
-  val riskChange: RiskChange? = null,
-  val security: SecurityReferral? = null,
-  val nextReviewChangeHistory: NextReviewChangeHistory? = null,
-  val liteCategory: LiteCategory? = null,
+  val riskChange: List<RiskChange>? = null,
+  val security: List<SecurityReferral>? = null,
+  val nextReviewChangeHistory: List<NextReviewChangeHistory>? = null,
+  val liteCategory: List<LiteCategory>? = null,
 )

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.CatForm
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.LiteCategory
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.NextReviewChangeHistory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.RiskProfile
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.SecurityReferral
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.riskprofile.LifeProfile
@@ -164,6 +165,15 @@ open class BaseSarUnitTest {
       prisonId = "BAI",
       status = "REVIEWED_FIRST",
       raisedDate = "2019-09-18 10:45:34.166 +0100",
+    )
+
+    @JvmStatic
+    protected val nextReviewChangeHistory = NextReviewChangeHistory(
+      id = "1",
+      offenderNo = "G7919UD",
+      nextReviewDate = "2021-12-12",
+      reason = "testing",
+      changeDate = "2021-09-22 10:25:44.395 +0100",
     )
   }
 }

@@ -78,7 +78,7 @@
       "due_by_date" : "2017-04-01",
       "cancelled_date" : "2019-11-25 11:24:12.768+00"
     },
-    "riskChange" : {
+    "riskChange" : [ {
       "old_profile" : {
         "soc" : { },
         "escape" : {
@@ -119,21 +119,21 @@
       "prison_id" : "1000",
       "status" : "NEW",
       "raised_date" : "2019-09-18T09:45:34.166Z"
-    },
-    "security" : {
+    } ],
+    "security" : [ {
       "offender_no" : "GXXXX",
       "prison_id" : "LPI",
       "status" : "REFERRED",
       "raised_date" : "2019-09-19T12:33:21.123Z",
       "processed_date" : "2019-09-19T12:36:46.335Z"
-    },
-    "nextReviewChangeHistory" : {
+    } ],
+    "nextReviewChangeHistory" : [ {
       "offender_no" : "GXXXX",
       "next_review_date" : "2021-12-12",
       "reason" : "testing",
       "change_date" : "2021-09-22T09:25:44.395Z"
-    },
-    "liteCategory" : {
+    } ],
+    "liteCategory" : [ {
       "category" : "U",
       "supervisorCategory" : "U",
       "offender_no" : "GXXXX",
@@ -149,7 +149,7 @@
       "approved_placement_comment" : "approved placement comment",
       "approved_comment" : "approval comment",
       "sequence" : "5"
-    }
+    } ]
   },
   "riskProfiler" : {
     "offender_no" : "GXXXX",
