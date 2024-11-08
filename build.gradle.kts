@@ -32,6 +32,7 @@ dependencies {
   implementation("io.hypersistence:hypersistence-utils-hibernate-60:3.5.1")
 
   implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:0.2.2")
+  implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.1.0")
 
   implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 

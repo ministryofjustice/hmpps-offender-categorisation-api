@@ -5,7 +5,6 @@ import io.awspring.cloud.sqs.annotation.SqsListener
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
-import uk.gov.justice.digital.hmpps.prisonperson.service.event.DomainEvent
 
 @Service
 class PrisonerOffenderSearchEventListenerService(
@@ -16,8 +15,8 @@ class PrisonerOffenderSearchEventListenerService(
     }
 
     @SqsListener("prisoneroffendersearch", factory = "hmppsQueueContainerFactoryProxy")
-    fun processMessage(message: String) {
-        val (message, messageAttributes) = mapper.readValue(requestJson, Message::class.java)
+    fun processMessage(rawMessage: String) {
+        val (message, messageAttributes) = mapper.readValue(rawMessage, Message::class.java)
         val eventType = messageAttributes.eventType.Value
         log.info("Received message $message, type $eventType")
     }
