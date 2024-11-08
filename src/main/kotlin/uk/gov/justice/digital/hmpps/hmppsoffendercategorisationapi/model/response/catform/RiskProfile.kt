@@ -8,6 +8,8 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class RiskProfile(
+  val catHistory: RedactedSection? = null,
+
   val history: RedactedSection? = null,
 
   val offences: List<Map<String, Any>>? = emptyList(),
