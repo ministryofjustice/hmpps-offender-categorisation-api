@@ -37,6 +37,13 @@ generic-service:
       DB_NAME: "database_name"
       DB_USER: "offender_categorisation_api_username"
       DB_PASS: "offender_categorisation_api_password"
+    inbound-queue-sqs-instance-output:
+      HMPPS_SQS_QUEUES_PRISONEROFFENDERSEARCHQUEUE_QUEUE_NAME: "prisoneroffendersearch"
+    inbound-queue-sqs-dl-instance-output:
+      HMPPS_SQS_QUEUES_PRISONEROFFENDERSEARCHQUEUE_DLQ_NAME: "prisoneroffendersearchdlq"
+    inbound-topic:
+      HMPPS_SQS_TOPICS_PRISONEROFFENDERSEARCHTOPIC_TOPIC_ARN: "prisoneroffendersearchtopic"
+
   allowlist:
     groups:
       - internal
