@@ -62,6 +62,7 @@ open class BaseSarUnitTest {
     )
 
     protected val riskProfile = RiskProfile(
+      catHistory = RedactedSection(),
       history = RedactedSection(),
       offences = emptyList(),
       socProfile = RedactedSection(),
