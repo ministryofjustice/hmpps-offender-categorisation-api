@@ -1,0 +1,11 @@
+hmpps.sqs:
+  provider: localstack
+  queues:
+    prisoneroffendersearch:
+      queueName: prisoneroffendersearch-queue
+      dlqName: prisoneroffendersearch-dlq
+      subscribeTopicId: prisoneroffendersearchtopic
+      subscribeFilter: '{"eventType":[ "prisoner-offender-search.prisoner.updated", "prisoner-offender-search.prisoner.received", "prisoner-offender-search.prisoner.released", "test.type"] }'
+  topics:
+    prisoneroffendersearchtopic:
+      arn: arn:aws:sns:eu-west-2:000000000000:prisoneroffendersearch-topic

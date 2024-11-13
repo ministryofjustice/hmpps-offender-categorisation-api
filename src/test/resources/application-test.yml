@@ -30,3 +30,17 @@ spring:
 
   jpa:
     show-sql: true
+
+hmpps.sqs:
+  provider: localstack
+  queues:
+    prisoneroffendersearch:
+      dlqName: ${random.uuid}
+      queueName: ${random.uuid}
+      subscribeTopicId: prisoneroffendersearchtopic
+      subscribeFilter: '{"eventType":[ "prisoner-offender-search.prisoner.updated", "prisoner-offender-search.prisoner.received", "prisoner-offender-search.prisoner.released", "test.type"] }'
+      dlqMaxReceiveCount: 1
+      errorVisibilityTimeout: 0
+  topics:
+    prisoneroffendersearchtopic:
+      arn: arn:aws:sns:eu-west-2:000000000000:${random.uuid}
