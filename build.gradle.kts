@@ -1,5 +1,5 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "6.0.4"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "6.1.0"
   kotlin("plugin.spring") version "2.0.20"
   kotlin("plugin.jpa") version "2.0.20"
   kotlin("plugin.serialization") version "1.9.25"
@@ -31,12 +31,12 @@ dependencies {
   implementation("com.vladmihalcea:hibernate-types-60:2.21.1")
   implementation("io.hypersistence:hypersistence-utils-hibernate-60:3.5.1")
 
-  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:0.2.2")
+  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.1.0")
 
   implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
   // OpenAPI
-  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.4.0")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0")
 
   // Test dependencies
   testImplementation("com.github.tomakehurst:wiremock-jre8-standalone:3.0.1")
