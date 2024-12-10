@@ -1,11 +1,13 @@
 hmpps.sqs:
   provider: localstack
   queues:
-    prisoneroffendersearch:
-      queueName: prisoneroffendersearch-queue
-      dlqName: prisoneroffendersearch-dlq
-      subscribeTopicId: prisoneroffendersearchtopic
-      subscribeFilter: '{"eventType":[ "prisoner-offender-search.prisoner.updated", "prisoner-offender-search.prisoner.received", "prisoner-offender-search.prisoner.released", "test.type"] }'
+    prisonerlistener:
+      queueName: "prisonerlistener-${random.uuid}"
+      dlqName: "prisonerlistener-dlq-${random.uuid}"
+      subscribeTopicId: domainevents
+      subscribeFilter: "{\"eventType\":[\"prisoner-offender-search.prisoner.released\", \"prisoner-offender-search.prisoner.received\", \"prison-offender-events.prisoner.merged\"]}"
+      dlqMaxReceiveCount: 3
+      visibilityTimeout: 120
   topics:
-    prisoneroffendersearchtopic:
-      arn: arn:aws:sns:eu-west-2:000000000000:prisoneroffendersearch-topic
+    domainevents:
+      arn: arn:aws:sns:eu-west-2:000000000000:${random.uuid}
