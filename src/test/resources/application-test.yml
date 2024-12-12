@@ -12,13 +12,18 @@ hmpps:
     url: http://localhost:8090/auth
 
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          public-key-location: classpath:local-public-key.pub
+
   datasource:
     url: jdbc:postgresql://localhost:5432/form-builder
     username: form-builder
     password: form-builder
 
   flyway:
-    baselineOnMigrate: true
     locations: classpath:/migration/common,/migration/{vendor}
     url: jdbc:postgresql://localhost:5432/form-builder
     user: form-builder
@@ -45,3 +50,8 @@ hmpps.sqs:
   topics:
     domainevents:
       arn: arn:aws:sns:eu-west-2:000000000000:11111111-2222-3333-4444-555555555555
+
+# Wiremock prison-api
+prison:
+  api:
+    url: http://localhost:8332
