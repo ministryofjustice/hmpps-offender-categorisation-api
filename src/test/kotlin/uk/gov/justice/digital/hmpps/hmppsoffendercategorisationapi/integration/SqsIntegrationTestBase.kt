@@ -1,6 +1,5 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.integration
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
@@ -17,14 +16,11 @@ class SqsIntegrationTestBase : IntegrationTestBase() {
   @Autowired
   private lateinit var hmppsQueueService: HmppsQueueService
 
-  @Autowired
-  protected lateinit var objectMapper: ObjectMapper
-
   private val domainEventsTopic by lazy { hmppsQueueService.findByTopicId("domainevents") ?: throw MissingQueueException("HmppsTopic domainevents not found") }
   protected val domainEventsTopicSnsClient by lazy { domainEventsTopic.snsClient }
   protected val domainEventsTopicArn by lazy { domainEventsTopic.arn }
 
-  protected val prisonerListenerQueue by lazy { hmppsQueueService.findByQueueId("prisonerlistener") as HmppsQueue }
+  protected val prisonerListenerQueue by lazy { hmppsQueueService.findByQueueId("prisoneroffendersearch") as HmppsQueue }
   internal val prisonerListenerQueueUrl by lazy { prisonerListenerQueue.queueUrl }
 
   companion object {

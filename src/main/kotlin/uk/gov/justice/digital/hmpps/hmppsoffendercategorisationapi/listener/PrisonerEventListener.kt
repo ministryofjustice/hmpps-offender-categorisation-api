@@ -18,7 +18,7 @@ class PrisonerEventListener(
     val log: Logger = LoggerFactory.getLogger(this::class.java)
   }
 
-  @SqsListener("prisonerlistener", factory = "hmppsQueueContainerFactoryProxy")
+  @SqsListener("prisoneroffendersearch", factory = "hmppsQueueContainerFactoryProxy")
   fun onDomainEvent(
     rawMessage: String,
   ) {

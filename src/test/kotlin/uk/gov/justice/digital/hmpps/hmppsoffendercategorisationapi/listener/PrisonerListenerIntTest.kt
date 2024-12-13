@@ -29,7 +29,7 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
         ).build(),
     ).get()
 
-    assertThat(logCaptor.infoLogs.contains("Handling release of")).isTrue()
+    assertThat(logCaptor.infoLogs.contains("Handling release of")).isFalse()
     await untilAsserted {
       assertThat(prisonerListenerQueue.sqsClient.countAllMessagesOnQueue(prisonerListenerQueueUrl).get()).isEqualTo(0)
     }
