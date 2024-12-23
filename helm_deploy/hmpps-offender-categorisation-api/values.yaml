@@ -13,6 +13,13 @@ generic-service:
     enabled: true
     host: app-hostname.local # override per environment
     tlsSecretName: hmpps-offender-categorisation-api-cert
+    annotations:
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        server_tokens off;
+        location /nominal-source-system/synchronise {
+          deny all;
+          return 401;
+        }
 
   # Environment variables to load into the deployment
   env:
@@ -43,3 +50,6 @@ generic-service:
 
 generic-prometheus-alerts:
   targetApplication: hmpps-offender-categorisation-api
+
+cron:
+  report_released_prisoners_with_active_categorisations_schedule: "0 6 1 * *"

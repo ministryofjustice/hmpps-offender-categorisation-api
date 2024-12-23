@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: synchronise-nominal-source-systems
+spec:
+  schedule: "{{ .Values.cron.report_released_prisoners_with_active_categorisations_schedule }}"
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 5
+  startingDeadlineSeconds: 600
+  successfulJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: report-released-prisoners-with-active-categorisations
+              image: ghcr.io/ministryofjustice/hmpps-devops-tools
+              securityContext:
+                allowPrivilegeEscalation: false
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
+                capabilities:
+                  drop: ["ALL"]
+              args:
+                - /bin/sh
+                - -c
+                - curl --retry 2 http://https-offender-categorisation-api/released-prisoners-with-active-categorisations/report
+          restartPolicy: Never
