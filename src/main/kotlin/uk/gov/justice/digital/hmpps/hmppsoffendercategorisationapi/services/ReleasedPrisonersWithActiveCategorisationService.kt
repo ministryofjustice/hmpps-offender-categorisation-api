@@ -1,6 +1,7 @@
 import org.slf4j.LoggerFactory
 import org.springframework.data.domain.PageRequest
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonerSearchApiClient
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.FormEntity
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.FormRepository
 
 class ReleasedPrisonersWithActiveCategorisationService(
@@ -11,7 +12,7 @@ class ReleasedPrisonersWithActiveCategorisationService(
     try {
       var index = 0
       do {
-        val activeCategorisations = formRepository.findAllByStatusNotIn(listOf("APPROVED", "CANCELLED"), PageRequest.of(index, CHUNK_SIZE))
+        val activeCategorisations = formRepository.findAllByStatusNotIn(listOf(FormEntity.STATUS_APPROVED, FormEntity.STATUS_CANCELLED), PageRequest.of(index, CHUNK_SIZE))
         if (activeCategorisations.isEmpty()) {
           continue
         }

@@ -1,8 +1,6 @@
 import com.fasterxml.jackson.annotation.JsonInclude
 import io.swagger.v3.oas.annotations.media.Schema
 
-const val STATUS_ACTIVE_IN = "ACTIVE IN"
-
 @Schema(description = "Prisoner")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Prisoner(
@@ -13,4 +11,9 @@ data class Prisoner(
 ) {
   val currentlyInPrison: Boolean
     get() = status !== null && status == STATUS_ACTIVE_IN
+
+  companion object {
+    const val STATUS_ACTIVE_IN = "ACTIVE IN"
+    const val STATUS_INACTIVE_OUT = "INACTIVE OUT"
+  }
 }

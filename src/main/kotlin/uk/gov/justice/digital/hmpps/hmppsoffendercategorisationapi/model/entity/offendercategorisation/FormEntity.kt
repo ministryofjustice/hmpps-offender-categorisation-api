@@ -92,4 +92,14 @@ class FormEntity(
    */
   @Column(name = "cancelled_by")
   val cancelledBy: String,
-)
+) {
+  companion object {
+    const val STATUS_APPROVED = "APPROVED"
+    const val STATUS_CANCELLED = "CANCELLED"
+    const val STATUS_STARTED = "STARTED"
+
+    const val CAT_TYPE_INITIAL = "INITIAL"
+
+    const val REVIEW_REASON_MANUAL = "MANUAL"
+  }
+}
