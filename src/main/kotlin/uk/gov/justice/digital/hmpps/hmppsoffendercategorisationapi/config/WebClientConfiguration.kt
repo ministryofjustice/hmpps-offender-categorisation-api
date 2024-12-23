@@ -50,6 +50,7 @@ class WebClientConfiguration(
       .exchangeStrategies(exchangeStrategies)
       .build()
   }
+
   @Bean
   fun prisonerSearchApiHealthWebClient(): WebClient {
     return webClientBuilder.baseUrl(prisonerSearchApiBaseUrl).build()
