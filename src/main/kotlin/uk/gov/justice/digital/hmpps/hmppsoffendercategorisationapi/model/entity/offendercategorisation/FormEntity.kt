@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation
 
+import com.fasterxml.jackson.module.kotlin.readValue
 import com.vladmihalcea.hibernate.type.json.JsonType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -8,10 +9,11 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import org.hibernate.annotations.Type
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.objectMapper
 
 /**
  *  assigned_user_id, user_id referred_by, approved_by,
- *  assessed_by, security_reviewed_by cancelled_by all ** REACTED **
+ *  assessed_by, cancelled_by all ** REACTED **
  */
 @Entity
 @Table(name = "form", schema = "public")
@@ -22,7 +24,7 @@ class FormEntity(
 
   @Type(JsonType::class)
   @Column(columnDefinition = "jsonb", name = "form_response")
-  val formResponse: String? = null,
+  private var formResponse: String? = null,
 
   /**
    * REDACTED
@@ -36,7 +38,7 @@ class FormEntity(
   @Column(name = "user_id")
   val userId: String = "",
 
-  val status: String,
+  private var status: String,
 
   @Column(name = "referred_date")
   val referredDate: String = "",
@@ -61,7 +63,10 @@ class FormEntity(
   val startDate: String,
 
   @Column(name = "security_reviewed_date")
-  val securityReviewedDate: String,
+  private var securityReviewedDate: String,
+
+  @Column(name = "security_reviewed_by")
+  private var securityReviewedBy: String?,
 
   @Column(name = "approval_date")
   val approvalDate: String,
@@ -92,4 +97,37 @@ class FormEntity(
    */
   @Column(name = "cancelled_by")
   val cancelledBy: String,
-)
+) {
+  fun getFormResponse(): String? {
+    return formResponse
+  }
+  fun getStatus(): String {
+    return status
+  }
+  fun getSecurityReviewedDate(): String {
+    return securityReviewedDate
+  }
+  fun updateFormResponse(section: String, name: String, value: String) {
+    val formResponseMap = formResponse?.let { objectMapper.readValue<MutableMap<String, Any>>(it) }
+    if (formResponseMap != null) {
+      formResponseMap[section] = mapOf(name to value)
+      formResponse = formResponseMap.toString()
+    }
+  }
+  fun setStatus(newStatus: String) {
+    status = newStatus
+  }
+  fun setSecurityReviewedDate(newSecurityReviewedDate: String) {
+    securityReviewedDate = newSecurityReviewedDate
+  }
+  fun setSecurityReviewedBy(newSecurityReviewedBy: String) {
+    securityReviewedBy = newSecurityReviewedBy
+  }
+
+  companion object {
+    const val FORM_RESPONSE_SECTION_SECURITY = "security"
+    const val FORM_RESPONSE_FIELD_NAME = "security"
+
+    const val STATUS_SECURITY_BACK = "SECURITY_BACK"
+  }
+}

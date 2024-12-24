@@ -136,16 +136,16 @@ fun transform(entity: FormEntity?): CatForm? {
     return CatForm(
       prisonId = entity.prisonId,
       offenderNo = entity.offenderNo,
-      status = entity.status,
+      status = entity.getStatus(),
       reviewReason = entity.reviewReason,
       dueByDate = entity.dueByDate,
 
-      formResponse = entity.formResponse?.let { objectMapper.readValue<Map<String, Any>>(it) },
+      formResponse = entity.getFormResponse()?.let { objectMapper.readValue<Map<String, Any>>(it) },
       riskProfile = entity.riskProfile?.let { objectMapper.readValue<RiskProfile>(it) },
 
       cancelledDate = entity.cancelledDate,
       approvalDate = entity.approvalDate,
-      securityReviewedDate = entity.securityReviewedDate,
+      securityReviewedDate = entity.getSecurityReviewedDate(),
       assessmentDate = entity.assessmentDate,
       startDate = entity.startDate,
       referredDate = entity.referredDate,
