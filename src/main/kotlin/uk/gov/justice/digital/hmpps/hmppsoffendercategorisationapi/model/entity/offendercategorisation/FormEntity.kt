@@ -107,6 +107,9 @@ class FormEntity(
   fun getSecurityReviewedDate(): String {
     return securityReviewedDate
   }
+  fun getSecurityReviewedBy(): String? {
+    return securityReviewedBy
+  }
   fun updateFormResponse(section: String, name: String, value: String) {
     val formResponseMap = formResponse?.let { objectMapper.readValue<MutableMap<String, Any>>(it) }
     if (formResponseMap != null) {
@@ -125,6 +128,13 @@ class FormEntity(
   }
 
   companion object {
+    const val STATUS_APPROVED = "APPROVED"
+    const val STATUS_CANCELLED = "CANCELLED"
+    const val STATUS_STARTED = "STARTED"
+
+    const val CAT_TYPE_INITIAL = "INITIAL"
+
+    const val REVIEW_REASON_MANUAL = "MANUAL"
     const val FORM_RESPONSE_SECTION_SECURITY = "security"
     const val FORM_RESPONSE_FIELD_NAME = "security"
 

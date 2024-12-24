@@ -21,9 +21,9 @@ class FormService(
     }
     if (submitted) {
       formEntity.setStatus(FormEntity.STATUS_SECURITY_BACK)
+      formEntity.setSecurityReviewedBy(userId)
+      formEntity.setSecurityReviewedDate(ZonedDateTime.now().toString())
     }
-    formEntity.setSecurityReviewedDate(ZonedDateTime.now().toString())
-    formEntity.setSecurityReviewedBy(userId)
     formRepository.save(formEntity)
   }
 }
