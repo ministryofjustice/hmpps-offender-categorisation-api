@@ -9,6 +9,12 @@ hmpps:
   auth:
     url: https://sign-in-dev.hmpps.service.justice.gov.uk/auth
 
+prisoner:
+  search:
+    api:
+      endpoint:
+        url: https://prisoner-search-dev.prison.service.justice.gov.uk
+
 # Update to your personal token with correct permissions
 system:
   client:

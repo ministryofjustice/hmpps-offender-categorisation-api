@@ -1,9 +1,14 @@
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services
+
 import org.slf4j.LoggerFactory
 import org.springframework.data.domain.PageRequest
+import org.springframework.stereotype.Service
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonerSearchApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.FormEntity
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.FormRepository
 
+@Service
 class ReleasedPrisonersWithActiveCategorisationService(
   private val formRepository: FormRepository,
   private val prisonerSearchApiClient: PrisonerSearchApiClient,

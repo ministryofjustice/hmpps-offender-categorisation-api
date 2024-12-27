@@ -1,6 +1,5 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client
 
-import Prisoner
 import com.google.gson.Gson
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Qualifier
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.WebClientException
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
 
 @Service
 class PrisonerSearchApiClient(

@@ -30,4 +30,4 @@ prisoner:
   search:
     api:
       endpoint:
-        url: http://dummy.value
+        url: "https://prisoner-search-dev.prison.service.justice.gov.uk/"
