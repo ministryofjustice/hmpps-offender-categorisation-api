@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: report-released-prisoners-with-active-categorisations
+  name: report-released-prisoners-with-active-cat
 spec:
   schedule: "{{ .Values.cron.report_released_prisoners_with_active_categorisations_schedule }}"
   concurrencyPolicy: Forbid
@@ -13,7 +13,7 @@ spec:
       template:
         spec:
           containers:
-            - name: report-released-prisoners-with-active-categorisations
+            - name: report-released-prisoners-with-active-cat
               image: ghcr.io/ministryofjustice/hmpps-devops-tools
               securityContext:
                 allowPrivilegeEscalation: false
