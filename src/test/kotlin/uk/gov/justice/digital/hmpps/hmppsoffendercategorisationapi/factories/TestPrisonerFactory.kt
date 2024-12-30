@@ -1,6 +1,6 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories
 
-import Prisoner
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
 
 class TestPrisonerFactory {
   private var prisonerNumber = "123ABC"

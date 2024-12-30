@@ -25,5 +25,5 @@ spec:
               args:
                 - /bin/sh
                 - -c
-                - curl --retry 2 http://https-offender-categorisation-api/released-prisoners-with-active-categorisations/report
+                - curl --retry 2 http://hmpps-offender-categorisation-api/released-prisoners-with-active-categorisations/report
           restartPolicy: Never

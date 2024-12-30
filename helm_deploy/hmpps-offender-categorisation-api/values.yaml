@@ -16,7 +16,7 @@ generic-service:
     annotations:
       nginx.ingress.kubernetes.io/configuration-snippet: |
         server_tokens off;
-        location /nominal-source-system/synchronise {
+        location /released-prisoners-with-active-categorisations/report {
           deny all;
           return 401;
         }

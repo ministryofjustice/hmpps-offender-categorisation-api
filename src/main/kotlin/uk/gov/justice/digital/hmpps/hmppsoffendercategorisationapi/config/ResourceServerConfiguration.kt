@@ -40,7 +40,7 @@ class ResourceServerConfiguration {
           "/swagger-resources",
           "/swagger-resources/configuration/ui",
           "/swagger-resources/configuration/security",
-          "released-prisoners-with-active-categorisations/report",
+          "/released-prisoners-with-active-categorisations/report",
         ).forEach { authorize(it, permitAll) }
         authorize(anyRequest, authenticated)
       }

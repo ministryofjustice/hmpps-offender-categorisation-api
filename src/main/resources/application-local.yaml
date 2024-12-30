@@ -13,10 +13,10 @@ prisoner:
   search:
     api:
       endpoint:
-        url: https://prisoner-search-dev.prison.service.justice.gov.uk
+        url: "https://prisoner-search-dev.prison.service.justice.gov.uk"
 
 # Update to your personal token with correct permissions
 system:
   client:
-      id: offender-categorisation-api
-      secret: clientsecret
+      id:
+      secret:

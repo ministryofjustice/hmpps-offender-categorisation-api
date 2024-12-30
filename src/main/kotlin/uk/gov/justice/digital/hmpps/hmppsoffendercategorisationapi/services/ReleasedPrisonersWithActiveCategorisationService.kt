@@ -44,7 +44,7 @@ class ReleasedPrisonersWithActiveCategorisationService(
         index++
       } while (activeCategorisations.count() >= CHUNK_SIZE)
     } catch (e: Exception) {
-      log.error("Nominal Synchronisation failed", e)
+      log.error("Reporting released prisoners with active categorisation failed", e)
     }
   }
 
