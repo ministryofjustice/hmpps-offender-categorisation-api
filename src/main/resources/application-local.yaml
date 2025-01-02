@@ -16,7 +16,8 @@ prisoner:
         url: "https://prisoner-search-dev.prison.service.justice.gov.uk"
 
 # Update to your personal token with correct permissions
-system:
+api:
   client:
-      id:
-      secret:
+    admin:
+      id: something
+      secret: something

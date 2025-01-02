@@ -24,7 +24,7 @@ spring:
 hmpps:
   auth:
     token:
-      url: "https://sign-in-dev.hmpps.service.justice.gov.uk/auth"
+      url: "https://sign-in-dev.hmpps.service.justice.gov.uk/auth/oauth/token"
 
 prisoner:
   search:
