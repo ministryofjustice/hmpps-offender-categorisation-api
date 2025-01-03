@@ -110,7 +110,7 @@ class FormEntity(
   fun getSecurityReviewedBy(): String? {
     return securityReviewedBy
   }
-  fun updateFormResponse(section: String, name: String, value: String) {
+  fun updateFormResponse(section: String, name: String, value: Map<String, String>) {
     val formResponseMap = formResponse?.let { objectMapper.readValue<MutableMap<String, Any>>(it) }
     if (formResponseMap != null) {
       formResponseMap[section] = mapOf(name to value)
@@ -136,7 +136,7 @@ class FormEntity(
 
     const val REVIEW_REASON_MANUAL = "MANUAL"
     const val FORM_RESPONSE_SECTION_SECURITY = "security"
-    const val FORM_RESPONSE_FIELD_NAME = "security"
+    const val FORM_RESPONSE_FIELD_NAME = "review"
 
     const val STATUS_SECURITY_BACK = "SECURITY_BACK"
   }

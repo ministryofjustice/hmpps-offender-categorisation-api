@@ -16,7 +16,7 @@ class FormService(
       formEntity.updateFormResponse(
         FormEntity.FORM_RESPONSE_SECTION_SECURITY,
         FormEntity.FORM_RESPONSE_FIELD_NAME,
-        "{\"securityReview\": \"$securityReview\"}",
+        mapOf(Pair("securityReview", securityReview)),
       )
     }
     if (submitted) {
