@@ -2,6 +2,7 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories
 
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.FormEntity
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.CatType
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.ReviewReason
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -16,9 +17,9 @@ class TestFormEntityFactory {
   private var securityReviewedBy: String? = null
   private var approvalDate = LocalDate.of(2024, 3, 1)
   private var catType = CatType.INITIAL
-  private var nomisSequenceNo = "0"
+  private var nomisSequenceNo = 0
   private var assessmentDate = LocalDate.of(2024, 4, 1)
-  private var reviewReason = FormEntity.REVIEW_REASON_MANUAL
+  private var reviewReason = ReviewReason.MANUAL
   private var dueByDate = LocalDate.of(2024, 4, 1)
   private var cancelledDate: LocalDateTime? = null
   private var cancelledBy = ""
@@ -73,7 +74,7 @@ class TestFormEntityFactory {
     return this
   }
 
-  fun withNomisSequenceNo(nomisSequenceNo: String): TestFormEntityFactory {
+  fun withNomisSequenceNo(nomisSequenceNo: Int): TestFormEntityFactory {
     this.nomisSequenceNo = nomisSequenceNo
     return this
   }
@@ -83,7 +84,7 @@ class TestFormEntityFactory {
     return this
   }
 
-  fun withReviewReason(reviewReason: String): TestFormEntityFactory {
+  fun withReviewReason(reviewReason: ReviewReason): TestFormEntityFactory {
     this.reviewReason = reviewReason
     return this
   }

@@ -10,8 +10,12 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import net.minidev.json.JSONObject
+import org.hibernate.annotations.JdbcType
 import org.hibernate.annotations.Type
+import org.hibernate.dialect.PostgreSQLEnumJdbcType
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.CatType
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.ReviewReason
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.objectMapper
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -52,7 +56,7 @@ class FormEntity(
    * REDACTED
    */
   @Column(name = "sequence_no")
-  val sequenceNo: String = "",
+  val sequenceNo: Int = 1,
 
   @Type(JsonType::class)
   @Column(columnDefinition = "jsonb", name = "risk_profile")
@@ -76,21 +80,24 @@ class FormEntity(
   @Column(name = "approval_date")
   val approvalDate: LocalDate?,
 
-  @Column(name = "cat_type")
   @Enumerated(EnumType.STRING)
+  @Column(name = "cat_type")
+  @JdbcType(PostgreSQLEnumJdbcType::class)
   val catType: CatType,
 
   /**
    * REDACTED
    */
   @Column(name = "nomis_sequence_no")
-  val nomisSequenceNo: String,
+  val nomisSequenceNo: Int? = null,
 
   @Column(name = "assessment_date")
   val assessmentDate: LocalDate?,
 
+  @Enumerated(EnumType.STRING)
+  @JdbcType(PostgreSQLEnumJdbcType::class)
   @Column(name = "review_reason")
-  val reviewReason: String,
+  val reviewReason: ReviewReason,
 
   @Column(name = "due_by_date")
   val dueByDate: LocalDate?,
@@ -120,7 +127,7 @@ class FormEntity(
     val formResponseMap = formResponse?.let { objectMapper.readValue<MutableMap<String, Any>>(it) }
     if (formResponseMap != null) {
       formResponseMap[section] = mapOf(name to value)
-      formResponse = formResponseMap.toString()
+      formResponse = JSONObject(formResponseMap).toString()
     }
   }
   fun setStatus(newStatus: String) {
@@ -138,7 +145,6 @@ class FormEntity(
     const val STATUS_CANCELLED = "CANCELLED"
     const val STATUS_STARTED = "STARTED"
 
-    const val REVIEW_REASON_MANUAL = "MANUAL"
     const val FORM_RESPONSE_SECTION_SECURITY = "security"
     const val FORM_RESPONSE_FIELD_NAME = "review"
 

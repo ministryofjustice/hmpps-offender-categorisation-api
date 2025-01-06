@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services
 
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.FormEntity
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.FormRepository
@@ -24,6 +25,11 @@ class FormService(
       formEntity.setSecurityReviewedBy(userId)
       formEntity.setSecurityReviewedDate(ZonedDateTime.now().toLocalDateTime())
     }
+    log.info(formEntity.getFormResponse())
     formRepository.save(formEntity)
+  }
+
+  private companion object {
+    private val log = LoggerFactory.getLogger(this::class.java)
   }
 }

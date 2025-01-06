@@ -137,7 +137,7 @@ fun transform(entity: FormEntity?): CatForm? {
       prisonId = entity.prisonId,
       offenderNo = entity.offenderNo,
       status = entity.getStatus(),
-      reviewReason = entity.reviewReason,
+      reviewReason = entity.reviewReason.toString(),
       dueByDate = entity.dueByDate.toString(),
 
       formResponse = entity.getFormResponse()?.let { objectMapper.readValue<Map<String, Any>>(it) },
