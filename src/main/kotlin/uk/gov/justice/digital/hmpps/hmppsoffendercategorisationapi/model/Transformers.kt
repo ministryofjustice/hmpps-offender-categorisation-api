@@ -149,7 +149,7 @@ fun transform(entity: FormEntity?): CatForm? {
       assessmentDate = entity.assessmentDate.toString(),
       startDate = entity.startDate.toString(),
       referredDate = entity.referredDate.toString(),
-      catType = entity.catType,
+      catType = entity.catType.toString(),
     )
   }
 

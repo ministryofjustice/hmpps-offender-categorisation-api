@@ -4,11 +4,14 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import com.vladmihalcea.hibernate.type.json.JsonType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import org.hibernate.annotations.Type
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.CatType
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.objectMapper
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -74,7 +77,8 @@ class FormEntity(
   val approvalDate: LocalDate?,
 
   @Column(name = "cat_type")
-  val catType: String,
+  @Enumerated(EnumType.STRING)
+  val catType: CatType,
 
   /**
    * REDACTED
@@ -133,8 +137,6 @@ class FormEntity(
     const val STATUS_APPROVED = "APPROVED"
     const val STATUS_CANCELLED = "CANCELLED"
     const val STATUS_STARTED = "STARTED"
-
-    const val CAT_TYPE_INITIAL = "INITIAL"
 
     const val REVIEW_REASON_MANUAL = "MANUAL"
     const val FORM_RESPONSE_SECTION_SECURITY = "security"
