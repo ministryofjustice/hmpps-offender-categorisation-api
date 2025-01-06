@@ -10,6 +10,8 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 import org.hibernate.annotations.Type
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.objectMapper
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 /**
  *  assigned_user_id, user_id referred_by, approved_by,
@@ -41,7 +43,7 @@ class FormEntity(
   private var status: String,
 
   @Column(name = "referred_date")
-  val referredDate: String = "",
+  val referredDate: LocalDateTime? = null,
 
   /**
    * REDACTED
@@ -60,16 +62,16 @@ class FormEntity(
   val offenderNo: String,
 
   @Column(name = "start_date")
-  val startDate: String,
+  val startDate: LocalDateTime,
 
   @Column(name = "security_reviewed_date")
-  private var securityReviewedDate: String,
+  private var securityReviewedDate: LocalDateTime?,
 
   @Column(name = "security_reviewed_by")
   private var securityReviewedBy: String?,
 
   @Column(name = "approval_date")
-  val approvalDate: String,
+  val approvalDate: LocalDate?,
 
   @Column(name = "cat_type")
   val catType: String,
@@ -81,16 +83,16 @@ class FormEntity(
   val nomisSequenceNo: String,
 
   @Column(name = "assessment_date")
-  val assessmentDate: String,
+  val assessmentDate: LocalDate?,
 
   @Column(name = "review_reason")
   val reviewReason: String,
 
   @Column(name = "due_by_date")
-  val dueByDate: String,
+  val dueByDate: LocalDate?,
 
   @Column(name = "cancelled_date")
-  val cancelledDate: String,
+  val cancelledDate: LocalDateTime?,
 
   /**
    * REDACTED
@@ -104,7 +106,7 @@ class FormEntity(
   fun getStatus(): String {
     return status
   }
-  fun getSecurityReviewedDate(): String {
+  fun getSecurityReviewedDate(): LocalDateTime? {
     return securityReviewedDate
   }
   fun getSecurityReviewedBy(): String? {
@@ -120,7 +122,7 @@ class FormEntity(
   fun setStatus(newStatus: String) {
     status = newStatus
   }
-  fun setSecurityReviewedDate(newSecurityReviewedDate: String) {
+  fun setSecurityReviewedDate(newSecurityReviewedDate: LocalDateTime) {
     securityReviewedDate = newSecurityReviewedDate
   }
   fun setSecurityReviewedBy(newSecurityReviewedBy: String) {

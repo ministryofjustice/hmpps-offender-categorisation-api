@@ -29,7 +29,7 @@ class FormServiceTest {
         .withFormResponse("{}")
         .withBookingId(testBookingId)
         .withStatus(FormEntity.STATUS_STARTED)
-        .withApprovalDate("")
+        .withApprovalDate(null)
         .build(),
     )
     formService.saveSecurityReview(testBookingId, testUserId, true, testSecurityReview)
@@ -53,7 +53,7 @@ class FormServiceTest {
         .withFormResponse("{}")
         .withBookingId(testBookingId)
         .withStatus(FormEntity.STATUS_STARTED)
-        .withApprovalDate("")
+        .withApprovalDate(null)
         .build(),
     )
     formService.saveSecurityReview(testBookingId, testUserId, false, testSecurityReview)

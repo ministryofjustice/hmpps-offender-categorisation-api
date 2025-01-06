@@ -17,7 +17,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services.Form
 
 @RestController
 @Tag(name = "Security", description = "Add / update security input of categorisations")
-@PreAuthorize("hasAnyRole('CATEGORISATION_SECURITY')")
+@PreAuthorize("hasAnyRole('SYSTEM_USER')")
 @Validated
 @RequestMapping("/security", produces = [MediaType.APPLICATION_JSON_VALUE])
 class SecurityController(

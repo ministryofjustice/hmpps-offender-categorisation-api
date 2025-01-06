@@ -1,6 +1,8 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories
 
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.FormEntity
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 class TestFormEntityFactory {
   private var bookingId = 1L
@@ -8,16 +10,16 @@ class TestFormEntityFactory {
   private var status = FormEntity.STATUS_APPROVED
   private var prisonId = "BXI"
   private var offenderNo = "ABC123"
-  private var startDate = "2024-01-01"
-  private var securityReviewedDate = "2024-02-01"
+  private var startDate = LocalDateTime.of(2024, 1, 1, 0, 0, 0)
+  private var securityReviewedDate = LocalDateTime.of(2024, 2, 1, 0, 0, 0)
   private var securityReviewedBy: String? = null
-  private var approvalDate = "2024-03-01"
+  private var approvalDate = LocalDate.of(2024, 3, 1)
   private var catType = FormEntity.CAT_TYPE_INITIAL
   private var nomisSequenceNo = "0"
-  private var assessmentDate = "2024-04-01"
+  private var assessmentDate = LocalDate.of(2024, 4, 1)
   private var reviewReason = FormEntity.REVIEW_REASON_MANUAL
-  private var dueByDate = "2024-03-01"
-  private var cancelledDate = ""
+  private var dueByDate = LocalDate.of(2024, 4, 1)
+  private var cancelledDate: LocalDateTime? = null
   private var cancelledBy = ""
 
   fun withBookingId(bookingId: Long): TestFormEntityFactory {
@@ -45,12 +47,12 @@ class TestFormEntityFactory {
     return this
   }
 
-  fun withStartDate(startDate: String): TestFormEntityFactory {
+  fun withStartDate(startDate: LocalDateTime): TestFormEntityFactory {
     this.startDate = startDate
     return this
   }
 
-  fun withSecurityReviewedDate(securityReviewedDate: String): TestFormEntityFactory {
+  fun withSecurityReviewedDate(securityReviewedDate: LocalDateTime): TestFormEntityFactory {
     this.securityReviewedDate = securityReviewedDate
     return this
   }
@@ -60,7 +62,7 @@ class TestFormEntityFactory {
     return this
   }
 
-  fun withApprovalDate(approvalDate: String): TestFormEntityFactory {
+  fun withApprovalDate(approvalDate: LocalDate?): TestFormEntityFactory {
     this.approvalDate = approvalDate
     return this
   }
@@ -75,7 +77,7 @@ class TestFormEntityFactory {
     return this
   }
 
-  fun withAssessmentDate(assessmentDate: String): TestFormEntityFactory {
+  fun withAssessmentDate(assessmentDate: LocalDate): TestFormEntityFactory {
     this.assessmentDate = assessmentDate
     return this
   }
@@ -85,12 +87,12 @@ class TestFormEntityFactory {
     return this
   }
 
-  fun withDueDate(dueByDate: String): TestFormEntityFactory {
+  fun withDueDate(dueByDate: LocalDate): TestFormEntityFactory {
     this.dueByDate = dueByDate
     return this
   }
 
-  fun withCancelledDate(cancelledDate: String): TestFormEntityFactory {
+  fun withCancelledDate(cancelledDate: LocalDateTime): TestFormEntityFactory {
     this.cancelledDate = cancelledDate
     return this
   }
