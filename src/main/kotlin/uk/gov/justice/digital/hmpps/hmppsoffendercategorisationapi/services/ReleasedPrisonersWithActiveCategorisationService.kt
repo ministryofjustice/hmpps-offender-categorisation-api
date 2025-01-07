@@ -18,7 +18,7 @@ class ReleasedPrisonersWithActiveCategorisationService(
       var index = 0
       do {
         val activeCategorisations = formRepository.findAllByStatusNotIn(listOf(FormEntity.STATUS_APPROVED, FormEntity.STATUS_CANCELLED), PageRequest.of(index, CHUNK_SIZE))
-        processChunkOfActiveCategorisationsAnd(activeCategorisations)
+        processChunkOfActiveCategorisations(activeCategorisations)
         index++
       } while (activeCategorisations.count() >= CHUNK_SIZE)
     } catch (e: Exception) {
@@ -26,7 +26,7 @@ class ReleasedPrisonersWithActiveCategorisationService(
     }
   }
 
-  private fun processChunkOfActiveCategorisationsAnd(activeCategorisations: List<FormEntity>) {
+  private fun processChunkOfActiveCategorisations(activeCategorisations: List<FormEntity>) {
     if (activeCategorisations.isEmpty()) {
       return
     }
