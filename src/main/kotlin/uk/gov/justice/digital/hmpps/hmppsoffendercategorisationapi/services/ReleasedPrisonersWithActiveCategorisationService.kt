@@ -18,34 +18,44 @@ class ReleasedPrisonersWithActiveCategorisationService(
       var index = 0
       do {
         val activeCategorisations = formRepository.findAllByStatusNotIn(listOf(FormEntity.STATUS_APPROVED, FormEntity.STATUS_CANCELLED), PageRequest.of(index, CHUNK_SIZE))
-        if (activeCategorisations.isEmpty()) {
-          continue
-        }
-        val activeCategorisationsByPrisonerNumber = activeCategorisations.associateBy { it.offenderNo }
-        val prisonerNumbers = activeCategorisationsByPrisonerNumber.keys.toList()
-        if (prisonerNumbers.isEmpty()) {
-          break
-        }
-        val prisonersFromPrisonerSearch = prisonerSearchApiClient.findPrisonersByPrisonerNumbers(prisonerNumbers)
-        reportIfDiscrepancyInPrisonerNumbers(prisonerNumbers, prisonersFromPrisonerSearch)
-        for (prisoner in prisonersFromPrisonerSearch) {
-          val prisonerNumber = prisoner.prisonerNumber
-          if (prisonerNumber === null) {
-            continue
-          }
-          val activeCategorisation = activeCategorisationsByPrisonerNumber[prisonerNumber]
-          if (activeCategorisation === null) {
-            throw Exception("Prisoner $prisonerNumber returned from prisoner search but not in original list")
-          }
-          if (!prisoner.currentlyInPrison) {
-            log.info("Prisoner $prisonerNumber has active categorisation of type ${activeCategorisation.catType} but prisoner search shows them to have status ${prisoner.status} and restricted patient value ${prisoner.restrictedPatient}")
-          }
-        }
+        processChunkOfActiveCategorisationsAnd(activeCategorisations)
         index++
       } while (activeCategorisations.count() >= CHUNK_SIZE)
     } catch (e: Exception) {
       log.error("Reporting released prisoners with active categorisation failed", e)
     }
+  }
+
+  private fun processChunkOfActiveCategorisationsAnd(activeCategorisations: List<FormEntity>) {
+    if (activeCategorisations.isEmpty()) {
+      return
+    }
+    val activeCategorisationsByPrisonerNumber = activeCategorisations.associateBy { it.offenderNo }
+    val prisonersFromPrisonerSearch = getPrisonersFromPrisonerSearch(activeCategorisationsByPrisonerNumber)
+
+    for (prisoner in prisonersFromPrisonerSearch) {
+      val prisonerNumber = prisoner.prisonerNumber
+      if (prisonerNumber === null) {
+        continue
+      }
+      val activeCategorisation = activeCategorisationsByPrisonerNumber[prisonerNumber]
+      if (activeCategorisation === null) {
+        throw Exception("Prisoner $prisonerNumber returned from prisoner search but not in original list")
+      }
+      if (!prisoner.currentlyInPrison) {
+        log.info("Prisoner $prisonerNumber has active categorisation of type ${activeCategorisation.catType} but prisoner search shows them to have status ${prisoner.status} and restricted patient value ${prisoner.restrictedPatient}")
+      }
+    }
+  }
+
+  private fun getPrisonersFromPrisonerSearch(activeCategorisationsByPrisonerNumber: Map<String, FormEntity>): List<Prisoner> {
+    val prisonerNumbers = activeCategorisationsByPrisonerNumber.keys.toList()
+    if (prisonerNumbers.isEmpty()) {
+      return listOf()
+    }
+    val prisonersFromPrisonerSearch = prisonerSearchApiClient.findPrisonersByPrisonerNumbers(prisonerNumbers)
+    reportIfDiscrepancyInPrisonerNumbers(prisonerNumbers, prisonersFromPrisonerSearch)
+    return prisonersFromPrisonerSearch
   }
 
   private fun reportIfDiscrepancyInPrisonerNumbers(prisonerNumbersFromDatabase: List<String>, prisoners: List<Prisoner>) {

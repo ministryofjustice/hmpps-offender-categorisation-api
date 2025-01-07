@@ -11,7 +11,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services.Rele
 @RestController
 @Validated
 @RequestMapping("/released-prisoners-with-active-categorisations", produces = [MediaType.APPLICATION_JSON_VALUE])
-class CleanupReleasedPrisonersWithActiveCategorisationsResource(
+class ReportReleasedPrisonersWithActiveCategorisationsResource(
   private val releasedPrisonersWithActiveCategorisationService: ReleasedPrisonersWithActiveCategorisationService,
 ) {
   @GetMapping("/report")
