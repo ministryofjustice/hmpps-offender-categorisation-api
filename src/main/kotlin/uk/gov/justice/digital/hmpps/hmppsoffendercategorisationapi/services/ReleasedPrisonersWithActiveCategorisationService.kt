@@ -14,16 +14,12 @@ class ReleasedPrisonersWithActiveCategorisationService(
   private val prisonerSearchApiClient: PrisonerSearchApiClient,
 ) {
   fun report() {
-    try {
-      var index = 0
-      do {
-        val activeCategorisations = formRepository.findAllByStatusNotIn(listOf(FormEntity.STATUS_APPROVED, FormEntity.STATUS_CANCELLED), PageRequest.of(index, CHUNK_SIZE))
-        processChunkOfActiveCategorisations(activeCategorisations)
-        index++
-      } while (activeCategorisations.count() >= CHUNK_SIZE)
-    } catch (e: Exception) {
-      log.error("Reporting released prisoners with active categorisation failed", e)
-    }
+    var index = 0
+    do {
+      val activeCategorisations = formRepository.findAllByStatusNotIn(listOf(FormEntity.STATUS_APPROVED, FormEntity.STATUS_CANCELLED), PageRequest.of(index, CHUNK_SIZE))
+      processChunkOfActiveCategorisations(activeCategorisations)
+      index++
+    } while (activeCategorisations.count() >= CHUNK_SIZE)
   }
 
   private fun processChunkOfActiveCategorisations(activeCategorisations: List<FormEntity>) {
