@@ -11,6 +11,12 @@ hmpps:
       url: http://localhost:8090/auth/oauth/token
     url: http://localhost:8090/auth
 
+prisoner:
+  search:
+    api:
+      endpoint:
+        url: http://dummy.value
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/form-builder
@@ -23,7 +29,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/form-builder
     user: form-builder
     password: form-builder
-    enabled: true
+    enabled: false
 
   main:
     allow-bean-definition-overriding: true
