@@ -144,10 +144,9 @@ class FormEntity(
     const val STATUS_APPROVED = "APPROVED"
     const val STATUS_CANCELLED = "CANCELLED"
     const val STATUS_STARTED = "STARTED"
+    const val STATUS_SECURITY_BACK = "SECURITY_BACK"
 
     const val FORM_RESPONSE_SECTION_SECURITY = "security"
     const val FORM_RESPONSE_FIELD_NAME = "review"
-
-    const val STATUS_SECURITY_BACK = "SECURITY_BACK"
   }
 }
