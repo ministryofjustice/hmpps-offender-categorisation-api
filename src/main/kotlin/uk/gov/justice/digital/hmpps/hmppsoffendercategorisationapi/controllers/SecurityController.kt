@@ -35,8 +35,12 @@ class SecurityController(
     )
     @PathVariable
     bookingId: Long,
-    @RequestBody
+    @Parameter(
+      description = "Details of the review being submitted.",
+      required = true,
+    )
     @Valid
+    @RequestBody
     data: SecurityReviewRequest,
   ) = formService.saveSecurityReview(bookingId, data.userId, data.submitted, data.securityReview)
 }

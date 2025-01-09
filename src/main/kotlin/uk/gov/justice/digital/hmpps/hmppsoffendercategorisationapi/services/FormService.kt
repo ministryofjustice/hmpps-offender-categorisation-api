@@ -11,7 +11,7 @@ class FormService(
 ) {
   fun saveSecurityReview(bookingId: Long, userId: String, submitted: Boolean, securityReview: String?) {
     val formEntity = formRepository.findByBookingId(bookingId)
-      ?: throw Exception("Could not find form entity for booking ID $bookingId")
+      ?: throw FormNotFoundException(bookingId)
     if (securityReview != null) {
       formEntity.updateFormResponse(
         FormEntity.FORM_RESPONSE_SECTION_SECURITY,
@@ -27,3 +27,6 @@ class FormService(
     formRepository.save(formEntity)
   }
 }
+
+class FormNotFoundException(bookingId: Long) :
+  Exception("Unable to find form record for $bookingId")
