@@ -67,6 +67,5 @@ class FormServiceTest {
         entity.getFormResponse()!!.contains("{\"security\":{\"review\":{\"securityReview\":\"Test security review\"}}}")
       },
     )
-    assert(true)
   }
 }
