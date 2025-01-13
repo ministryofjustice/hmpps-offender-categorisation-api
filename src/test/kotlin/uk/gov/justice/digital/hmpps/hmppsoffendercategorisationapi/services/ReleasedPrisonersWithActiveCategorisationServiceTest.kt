@@ -13,6 +13,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.Prison
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestFormEntityFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonerFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.FormEntity
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.CatType
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.FormRepository
 
@@ -42,7 +43,7 @@ class ReleasedPrisonersWithActiveCategorisationServiceTest() {
     ).thenReturn(
       listOf<FormEntity>(
         (TestFormEntityFactory()).withStatus(FormEntity.STATUS_STARTED).withOffenderNo(testOffenderId1).build(),
-        (TestFormEntityFactory()).withStatus(FormEntity.STATUS_STARTED).withOffenderNo(testOffenderId2).withCatType(FormEntity.CAT_TYPE_INITIAL).build(),
+        (TestFormEntityFactory()).withStatus(FormEntity.STATUS_STARTED).withOffenderNo(testOffenderId2).withCatType(CatType.INITIAL).build(),
       ),
     )
 
@@ -55,7 +56,7 @@ class ReleasedPrisonersWithActiveCategorisationServiceTest() {
 
     releasedPrisonersWithActiveCategorisationService.report()
 
-    assertThat(output).contains("Prisoner $testOffenderId2 has active categorisation of type ${FormEntity.CAT_TYPE_INITIAL} but prisoner search shows them to have status ${Prisoner.STATUS_INACTIVE_OUT} and restricted patient value false")
+    assertThat(output).contains("Prisoner $testOffenderId2 has active categorisation of type ${CatType.INITIAL} but prisoner search shows them to have status ${Prisoner.STATUS_INACTIVE_OUT} and restricted patient value false")
     assert(true)
   }
 }
