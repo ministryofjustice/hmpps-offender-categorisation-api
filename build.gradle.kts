@@ -9,6 +9,9 @@ configurations {
   testImplementation { exclude(group = "org.junit.vintage") }
 }
 
+// https://mojdt.slack.com/archives/C69NWE339/p1734943189790819
+ext["logback.version"] = "1.5.14"
+
 dependencies {
   annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
