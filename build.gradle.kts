@@ -1,5 +1,5 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "6.0.8"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "6.1.2"
   kotlin("plugin.spring") version "2.0.21"
   kotlin("plugin.jpa") version "2.0.21"
   kotlin("plugin.serialization") version "1.9.25"
@@ -8,6 +8,9 @@ plugins {
 configurations {
   testImplementation { exclude(group = "org.junit.vintage") }
 }
+
+// https://mojdt.slack.com/archives/C69NWE339/p1734943189790819
+ext["logback.version"] = "1.5.14"
 
 dependencies {
   annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
@@ -31,13 +34,15 @@ dependencies {
   implementation("com.vladmihalcea:hibernate-types-60:2.21.1")
   implementation("io.hypersistence:hypersistence-utils-hibernate-60:3.5.1")
 
-  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:0.2.2")
+  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.1.1")
   implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.1.1")
 
   implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
   // OpenAPI
-  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.4.0")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0")
+
+  implementation("com.google.code.gson:gson:2.11.0")
 
   // Test dependencies
   testImplementation("com.h2database:h2:2.3.232")

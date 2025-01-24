@@ -46,7 +46,7 @@
         "openConditionsRequested" : false
       },
       "status" : "APPROVED",
-      "referred_date" : "2019-11-25 11:24:12.768+00",
+      "referred_date" : "2019-11-25T11:24:12.768",
       "risk_profile" : {
         "history" : { },
         "offences" : [ ],
@@ -69,14 +69,14 @@
       },
       "prison_id" : "NMI",
       "offender_no" : "GXXXX",
-      "start_date" : "2019-11-25 11:24:12.768+00",
-      "security_reviewed_date" : "2019-11-25 11:24:12.768+00",
+      "start_date" : "2019-11-25T11:24:12.768",
+      "security_reviewed_date" : "2019-11-25T11:24:12.768",
       "approval_date" : "2019-06-25",
       "cat_type" : "INITIAL",
       "assessment_date" : "2019-07-16",
       "review_reason" : "DUE",
       "due_by_date" : "2017-04-01",
-      "cancelled_date" : "2019-11-25 11:24:12.768+00"
+      "cancelled_date" : "2019-11-25T11:24:12.768"
     },
     "riskChange" : [ {
       "old_profile" : {
