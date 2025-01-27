@@ -1,7 +1,7 @@
 plugins {
   id("uk.gov.justice.hmpps.gradle-spring-boot") version "6.1.2"
-  kotlin("plugin.spring") version "2.0.20"
-  kotlin("plugin.jpa") version "2.0.20"
+  kotlin("plugin.spring") version "2.0.21"
+  kotlin("plugin.jpa") version "2.0.21"
   kotlin("plugin.serialization") version "1.9.25"
 }
 
@@ -35,6 +35,7 @@ dependencies {
   implementation("io.hypersistence:hypersistence-utils-hibernate-60:3.5.1")
 
   implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.1.1")
+  implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.1.1")
 
   implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
@@ -44,6 +45,8 @@ dependencies {
   implementation("com.google.code.gson:gson:2.11.0")
 
   // Test dependencies
+  testImplementation("com.h2database:h2:2.3.232")
+  testImplementation("io.github.hakky54:logcaptor:2.10.0")
   testImplementation("com.github.tomakehurst:wiremock-jre8-standalone:3.0.1")
   testImplementation("org.springframework.security:spring-security-test")
   testImplementation("org.awaitility:awaitility-kotlin:4.2.1")
