@@ -14,7 +14,7 @@ class LiteCategoryRepositoryTest : ResourceTest() {
   @Sql("classpath:repository/lite_category.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   fun `Should Find by Offender No`() {
-    val lightCategoryRecords = repository.findByOffenderNoAndCreatedDateBetweenOrApprovedDateBetweenOrderBySequenceDesc("G0089UO")
+    val lightCategoryRecords = repository.findByOffenderNoOrderBySequenceDesc("G0089UO")
 
     Assertions.assertThat(lightCategoryRecords?.first()?.assessedBy).isEqualTo("LBENNETT_GEN")
   }

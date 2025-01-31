@@ -15,7 +15,7 @@ class PreviousProfileRepositoryTest : ResourceTest() {
   @Sql("classpath:repository/previous_profile.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = AFTER_TEST_METHOD)
   fun `Should Find by Offender No`() {
-    val entity = repository.findByOffenderNoAndExecuteDateTimeBetween("GXXXX")
+    val entity = repository.findByOffenderNo("GXXXX")
 
     assertThat(entity?.offenderNo).isEqualTo("GXXXX")
   }

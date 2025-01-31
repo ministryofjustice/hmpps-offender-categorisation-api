@@ -10,13 +10,16 @@ import java.time.LocalDateTime
 @Repository
 interface FormRepository : JpaRepository<FormEntity, Long> {
   fun findByBookingId(bookingId: Long): FormEntity?
-  fun findByOffenderNoOrderBySequenceNoAsc(offenderNo: String): List<FormEntity>
-  fun findByOffenderNoAndStartDateBetweenOrApprovalDateBetweenOrderBySequenceNoAsc(
+  fun findAllByOffenderNoAndStartDateBetweenOrApprovalDateBetweenOrderBySequenceNoAsc(
     offenderNo: String,
     fromStartDate: LocalDateTime? = null,
     toStartDate: LocalDateTime? = null,
     fromApprovalDate: LocalDate? = null,
     toApprovalDate: LocalDate? = null,
+  ): List<FormEntity>
+
+  fun findAllByOffenderNoOrderBySequenceNoAsc(
+    offenderNo: String,
   ): List<FormEntity>
 
   fun findAllByStatusNotIn(notInStatuses: List<String>, pageable: Pageable): List<FormEntity>

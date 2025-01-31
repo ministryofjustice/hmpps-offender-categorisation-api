@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services
 
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.CategorisationTool
@@ -21,6 +22,7 @@ import uk.gov.justice.hmpps.kotlin.sar.HmppsSubjectAccessRequestContent
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneId
+import java.time.ZonedDateTime
 
 @Transactional(readOnly = true)
 @Service
@@ -37,65 +39,60 @@ class SubjectAccessRequestService(
     fromDate: LocalDate?,
     toDate: LocalDate?,
   ): HmppsSubjectAccessRequestContent? {
-    val catFormEntity = formRepository.findByOffenderNoAndStartDateBetweenOrApprovalDateBetweenOrderBySequenceNoAsc(
-      prn,
-      fromDate?.atStartOfDay(),
-      toDate?.atTime(LocalTime.MAX),
-      fromDate,
-      toDate,
-    )
+    val fromZonedDateTime = fromDate?.atStartOfDay(ZoneId.systemDefault())
+    val toZonedDateTime = toDate?.atTime(LocalTime.MAX)?.atZone(ZoneId.systemDefault())
+
+    val catFormEntity = formRepository.findAllByOffenderNoOrderBySequenceNoAsc(prn).filter {
+      dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.startDate.atZone(ZoneId.systemDefault())) ||
+        dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.approvalDate?.atStartOfDay(ZoneId.systemDefault()))
+    }
 
     if (catFormEntity.isEmpty()) {
       return null // returns 204 no content - see acceptance criteria si-841
     }
 
-    val fromZonedDateTime = fromDate?.atStartOfDay(ZoneId.systemDefault())
-    val toZonedDateTime = toDate?.atTime(LocalTime.MAX)?.atZone(ZoneId.systemDefault())
+    val previousRiskProfile = previousProfileRepository.findByOffenderNo(prn)
 
     return HmppsSubjectAccessRequestContent(
       content =
       SarResponse(
         categorisationTool = CategorisationTool(
           security = transformSecurityReferral(
-            securityReferralRepository.findByOffenderNoAndRaisedDateBetweenOrderByRaisedDateDesc(
-              prn,
-              fromZonedDateTime,
-              toZonedDateTime,
-            ),
+            securityReferralRepository.findByOffenderNoOrderByRaisedDateDesc(prn).filter {
+              dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.raisedDate)
+            },
           ),
           liteCategory = transformLiteCategory(
-            liteCategoryRepository.findByOffenderNoAndCreatedDateBetweenOrApprovedDateBetweenOrderBySequenceDesc(
+            liteCategoryRepository.findByOffenderNoOrderBySequenceDesc(
               prn,
-              fromZonedDateTime,
-              toZonedDateTime,
-              fromZonedDateTime,
-              toZonedDateTime,
-            ),
+            ).filter {
+              dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.createdDate) ||
+                dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.approvedDate)
+            },
           ),
           riskChange = transformRiskChange(
-            riskChangeRepository.findByOffenderNoAndRaisedDateBetweenOrderByRaisedDateDesc(
-              prn,
-              fromZonedDateTime,
-              toZonedDateTime,
-            ),
+            riskChangeRepository.findByOffenderNoOrderByRaisedDateDesc(prn).filter {
+              dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.raisedDate)
+            },
           ),
           nextReviewChangeHistory = transformNextReviewChangeHistory(
-            nextReviewChangeHistoryRepository.findByOffenderNoAndChangeDateBetween(
-              prn,
-              fromZonedDateTime,
-              toZonedDateTime,
-            ),
+            nextReviewChangeHistoryRepository.findByOffenderNo(prn).filter {
+              dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.changeDate)
+            },
           ),
           catForm = transformAllFromCatForm(catFormEntity),
         ),
-        riskProfiler = transform(
-          previousProfileRepository.findByOffenderNoAndExecuteDateTimeBetween(
-            prn,
-            fromZonedDateTime,
-            toZonedDateTime,
-          ),
-        ),
+        riskProfiler = if (dateIsWithinDates(fromZonedDateTime, toZonedDateTime, previousRiskProfile.executeDateTime)) transform(previousRiskProfile) else null,
       ),
     )
+  }
+
+  private fun dateIsWithinDates(fromDate: ZonedDateTime?, toDate: ZonedDateTime?, dateInQuestion: ZonedDateTime?): Boolean {
+    return fromDate == null || (dateInQuestion == null || dateInQuestion.isAfter(fromDate)) &&
+      toDate == null || (dateInQuestion == null || dateInQuestion.isBefore(toDate))
+  }
+
+  private companion object {
+    private val log = LoggerFactory.getLogger(this::class.java)
   }
 }

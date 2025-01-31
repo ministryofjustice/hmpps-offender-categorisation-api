@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.springframework.test.context.jdbc.Sql
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.BaseSarUnitTest
 
 class SubjectAccessRequestIntegrationTest : IntegrationTestBase() {
   @Nested
@@ -48,7 +49,7 @@ class SubjectAccessRequestIntegrationTest : IntegrationTestBase() {
           .expectStatus().isOk
           .expectBody()
           .consumeWith(System.out::println)
-          .jsonPath("$.content.categorisationTool.catForm.offender_no").isEqualTo("GXXXX")
+          .json("{\"content\":${BaseSarUnitTest.loadExpectedOutput("/subject_access_request_content_v2.json")}}")
       }
 
       @Test
