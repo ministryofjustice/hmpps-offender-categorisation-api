@@ -1,6 +1,6 @@
 {
   "categorisationTool" : {
-    "catForm" : {
+    "catForm" : [ {
       "id" : "1598",
       "form_response" : {
         "history" : {
@@ -132,7 +132,7 @@
       "review_reason" : "MANUAL",
       "due_by_date" : "1977-12-16",
       "cancelled_date" : "1977-12-17"
-    },
+    } ],
     "riskChange" : [ {
       "id" : "1",
       "old_profile" : {

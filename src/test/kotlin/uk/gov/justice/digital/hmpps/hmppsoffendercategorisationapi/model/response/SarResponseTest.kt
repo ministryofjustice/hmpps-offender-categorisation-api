@@ -10,7 +10,7 @@ class SarResponseTest : CategorisationToolTest() {
   fun `should build response to match response defined in acceptance criteria`() {
     val response = json.writerWithDefaultPrettyPrinter().writeValueAsString(sarResponse)
 
-    val expectedResult = loadExpectedOutput("sar_response.json")
+    val expectedResult = loadExpectedOutput("sar_response_pretty_printer_formatted.txt")
 
     assertThat(response).isEqualTo(expectedResult)
   }

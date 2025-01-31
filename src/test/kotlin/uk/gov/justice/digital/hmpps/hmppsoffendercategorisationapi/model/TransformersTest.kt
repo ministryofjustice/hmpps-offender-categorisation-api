@@ -87,7 +87,7 @@ class TransformersTest : ResourceTest() {
 
     val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/form.json")
 
-    Assertions.assertThat(json.writeValueAsString(form)).isEqualTo(expectedResult)
+    Assertions.assertThat(json.writeValueAsString(form)).isEqualTo(listOf(expectedResult))
   }
 
   @Test
