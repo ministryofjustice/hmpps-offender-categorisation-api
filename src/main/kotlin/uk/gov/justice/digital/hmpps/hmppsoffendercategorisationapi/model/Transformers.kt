@@ -131,29 +131,31 @@ fun transformLiteCategory(entity: List<LiteCategoryEntity>?): List<LiteCategory>
 /**
  * userId, cancelledBy is REDACTED
  */
-fun transform(entity: FormEntity?): CatForm? {
-  if (entity != null) {
-    return CatForm(
-      prisonId = entity.prisonId,
-      offenderNo = entity.offenderNo,
-      status = entity.getStatus(),
-      reviewReason = entity.reviewReason.toString(),
-      dueByDate = entity.dueByDate.toString(),
+fun transformAllFromCatForm(entity: List<FormEntity>): List<CatForm> {
+  val response = ArrayList<CatForm>()
+  entity.forEach {
+    response.add(
+      CatForm(
+        prisonId = it.prisonId,
+        offenderNo = it.offenderNo,
+        status = it.getStatus(),
+        reviewReason = it.reviewReason.toString(),
+        dueByDate = it.dueByDate.toString(),
 
-      formResponse = entity.getFormResponse()?.let { objectMapper.readValue<Map<String, Any>>(it) },
-      riskProfile = entity.riskProfile?.let { objectMapper.readValue<RiskProfile>(it) },
+        formResponse = it.getFormResponse()?.let { objectMapper.readValue<Map<String, Any>>(it) },
+        riskProfile = it.riskProfile?.let { objectMapper.readValue<RiskProfile>(it) },
 
-      cancelledDate = entity.cancelledDate.toString(),
-      approvalDate = entity.approvalDate.toString(),
-      securityReviewedDate = entity.getSecurityReviewedDate().toString(),
-      assessmentDate = entity.assessmentDate.toString(),
-      startDate = entity.startDate.toString(),
-      referredDate = entity.referredDate.toString(),
-      catType = entity.catType.toString(),
+        cancelledDate = it.cancelledDate.toString(),
+        approvalDate = it.approvalDate.toString(),
+        securityReviewedDate = it.getSecurityReviewedDate().toString(),
+        assessmentDate = it.assessmentDate.toString(),
+        startDate = it.startDate.toString(),
+        referredDate = it.referredDate.toString(),
+        catType = it.catType.toString(),
+      ),
     )
   }
-
-  return null
+  return response
 }
 
 /**

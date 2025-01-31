@@ -1,6 +1,7 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform
 
 import com.fasterxml.jackson.annotation.JsonInclude
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.riskprofile.CatHistory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.riskprofile.LifeProfile
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.common.RedactedSection
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.Escape
@@ -8,7 +9,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class RiskProfile(
-  val catHistory: RedactedSection? = null,
+  val catHistory: List<CatHistory>? = null,
 
   val history: RedactedSection? = null,
 

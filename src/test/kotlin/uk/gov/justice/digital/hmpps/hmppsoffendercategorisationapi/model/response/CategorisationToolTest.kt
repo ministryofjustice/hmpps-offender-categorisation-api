@@ -6,7 +6,7 @@ open class CategorisationToolTest : BaseSarUnitTest() {
 
     @JvmStatic
     protected val categorisationTool = CategorisationTool(
-      catForm,
+      catForm = listOf(catForm),
       security = listOf(security),
       liteCategory = listOf(liteCategory),
       nextReviewChangeHistory = listOf(nextReviewChangeHistory),

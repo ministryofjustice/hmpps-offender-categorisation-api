@@ -8,6 +8,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.NextReviewChangeHistory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.RiskProfile
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.SecurityReferral
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.riskprofile.CatHistory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.riskprofile.LifeProfile
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.common.RedactedSection
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.Escape
@@ -62,7 +63,24 @@ open class BaseSarUnitTest {
     )
 
     protected val riskProfile = RiskProfile(
-      catHistory = RedactedSection(),
+      catHistory = listOf(
+        CatHistory(
+          bookingId = 12345,
+          offenderNo = "ABC123",
+          approvalDate = "2024-02-18",
+          assessmentSequence = 5,
+          assessmentDate = "2024-03-23",
+          classification = "Cat C",
+          nextReviewDate = "2025-02-18",
+          assessmentStatus = "A",
+          agencyDescription = "Pentonville",
+          assessmentComment = "something",
+          classificationCode = "C",
+          approvalDateDisplay = "18/01/2024",
+          cellSharingAlertFlag = false,
+          assessmentDescription = "something",
+        ),
+      ),
       history = RedactedSection(),
       offences = emptyList(),
       socProfile = RedactedSection(),

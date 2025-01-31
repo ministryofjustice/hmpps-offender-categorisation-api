@@ -3,8 +3,13 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.o
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.SecurityReferralEntity
+import java.time.ZonedDateTime
 
 @Repository
 interface SecurityReferralRepository : JpaRepository<SecurityReferralEntity, Long> {
-  fun findByOffenderNoOrderByRaisedDateDesc(offenderNo: String): List<SecurityReferralEntity>?
+  fun findByOffenderNoAndRaisedDateBetweenOrderByRaisedDateDesc(
+    offenderNo: String,
+    dateFrom: ZonedDateTime? = null,
+    dateTo: ZonedDateTime? = null,
+  ): List<SecurityReferralEntity>?
 }

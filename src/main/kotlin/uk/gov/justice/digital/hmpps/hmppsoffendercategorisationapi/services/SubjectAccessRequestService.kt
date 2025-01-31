@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.CategorisationTool
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.SarResponse
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.transform
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.transformAllFromCatForm
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.transformLiteCategory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.transformNextReviewChangeHistory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.transformRiskChange
@@ -18,6 +19,8 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.ri
 import uk.gov.justice.hmpps.kotlin.sar.HmppsPrisonSubjectAccessRequestService
 import uk.gov.justice.hmpps.kotlin.sar.HmppsSubjectAccessRequestContent
 import java.time.LocalDate
+import java.time.LocalTime
+import java.time.ZoneId
 
 @Transactional(readOnly = true)
 @Service
@@ -34,23 +37,64 @@ class SubjectAccessRequestService(
     fromDate: LocalDate?,
     toDate: LocalDate?,
   ): HmppsSubjectAccessRequestContent? {
-    val catFormEntity = formRepository.findTopByOffenderNoOrderBySequenceNoAsc(prn)
+    val catFormEntity = formRepository.findByOffenderNoAndStartDateBetweenOrApprovalDateBetweenOrderBySequenceNoAsc(
+      prn,
+      fromDate?.atStartOfDay(),
+      toDate?.atTime(LocalTime.MAX),
+      fromDate,
+      toDate,
+    )
 
-    if (catFormEntity == null) {
+    if (catFormEntity.isEmpty()) {
       return null // returns 204 no content - see acceptance criteria si-841
     }
+
+    val fromZonedDateTime = fromDate?.atStartOfDay(ZoneId.systemDefault())
+    val toZonedDateTime = toDate?.atTime(LocalTime.MAX)?.atZone(ZoneId.systemDefault())
 
     return HmppsSubjectAccessRequestContent(
       content =
       SarResponse(
         categorisationTool = CategorisationTool(
-          security = transformSecurityReferral(securityReferralRepository.findByOffenderNoOrderByRaisedDateDesc(prn)),
-          liteCategory = transformLiteCategory(liteCategoryRepository.findByOffenderNoOrderBySequenceDesc(prn)),
-          riskChange = transformRiskChange(riskChangeRepository.findByOffenderNoOrderByRaisedDateDesc(prn)),
-          nextReviewChangeHistory = transformNextReviewChangeHistory(nextReviewChangeHistoryRepository.findByOffenderNo(prn)),
-          catForm = transform(catFormEntity),
+          security = transformSecurityReferral(
+            securityReferralRepository.findByOffenderNoAndRaisedDateBetweenOrderByRaisedDateDesc(
+              prn,
+              fromZonedDateTime,
+              toZonedDateTime,
+            ),
+          ),
+          liteCategory = transformLiteCategory(
+            liteCategoryRepository.findByOffenderNoAndCreatedDateBetweenOrApprovedDateBetweenOrderBySequenceDesc(
+              prn,
+              fromZonedDateTime,
+              toZonedDateTime,
+              fromZonedDateTime,
+              toZonedDateTime,
+            ),
+          ),
+          riskChange = transformRiskChange(
+            riskChangeRepository.findByOffenderNoAndRaisedDateBetweenOrderByRaisedDateDesc(
+              prn,
+              fromZonedDateTime,
+              toZonedDateTime,
+            ),
+          ),
+          nextReviewChangeHistory = transformNextReviewChangeHistory(
+            nextReviewChangeHistoryRepository.findByOffenderNoAndChangeDateBetween(
+              prn,
+              fromZonedDateTime,
+              toZonedDateTime,
+            ),
+          ),
+          catForm = transformAllFromCatForm(catFormEntity),
         ),
-        riskProfiler = transform(previousProfileRepository.findByOffenderNo(prn)),
+        riskProfiler = transform(
+          previousProfileRepository.findByOffenderNoAndExecuteDateTimeBetween(
+            prn,
+            fromZonedDateTime,
+            toZonedDateTime,
+          ),
+        ),
       ),
     )
   }

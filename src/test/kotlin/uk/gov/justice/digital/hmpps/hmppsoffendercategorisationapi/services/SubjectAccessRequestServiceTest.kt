@@ -85,12 +85,14 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
 
   @Test
   fun `should build response with empty data`() {
-    whenever(liteCategoryRepositoryMock.findByOffenderNoOrderBySequenceDesc(OFFENDER_NO)).thenReturn(null)
-    whenever(formRepositoryMock.findTopByOffenderNoOrderBySequenceNoAsc(OFFENDER_NO)).thenReturn(null)
-    whenever(riskChangeRepositoryMock.findByOffenderNoOrderByRaisedDateDesc(OFFENDER_NO)).thenReturn(null)
-    whenever(nextReviewChangeHistoryRepositoryMock.findByOffenderNo(OFFENDER_NO)).thenReturn(null)
-    whenever(securityReferralRepositoryMock.findByOffenderNoOrderByRaisedDateDesc(OFFENDER_NO)).thenReturn(null)
-    whenever(previousProfileRepositoryMock.findByOffenderNo(OFFENDER_NO)).thenReturn(null)
+    whenever(liteCategoryRepositoryMock.findByOffenderNoAndCreatedDateBetweenOrApprovedDateBetweenOrderBySequenceDesc(OFFENDER_NO)).thenReturn(null)
+    whenever(formRepositoryMock.findByOffenderNoAndStartDateBetweenOrApprovalDateBetweenOrderBySequenceNoAsc(OFFENDER_NO)).thenReturn(
+      listOf(),
+    )
+    whenever(riskChangeRepositoryMock.findByOffenderNoAndRaisedDateBetweenOrderByRaisedDateDesc(OFFENDER_NO)).thenReturn(null)
+    whenever(nextReviewChangeHistoryRepositoryMock.findByOffenderNoAndChangeDateBetween(OFFENDER_NO)).thenReturn(null)
+    whenever(securityReferralRepositoryMock.findByOffenderNoAndRaisedDateBetweenOrderByRaisedDateDesc(OFFENDER_NO)).thenReturn(null)
+    whenever(previousProfileRepositoryMock.findByOffenderNoAndExecuteDateTimeBetween(OFFENDER_NO)).thenReturn(null)
 
     val subjectAccessRequestService = SubjectAccessRequestService(
       securityReferralRepositoryMock,
