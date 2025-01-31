@@ -14,7 +14,7 @@ class FormRepositoryTest : ResourceTest() {
   @Sql("classpath:repository/form.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   fun `Should Find by Offender No`() {
-    val formRecords = repository.findAllByOffenderNoAndStartDateBetweenOrApprovalDateBetweenOrderBySequenceNoAsc("G8105VR")
+    val formRecords = repository.findAllByOffenderNoOrderBySequenceNoAsc("G8105VR")
 
     Assertions.assertThat(formRecords.count()).isEqualTo(1)
     Assertions.assertThat(formRecords.first()?.cancelledBy).isEqualTo("SRENDELL_GEN")
@@ -24,7 +24,7 @@ class FormRepositoryTest : ResourceTest() {
   @Sql("classpath:repository/form_with_catHistory.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   fun `Should Ignore dodgy catHistory data and find by Offender No`() {
-    val formRecords = repository.findAllByOffenderNoAndStartDateBetweenOrApprovalDateBetweenOrderBySequenceNoAsc("G8105VR")
+    val formRecords = repository.findAllByOffenderNoOrderBySequenceNoAsc("G8105VR")
 
     Assertions.assertThat(formRecords.count()).isEqualTo(1)
     Assertions.assertThat(formRecords.first()?.cancelledBy).isEqualTo("SRENDELL_GEN")
