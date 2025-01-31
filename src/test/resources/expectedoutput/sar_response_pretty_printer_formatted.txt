@@ -95,7 +95,7 @@
       "status" : "APPROVED",
       "referred_date" : "2023-03-21 15:08:50.982 +0000",
       "risk_profile" : {
-        "catHistory" : { },
+        "catHistory" : [ { } ],
         "history" : { },
         "offences" : [ ],
         "socProfile" : { },
