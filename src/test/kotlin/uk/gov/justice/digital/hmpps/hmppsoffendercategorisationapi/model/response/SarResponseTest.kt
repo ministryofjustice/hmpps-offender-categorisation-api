@@ -24,14 +24,18 @@ class SarResponseTest : CategorisationToolTest() {
 
   protected companion object {
     protected val sarResponse = SarResponse(
-      categorisationTool,
+      catForm = listOf(catForm),
+      security = listOf(security),
+      liteCategory = listOf(liteCategory),
+      nextReviewChangeHistory = listOf(nextReviewChangeHistory),
+      riskChange = listOf(riskChange),
       riskProfiler = RiskProfiler(
         offenderNo = "G2194GK",
         escape = RedactedSection(),
         extremism = RedactedSection(),
         soc = RedactedSection(),
         violence = riskProfilerViolence,
-        executeDateTime = "2021-07-27 02:18:22.10621",
+        dateAndTimeRiskInformationLastUpdated = "2021-07-27 02:18:22.10621",
       ),
     )
   }

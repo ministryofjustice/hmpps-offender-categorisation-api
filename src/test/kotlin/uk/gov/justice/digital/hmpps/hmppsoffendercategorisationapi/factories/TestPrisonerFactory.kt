@@ -7,6 +7,7 @@ class TestPrisonerFactory {
   private var status = Prisoner.STATUS_ACTIVE_IN
   private var prisonId = "TEST"
   private var restrictedPatient = false
+  private var prisonName = "HMP Test"
 
   fun withPrisonerNumber(prisonerNumber: String): TestPrisonerFactory {
     this.prisonerNumber = prisonerNumber
@@ -28,12 +29,18 @@ class TestPrisonerFactory {
     return this
   }
 
+  fun withPrisonName(prisonName: String): TestPrisonerFactory {
+    this.prisonName = prisonName
+    return this
+  }
+
   fun build(): Prisoner {
     return Prisoner(
       prisonerNumber = this.prisonerNumber,
       status = this.status,
       prisonId = prisonId,
       restrictedPatient = this.restrictedPatient,
+      prisonName = this.prisonName,
     )
   }
 }

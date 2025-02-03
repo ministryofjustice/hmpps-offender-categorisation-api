@@ -1,5 +1,9 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.integration
 
+import com.github.tomakehurst.wiremock.client.WireMock
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -28,6 +32,8 @@ abstract class IntegrationTestBase {
 
   companion object {
     private val pgContainer = PostgresContainer.instance
+    internal val prisonerSearchMockServer = PrisonerSearchMockServer()
+    internal val hmppsAuthMockServer = HmppsAuthMockServer()
 
     @JvmStatic
     @DynamicPropertySource
@@ -43,6 +49,48 @@ abstract class IntegrationTestBase {
         registry.add("spring.flyway.password", pgContainer::getPassword)
       }
     }
+
+    @BeforeAll
+    @JvmStatic
+    fun startMocks() {
+      prisonerSearchMockServer.start()
+      hmppsAuthMockServer.start()
+    }
+
+    @AfterAll
+    @JvmStatic
+    fun stopMocks() {
+      prisonerSearchMockServer.stop()
+      hmppsAuthMockServer.stop()
+    }
+
+    fun stubPing(status: Int) {
+      hmppsAuthMockServer.stubFor(
+        WireMock.get("/auth/health/ping").willReturn(
+          WireMock.aResponse()
+            .withHeader("Content-Type", "application/json")
+            .withBody(if (status == 200) "pong" else "some error")
+            .withStatus(status),
+        ),
+      )
+
+      prisonerSearchMockServer.stubFor(
+        WireMock.get("/health/ping").willReturn(
+          WireMock.aResponse()
+            .withHeader("Content-Type", "application/json")
+            .withBody(if (status == 200) "pong" else "some error")
+            .withStatus(status),
+        ),
+      )
+    }
+  }
+
+  @BeforeEach
+  fun resetStubs() {
+    hmppsAuthMockServer.resetAll()
+    prisonerSearchMockServer.resetAll()
+
+    hmppsAuthMockServer.stubGrantToken()
   }
 
   protected fun setAuthorisation(

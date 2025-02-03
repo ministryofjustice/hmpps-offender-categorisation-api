@@ -128,6 +128,33 @@ fun transformLiteCategory(entity: List<LiteCategoryEntity>?): List<LiteCategory>
   return null
 }
 
+private fun processCatFormResponseForSubjectAccessRequest(formResponse: Map<String, Any>?): Map<String, Any> {
+  if (formResponse == null) {
+    return emptyMap()
+  }
+  val processedFormResponse = mutableMapOf<String, Any>()
+
+  formResponse.forEach {
+    val key = when (it.key) {
+      "securityBack" -> "categoryDecisionBasedOnSecurityInformation"
+      "catB" -> "categoryBIsWarranted"
+      else -> it.key
+    }
+    if (it.value is Map<*, *>) {
+      processedFormResponse[key] = processCatFormResponseForSubjectAccessRequest(it.value as Map<String, Any>)
+    } else {
+      val value = when (it.value) {
+        true -> "Yes"
+        false -> "No"
+        else -> it.value
+      }
+      processedFormResponse[key] = value
+    }
+  }
+
+  return processedFormResponse
+}
+
 /**
  * userId, cancelledBy is REDACTED
  */
@@ -139,10 +166,12 @@ fun transformAllFromCatForm(entity: List<FormEntity>): List<CatForm> {
         prisonId = it.prisonId,
         offenderNo = it.offenderNo,
         status = it.getStatus(),
-        reviewReason = it.reviewReason.toString(),
+        reason = it.reviewReason,
         dueByDate = it.dueByDate.toString(),
 
-        formResponse = it.getFormResponse()?.let { objectMapper.readValue<Map<String, Any>>(it) },
+        formResponse = processCatFormResponseForSubjectAccessRequest(
+          it.getFormResponse()?.let { objectMapper.readValue<Map<String, Any>>(it) },
+        ),
         riskProfile = it.riskProfile?.let { objectMapper.readValue<RiskProfile>(it) },
 
         cancelledDate = it.cancelledDate.toString(),
@@ -151,7 +180,7 @@ fun transformAllFromCatForm(entity: List<FormEntity>): List<CatForm> {
         assessmentDate = it.assessmentDate.toString(),
         startDate = it.startDate.toString(),
         referredDate = it.referredDate.toString(),
-        catType = it.catType.toString(),
+        catType = it.catType,
       ),
     )
   }
@@ -169,7 +198,7 @@ fun transform(entity: PreviousProfileEntity?): RiskProfiler? {
       escape = RedactedSection(),
       extremism = RedactedSection(),
       violence = entity.violence.let { objectMapper.readValue<Violence>(it) },
-      executeDateTime = entity.executeDateTime.toString(),
+      dateAndTimeRiskInformationLastUpdated = entity.executeDateTime.toString(),
     )
   }
 

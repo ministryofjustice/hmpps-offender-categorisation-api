@@ -17,7 +17,7 @@ data class RiskProfile(
 
   val socProfile: RedactedSection? = null,
 
-  val lifeProfile: LifeProfile? = null,
+  val courtIssuedLifeSentence: LifeProfile? = null,
 
   val escapeProfile: Escape? = null,
 

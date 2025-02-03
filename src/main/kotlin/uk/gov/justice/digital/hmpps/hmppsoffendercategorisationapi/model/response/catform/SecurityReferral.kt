@@ -10,7 +10,6 @@ class SecurityReferral(
   @JsonProperty("offender_no")
   val offenderNo: String,
 
-  @JsonProperty("prison_id")
   val prisonId: String?,
 
   val status: String?,

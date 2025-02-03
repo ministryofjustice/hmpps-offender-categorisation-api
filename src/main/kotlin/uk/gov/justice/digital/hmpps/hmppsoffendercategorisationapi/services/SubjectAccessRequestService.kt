@@ -1,9 +1,7 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services
 
-import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.CategorisationTool
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.SarResponse
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.transform
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.transformAllFromCatForm
@@ -56,32 +54,30 @@ class SubjectAccessRequestService(
     return HmppsSubjectAccessRequestContent(
       content =
       SarResponse(
-        categorisationTool = CategorisationTool(
-          security = transformSecurityReferral(
-            securityReferralRepository.findByOffenderNoOrderByRaisedDateDesc(prn).filter {
-              dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.raisedDate)
-            },
-          ),
-          liteCategory = transformLiteCategory(
-            liteCategoryRepository.findByOffenderNoOrderBySequenceDesc(
-              prn,
-            ).filter {
-              dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.createdDate) ||
-                dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.approvedDate)
-            },
-          ),
-          riskChange = transformRiskChange(
-            riskChangeRepository.findByOffenderNoOrderByRaisedDateDesc(prn).filter {
-              dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.raisedDate)
-            },
-          ),
-          nextReviewChangeHistory = transformNextReviewChangeHistory(
-            nextReviewChangeHistoryRepository.findByOffenderNo(prn).filter {
-              dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.changeDate)
-            },
-          ),
-          catForm = transformAllFromCatForm(catFormEntity),
+        security = transformSecurityReferral(
+          securityReferralRepository.findByOffenderNoOrderByRaisedDateDesc(prn).filter {
+            dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.raisedDate)
+          },
         ),
+        liteCategory = transformLiteCategory(
+          liteCategoryRepository.findByOffenderNoOrderBySequenceDesc(
+            prn,
+          ).filter {
+            dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.createdDate) ||
+              dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.approvedDate)
+          },
+        ),
+        riskChange = transformRiskChange(
+          riskChangeRepository.findByOffenderNoOrderByRaisedDateDesc(prn).filter {
+            dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.raisedDate)
+          },
+        ),
+        nextReviewChangeHistory = transformNextReviewChangeHistory(
+          nextReviewChangeHistoryRepository.findByOffenderNo(prn).filter {
+            dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.changeDate)
+          },
+        ),
+        catForm = transformAllFromCatForm(catFormEntity),
         riskProfiler = if (dateIsWithinDates(fromZonedDateTime, toZonedDateTime, previousRiskProfile.executeDateTime)) transform(previousRiskProfile) else null,
       ),
     )
@@ -90,9 +86,5 @@ class SubjectAccessRequestService(
   private fun dateIsWithinDates(fromDate: ZonedDateTime?, toDate: ZonedDateTime?, dateInQuestion: ZonedDateTime?): Boolean {
     return fromDate == null || (dateInQuestion == null || dateInQuestion.isAfter(fromDate)) &&
       toDate == null || (dateInQuestion == null || dateInQuestion.isBefore(toDate))
-  }
-
-  private companion object {
-    private val log = LoggerFactory.getLogger(this::class.java)
   }
 }

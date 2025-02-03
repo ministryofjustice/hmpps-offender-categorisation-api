@@ -2,6 +2,8 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respon
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.CatType
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.ReviewReason
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class CatForm(
@@ -10,7 +12,7 @@ data class CatForm(
   @JsonProperty("form_response")
   val formResponse: Map<String, Any>? = null,
 
-  val status: String? = null,
+  private val status: String? = null,
 
   @JsonProperty("referred_date")
   val referredDate: String? = null,
@@ -18,7 +20,6 @@ data class CatForm(
   @JsonProperty("risk_profile")
   val riskProfile: RiskProfile? = null,
 
-  @JsonProperty("prison_id")
   val prisonId: String? = null,
 
   @JsonProperty("offender_no")
@@ -33,18 +34,56 @@ data class CatForm(
   @JsonProperty("approval_date")
   val approvalDate: String? = null,
 
-  @JsonProperty("cat_type")
-  val catType: String? = null,
+  private val catType: CatType? = null,
 
   @JsonProperty("assessment_date")
   val assessmentDate: String? = null,
 
-  @JsonProperty("review_reason")
-  val reviewReason: String? = null,
+  private val reason: ReviewReason? = null,
 
   @JsonProperty("due_by_date")
   val dueByDate: String? = null,
 
   @JsonProperty("cancelled_date")
   val cancelledDate: String? = null,
-)
+) {
+  val reviewReason: String?
+    get() = if (this.reason == null) {
+      null
+    } else {
+      when (this.reason) {
+        ReviewReason.MANUAL -> "Review manually started"
+        ReviewReason.AGE -> "Age change - review required"
+        ReviewReason.DUE -> "Review due"
+        ReviewReason.RISK_CHANGE -> "Change in risk"
+      }
+    }
+
+  val typeOfCategorisationAssessment: String?
+    get() = if (this.catType == null) {
+      null
+    } else {
+      when (this.catType) {
+        CatType.INITIAL -> "Initial"
+        CatType.RECAT -> "Recategorisation"
+      }
+    }
+
+  val reviewStatus: String?
+    get() = if (this.status == null) {
+      null
+    } else {
+      when (this.status) {
+        "SECURITY_BACK" -> "Security review complete"
+        "CANCELLED" -> "Review cancelled"
+        "APPROVED" -> "Review approved"
+        "SECURITY_AUTO" -> "Automatically referred to security team"
+        "SECURITY_MANUAL" -> "Manually referred to security team"
+        "SECURITY_FLAGGED" -> "Flagged to be referred to security team"
+        "STARTED" -> "Review started"
+        "SUPERVISOR_BACK" -> "Review back from supervisor"
+        "AWAITING_APPROVAL" -> "Review awaiting approval"
+        else -> this.status
+      }
+    }
+}

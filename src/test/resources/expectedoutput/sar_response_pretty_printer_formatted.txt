@@ -17,8 +17,8 @@
             "escapeOtherEvidence" : "No",
             "escapeOtherEvidenceText" : ""
           },
-          "securityBack" : {
-            "catB" : "No"
+          "categoryDecisionBasedOnSecurityInformation" : {
+            "categoryBIsWarranted" : "No"
           },
           "violenceRating" : {
             "seriousThreat" : "No",
@@ -45,7 +45,6 @@
         },
         "socProfile" : {
           "nomsId" : "G6816VN",
-          "riskType" : "SOC",
           "transferToSecurity" : true,
           "provisionalCategorisation" : "C"
         },

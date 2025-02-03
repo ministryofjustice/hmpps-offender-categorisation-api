@@ -28,7 +28,5 @@ data class RiskProfiler(
 
   val violence: Violence? = null,
 
-  // datetime
-  @JsonProperty("execute_date_time")
-  val executeDateTime: String? = null,
+  val dateAndTimeRiskInformationLastUpdated: String? = null,
 )
