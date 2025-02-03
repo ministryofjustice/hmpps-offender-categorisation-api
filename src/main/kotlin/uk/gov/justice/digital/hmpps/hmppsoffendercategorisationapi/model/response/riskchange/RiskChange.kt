@@ -22,9 +22,22 @@ data class RiskChange(
   @JsonProperty("prison_id")
   val prisonId: String? = null,
 
-  val status: String? = null,
+  private val status: String? = null,
 
   // datetime
   @JsonProperty("raised_date")
   val raisedDate: String? = null,
-)
+) {
+  val riskChangeStatus: String?
+    get() = if (this.status == null) {
+      null
+    } else {
+      when (this.status) {
+        "REVIEW_REQUIRED" -> "Review required"
+        "REVIEWED_FIRST" -> "Review took place before risk alert processed"
+        "NEW" -> "New risk change alert"
+        "REVIEW_NOT_REQUIRED" -> "Review not required"
+        else -> this.status
+      }
+    }
+}

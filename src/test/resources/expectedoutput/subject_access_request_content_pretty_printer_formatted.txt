@@ -44,7 +44,6 @@
       },
       "openConditionsRequested" : "No"
     },
-    "reviewStatus" : "Review approved",
     "referred_date" : "2019-11-25T11:24:12.768",
     "risk_profile" : {
       "history" : { },
@@ -57,9 +56,9 @@
       "violenceProfile" : {
         "nomsId" : "G4143VX",
         "numberOfAssaults" : 0,
-        "shouldNotifySafetyCustodyLead" : "No",
         "numberOfSeriousAssaults" : 0,
         "provisionalCategorisation" : "C",
+        "shouldNotifySafetyCustodyLead" : "No",
         "isVeryHighRiskViolentOffender" : "No"
       },
       "extremismProfile" : { }
@@ -69,11 +68,12 @@
     "start_date" : "2019-11-25T11:24:12.768",
     "security_reviewed_date" : "2019-11-25T11:24:12.768",
     "approval_date" : "2019-06-25",
-    "typeOfCategorisationAssessment" : "Initial",
     "assessment_date" : "2019-07-16",
-    "reviewReason" : "Review due",
     "due_by_date" : "2017-04-01",
-    "cancelled_date" : "2019-11-25T11:24:12.768"
+    "cancelled_date" : "2019-11-25T11:24:12.768",
+    "reviewReason" : "Review due",
+    "typeOfCategorisationAssessment" : "Initial",
+    "reviewStatus" : "Review approved"
   }, {
     "form_response" : {
       "recat" : {
@@ -87,7 +87,7 @@
         },
         "nextReviewDate" : {
           "date" : "2/8/2019"
-        },
+          },
         "riskAssessment" : {
           "lowerCategory" : "lower text",
           "otherRelevant" : "Yes",
@@ -119,7 +119,6 @@
       },
       "openConditionsRequested" : "No"
     },
-    "reviewStatus" : "Review approved",
     "referred_date" : "2019-11-25T11:24:12.768",
     "risk_profile" : {
       "history" : { },
@@ -132,9 +131,9 @@
       "violenceProfile" : {
         "nomsId" : "G4143VX",
         "numberOfAssaults" : 0,
-        "shouldNotifySafetyCustodyLead" : "No",
         "numberOfSeriousAssaults" : 0,
         "provisionalCategorisation" : "C",
+        "shouldNotifySafetyCustodyLead" : "No",
         "isVeryHighRiskViolentOffender" : "No"
       },
       "extremismProfile" : { }
@@ -144,11 +143,12 @@
     "start_date" : "2019-11-25T11:24:12.768",
     "security_reviewed_date" : "2019-11-25T11:24:12.768",
     "approval_date" : "2019-06-25",
-    "typeOfCategorisationAssessment" : "initial",
     "assessment_date" : "2019-07-16",
-    "reviewReason" : "Review due",
     "due_by_date" : "2017-04-01",
-    "cancelled_date" : "2019-11-25T11:24:12.768"
+    "cancelled_date" : "2019-11-25T11:24:12.768",
+    "reviewReason" : "Review due",
+    "typeOfCategorisationAssessment" : "Initial",
+    "reviewStatus" : "Review approved"
   } ],
   "riskChange" : [ {
     "old_profile" : {
@@ -160,9 +160,9 @@
       "violence" : {
         "nomsId" : "G0048VL",
         "numberOfAssaults" : 0,
-        "shouldNotifySafetyCustodyLead" : "No",
         "numberOfSeriousAssaults" : 0,
         "provisionalCategorisation" : "C",
+        "shouldNotifySafetyCustodyLead" : "No",
         "isVeryHighRiskViolentOffender" : "No"
       },
       "extremism" : { }
@@ -176,22 +176,22 @@
       "violence" : {
         "nomsId" : "G0048VL",
         "numberOfAssaults" : 1,
-        "shouldNotifySafetyCustodyLead" : "No",
         "numberOfSeriousAssaults" : 0,
         "provisionalCategorisation" : "C",
+        "shouldNotifySafetyCustodyLead" : "No",
         "isVeryHighRiskViolentOffender" : "No"
       },
       "extremism" : { }
     },
     "offender_no" : "GXXXX",
     "prison_id" : "1000",
-    "status" : "NEW",
+    "riskChangeStatus" : "New risk change alert",
     "raised_date" : "2019-09-18T09:45:34.166Z"
   } ],
   "security" : [ {
     "offender_no" : "GXXXX",
     "prisonId" : "LPI",
-    "status" : "REFERRED",
+    "status" : "Referred",
     "raised_date" : "2019-09-19T12:33:21.123Z",
     "processed_date" : "2019-09-19T12:36:46.335Z"
   } ],
@@ -226,10 +226,10 @@
     "violence" : {
       "nomsId" : "G2194GK",
       "numberOfAssaults" : 0,
-      "shouldNotifySafetyCustodyLead" : "No",
       "numberOfSeriousAssaults" : 0,
       "numberOfNonSeriousAssaults" : 0,
       "provisionalCategorisation" : "C",
+      "shouldNotifySafetyCustodyLead" : "No",
       "isVeryHighRiskViolentOffender" : "No"
     },
     "dateAndTimeRiskInformationLastUpdated" : "2021-09-22T10:25:44.395Z"

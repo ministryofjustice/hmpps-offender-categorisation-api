@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.SecurityReferralStatus
 import java.time.ZonedDateTime
 
 /**
@@ -30,10 +31,7 @@ class SecurityReferralEntity(
   @Column(name = "prison_id")
   val prisonId: String,
 
-  /*
-  Security referral status enum
-   */
-  val status: String,
+  val status: SecurityReferralStatus,
 
   @Column(name = "raised_date")
   val raisedDate: ZonedDateTime? = null,

@@ -189,7 +189,7 @@
       },
       "offender_no": "GXXXX",
       "prison_id": "1000",
-      "status": "NEW",
+      "riskChangeStatus": "New risk change alert",
       "raised_date": "2019-09-18T09:45:34.166Z"
     }
   ],

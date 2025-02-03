@@ -31,7 +31,7 @@ fun transformSecurityReferral(securityReferral: List<SecurityReferralEntity>?): 
           prisonId = it.prisonId,
           raisedDate = it.raisedDate.toString(),
           offenderNo = it.offenderNo,
-          status = it.status,
+          statusId = it.status,
           processedDate = it.processedDate.toString(),
         ),
       )

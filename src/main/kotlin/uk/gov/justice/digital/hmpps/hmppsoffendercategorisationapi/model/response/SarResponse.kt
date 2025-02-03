@@ -9,7 +9,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class SarResponse(
-  val catForm: List<CatForm> = listOf(),
+  val catForm: List<CatForm>? = null,
   val riskChange: List<RiskChange>? = null,
   val security: List<SecurityReferral>? = null,
   val nextReviewChangeHistory: List<NextReviewChangeHistory>? = null,

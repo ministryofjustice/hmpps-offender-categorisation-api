@@ -5,6 +5,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.CatType
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.ReviewReason
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.SecurityReferralStatus
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.CatForm
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.LiteCategory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.NextReviewChangeHistory
@@ -121,7 +122,7 @@ open class BaseSarUnitTest {
       id = "2",
       offenderNo = "G2550VO",
       prisonId = "LEI",
-      status = "REFERRED",
+      statusId = SecurityReferralStatus.REFERRED,
       raisedDate = "2019-09-19 13:33:21.123 +0100",
       processedDate = "2019-09-19 13:36:46.335 +0100",
     )
