@@ -185,15 +185,15 @@
     },
     "offender_no" : "GXXXX",
     "prison_id" : "1000",
-    "riskChangeStatus" : "New risk change alert",
-    "raised_date" : "2019-09-18T09:45:34.166Z"
+    "raised_date" : "2019-09-18T09:45:34.166Z",
+    "riskChangeStatus" : "New risk change alert"
   } ],
   "security" : [ {
     "offender_no" : "GXXXX",
     "prisonId" : "LPI",
-    "status" : "Referred",
     "raised_date" : "2019-09-19T12:33:21.123Z",
-    "processed_date" : "2019-09-19T12:36:46.335Z"
+    "processed_date" : "2019-09-19T12:36:46.335Z",
+    "status" : "Referred"
   } ],
   "nextReviewChangeHistory" : [ {
     "offender_no" : "GXXXX",
