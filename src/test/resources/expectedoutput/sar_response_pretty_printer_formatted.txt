@@ -111,7 +111,6 @@
       } ],
       "history" : { },
       "offences" : [ ],
-      "socProfile" : { },
       "escapeProfile" : {
         "nomsId" : "G8105VR",
         "provisionalCategorisation" : "C"
@@ -125,7 +124,6 @@
         "shouldNotifySafetyCustodyLead" : "No",
         "isVeryHighRiskViolentOffender" : "No"
       },
-      "extremismProfile" : { },
       "courtIssuedLifeSentence" : {
         "nomsId" : "G8105VR",
         "provisionalCategorisation" : "B",
@@ -147,7 +145,6 @@
   "riskChange" : [ {
     "id" : "1",
     "old_profile" : {
-      "soc" : { },
       "escape" : {
         "nomsId" : "G0048VL",
         "provisionalCategorisation" : "C"
@@ -157,11 +154,9 @@
         "numberOfAssaults" : 0,
         "provisionalCategorisation" : "C",
         "isVeryHighRiskViolentOffender" : "No"
-      },
-      "extremism" : { }
+      }
     },
     "new_profile" : {
-      "soc" : { },
       "escape" : {
         "nomsId" : "G0048VL",
         "provisionalCategorisation" : "C"
@@ -171,8 +166,7 @@
         "numberOfAssaults" : 0,
         "provisionalCategorisation" : "C",
         "isVeryHighRiskViolentOffender" : "No"
-      },
-      "extremism" : { }
+      }
     },
     "offender_no" : "",
     "prison_id" : "BAI",
@@ -213,9 +207,6 @@
   } ],
   "riskProfiler" : {
     "offender_no" : "G2194GK",
-    "escape" : { },
-    "extremism" : { },
-    "soc" : { },
     "violence" : {
       "nomsId" : "G2194GK",
       "numberOfAssaults" : 0,
