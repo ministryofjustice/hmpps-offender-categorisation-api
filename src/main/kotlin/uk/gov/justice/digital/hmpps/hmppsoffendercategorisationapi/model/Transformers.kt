@@ -120,9 +120,8 @@ fun transformLiteCategory(entity: List<LiteCategoryEntity>?): List<LiteCategory>
           placementPrisonId = it.placementPrisonId,
         ),
       )
-
-      return response
     }
+    return response
   }
 
   return null

@@ -60,7 +60,7 @@ class SubjectAccessRequestService(
           },
         ),
         liteCategory = transformLiteCategory(
-          liteCategoryRepository.findByOffenderNoOrderBySequenceDesc(
+          liteCategoryRepository.findAllByOffenderNoOrderBySequenceDesc(
             prn,
           ).filter {
             dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.createdDate) ||
@@ -69,6 +69,7 @@ class SubjectAccessRequestService(
         ),
         riskChange = transformRiskChange(
           riskChangeRepository.findByOffenderNoOrderByRaisedDateDesc(prn).filter {
+            println(it.raisedDate)
             dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.raisedDate)
           },
         ),
@@ -84,7 +85,7 @@ class SubjectAccessRequestService(
   }
 
   private fun dateIsWithinDates(fromDate: ZonedDateTime?, toDate: ZonedDateTime?, dateInQuestion: ZonedDateTime?): Boolean {
-    return fromDate == null || (dateInQuestion == null || dateInQuestion.isAfter(fromDate)) &&
-      toDate == null || (dateInQuestion == null || dateInQuestion.isBefore(toDate))
+    return (fromDate == null || (dateInQuestion == null || dateInQuestion.isAfter(fromDate))) &&
+      (toDate == null || (dateInQuestion == null || dateInQuestion.isBefore(toDate)))
   }
 }

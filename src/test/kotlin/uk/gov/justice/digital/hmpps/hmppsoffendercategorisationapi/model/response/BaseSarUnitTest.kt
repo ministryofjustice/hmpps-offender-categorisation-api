@@ -11,7 +11,6 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.NextReviewChangeHistory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.RiskProfile
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.SecurityReferral
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.riskprofile.CatHistory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.riskprofile.LifeProfile
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.common.RedactedSection
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.Escape
@@ -65,28 +64,28 @@ open class BaseSarUnitTest {
 
     protected val riskProfile = RiskProfile(
       catHistory = listOf(
-        CatHistory(
-          bookingId = 12345,
-          offenderNo = "ABC123",
-          approvalDate = "2024-02-18",
-          assessmentSequence = 5,
-          assessmentDate = "2024-03-23",
-          classification = "Cat C",
-          nextReviewDate = "2025-02-18",
-          assessmentStatus = "A",
-          agencyDescription = "Pentonville",
-          assessmentComment = "something",
-          classificationCode = "C",
-          approvalDateDisplay = "18/01/2024",
-          cellSharingAlertFlag = false,
-          assessmentDescription = "something",
+        mapOf(
+          "bookingId" to 12345,
+          "offenderNo" to "ABC123",
+          "approvalDate" to "2024-02-18",
+          "assessmentSequence" to 5,
+          "assessmentDate" to "2024-03-23",
+          "classification" to "Cat C",
+          "nextReviewDate" to "2025-02-18",
+          "assessmentStatus" to "A",
+          "agencyDescription" to "Pentonville",
+          "assessmentComment" to "something",
+          "classificationCode" to "C",
+          "approvalDateDisplay" to "18/01/2024",
+          "cellSharingAlertFlag" to false,
+          "assessmentDescription" to "something",
         ),
       ),
       history = RedactedSection(),
       offences = emptyList(),
       socProfile = RedactedSection(),
-      courtIssuedLifeSentence = LifeProfile(
-        serviceACourtIssuedLifeSentence = true,
+      lifeProfile = LifeProfile(
+        life = true,
         nomsId = "G8105VR",
         provisionalCategorisation = "B",
       ),

@@ -20,6 +20,7 @@ data class Violence(
   val numberOfNonSeriousAssaults: Int? = null,
   val provisionalCategorisation: String? = null,
   private val veryHighRiskViolentOffender: Boolean? = null,
+  private val riskType: String? = null,
 ) {
   val shouldNotifySafetyCustodyLead: String?
     get() = if (this.notifySafetyCustodyLead == null) {

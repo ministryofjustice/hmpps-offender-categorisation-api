@@ -5,11 +5,11 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Profile(
-  val soc: RedactedSection = RedactedSection(),
+  val soc: RedactedSection? = RedactedSection(),
 
   val escape: Escape? = null,
 
   val violence: Violence? = null,
 
-  val extremism: RedactedSection = RedactedSection(),
+  val extremism: RedactedSection? = RedactedSection(),
 )

@@ -88,7 +88,7 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
 
   @Test
   fun `should build response with empty data`() {
-    whenever(liteCategoryRepositoryMock.findByOffenderNoOrderBySequenceDesc(OFFENDER_NO)).thenReturn(null)
+    whenever(liteCategoryRepositoryMock.findAllByOffenderNoOrderBySequenceDesc(OFFENDER_NO)).thenReturn(null)
     whenever(formRepositoryMock.findAllByOffenderNoOrderBySequenceNoAsc(OFFENDER_NO)).thenReturn(
       listOf(),
     )

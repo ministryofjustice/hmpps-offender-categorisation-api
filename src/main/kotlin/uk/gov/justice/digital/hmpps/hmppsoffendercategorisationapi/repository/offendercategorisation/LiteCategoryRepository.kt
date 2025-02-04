@@ -6,7 +6,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.
 
 @Repository
 interface LiteCategoryRepository : JpaRepository<LiteCategoryEntity, Long> {
-  fun findByOffenderNoOrderBySequenceDesc(
+  fun findAllByOffenderNoOrderBySequenceDesc(
     offenderNo: String,
   ): List<LiteCategoryEntity>
 }
