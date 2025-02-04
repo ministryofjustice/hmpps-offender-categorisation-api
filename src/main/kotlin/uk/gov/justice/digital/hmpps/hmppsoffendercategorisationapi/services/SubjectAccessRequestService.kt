@@ -69,7 +69,6 @@ class SubjectAccessRequestService(
         ),
         riskChange = transformRiskChange(
           riskChangeRepository.findByOffenderNoOrderByRaisedDateDesc(prn).filter {
-            println(it.raisedDate)
             dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.raisedDate)
           },
         ),

@@ -41,4 +41,11 @@ class RiskChangeEntity(
 
   @Column(name = "raised_date")
   val raisedDate: ZonedDateTime? = null,
-)
+) {
+  companion object {
+    const val STATUS_REVIEW_REQUIRED = "REVIEW_REQUIRED"
+    const val STATUS_REVIEWED_FIRST = "REVIEWED_FIRST"
+    const val STATUS_NEW = "NEW"
+    const val STATUS_REVIEW_NOT_REQUIRED = "REVIEW_NOT_REQUIRED"
+  }
+}

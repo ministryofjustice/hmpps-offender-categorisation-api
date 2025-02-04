@@ -2,6 +2,7 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respon
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.FormEntity
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.CatType
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.ReviewReason
 
@@ -74,15 +75,15 @@ data class CatForm(
       null
     } else {
       when (this.status) {
-        "SECURITY_BACK" -> "Security review complete"
-        "CANCELLED" -> "Review cancelled"
-        "APPROVED" -> "Review approved"
-        "SECURITY_AUTO" -> "Automatically referred to security team"
-        "SECURITY_MANUAL" -> "Manually referred to security team"
-        "SECURITY_FLAGGED" -> "Flagged to be referred to security team"
-        "STARTED" -> "Review started"
-        "SUPERVISOR_BACK" -> "Review back from supervisor"
-        "AWAITING_APPROVAL" -> "Review awaiting approval"
+        FormEntity.STATUS_SECURITY_BACK -> "Security review complete"
+        FormEntity.STATUS_CANCELLED -> "Review cancelled"
+        FormEntity.STATUS_APPROVED -> "Review approved"
+        FormEntity.STATUS_SECURITY_AUTO -> "Automatically referred to security team"
+        FormEntity.STATUS_SECURITY_MANUAL -> "Manually referred to security team"
+        FormEntity.STATUS_SECURITY_FLAGGED -> "Flagged to be referred to security team"
+        FormEntity.STATUS_STARTED -> "Review started"
+        FormEntity.STATUS_SUPERVISOR_BACK -> "Review back from supervisor"
+        FormEntity.STATUS_AWAITING_APPROVAL -> "Review awaiting approval"
         else -> this.status
       }
     }
