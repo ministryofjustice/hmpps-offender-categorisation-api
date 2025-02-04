@@ -160,8 +160,8 @@
         "shouldNotifySafetyCustodyLead" : "No",
         "isVeryHighRiskViolentOffender" : "No"
       },
-      "transferToSecurity": false,
-      "provisionalCategorisation": "C"
+      "transferToSecurity" : false,
+      "provisionalCategorisation" : "C"
     },
     "new_profile" : {
       "escape" : {

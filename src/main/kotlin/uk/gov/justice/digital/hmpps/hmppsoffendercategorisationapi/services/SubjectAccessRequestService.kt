@@ -79,7 +79,7 @@ class SubjectAccessRequestService(
           },
         ),
         catForm = transformAllFromCatForm(catFormEntity),
-        riskProfiler = if (dateIsWithinDates(fromZonedDateTime, toZonedDateTime, previousRiskProfile.executeDateTime)) transform(previousRiskProfile) else null,
+        riskProfiler = if (dateIsWithinDates(fromZonedDateTime, toZonedDateTime, previousRiskProfile?.executeDateTime)) transform(previousRiskProfile) else null,
       ),
     )
   }

@@ -166,19 +166,19 @@ fun transformAllFromCatForm(entity: List<FormEntity>): List<CatForm> {
         offenderNo = it.offenderNo,
         status = it.getStatus(),
         reason = it.reviewReason,
-        dueByDate = it.dueByDate.toString(),
+        dueByDate = it.dueByDate?.toString(),
 
         formResponse = processCatFormResponseForSubjectAccessRequest(
           it.getFormResponse()?.let { objectMapper.readValue<Map<String, Any>>(it) },
         ),
         riskProfile = it.riskProfile?.let { objectMapper.readValue<RiskProfile>(it) },
 
-        cancelledDate = it.cancelledDate.toString(),
-        approvalDate = it.approvalDate.toString(),
-        securityReviewedDate = it.getSecurityReviewedDate().toString(),
-        assessmentDate = it.assessmentDate.toString(),
+        cancelledDate = it.cancelledDate?.toString(),
+        approvalDate = it.approvalDate?.toString(),
+        securityReviewedDate = it.getSecurityReviewedDate()?.toString(),
+        assessmentDate = it.assessmentDate?.toString(),
         startDate = it.startDate.toString(),
-        referredDate = it.referredDate.toString(),
+        referredDate = it.referredDate?.toString(),
         catType = it.catType,
       ),
     )

@@ -6,5 +6,5 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.
 
 @Repository
 interface PreviousProfileRepository : CrudRepository<PreviousProfileEntity, String> {
-  fun findByOffenderNo(offenderNo: String): PreviousProfileEntity
+  fun findByOffenderNo(offenderNo: String): PreviousProfileEntity?
 }
