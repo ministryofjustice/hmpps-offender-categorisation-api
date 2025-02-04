@@ -127,7 +127,7 @@
       "courtIssuedLifeSentence" : {
         "nomsId" : "G8105VR",
         "provisionalCategorisation" : "B",
-        "serviceACourtIssuedLifeSentence" : true
+        "servingACourtIssuedLifeSentence" : true
       }
     },
     "prisonId" : "LEI",

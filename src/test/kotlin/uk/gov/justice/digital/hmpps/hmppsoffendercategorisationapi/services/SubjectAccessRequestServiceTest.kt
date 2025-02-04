@@ -9,14 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.jdbc.Sql
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.ResourceTest
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.BaseSarUnitTest
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.SarResponse
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.FormRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.LiteCategoryRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.NextReviewChangeHistoryRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.RiskChangeRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.SecurityReferralRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.riskprofiler.PreviousProfileRepository
-import java.time.LocalDate.now
 
 class SubjectAccessRequestServiceTest : ResourceTest() {
 
@@ -62,9 +60,9 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
       previousProfileRepository,
     )
 
-    val response = subjectAccessRequestService.getPrisonContentFor(testPrisonerNumber, now(), now())
+    val response = subjectAccessRequestService.getPrisonContentFor(testPrisonerNumber, null, null)
     println(json.writeValueAsString(response?.content))
-    assertThat(json.writerWithDefaultPrettyPrinter().writeValueAsString(response?.content as SarResponse)).isEqualTo(
+    assertThat(json.writerWithDefaultPrettyPrinter().writeValueAsString(response?.content)).isEqualTo(
       BaseSarUnitTest.loadExpectedOutput("/subject_access_request_content_pretty_printer_formatted.txt"),
     )
   }
@@ -81,7 +79,7 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
       previousProfileRepository,
     )
 
-    val response = subjectAccessRequestService.getPrisonContentFor(testPrisonerNumber, now(), now())
+    val response = subjectAccessRequestService.getPrisonContentFor(testPrisonerNumber, null, null)
 
     assertThat(response).isEqualTo(null)
   }
@@ -107,7 +105,7 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
       previousProfileRepositoryMock,
     )
 
-    val response = subjectAccessRequestService.getPrisonContentFor(testPrisonerNumber, now(), now())
+    val response = subjectAccessRequestService.getPrisonContentFor(testPrisonerNumber, null, null)
     assertThat(response).isEqualTo(null)
   }
 
