@@ -193,8 +193,8 @@ fun transform(entity: PreviousProfileEntity?): RiskProfiler? {
   if (entity != null) {
     return RiskProfiler(
       offenderNo = entity.offenderNo,
-      soc = RedactedSection(),
-      escape = RedactedSection(),
+      soc = null,
+      escape = null,
       extremism = RedactedSection(),
       violence = entity.violence.let { objectMapper.readValue<Violence>(it) },
       dateAndTimeRiskInformationLastUpdated = entity.executeDateTime.toString(),

@@ -12,6 +12,6 @@ data class LifeProfile(
 
   private val riskType: String? = null,
 ) {
-  val serviceACourtIssuedLifeSentence: Boolean?
+  val servingACourtIssuedLifeSentence: Boolean?
     get() = this.life
 }

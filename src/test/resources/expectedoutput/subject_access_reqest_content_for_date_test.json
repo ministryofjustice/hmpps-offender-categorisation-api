@@ -129,7 +129,6 @@
             }
           ],
           "offences": [],
-          "socProfile": {},
           "escapeProfile": {
             "nomsId": "123ABC",
             "provisionalCategorisation": "C"
@@ -143,18 +142,19 @@
             "shouldNotifySafetyCustodyLead": "No",
             "isVeryHighRiskViolentOffender": "No"
           },
-          "extremismProfile": {}
+          "transferToSecurity": false,
+          "provisionalCategorisation": "C"
         },
         "prisonId": "NMI",
         "offender_no": "123ABC",
-        "start_date": "2020-05-18T13:58:42.435",
-        "security_reviewed_date": "2020-05-20T13:58:42.435",
+        "start_date": "2020-05-18T11:24:12.768",
+        "security_reviewed_date": "2019-11-25T11:24:12.768",
         "approval_date": "2021-05-18",
         "assessment_date": "2019-07-16",
         "due_by_date": "2020-05-01",
         "cancelled_date": "null",
-        "reviewStatus": "Review approved",
         "reviewReason": "Review due",
+        "reviewStatus": "Review approved",
         "typeOfCategorisationAssessment": "Recategorisation"
       },
       {
@@ -288,7 +288,6 @@
               "secondaryResultConviction": false
             }
           ],
-          "socProfile": {},
           "escapeProfile": {
             "nomsId": "123ABC",
             "provisionalCategorisation": "C"
@@ -302,30 +301,30 @@
             "shouldNotifySafetyCustodyLead": "No",
             "isVeryHighRiskViolentOffender": "No"
           },
-          "extremismProfile": {},
+          "transferToSecurity": false,
+          "provisionalCategorisation": "C",
           "courtIssuedLifeSentence": {
             "nomsId": "123ABC",
             "provisionalCategorisation": "C",
-            "serviceACourtIssuedLifeSentence": false
+            "servingACourtIssuedLifeSentence": false
           }
         },
         "prisonId": "NMI",
         "offender_no": "123ABC",
-        "start_date": "2019-05-18T13:58:42.435",
-        "security_reviewed_date": "2020-05-20T13:58:42.435",
+        "start_date": "2019-05-18T11:24:12.768",
+        "security_reviewed_date": "2019-11-25T11:24:12.768",
         "approval_date": "2020-05-18",
         "assessment_date": "2020-05-01",
         "due_by_date": "2020-05-01",
         "cancelled_date": "null",
-        "reviewStatus": "Review approved",
         "reviewReason": "Review due",
+        "reviewStatus": "Review approved",
         "typeOfCategorisationAssessment": "Recategorisation"
       }
     ],
     "riskChange": [
       {
         "old_profile": {
-          "soc": {},
           "escape": {
             "nomsId": "123ABC",
             "provisionalCategorisation": "C"
@@ -338,10 +337,11 @@
             "provisionalCategorisation": "C",
             "shouldNotifySafetyCustodyLead": "No",
             "isVeryHighRiskViolentOffender": "No"
-          }
+          },
+          "transferToSecurity": false,
+          "provisionalCategorisation": "C"
         },
         "new_profile": {
-          "soc": {},
           "escape": {
             "nomsId": "123ABC",
             "provisionalCategorisation": "C"
@@ -354,7 +354,9 @@
             "provisionalCategorisation": "C",
             "shouldNotifySafetyCustodyLead": "No",
             "isVeryHighRiskViolentOffender": "Yes"
-          }
+          },
+          "transferToSecurity": false,
+          "provisionalCategorisation": "C"
         },
         "offender_no": "123ABC",
         "prison_id": "1000",

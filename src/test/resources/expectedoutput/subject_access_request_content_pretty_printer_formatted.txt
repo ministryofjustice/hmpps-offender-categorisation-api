@@ -48,7 +48,6 @@
     "risk_profile" : {
       "history" : { },
       "offences" : [ ],
-      "socProfile" : { },
       "escapeProfile" : {
         "nomsId" : "G4143VX",
         "provisionalCategorisation" : "C"
@@ -60,8 +59,7 @@
         "provisionalCategorisation" : "C",
         "shouldNotifySafetyCustodyLead" : "No",
         "isVeryHighRiskViolentOffender" : "No"
-      },
-      "extremismProfile" : { }
+      }
     },
     "prisonId" : "NMI",
     "offender_no" : "GXXXX",
@@ -123,7 +121,6 @@
     "risk_profile" : {
       "history" : { },
       "offences" : [ ],
-      "socProfile" : { },
       "escapeProfile" : {
         "nomsId" : "G4143VX",
         "provisionalCategorisation" : "C"
@@ -135,8 +132,7 @@
         "provisionalCategorisation" : "C",
         "shouldNotifySafetyCustodyLead" : "No",
         "isVeryHighRiskViolentOffender" : "No"
-      },
-      "extremismProfile" : { }
+      }
     },
     "prisonId" : "NMI",
     "offender_no" : "GXXXX",
@@ -152,7 +148,6 @@
   } ],
   "riskChange" : [ {
     "old_profile" : {
-      "soc" : { },
       "escape" : {
         "nomsId" : "G0048VL",
         "provisionalCategorisation" : "C"
@@ -165,10 +160,10 @@
         "shouldNotifySafetyCustodyLead" : "No",
         "isVeryHighRiskViolentOffender" : "No"
       },
-      "extremism" : { }
+      "transferToSecurity": false,
+      "provisionalCategorisation": "C"
     },
     "new_profile" : {
-      "soc" : { },
       "escape" : {
         "nomsId" : "G0048VL",
         "provisionalCategorisation" : "C"
@@ -181,7 +176,8 @@
         "shouldNotifySafetyCustodyLead" : "No",
         "isVeryHighRiskViolentOffender" : "No"
       },
-      "extremism" : { }
+      "transferToSecurity" : true,
+      "provisionalCategorisation" : "C"
     },
     "offender_no" : "GXXXX",
     "prison_id" : "1000",
@@ -220,9 +216,6 @@
   } ],
   "riskProfiler" : {
     "offender_no" : "GXXXX",
-    "escape" : { },
-    "extremism" : { },
-    "soc" : { },
     "violence" : {
       "nomsId" : "G2194GK",
       "numberOfAssaults" : 0,

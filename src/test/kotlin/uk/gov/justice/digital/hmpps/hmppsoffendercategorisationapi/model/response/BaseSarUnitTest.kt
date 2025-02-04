@@ -83,7 +83,7 @@ open class BaseSarUnitTest {
       ),
       history = RedactedSection(),
       offences = emptyList(),
-      socProfile = RedactedSection(),
+      socProfile = null,
       lifeProfile = LifeProfile(
         life = true,
         nomsId = "G8105VR",
@@ -161,7 +161,7 @@ open class BaseSarUnitTest {
         ),
       ),
       newProfile = Profile(
-        soc = RedactedSection(),
+        soc = null,
         escape = Escape(
           nomsId = "G0048VL",
           provisionalCategorisation = "C",

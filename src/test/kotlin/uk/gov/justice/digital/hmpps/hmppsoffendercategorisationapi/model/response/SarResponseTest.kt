@@ -31,9 +31,9 @@ class SarResponseTest : CategorisationToolTest() {
       riskChange = listOf(riskChange),
       riskProfiler = RiskProfiler(
         offenderNo = "G2194GK",
-        escape = RedactedSection(),
+        escape = null,
         extremism = RedactedSection(),
-        soc = RedactedSection(),
+        soc = null,
         violence = riskProfilerViolence,
         dateAndTimeRiskInformationLastUpdated = "2021-07-27 02:18:22.10621",
       ),

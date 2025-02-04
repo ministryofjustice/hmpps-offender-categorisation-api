@@ -5,11 +5,17 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Profile(
-  val soc: RedactedSection? = RedactedSection(),
+  private val soc: Soc? = null,
 
   val escape: Escape? = null,
 
   val violence: Violence? = null,
 
-  val extremism: RedactedSection? = RedactedSection(),
-)
+  private val extremism: RedactedSection? = null,
+) {
+  // removing any reference to the word 'soc' but leaving in the actual data because it is not soc specific
+  val transferToSecurity: Boolean?
+    get() = if (this.soc == null) null else this.soc.transferToSecurity
+  val provisionalCategorisation: String?
+    get() = if (this.soc == null) null else this.soc.provisionalCategorisation
+}
