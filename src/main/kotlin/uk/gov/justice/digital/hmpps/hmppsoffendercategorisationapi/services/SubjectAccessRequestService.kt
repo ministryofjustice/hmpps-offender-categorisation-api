@@ -2,9 +2,9 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.CategorisationTool
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.SarResponse
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.transform
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.transformAllFromCatForm
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.transformLiteCategory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.transformNextReviewChangeHistory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.transformRiskChange
@@ -18,6 +18,9 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.ri
 import uk.gov.justice.hmpps.kotlin.sar.HmppsPrisonSubjectAccessRequestService
 import uk.gov.justice.hmpps.kotlin.sar.HmppsSubjectAccessRequestContent
 import java.time.LocalDate
+import java.time.LocalTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
 @Transactional(readOnly = true)
 @Service
@@ -34,24 +37,54 @@ class SubjectAccessRequestService(
     fromDate: LocalDate?,
     toDate: LocalDate?,
   ): HmppsSubjectAccessRequestContent? {
-    val catFormEntity = formRepository.findTopByOffenderNoOrderBySequenceNoAsc(prn)
+    val fromZonedDateTime = fromDate?.atStartOfDay(ZoneId.systemDefault())
+    val toZonedDateTime = toDate?.atTime(LocalTime.MAX)?.atZone(ZoneId.systemDefault())
 
-    if (catFormEntity == null) {
+    val catFormEntity = formRepository.findAllByOffenderNoOrderBySequenceNoAsc(prn).filter {
+      dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.startDate.atZone(ZoneId.systemDefault())) ||
+        dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.approvalDate?.atStartOfDay(ZoneId.systemDefault()))
+    }
+
+    if (catFormEntity.isEmpty()) {
       return null // returns 204 no content - see acceptance criteria si-841
     }
+
+    val previousRiskProfile = previousProfileRepository.findByOffenderNo(prn)
 
     return HmppsSubjectAccessRequestContent(
       content =
       SarResponse(
-        categorisationTool = CategorisationTool(
-          security = transformSecurityReferral(securityReferralRepository.findByOffenderNoOrderByRaisedDateDesc(prn)),
-          liteCategory = transformLiteCategory(liteCategoryRepository.findByOffenderNoOrderBySequenceDesc(prn)),
-          riskChange = transformRiskChange(riskChangeRepository.findByOffenderNoOrderByRaisedDateDesc(prn)),
-          nextReviewChangeHistory = transformNextReviewChangeHistory(nextReviewChangeHistoryRepository.findByOffenderNo(prn)),
-          catForm = transform(catFormEntity),
+        security = transformSecurityReferral(
+          securityReferralRepository.findByOffenderNoOrderByRaisedDateDesc(prn).filter {
+            dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.raisedDate)
+          },
         ),
-        riskProfiler = transform(previousProfileRepository.findByOffenderNo(prn)),
+        liteCategory = transformLiteCategory(
+          liteCategoryRepository.findAllByOffenderNoOrderBySequenceDesc(
+            prn,
+          ).filter {
+            dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.createdDate) ||
+              dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.approvedDate)
+          },
+        ),
+        riskChange = transformRiskChange(
+          riskChangeRepository.findByOffenderNoOrderByRaisedDateDesc(prn).filter {
+            dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.raisedDate)
+          },
+        ),
+        nextReviewChangeHistory = transformNextReviewChangeHistory(
+          nextReviewChangeHistoryRepository.findByOffenderNo(prn).filter {
+            dateIsWithinDates(fromZonedDateTime, toZonedDateTime, it.changeDate)
+          },
+        ),
+        catForm = transformAllFromCatForm(catFormEntity),
+        riskProfiler = if (dateIsWithinDates(fromZonedDateTime, toZonedDateTime, previousRiskProfile?.executeDateTime)) transform(previousRiskProfile) else null,
       ),
     )
+  }
+
+  private fun dateIsWithinDates(fromDate: ZonedDateTime?, toDate: ZonedDateTime?, dateInQuestion: ZonedDateTime?): Boolean {
+    return (fromDate == null || (dateInQuestion == null || dateInQuestion.isAfter(fromDate))) &&
+      (toDate == null || (dateInQuestion == null || dateInQuestion.isBefore(toDate)))
   }
 }

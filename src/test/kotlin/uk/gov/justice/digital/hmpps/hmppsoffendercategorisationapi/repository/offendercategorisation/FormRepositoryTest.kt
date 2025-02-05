@@ -14,17 +14,19 @@ class FormRepositoryTest : ResourceTest() {
   @Sql("classpath:repository/form.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   fun `Should Find by Offender No`() {
-    val securityReferral = repository.findTopByOffenderNoOrderBySequenceNoAsc("G8105VR")
+    val formRecords = repository.findAllByOffenderNoOrderBySequenceNoAsc("G8105VR")
 
-    Assertions.assertThat(securityReferral?.cancelledBy).isEqualTo("SRENDELL_GEN")
+    Assertions.assertThat(formRecords.count()).isEqualTo(1)
+    Assertions.assertThat(formRecords.first()?.cancelledBy).isEqualTo("SRENDELL_GEN")
   }
 
   @Test
   @Sql("classpath:repository/form_with_catHistory.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   fun `Should Ignore dodgy catHistory data and find by Offender No`() {
-    val securityReferral = repository.findTopByOffenderNoOrderBySequenceNoAsc("G8105VR")
+    val formRecords = repository.findAllByOffenderNoOrderBySequenceNoAsc("G8105VR")
 
-    Assertions.assertThat(securityReferral?.cancelledBy).isEqualTo("SRENDELL_GEN")
+    Assertions.assertThat(formRecords.count()).isEqualTo(1)
+    Assertions.assertThat(formRecords.first()?.cancelledBy).isEqualTo("SRENDELL_GEN")
   }
 }

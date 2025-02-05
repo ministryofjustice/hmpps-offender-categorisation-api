@@ -31,7 +31,7 @@ VALUES('{"recat":{"decision":{"category":"B"},"securityBack":{},"securityInput":
        '2019-11-25 11:24:12.768+00',
        '',
        1,
-       '{"catHistory":{},"socProfile":{},"escapeProfile":{"nomsId":"G4143VX","riskType":"ESCAPE","provisionalCategorisation":"C"},"violenceProfile":{"nomsId":"G4143VX","riskType":"VIOLENCE","displayAssaults":false,"numberOfAssaults":0,"notifySafetyCustodyLead":false,"numberOfSeriousAssaults":0,"provisionalCategorisation":"C","veryHighRiskViolentOffender":false},"extremismProfile":{}}',
+       '{"catHistory":[{"bookingId":12345,"assessorId":54321,"offenderNo":"G4143VX","approvalDate":"2023-01-02","assessorUser":"ABC123","assessmentSeq":25,"assessmentCode":"CATEGORY","assessmentDate":"2022-12-28","classification":"Cat C","nextReviewDate":"2023-12-28","assessmentStatus":"A","agencyDescription":"Holme House (HMP)","assessmentComment":"Cat-tool Recat","assessmentAgencyId":"HHI","classificationCode":"C","approvalDateDisplay":"02/01/2023","cellSharingAlertFlag":false,"assessmentDescription":"Categorisation"}],"socProfile":{},"escapeProfile":{"nomsId":"G4143VX","riskType":"ESCAPE","provisionalCategorisation":"C"},"violenceProfile":{"nomsId":"G4143VX","riskType":"VIOLENCE","displayAssaults":false,"numberOfAssaults":0,"notifySafetyCustodyLead":false,"numberOfSeriousAssaults":0,"provisionalCategorisation":"C","veryHighRiskViolentOffender":false},"extremismProfile":{}}',
        'NMI'::character varying,
        'G8105VR',
        '2019-11-25 11:24:12.768+00',

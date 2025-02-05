@@ -1,0 +1,411 @@
+{
+  "content": {
+    "catForm": [
+      {
+        "form_response": {
+          "recat": {
+            "decision": {
+              "category": "C"
+            },
+            "oasysInput": {
+              "date": "16/04/2021",
+              "oasysRelevantInfo": "No"
+            },
+            "securityInput": {
+              "securityNoteNeeded": "Yes",
+              "securityInputNeeded": "Yes",
+              "securityInputNeededText": "As per procedure."
+            },
+            "nextReviewDate": {
+              "date": "18/08/2022",
+              "indeterminate": "false"
+            },
+            "riskAssessment": {
+              "lowerCategory": "Not at this time.",
+              "otherRelevant": "No",
+              "higherCategory": "To remain CAT C.",
+              "otherRelevantText": ""
+            },
+            "prisonerBackground": {
+              "offenceDetails": "Main offence: something."
+            }
+          },
+          "security": {
+            "review": {
+              "securityReview": "Having considered all available information there is nothing further to add to this assessment."
+            }
+          },
+          "supervisor": {
+            "review": {
+              "proposedCategory": "C",
+              "otherInformationText": "reviewed and approved ",
+              "supervisorCategoryAppropriate": "Yes"
+            }
+          },
+          "openConditionsRequested": "No"
+        },
+        "referred_date": "2019-11-25T11:24:12.768",
+        "risk_profile": {
+          "catHistory": [
+            {
+              "bookingId": 1234,
+              "assessorId": 1234,
+              "offenderNo": "123ABC",
+              "approvalDate": "2020-12-05",
+              "assessorUser": "TEST_GEN",
+              "assessmentSeq": 1,
+              "assessmentCode": "CATEGORY",
+              "assessmentDate": "2020-12-23",
+              "classification": "Cat C",
+              "nextReviewDate": "2021-12-05",
+              "assessmentStatus": "A",
+              "agencyDescription": "LMI",
+              "assessmentComment": "Cat-tool Recat",
+              "assessmentAgencyId": "UKI",
+              "classificationCode": "C",
+              "approvalDateDisplay": "03/12/2020",
+              "cellSharingAlertFlag": false,
+              "assessmentDescription": "Categorisation"
+            },
+            {
+              "bookingId": 2345,
+              "assessorId": 2345,
+              "offenderNo": "123ABC",
+              "approvalDate": "2022-04-12",
+              "assessorUser": "TEST_GEN",
+              "assessmentSeq": 3,
+              "assessmentCode": "CATEGORY",
+              "assessmentDate": "2022-03-10",
+              "classification": "Cat C",
+              "nextReviewDate": "2023-01-10",
+              "assessmentStatus": "I",
+              "agencyDescription": "LMI (HMP)",
+              "assessmentComment": "Cat-tool Recat",
+              "assessmentAgencyId": "LMI",
+              "classificationCode": "C",
+              "approvalDateDisplay": "11/07/2022",
+              "cellSharingAlertFlag": false,
+              "assessmentDescription": "Categorisation"
+            },
+            {
+              "bookingId": 4567,
+              "assessorId": 6445,
+              "offenderNo": "123ABC",
+              "approvalDate": "2023-07-12",
+              "assessorUser": "TEST_GEN",
+              "assessmentSeq": 7,
+              "assessmentCode": "CATEGORY",
+              "assessmentDate": "2023-07-25",
+              "classification": "Cat C",
+              "nextReviewDate": "2023-12-14",
+              "assessmentStatus": "I",
+              "agencyDescription": "DHE (HMP)",
+              "assessmentComment": "Cat-tool Recat",
+              "assessmentAgencyId": "DHE",
+              "classificationCode": "C",
+              "approvalDateDisplay": "18/03/2023",
+              "cellSharingAlertFlag": false,
+              "assessmentDescription": "Categorisation"
+            },
+            {
+              "bookingId": 64543,
+              "assessorId": 653635,
+              "offenderNo": "123ABC",
+              "approvalDate": "2024-07-24",
+              "assessorUser": "TEST_GEN",
+              "assessmentSeq": 9,
+              "assessmentCode": "CATEGORY",
+              "assessmentDate": "2024-07-21",
+              "classification": "Cat C",
+              "nextReviewDate": "2024-06-21",
+              "assessmentStatus": "I",
+              "agencyDescription": "Prison (HMP)",
+              "assessmentComment": "Cat-tool Initial",
+              "assessmentAgencyId": "PRI",
+              "classificationCode": "C",
+              "approvalDateDisplay": "27/07/2024",
+              "cellSharingAlertFlag": false,
+              "assessmentDescription": "Categorisation"
+            }
+          ],
+          "offences": [],
+          "escapeProfile": {
+            "nomsId": "123ABC",
+            "provisionalCategorisation": "C"
+          },
+          "violenceProfile": {
+            "nomsId": "123ABC",
+            "numberOfAssaults": 0,
+            "numberOfSeriousAssaults": 0,
+            "numberOfNonSeriousAssaults": 0,
+            "provisionalCategorisation": "C",
+            "shouldNotifySafetyCustodyLead": "No",
+            "isVeryHighRiskViolentOffender": "No"
+          },
+          "transferToSecurity": false,
+          "provisionalCategorisation": "C"
+        },
+        "prisonId": "NMI",
+        "offender_no": "123ABC",
+        "start_date": "2020-05-18T11:24:12.768",
+        "security_reviewed_date": "2019-11-25T11:24:12.768",
+        "approval_date": "2021-05-18",
+        "assessment_date": "2019-07-16",
+        "due_by_date": "2020-05-01",
+        "reviewReason": "Review due",
+        "reviewStatus": "Review approved",
+        "typeOfCategorisationAssessment": "Recategorisation"
+      },
+      {
+        "form_response": {
+          "recat": {
+            "decision": {
+              "category": "B"
+            },
+            "oasysInput": {
+              "date": "09/06/2022",
+              "oasysRelevantInfo": "No"
+            },
+            "categoryDecisionBasedOnSecurityInformation": {},
+            "securityInput": {
+              "securityNoteNeeded": "No",
+              "securityInputNeeded": "Yes"
+            },
+            "nextReviewDate": {
+              "date": "06/03/2023",
+              "indeterminate": "false"
+            },
+            "riskAssessment": {
+              "lowerCategory": "There is no evidence of something or other",
+              "otherRelevant": "No",
+              "higherCategory": "There is no evidence to suggest something.",
+              "otherRelevantText": ""
+            },
+            "prisonerBackground": {
+              "offenceDetails": "Something about offences"
+            }
+          },
+          "security": {
+            "review": {
+              "securityReview": "There is nothing further to add to this assessment."
+            }
+          },
+          "supervisor": {
+            "review": {
+              "proposedCategory": "B",
+              "supervisorCategoryAppropriate": "Yes"
+            }
+          },
+          "openConditionsRequested": "No"
+        },
+        "referred_date": "2019-11-25T11:24:12.768",
+        "risk_profile": {
+          "history": {},
+          "offences": [
+            {
+              "caseId": 1234,
+              "bookingId": 4567,
+              "courtDate": "2012-10-15",
+              "mostSerious": false,
+              "offenceCode": "SOMETHING",
+              "offenceDate": "2010-02-12",
+              "statuteCode": "TBD",
+              "primaryResultCode": "1234",
+              "offenceDescription": "Something",
+              "primaryResultConviction": true,
+              "primaryResultDescription": "Detention",
+              "secondaryResultConviction": false
+            },
+            {
+              "caseId": 642646,
+              "bookingId": 6757452,
+              "courtDate": "2013-10-02",
+              "mostSerious": false,
+              "offenceCode": "SOMETHINGELSE",
+              "offenceDate": "2013-01-06",
+              "statuteCode": "GHD",
+              "primaryResultCode": "64356",
+              "offenceDescription": "Crime",
+              "primaryResultConviction": true,
+              "primaryResultDescription": "Detention",
+              "secondaryResultConviction": false
+            },
+            {
+              "caseId": 63636,
+              "bookingId": 78463,
+              "courtDate": "2015-09-06",
+              "mostSerious": false,
+              "offenceCode": "SOME",
+              "offenceDate": "2015-02-01",
+              "statuteCode": "FGERG",
+              "primaryResultCode": "6463",
+              "offenceDescription": "More crime",
+              "primaryResultConviction": true,
+              "primaryResultDescription": "Imprisonment",
+              "secondaryResultConviction": false
+            },
+            {
+              "caseId": 754747,
+              "bookingId": 553463,
+              "courtDate": "2018-10-11",
+              "mostSerious": false,
+              "offenceCode": "GUOGO",
+              "offenceDate": "2017-01-05",
+              "statuteCode": "GUOGO",
+              "primaryResultCode": "546363",
+              "offenceDescription": "Crime again",
+              "primaryResultConviction": true,
+              "primaryResultDescription": "Imprisonment",
+              "secondaryResultConviction": false
+            },
+            {
+              "caseId": 7648643,
+              "bookingId": 6425426,
+              "courtDate": "2018-10-11",
+              "mostSerious": false,
+              "offenceCode": "UOGPUGP",
+              "offenceDate": "2018-08-06",
+              "statuteCode": "GUOGUP",
+              "primaryResultCode": "643634",
+              "offenceDescription": "Some crime",
+              "primaryResultConviction": true,
+              "primaryResultDescription": "Imprisonment",
+              "secondaryResultConviction": false
+            },
+            {
+              "caseId": 6347474,
+              "bookingId": 4325245,
+              "courtDate": "2020-10-01",
+              "mostSerious": false,
+              "offenceCode": "UOGPGBP",
+              "offenceDate": "2020-09-06",
+              "statuteCode": "HUIPHGP",
+              "primaryResultCode": "6356",
+              "offenceDescription": "Drug crime",
+              "primaryResultConviction": true,
+              "primaryResultDescription": "Imprisonment",
+              "secondaryResultConviction": false
+            }
+          ],
+          "escapeProfile": {
+            "nomsId": "123ABC",
+            "provisionalCategorisation": "C"
+          },
+          "violenceProfile": {
+            "nomsId": "123ABC",
+            "numberOfAssaults": 2,
+            "numberOfSeriousAssaults": 0,
+            "numberOfNonSeriousAssaults": 0,
+            "provisionalCategorisation": "C",
+            "shouldNotifySafetyCustodyLead": "No",
+            "isVeryHighRiskViolentOffender": "No"
+          },
+          "transferToSecurity": false,
+          "provisionalCategorisation": "C",
+          "courtIssuedLifeSentence": {
+            "nomsId": "123ABC",
+            "provisionalCategorisation": "C",
+            "servingACourtIssuedLifeSentence": false
+          }
+        },
+        "prisonId": "NMI",
+        "offender_no": "123ABC",
+        "start_date": "2019-05-18T11:24:12.768",
+        "security_reviewed_date": "2019-11-25T11:24:12.768",
+        "approval_date": "2020-05-18",
+        "assessment_date": "2020-05-01",
+        "due_by_date": "2020-05-01",
+        "reviewReason": "Review due",
+        "reviewStatus": "Review approved",
+        "typeOfCategorisationAssessment": "Recategorisation"
+      }
+    ],
+    "riskChange": [
+      {
+        "old_profile": {
+          "escape": {
+            "nomsId": "123ABC",
+            "provisionalCategorisation": "C"
+          },
+          "violence": {
+            "nomsId": "123ABC",
+            "numberOfAssaults": 8,
+            "numberOfSeriousAssaults": 0,
+            "numberOfNonSeriousAssaults": 0,
+            "provisionalCategorisation": "C",
+            "shouldNotifySafetyCustodyLead": "No",
+            "isVeryHighRiskViolentOffender": "No"
+          },
+          "transferToSecurity": false,
+          "provisionalCategorisation": "C"
+        },
+        "new_profile": {
+          "escape": {
+            "nomsId": "123ABC",
+            "provisionalCategorisation": "C"
+          },
+          "violence": {
+            "nomsId": "123ABC",
+            "numberOfAssaults": 8,
+            "numberOfSeriousAssaults": 0,
+            "numberOfNonSeriousAssaults": 0,
+            "provisionalCategorisation": "C",
+            "shouldNotifySafetyCustodyLead": "No",
+            "isVeryHighRiskViolentOffender": "Yes"
+          },
+          "transferToSecurity": false,
+          "provisionalCategorisation": "C"
+        },
+        "offender_no": "123ABC",
+        "prison_id": "1000",
+        "raised_date": "2020-05-18T09:45:34.166Z",
+        "riskChangeStatus": "New risk change alert"
+      }
+    ],
+    "security": [],
+    "nextReviewChangeHistory": [
+      {
+        "offender_no": "123ABC",
+        "next_review_date": "2021-05-18",
+        "reason": "testing one",
+        "change_date": "2020-05-18T09:25:44.395Z"
+      }
+    ],
+    "liteCategory": [
+      {
+        "category": "U",
+        "supervisorCategory": "U",
+        "offender_no": "123ABC",
+        "prison_id": "LEI",
+        "created_date": "2019-05-18T12:58:42.435Z",
+        "approved_date": "2020-05-18T00:00Z",
+        "assessment_committee": "OCA",
+        "assessment_comment": "Testing the creation of an unsentenced two",
+        "next_review_date": "2022-11-18",
+        "placement_prison_id": "ASI",
+        "approved_committee": "OCA",
+        "approved_placement_prison_id": "ASI",
+        "approved_placement_comment": "approved placement comment two",
+        "approved_comment": "approval comment two",
+        "sequence": "6"
+      },
+      {
+        "category": "U",
+        "supervisorCategory": "U",
+        "offender_no": "123ABC",
+        "prison_id": "LPI",
+        "created_date": "2020-05-18T12:58:42.435Z",
+        "approved_date": "2021-05-18T00:00Z",
+        "assessment_committee": "OCA",
+        "assessment_comment": "Testing the creation of an unsentenced one",
+        "next_review_date": "2021-11-18",
+        "placement_prison_id": "ASI",
+        "approved_committee": "OCA",
+        "approved_placement_prison_id": "ASI",
+        "approved_placement_comment": "approved placement comment one",
+        "approved_comment": "approval comment one",
+        "sequence": "5"
+      }
+    ]
+  }
+}

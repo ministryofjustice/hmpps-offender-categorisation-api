@@ -15,7 +15,7 @@ prisoner:
   search:
     api:
       endpoint:
-        url: http://dummy.value
+        url: http://localhost:8091
 
 spring:
   datasource:

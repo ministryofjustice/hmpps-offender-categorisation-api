@@ -10,6 +10,7 @@ data class Prisoner(
   val status: String? = null,
   val prisonId: String? = null,
   val restrictedPatient: Boolean,
+  val prisonName: String,
 ) {
   val currentlyInPrison: Boolean
     get() = status !== null && status == STATUS_ACTIVE_IN

@@ -76,7 +76,8 @@ CREATE TABLE public.lite_category (
                                       approved_committee varchar(12) NULL,
                                       approved_placement_prison_id varchar(6) NULL,
                                       approved_placement_comment varchar(240) NULL,
-                                      approved_comment varchar(240) NULL
+                                      approved_comment varchar(240) NULL,
+                                      approved_category_comment varchar(255) NULL
 );
 
 CREATE TABLE public.next_review_change_history (

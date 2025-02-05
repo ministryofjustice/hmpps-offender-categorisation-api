@@ -2,10 +2,15 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import org.hibernate.annotations.JdbcType
+import org.hibernate.dialect.PostgreSQLEnumJdbcType
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.SecurityReferralStatus
 import java.time.ZonedDateTime
 
 /**
@@ -30,10 +35,9 @@ class SecurityReferralEntity(
   @Column(name = "prison_id")
   val prisonId: String,
 
-  /*
-  Security referral status enum
-   */
-  val status: String,
+  @Enumerated(EnumType.STRING)
+  @JdbcType(PostgreSQLEnumJdbcType::class)
+  val status: SecurityReferralStatus,
 
   @Column(name = "raised_date")
   val raisedDate: ZonedDateTime? = null,
