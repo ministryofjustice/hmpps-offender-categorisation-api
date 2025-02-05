@@ -37,10 +37,10 @@ generic-service:
       DB_NAME: "database_name"
       DB_USER: "database_username"
       DB_PASS: "database_password"
-    hmpps-offender-categorisation-api-offender-events-sqs-instance-output:
-      HMPPS_SQS_QUEUES_HMPPSOFFENDERQUEUE_QUEUE_NAME: "sqs_queue_name"
-    hmpps-offender-categorisation-api-offender-events-sqs-dl-instance-output:
-      HMPPS_SQS_QUEUES_HMPPSOFFENDERQUEUE_DLQ_NAME: "sqs_queue_name"
+    offender-categorisation-api-offender-events-sqs-instance-output:
+      HMPPS_SQS_QUEUES_HMPPSOFFENDERQUEUE_QUEUE_NAME: "name"
+    offender-categorisation-api-offender-events-sqs-dl-instance-output:
+      HMPPS_SQS_QUEUES_HMPPSOFFENDERQUEUE_DLQ_NAME: "name"
 
   allowlist:
     groups:
