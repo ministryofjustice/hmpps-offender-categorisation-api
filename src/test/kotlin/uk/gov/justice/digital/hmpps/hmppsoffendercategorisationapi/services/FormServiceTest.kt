@@ -24,7 +24,7 @@ class FormServiceTest {
 
   @Test
   fun testSaveSecurityReview() {
-    whenever(mockFormRepository.findByBookingId(testBookingId)).thenReturn(
+    whenever(mockFormRepository.findFirstByBookingIdAndStatusNotOrderBySequenceNoAsc(testBookingId)).thenReturn(
       TestFormEntityFactory()
         .withFormResponse("{}")
         .withBookingId(testBookingId)
@@ -34,7 +34,7 @@ class FormServiceTest {
     )
     formService.saveSecurityReview(testBookingId, testUserId, true, testSecurityReview)
 
-    verify(mockFormRepository, times(1)).findByBookingId(testBookingId)
+    verify(mockFormRepository, times(1)).findFirstByBookingIdAndStatusNotOrderBySequenceNoAsc(testBookingId)
     verify(mockFormRepository, times(1)).save(
       argThat { entity ->
         entity.bookingId == testBookingId &&
@@ -48,7 +48,7 @@ class FormServiceTest {
 
   @Test
   fun testSaveSecurityReviewWithoutSubmitting() {
-    whenever(mockFormRepository.findByBookingId(testBookingId)).thenReturn(
+    whenever(mockFormRepository.findFirstByBookingIdAndStatusNotOrderBySequenceNoAsc(testBookingId)).thenReturn(
       TestFormEntityFactory()
         .withFormResponse("{}")
         .withBookingId(testBookingId)
@@ -58,7 +58,7 @@ class FormServiceTest {
     )
     formService.saveSecurityReview(testBookingId, testUserId, false, testSecurityReview)
 
-    verify(mockFormRepository, times(1)).findByBookingId(testBookingId)
+    verify(mockFormRepository, times(1)).findFirstByBookingIdAndStatusNotOrderBySequenceNoAsc(testBookingId)
     verify(mockFormRepository, times(1)).save(
       argThat { entity ->
         entity.bookingId == testBookingId &&
