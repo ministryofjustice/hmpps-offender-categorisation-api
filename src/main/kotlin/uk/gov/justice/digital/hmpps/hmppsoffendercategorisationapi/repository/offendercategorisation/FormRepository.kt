@@ -7,7 +7,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.
 
 @Repository
 interface FormRepository : JpaRepository<FormEntity, Long> {
-  fun findFirstByBookingIdAndStatusNotOrderBySequenceNoAsc(bookingId: Long, status: String = FormEntity.STATUS_CANCELLED): FormEntity?
+  fun findFirstByBookingIdAndStatusNotOrderBySequenceNoDesc(bookingId: Long, status: String = FormEntity.STATUS_CANCELLED): FormEntity?
 
   fun findAllByOffenderNoOrderBySequenceNoAsc(
     offenderNo: String,
