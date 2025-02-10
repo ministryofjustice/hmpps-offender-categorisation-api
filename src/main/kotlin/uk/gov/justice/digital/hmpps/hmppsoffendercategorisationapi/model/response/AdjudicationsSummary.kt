@@ -6,6 +6,6 @@ import io.swagger.v3.oas.annotations.media.Schema
 @Schema(description = "AdjudicationsSummary")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 class AdjudicationsSummary(
-  bookingId: Int,
-  adjudicationCount: Int,
+  val bookingId: Int,
+  val adjudicationCount: Int,
 )
