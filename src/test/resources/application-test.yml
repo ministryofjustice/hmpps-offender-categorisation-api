@@ -17,6 +17,12 @@ prisoner:
       endpoint:
         url: http://localhost:8091
 
+manage:
+  adjudications:
+    api:
+      endpoint:
+        url: http://localhost:8092
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/form-builder

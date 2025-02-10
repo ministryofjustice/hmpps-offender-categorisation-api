@@ -15,6 +15,12 @@ prisoner:
       endpoint:
         url: "https://prisoner-search-dev.prison.service.justice.gov.uk"
 
+manage:
+  adjudications:
+    api:
+      endpoint:
+        url: "https://manage-adjudications-api-dev.prison.service.justice.gov.uk"
+
 # Update to your personal token with correct permissions
 api:
   client:

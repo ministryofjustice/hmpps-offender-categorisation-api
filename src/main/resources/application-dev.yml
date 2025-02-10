@@ -31,3 +31,9 @@ prisoner:
     api:
       endpoint:
         url: "https://prisoner-search-dev.prison.service.justice.gov.uk"
+
+manage:
+  adjudications:
+    api:
+      endpoint:
+        url: "https://manage-adjudications-api-dev.prison.service.justice.gov.uk"
