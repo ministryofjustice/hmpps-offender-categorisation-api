@@ -32,6 +32,27 @@ class PrisonerSearchMockServer : MockServer(8091) {
   }
 }
 
+class ManageAdjudicationsMockServer : MockServer(8092) {
+  private val gson = Gson()
+  fun stubFindAdjudicationsByBookingId(bookingId: Int, numberOfAdjudications: Int?) {
+    stubFor(
+      WireMock.get(WireMock.urlEqualTo("/adjudications/by-booking-id/$bookingId"))
+        .willReturn(
+          WireMock.aResponse()
+            .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json")))
+            .withBody(
+              gson.toJson(
+                mapOf(
+                  "bookingId" to bookingId,
+                  "adjudicationCount" to numberOfAdjudications,
+                ),
+              ),
+            ),
+        ),
+    )
+  }
+}
+
 class HmppsAuthMockServer : MockServer(8090) {
   private val mapper = ObjectMapper()
 
