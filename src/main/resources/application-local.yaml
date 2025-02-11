@@ -20,6 +20,10 @@ manage:
     api:
       endpoint:
         url: "https://manage-adjudications-api-dev.prison.service.justice.gov.uk"
+  offences:
+    api:
+      endpoint:
+        url: "https://manage-offences-api-dev.hmpps.service.justice.gov.uk"
 
 # Update to your personal token with correct permissions
 api:

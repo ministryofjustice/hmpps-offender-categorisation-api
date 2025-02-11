@@ -53,6 +53,33 @@ class ManageAdjudicationsMockServer : MockServer(8092) {
   }
 }
 
+class ManageOffencesMockServer : MockServer(8093) {
+  private val gson = Gson()
+  fun stubCheckWhichOffenceCodesAreSdsExcluded(offenceCodes: List<String>) {
+    stubFor(
+      WireMock.get(WireMock.urlPathEqualTo("/schedule/sds-early-release-exclusions"))
+        .willReturn(
+          WireMock.aResponse()
+            .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json")))
+            .withBody(
+              gson.toJson(
+                if (offenceCodes.isEmpty()) {
+                  listOf()
+                } else {
+                  listOf(
+                    mapOf(
+                      "offenceCode" to offenceCodes[0],
+                      "schedulePart" to "violence",
+                    ),
+                  )
+                },
+              ),
+            ),
+        ),
+    )
+  }
+}
+
 class HmppsAuthMockServer : MockServer(8090) {
   private val mapper = ObjectMapper()
 
