@@ -19,6 +19,7 @@ class WebClientConfiguration(
   @Value("\${prisoner.search.api.endpoint.url}") private val prisonerSearchApiBaseUrl: String,
   @Value("\${manage.adjudications.api.endpoint.url}") private val manageAdjudicationsApiBaseUrl: String,
   @Value("\${prison.api.endpoint.url}") private val prisonApiBaseUrl: String,
+  @Value("\${manage.offences.api.endpoint.url}") private val manageOffencesApiBaseUrl: String,
   private val webClientBuilder: WebClient.Builder,
 ) {
   @Bean
@@ -78,6 +79,21 @@ class WebClientConfiguration(
         .build()
     return webClientBuilder
       .baseUrl(manageAdjudicationsApiBaseUrl)
+      .apply(oauth2Client.oauth2Configuration())
+      .exchangeStrategies(exchangeStrategies)
+      .build()
+  }
+
+  @Bean
+  fun manageOffencesApiWebClient(authorizedClientManager: OAuth2AuthorizedClientManager): WebClient {
+    val oauth2Client = ServletOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager)
+    oauth2Client.setDefaultClientRegistrationId("manage-offences-api")
+    val exchangeStrategies =
+      ExchangeStrategies.builder()
+        .codecs { configurer: ClientCodecConfigurer -> configurer.defaultCodecs().maxInMemorySize(-1) }
+        .build()
+    return webClientBuilder
+      .baseUrl(manageOffencesApiBaseUrl)
       .apply(oauth2Client.oauth2Configuration())
       .exchangeStrategies(exchangeStrategies)
       .build()
