@@ -34,14 +34,14 @@ dependencies {
   implementation("com.vladmihalcea:hibernate-types-60:2.21.1")
   implementation("io.hypersistence:hypersistence-utils-hibernate-60:3.5.1")
 
+  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.2")
+
   implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.1.1")
 
   implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
   // OpenAPI
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0")
-
-  implementation("com.google.code.gson:gson:2.11.0")
 
   // Test dependencies
   testImplementation("com.github.tomakehurst:wiremock-jre8-standalone:3.0.1")
