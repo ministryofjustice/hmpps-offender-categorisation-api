@@ -21,6 +21,14 @@ manage:
       endpoint:
         url: "https://manage-adjudications-api-dev.prison.service.justice.gov.uk"
 
+assess:
+  risks:
+    and:
+      needs:
+        api:
+          endpoint:
+            url: "https://assess-risks-and-needs-dev.hmpps.service.justice.gov.uk"
+
 # Update to your personal token with correct permissions
 api:
   client:
