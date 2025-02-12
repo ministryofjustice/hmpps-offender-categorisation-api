@@ -22,6 +22,10 @@ manage:
     api:
       endpoint:
         url: http://localhost:8092
+  offences:
+    api:
+      endpoint:
+        url: http://localhost:8093
 
 spring:
   datasource:
