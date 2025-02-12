@@ -62,7 +62,6 @@ class ManageAdjudicationsMockServer : MockServer(8092) {
 }
 
 class AssessRisksAndNeedsMockServer : MockServer(8095) {
-  private val gson = Gson()
   fun stubFindRiskSummary(crn: String, overallRiskLevel: RiskLevel = RiskLevel.LOW) {
     stubFor(
       WireMock.get(WireMock.urlEqualTo("/risks/crn/$crn/summary"))
@@ -70,10 +69,40 @@ class AssessRisksAndNeedsMockServer : MockServer(8095) {
           WireMock.aResponse()
             .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json")))
             .withBody(
-              gson.toJson(
+              jacksonObjectMapper().apply {
+                registerModule(JavaTimeModule())
+              }.writeValueAsString(
                 mapOf(
                   "overallRiskLevel" to overallRiskLevel,
                 ),
+              ),
+            ),
+        ),
+    )
+  }
+}
+
+class ManageOffencesMockServer : MockServer(8093) {
+  fun stubCheckWhichOffenceCodesAreSdsExcluded(offenceCodes: List<String>) {
+    stubFor(
+      WireMock.get(WireMock.urlPathEqualTo("/schedule/sds-early-release-exclusions"))
+        .willReturn(
+          WireMock.aResponse()
+            .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json")))
+            .withBody(
+              jacksonObjectMapper().apply {
+                registerModule(JavaTimeModule())
+              }.writeValueAsString(
+                if (offenceCodes.isEmpty()) {
+                  listOf()
+                } else {
+                  listOf(
+                    mapOf(
+                      "offenceCode" to offenceCodes[0],
+                      "schedulePart" to "violence",
+                    ),
+                  )
+                },
               ),
             ),
         ),

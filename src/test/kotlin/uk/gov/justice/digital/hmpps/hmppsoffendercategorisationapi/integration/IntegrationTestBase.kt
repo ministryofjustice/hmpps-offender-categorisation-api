@@ -35,6 +35,7 @@ abstract class IntegrationTestBase {
     internal val prisonerSearchMockServer = PrisonerSearchMockServer()
     internal val manageAdjudicationsMockServer = ManageAdjudicationsMockServer()
     internal val assessRisksAndNeedsMockServer = AssessRisksAndNeedsMockServer()
+    internal val manageOffencesMockServer = ManageOffencesMockServer()
     internal val hmppsAuthMockServer = HmppsAuthMockServer()
 
     @JvmStatic
@@ -58,6 +59,7 @@ abstract class IntegrationTestBase {
       prisonerSearchMockServer.start()
       manageAdjudicationsMockServer.start()
       assessRisksAndNeedsMockServer.start()
+      manageOffencesMockServer.start()
       hmppsAuthMockServer.start()
     }
 
@@ -67,6 +69,7 @@ abstract class IntegrationTestBase {
       prisonerSearchMockServer.stop()
       manageAdjudicationsMockServer.stop()
       assessRisksAndNeedsMockServer.stop()
+      manageOffencesMockServer.stop()
       hmppsAuthMockServer.stop()
     }
 
@@ -106,6 +109,15 @@ abstract class IntegrationTestBase {
             .withStatus(status),
         ),
       )
+
+      manageOffencesMockServer.stubFor(
+        WireMock.get("/health/ping").willReturn(
+          WireMock.aResponse()
+            .withHeader("Content-Type", "application/json")
+            .withBody(if (status == 200) "pong" else "some error")
+            .withStatus(status),
+        ),
+      )
     }
   }
 
@@ -115,6 +127,7 @@ abstract class IntegrationTestBase {
     prisonerSearchMockServer.resetAll()
     manageAdjudicationsMockServer.resetAll()
     assessRisksAndNeedsMockServer.resetAll()
+    manageOffencesMockServer.resetAll()
 
     hmppsAuthMockServer.stubGrantToken()
   }
