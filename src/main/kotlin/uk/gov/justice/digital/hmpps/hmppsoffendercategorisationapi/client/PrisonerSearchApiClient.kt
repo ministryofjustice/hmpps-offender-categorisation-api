@@ -1,6 +1,6 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client
 
-import com.google.gson.Gson
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.core.ParameterizedTypeReference
 import org.springframework.http.MediaType.APPLICATION_JSON
@@ -12,7 +12,6 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 @Service
 class PrisonerSearchApiClient(
   @Qualifier("prisonerSearchApiWebClient") private val webClient: WebClient,
-  private val gson: Gson,
 ) {
   fun findPrisonersByPrisonerNumbers(prisonerNumbers: List<String>): List<Prisoner> {
     val requestBody = HashMap<String, List<String>>()
@@ -21,7 +20,7 @@ class PrisonerSearchApiClient(
     return webClient.post()
       .uri("/prisoner-search/prisoner-numbers")
       .contentType(APPLICATION_JSON)
-      .body(BodyInserters.fromValue(gson.toJson(requestBody)))
+      .body(BodyInserters.fromValue(jacksonObjectMapper().writeValueAsString(requestBody)))
       .retrieve()
       .bodyToMono(object : ParameterizedTypeReference<List<Prisoner>>() {})
       .block()!!
