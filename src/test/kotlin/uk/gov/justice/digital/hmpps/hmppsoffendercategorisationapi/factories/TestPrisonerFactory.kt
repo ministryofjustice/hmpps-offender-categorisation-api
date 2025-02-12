@@ -1,6 +1,6 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories
 
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.*
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.ConvictedOffence
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.ConvictedOffencesResponse
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.CurrentIncentive
