@@ -16,9 +16,12 @@ prisoner:
     api:
       endpoint:
         url: http://localhost:8091
+
+prison:
   api:
-    url:
-      http://localhost:8094
+    endpoint:
+      url:
+        http://localhost:8094
 
 manage:
   adjudications:

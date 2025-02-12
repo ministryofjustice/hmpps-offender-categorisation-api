@@ -14,6 +14,8 @@ prisoner:
     api:
       endpoint:
         url: "https://prisoner-search-dev.prison.service.justice.gov.uk"
+
+prison:
   api:
     endpoint:
       url: "https://prison-api-dev.prison.service.justice.gov.uk"
