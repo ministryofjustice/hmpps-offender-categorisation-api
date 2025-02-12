@@ -39,7 +39,6 @@ class PrisonerSearchMockServer : MockServer(8091) {
 }
 
 class ManageAdjudicationsMockServer : MockServer(8092) {
-  private val gson = Gson()
   fun stubFindAdjudicationsByBookingId(bookingId: Int, numberOfAdjudications: Int?) {
     stubFor(
       WireMock.get(WireMock.urlEqualTo("/adjudications/by-booking-id/$bookingId"))
@@ -47,7 +46,9 @@ class ManageAdjudicationsMockServer : MockServer(8092) {
           WireMock.aResponse()
             .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json")))
             .withBody(
-              gson.toJson(
+              jacksonObjectMapper().apply {
+                registerModule(JavaTimeModule())
+              }.writeValueAsString(
                 mapOf(
                   "bookingId" to bookingId,
                   "adjudicationCount" to numberOfAdjudications,
