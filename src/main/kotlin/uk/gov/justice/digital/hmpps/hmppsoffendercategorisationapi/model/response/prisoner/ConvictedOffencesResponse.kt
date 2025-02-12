@@ -6,12 +6,12 @@ import io.swagger.v3.oas.annotations.media.Schema
 @Schema(description = "ConvictedOffencesResponse")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class ConvictedOffencesResponse(
-  val allConvictedOffences: List<ConvictedOffence>
+  val allConvictedOffences: List<ConvictedOffence>,
 )
 
 @Schema(description = "ConvictedOffence")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class ConvictedOffence(
   val offenceCode: String,
-  val offenceDescription: String
+  val offenceDescription: String,
 )

@@ -37,7 +37,7 @@ class PrisonerSearchApiClientTest : IntegrationTestBase() {
           .withLegalStatus("SENTENCED")
           .withConvictedOffencesResponse(ConvictedOffencesResponse(listOf(ConvictedOffence("SX56027", "Indecent assault on woman over 16 years of age"))))
           .withCurrentIncentive(CurrentIncentive(Level("STD", "Standard")))
-          .build()
+          .build(),
       )
       val result = prisonerSearchApiClient.findPrisonersByPrisonerNumbers(listOf("123ABC"))
       Assertions.assertThat(result.size).isEqualTo(1)

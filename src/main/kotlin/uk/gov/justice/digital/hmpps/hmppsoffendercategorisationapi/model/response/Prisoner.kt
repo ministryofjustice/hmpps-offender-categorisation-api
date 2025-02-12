@@ -20,7 +20,7 @@ data class Prisoner(
   val sentenceStartDate: LocalDate? = null,
   val legalStatus: String? = null,
   val convictedOffencesResponse: ConvictedOffencesResponse? = null,
-  ) {
+) {
   val currentlyInPrison: Boolean
     get() = status !== null && status == STATUS_ACTIVE_IN
 

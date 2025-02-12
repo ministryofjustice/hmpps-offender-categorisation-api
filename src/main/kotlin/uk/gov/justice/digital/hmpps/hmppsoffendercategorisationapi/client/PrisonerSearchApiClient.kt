@@ -11,7 +11,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 
 @Service
 class PrisonerSearchApiClient(
-  @Qualifier("prisonerSearchApiWebClient") private val webClient: WebClient
+  @Qualifier("prisonerSearchApiWebClient") private val webClient: WebClient,
 ) {
   fun findPrisonersByPrisonerNumbers(prisonerNumbers: List<String>): List<Prisoner> {
     val requestBody = HashMap<String, List<String>>()

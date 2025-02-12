@@ -17,17 +17,17 @@ class TestPrisonerFactory {
   private var releaseDate = LocalDate.now().minusDays(1)
   private var category = ""
   private var currentIncentive = CurrentIncentive(
-    level = Level("STD", "Standard")
+    level = Level("STD", "Standard"),
   )
   private var sentenceStartDate = LocalDate.now().minusDays(1)
   private var legalStatus = ""
   private var convictedOffencesResponse = ConvictedOffencesResponse(
     allConvictedOffences = listOf(
       ConvictedOffence(
-      offenceCode = "SX56027",
-      offenceDescription = "Indecent assault on woman over 16 years of age"
-    )
-    )
+        offenceCode = "SX56027",
+        offenceDescription = "Indecent assault on woman over 16 years of age",
+      ),
+    ),
   )
 
   fun withPrisonerNumber(prisonerNumber: String): TestPrisonerFactory {
@@ -85,19 +85,17 @@ class TestPrisonerFactory {
     return this
   }
 
-  fun build(): Prisoner {
-    return Prisoner(
-      prisonerNumber = this.prisonerNumber,
-      status = this.status,
-      prisonId = prisonId,
-      restrictedPatient = this.restrictedPatient,
-      prisonName = this.prisonName,
-      releaseDate = this.releaseDate,
-      category = this.category,
-      currentIncentive = this.currentIncentive,
-      sentenceStartDate = this.sentenceStartDate,
-      legalStatus = this.legalStatus,
-      convictedOffencesResponse = this.convictedOffencesResponse
-    )
-  }
+  fun build(): Prisoner = Prisoner(
+    prisonerNumber = this.prisonerNumber,
+    status = this.status,
+    prisonId = prisonId,
+    restrictedPatient = this.restrictedPatient,
+    prisonName = this.prisonName,
+    releaseDate = this.releaseDate,
+    category = this.category,
+    currentIncentive = this.currentIncentive,
+    sentenceStartDate = this.sentenceStartDate,
+    legalStatus = this.legalStatus,
+    convictedOffencesResponse = this.convictedOffencesResponse,
+  )
 }

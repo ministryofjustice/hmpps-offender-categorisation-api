@@ -13,5 +13,5 @@ data class CurrentIncentive(
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Level(
   val code: String,
-  val description: String
+  val description: String,
 )

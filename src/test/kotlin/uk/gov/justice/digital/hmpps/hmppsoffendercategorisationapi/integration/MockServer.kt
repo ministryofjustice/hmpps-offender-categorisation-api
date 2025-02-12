@@ -13,11 +13,12 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 
 private const val MAPPINGS_DIRECTORY = "src/testIntegration/resources"
 
-open class MockServer(port: Int) : WireMockServer(
-  WireMockConfiguration.wireMockConfig()
-    .port(port)
-    .usingFilesUnderDirectory(MAPPINGS_DIRECTORY),
-)
+open class MockServer(port: Int) :
+  WireMockServer(
+    WireMockConfiguration.wireMockConfig()
+      .port(port)
+      .usingFilesUnderDirectory(MAPPINGS_DIRECTORY),
+  )
 
 class PrisonerSearchMockServer : MockServer(8091) {
   fun stubFindPrisonerByPrisonerNumber(prisoner: Prisoner = (TestPrisonerFactory()).build()) {
@@ -27,8 +28,11 @@ class PrisonerSearchMockServer : MockServer(8091) {
         .willReturn(
           WireMock.aResponse()
             .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json")))
-            .withBody(jacksonObjectMapper().apply {
-              registerModule(JavaTimeModule()) }.writeValueAsString(listOf(prisoner))),
+            .withBody(
+              jacksonObjectMapper().apply {
+                registerModule(JavaTimeModule())
+              }.writeValueAsString(listOf(prisoner)),
+            ),
         ),
     )
   }
