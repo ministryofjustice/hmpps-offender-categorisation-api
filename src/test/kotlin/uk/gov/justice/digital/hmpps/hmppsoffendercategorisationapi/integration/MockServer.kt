@@ -61,7 +61,6 @@ class ManageAdjudicationsMockServer : MockServer(8092) {
 }
 
 class ManageOffencesMockServer : MockServer(8093) {
-  private val gson = Gson()
   fun stubCheckWhichOffenceCodesAreSdsExcluded(offenceCodes: List<String>) {
     stubFor(
       WireMock.get(WireMock.urlPathEqualTo("/schedule/sds-early-release-exclusions"))
@@ -69,7 +68,9 @@ class ManageOffencesMockServer : MockServer(8093) {
           WireMock.aResponse()
             .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json")))
             .withBody(
-              gson.toJson(
+              jacksonObjectMapper().apply {
+                registerModule(JavaTimeModule())
+              }.writeValueAsString(
                 if (offenceCodes.isEmpty()) {
                   listOf()
                 } else {
