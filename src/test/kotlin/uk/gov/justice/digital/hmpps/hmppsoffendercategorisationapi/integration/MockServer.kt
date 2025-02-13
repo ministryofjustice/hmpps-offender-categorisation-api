@@ -8,8 +8,10 @@ import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration
 import com.github.tomakehurst.wiremock.http.HttpHeader
 import com.github.tomakehurst.wiremock.http.HttpHeaders
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonerFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.RiskLevel
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prison
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
 
 private const val MAPPINGS_DIRECTORY = "src/testIntegration/resources"
@@ -33,6 +35,23 @@ class PrisonerSearchMockServer : MockServer(8091) {
               jacksonObjectMapper().apply {
                 registerModule(JavaTimeModule())
               }.writeValueAsString(listOf(prisoner)),
+            ),
+        ),
+    )
+  }
+}
+
+class PrisonApiMockServer : MockServer(8094) {
+  fun stubFindPrisons(prisons: List<Prison> = listOf((TestPrisonFactory()).build())) {
+    stubFor(
+      WireMock.get(WireMock.urlEqualTo("/api/agencies/prisons"))
+        .willReturn(
+          WireMock.aResponse()
+            .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json")))
+            .withBody(
+              jacksonObjectMapper().apply {
+                registerModule(JavaTimeModule())
+              }.writeValueAsString(prisons),
             ),
         ),
     )
