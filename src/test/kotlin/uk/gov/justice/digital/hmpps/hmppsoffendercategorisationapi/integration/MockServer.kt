@@ -10,6 +10,7 @@ import com.github.tomakehurst.wiremock.http.HttpHeader
 import com.github.tomakehurst.wiremock.http.HttpHeaders
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonerFactory
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.RiskLevel
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prison
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
 
@@ -71,6 +72,27 @@ class ManageAdjudicationsMockServer : MockServer(8092) {
                 mapOf(
                   "bookingId" to bookingId,
                   "adjudicationCount" to numberOfAdjudications,
+                ),
+              ),
+            ),
+        ),
+    )
+  }
+}
+
+class AssessRisksAndNeedsMockServer : MockServer(8095) {
+  fun stubFindRiskSummary(crn: String, overallRiskLevel: RiskLevel = RiskLevel.LOW) {
+    stubFor(
+      WireMock.get(WireMock.urlEqualTo("/risks/crn/$crn/summary"))
+        .willReturn(
+          WireMock.aResponse()
+            .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json")))
+            .withBody(
+              jacksonObjectMapper().apply {
+                registerModule(JavaTimeModule())
+              }.writeValueAsString(
+                mapOf(
+                  "overallRiskLevel" to overallRiskLevel,
                 ),
               ),
             ),

@@ -33,6 +33,14 @@ manage:
       endpoint:
         url: http://localhost:8093
 
+assess:
+  risks:
+    and:
+      needs:
+        api:
+          endpoint:
+            url: http://localhost:8095
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/form-builder
