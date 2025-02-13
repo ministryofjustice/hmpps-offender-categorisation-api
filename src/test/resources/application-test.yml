@@ -17,6 +17,12 @@ prisoner:
       endpoint:
         url: http://localhost:8091
 
+prison:
+  api:
+    endpoint:
+      url:
+        http://localhost:8094
+
 manage:
   adjudications:
     api:
@@ -26,6 +32,14 @@ manage:
     api:
       endpoint:
         url: http://localhost:8093
+
+assess:
+  risks:
+    and:
+      needs:
+        api:
+          endpoint:
+            url: http://localhost:8095
 
 spring:
   datasource:

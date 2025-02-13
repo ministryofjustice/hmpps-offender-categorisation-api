@@ -17,6 +17,11 @@ prisoner:
       endpoint:
         url: "https://prisoner-search-dev.prison.service.justice.gov.uk"
 
+prison:
+  api:
+    endpoint:
+      url: "https://prison-api-dev.prison.service.justice.gov.uk"
+
 manage:
   adjudications:
     api:
@@ -26,6 +31,14 @@ manage:
     api:
       endpoint:
         url: "https://manage-offences-api-dev.hmpps.service.justice.gov.uk"
+
+assess:
+  risks:
+    and:
+      needs:
+        api:
+          endpoint:
+            url: "https://assess-risks-and-needs-dev.hmpps.service.justice.gov.uk"
 
 # Update to your personal token with correct permissions
 api:

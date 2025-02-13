@@ -9,7 +9,9 @@ generic-service:
     HMPPS_AUTH_URL: https://sign-in.hmpps.service.justice.gov.uk/auth
     HMPPS_AUTH_TOKEN_URL: https://sign-in.hmpps.service.justice.gov.uk/auth/oauth/token
     PRISONER_SEARCH_API_ENDPOINT_URL: https://prisoner-search.prison.service.justice.gov.uk
+    PRISON_API_ENDPOINT_URL: https://prison-api.prison.service.justice.gov.uk
     MANAGE_ADJUDICATIONS_API_ENDPOINT_URL: https://manage-adjudications-api.prison.service.justice.gov.uk
+    ASSESS_RISKS_AND_NEEDS_API_ENDPOINT_URL: https://assess-risks-and-needs-prod.hmpps.service.justice.gov.uk
     MANAGE_OFFENCES_API_ENDPOINT_URL: https://manage-offences-api.hmpps.service.justice.gov.uk
 
 # CloudPlatform AlertManager receiver to route prometheus alerts to slack
