@@ -66,6 +66,5 @@ class PrsEligibilityServiceTest {
     prsEligibilityService.report()
 
     Assertions.assertThat(output).contains("PRS_ELIGIBILITY_INVESTIGATION: HCI, 2, 1, 1, 1, 1, 1")
-    assert(true)
   }
 }
