@@ -46,3 +46,4 @@ generic-prometheus-alerts:
 
 cron:
   report_released_prisoners_with_active_categorisations_schedule: "0 6 1 * *"
+  report_prs_eligibility_investigation_schedule: "0 0 1 * *"

@@ -25,4 +25,18 @@ class PrisonerSearchApiClient(
       .bodyToMono(object : ParameterizedTypeReference<List<Prisoner>>() {})
       .block()!!
   }
+
+  fun findPrisonersByAgencyId(agencyId: String, page: Int, size: Int): List<Prisoner> {
+    return webClient.get()
+      .uri("/prisoner-search/prison/$agencyId?page=$page&size=$size")
+      .header("Content-Type", "application/json")
+      .retrieve()
+      .bodyToMono(object : ParameterizedTypeReference<SearchResult>() {})
+      .block()!!
+      .content
+  }
 }
+
+data class SearchResult(
+  val content: List<Prisoner>,
+)

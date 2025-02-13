@@ -1,6 +1,7 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories
 
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Alert
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.ConvictedOffence
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.ConvictedOffencesResponse
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.CurrentIncentive
@@ -29,6 +30,7 @@ class TestPrisonerFactory {
       ),
     ),
   )
+  private var alerts: List<Alert>? = null
 
   fun withPrisonerNumber(prisonerNumber: String): TestPrisonerFactory {
     this.prisonerNumber = prisonerNumber
@@ -85,6 +87,11 @@ class TestPrisonerFactory {
     return this
   }
 
+  fun withAlerts(alerts: List<Alert>?): TestPrisonerFactory {
+    this.alerts = alerts
+    return this
+  }
+
   fun build(): Prisoner = Prisoner(
     prisonerNumber = this.prisonerNumber,
     status = this.status,
@@ -97,5 +104,6 @@ class TestPrisonerFactory {
     sentenceStartDate = this.sentenceStartDate,
     legalStatus = this.legalStatus,
     convictedOffencesResponse = this.convictedOffencesResponse,
+    alerts = this.alerts,
   )
 }
