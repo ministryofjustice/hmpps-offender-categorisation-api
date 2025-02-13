@@ -14,7 +14,6 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.Tes
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonerFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Alert
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Alerts
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.CurrentIncentive
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Level
 import java.time.LocalDate
@@ -51,13 +50,11 @@ class PrsEligibilityServiceTest {
           .withCategory(Prisoner.CATEGORY_B)
           .withCurrentIncentive(CurrentIncentive(Level(Prisoner.INCENTIVE_LEVEL_BASIC, "Basic")))
           .withAlerts(
-            Alerts(
-              listOf(
-                Alert(
-                  Alert.ESCAPE_RISK_ALERT_CODE,
-                  true,
-                  false,
-                ),
+            listOf(
+              Alert(
+                Alert.ESCAPE_RISK_ALERT_CODE,
+                true,
+                false,
               ),
             ),
           )

@@ -2,7 +2,7 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respon
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import io.swagger.v3.oas.annotations.media.Schema
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Alerts
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Alert
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.ConvictedOffencesResponse
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.CurrentIncentive
 import java.time.LocalDate
@@ -21,7 +21,7 @@ data class Prisoner(
   val sentenceStartDate: LocalDate? = null,
   val legalStatus: String? = null,
   val convictedOffencesResponse: ConvictedOffencesResponse? = null,
-  val alerts: Alerts? = null,
+  val alerts: List<Alert>? = null,
 ) {
   val currentlyInPrison: Boolean
     get() = status !== null && status == STATUS_ACTIVE_IN

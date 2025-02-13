@@ -28,7 +28,7 @@ class PrisonerPrsEligibilityCalculator(
   }
 
   private fun hasEscapeFlag(): Boolean {
-    return this.prisoner.alerts?.items?.any {
+    return this.prisoner.alerts?.any {
       listOf(
         Alert.ESCAPE_RISK_ALERT_CODE,
         Alert.ESCAPE_LIST_ALERT_CODE,
