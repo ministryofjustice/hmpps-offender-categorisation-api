@@ -1,6 +1,7 @@
-package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services.prs
 
 import org.springframework.stereotype.Service
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonerSearchApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.prs.AllPrisonersPrsEligibility
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
@@ -8,11 +9,16 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 @Service
 class PrsEligibilityService(
   private val prisonerSearchApiClient: PrisonerSearchApiClient,
+  private val prisonApiClient: PrisonApiClient,
 ) {
   fun report() {
+    val allPrisons = prisonApiClient.findPrisons()
+    allPrisons.forEach {
+      reportPrisonerEligibilityForPrison(it.agencyId)
+    }
   }
 
-  fun reportPrisonerEligibilityForPrison(agencyId: String) {
+  private fun reportPrisonerEligibilityForPrison(agencyId: String) {
     val allPrisonersPrsEligibility = AllPrisonersPrsEligibility(agencyId)
     var prisoners: List<Prisoner>
     var i = 0
@@ -20,7 +26,7 @@ class PrsEligibilityService(
       prisoners = prisonerSearchApiClient.findPrisonersByAgencyId(agencyId, i, PRISONERS_CHUNK_SIZE)
       prisoners.forEach {
         allPrisonersPrsEligibility.addPrisoner(
-          (PrisonerPrsEligibilityCalculator(it).calculate()),
+          (PrisonerPrsEligibilityCalculator(it)).calculate(),
         )
       }
       i++
@@ -29,6 +35,6 @@ class PrsEligibilityService(
   }
 
   companion object {
-    const val PRISONERS_CHUNK_SIZE = 100
+    private const val PRISONERS_CHUNK_SIZE = 100
   }
 }

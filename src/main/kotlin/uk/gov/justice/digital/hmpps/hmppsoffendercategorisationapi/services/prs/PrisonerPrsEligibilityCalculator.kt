@@ -1,9 +1,9 @@
-package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services.prs
 
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.PrsIneligibilityReason
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.prs.PrisonerPrsEligibility
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Alert
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Alert
 import java.time.LocalDate
 
 class PrisonerPrsEligibilityCalculator(
@@ -28,28 +28,28 @@ class PrisonerPrsEligibilityCalculator(
   }
 
   private fun hasEscapeFlag(): Boolean {
-    return this.prisoner.alerts?.any {
+    return this.prisoner.alerts?.items?.any {
       listOf(
         Alert.ESCAPE_RISK_ALERT_CODE,
         Alert.ESCAPE_LIST_ALERT_CODE,
         Alert.ESCAPE_LIST_HEIGHTENED_ALERT_CODE,
-      ).contains(it.alertCode)
+      ).contains(it.alertCode) && it.isActiveAndNonExpired
     } ?: false
   }
 
   fun calculate(): PrisonerPrsEligibility {
-    val reasonForIneligibility = emptyList<PrsIneligibilityReason>()
+    val reasonForIneligibility = mutableListOf<PrsIneligibilityReason>()
     if (!isCategoryCOrClosed()) {
-      reasonForIneligibility.plus(PrsIneligibilityReason.CATEGORY)
+      reasonForIneligibility.add(PrsIneligibilityReason.CATEGORY)
     }
     if (!hasOneToTwelveMonthsLeftToServeBeforeCrd()) {
-      reasonForIneligibility.plus(PrsIneligibilityReason.TIME_LEFT_TO_SERVE)
+      reasonForIneligibility.add(PrsIneligibilityReason.TIME_LEFT_TO_SERVE)
     }
     if (!hasEnhancedOrStandardIncentiveLevel()) {
-      reasonForIneligibility.plus(PrsIneligibilityReason.INCENTIVE_LEVEL)
+      reasonForIneligibility.add(PrsIneligibilityReason.INCENTIVE_LEVEL)
     }
     if (hasEscapeFlag()) {
-      reasonForIneligibility.plus(PrsIneligibilityReason.ESCAPE)
+      reasonForIneligibility.add(PrsIneligibilityReason.ESCAPE)
     }
     return PrisonerPrsEligibility(
       reasonForIneligibility,

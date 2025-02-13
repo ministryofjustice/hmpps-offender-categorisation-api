@@ -4,9 +4,10 @@ import org.slf4j.LoggerFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.PrsIneligibilityReason
 
 class AllPrisonersPrsEligibility(
-  val agencyId: String,
-  var prisonersEligible: Int = 0,
-  var reasonsForIneligibility: Map<PrsIneligibilityReason, Int> = mapOf(
+  private val agencyId: String,
+  private var prisonerCount: Int = 0,
+  private var prisonersEligible: Int = 0,
+  private var reasonsForIneligibility: MutableMap<PrsIneligibilityReason, Int> = mutableMapOf(
     PrsIneligibilityReason.CATEGORY to 0,
     PrsIneligibilityReason.TIME_LEFT_TO_SERVE to 0,
     PrsIneligibilityReason.INCENTIVE_LEVEL to 0,
@@ -14,16 +15,17 @@ class AllPrisonersPrsEligibility(
   ),
 ) {
   fun addPrisoner(prisonerPrsEligibility: PrisonerPrsEligibility) {
+    prisonerCount++
     if (prisonerPrsEligibility.isEligible) {
       prisonersEligible++
     }
     prisonerPrsEligibility.reasonForIneligibility.forEach {
-      this.reasonsForIneligibility[it]?.inc()
+      this.reasonsForIneligibility[it] = reasonsForIneligibility[it]?.plus(1) ?: 1
     }
   }
 
   fun logResult() {
-    val logStringBuilder = StringBuilder().append("PRS_ELIGIBILITY_INVESTIGATION: $agencyId, $prisonersEligible")
+    val logStringBuilder = StringBuilder().append("PRS_ELIGIBILITY_INVESTIGATION: $agencyId, $prisonerCount, $prisonersEligible")
     this.reasonsForIneligibility.forEach {
       logStringBuilder.append(", ${it.value}")
     }

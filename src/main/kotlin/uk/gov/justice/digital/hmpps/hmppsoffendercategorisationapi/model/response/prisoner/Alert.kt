@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner
 
 class Alert(
   val alertCode: String,
