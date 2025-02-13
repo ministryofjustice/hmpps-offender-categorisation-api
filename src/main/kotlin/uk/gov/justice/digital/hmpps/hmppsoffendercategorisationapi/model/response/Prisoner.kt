@@ -20,12 +20,20 @@ data class Prisoner(
   val sentenceStartDate: LocalDate? = null,
   val legalStatus: String? = null,
   val convictedOffencesResponse: ConvictedOffencesResponse? = null,
+  val alerts: List<Alert>? = null,
 ) {
   val currentlyInPrison: Boolean
     get() = status !== null && status == STATUS_ACTIVE_IN
 
   companion object {
+    const val CATEGORY_C = "C"
+    const val CATEGORY_R = "R"
     const val STATUS_ACTIVE_IN = "ACTIVE IN"
     const val STATUS_INACTIVE_OUT = "INACTIVE OUT"
+
+    const val INCENTIVE_LEVEL_STANDARD = "STD"
+    const val INCENTIVE_LEVEL_ENHANCED = "ENH"
+    const val INCENTIVE_LEVEL_ENHANCED_TWO = "EN2"
+    const val INCENTIVE_LEVEL_ENHANCED_THREE = "EN3"
   }
 }
