@@ -1,9 +1,11 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services.prs
 
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.ManageOffencesApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonerSearchApiClient
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.ClientTrackingInterceptor
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.prs.AllPrisonersPrsEligibility
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
 
@@ -43,10 +45,12 @@ class PrsEligibilityService(
     prisoners.forEach { prisoner ->
       prisoner.convictedOffencesResponse?.allConvictedOffences?.map { it.offenceCode }?.let { offenceCodes.addAll(it) }
     }
+    log.info(offenceCodes.distinct().toString())
     return offenceCodes.distinct()
   }
 
   companion object {
     private const val PRISONERS_CHUNK_SIZE = 100
+    private val log = LoggerFactory.getLogger(ClientTrackingInterceptor::class.java)
   }
 }
