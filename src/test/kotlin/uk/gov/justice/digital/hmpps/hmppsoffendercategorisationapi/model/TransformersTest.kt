@@ -72,7 +72,7 @@ class TransformersTest : ResourceTest() {
   @Sql("classpath:repository/lite_category.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   fun `Should transform list category data to response`() {
-    val liteCategory = transformLiteCategory(liteCategoryRepository.findByOffenderNoOrderBySequenceDesc("G0089UO"))
+    val liteCategory = transformLiteCategory(liteCategoryRepository.findAllByOffenderNoOrderBySequenceDesc("G0089UO"))
 
     val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/lite_category.json")
 
@@ -83,11 +83,13 @@ class TransformersTest : ResourceTest() {
   @Sql("classpath:repository/form.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   fun `Should transform form data to response`() {
-    val form = transform(formRepository.findTopByOffenderNoOrderBySequenceNoAsc("G8105VR"))
+    val form = transformAllFromCatForm(
+      formRepository.findAllByOffenderNoOrderBySequenceNoAsc("G8105VR"),
+    )
 
     val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/form.json")
 
-    Assertions.assertThat(json.writeValueAsString(form)).isEqualTo(expectedResult)
+    Assertions.assertThat(json.writeValueAsString(form)).isEqualTo("[$expectedResult]")
   }
 
   @Test

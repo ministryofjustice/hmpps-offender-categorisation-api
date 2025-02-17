@@ -12,6 +12,6 @@ import com.fasterxml.jackson.annotation.JsonInclude
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Escape(
   val nomsId: String?,
-  val riskType: String?,
   val provisionalCategorisation: String?,
+  private val riskType: String? = null,
 )

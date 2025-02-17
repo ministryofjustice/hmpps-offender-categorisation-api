@@ -3,6 +3,9 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respon
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.CatType
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.ReviewReason
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.SecurityReferralStatus
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.CatForm
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.LiteCategory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.catform.NextReviewChangeHistory
@@ -40,7 +43,6 @@ open class BaseSarUnitTest {
     @JvmStatic
     protected val violenceProfile = Violence(
       nomsId = "G8105VR",
-      riskType = "VIOLENCE",
       numberOfAssaults = 0,
       notifySafetyCustodyLead = false,
       numberOfSeriousAssaults = 0,
@@ -52,7 +54,6 @@ open class BaseSarUnitTest {
     @JvmStatic
     protected val riskProfilerViolence = Violence(
       nomsId = "G2194GK",
-      riskType = "VIOLENCE",
       numberOfAssaults = 0,
       notifySafetyCustodyLead = false,
       numberOfSeriousAssaults = 0,
@@ -62,19 +63,34 @@ open class BaseSarUnitTest {
     )
 
     protected val riskProfile = RiskProfile(
-      catHistory = RedactedSection(),
+      catHistory = listOf(
+        mapOf(
+          "bookingId" to 12345,
+          "offenderNo" to "ABC123",
+          "approvalDate" to "2024-02-18",
+          "assessmentSequence" to 5,
+          "assessmentDate" to "2024-03-23",
+          "classification" to "Cat C",
+          "nextReviewDate" to "2025-02-18",
+          "assessmentStatus" to "A",
+          "agencyDescription" to "Pentonville",
+          "assessmentComment" to "something",
+          "classificationCode" to "C",
+          "approvalDateDisplay" to "18/01/2024",
+          "cellSharingAlertFlag" to false,
+          "assessmentDescription" to "something",
+        ),
+      ),
       history = RedactedSection(),
       offences = emptyList(),
-      socProfile = RedactedSection(),
+      socProfile = null,
       lifeProfile = LifeProfile(
         life = true,
         nomsId = "G8105VR",
-        riskType = "LIFE",
         provisionalCategorisation = "B",
       ),
       escapeProfile = Escape(
         nomsId = "G8105VR",
-        riskType = "ESCAPE",
         provisionalCategorisation = "C",
       ),
       violenceProfile,
@@ -88,14 +104,14 @@ open class BaseSarUnitTest {
       status = "APPROVED",
       referredDate = "2023-03-21 15:08:50.982 +0000",
       riskProfile = riskProfile,
-      prisonId = "WMI",
+      prisonId = "LEI",
       offenderNo = "G8105VR",
       startDate = "2023-03-21 15:09:00.266 +0000",
       securityReviewedDate = "2023-03-21 15:09:00.266 +0000",
       approvalDate = "2023-03-21",
-      catType = "INITIAL",
+      catType = CatType.INITIAL,
       assessmentDate = "2023-03-21",
-      reviewReason = "MANUAL",
+      reason = ReviewReason.MANUAL,
       dueByDate = "1977-12-16",
       cancelledDate = "1977-12-17",
     )
@@ -104,8 +120,8 @@ open class BaseSarUnitTest {
     protected val security = SecurityReferral(
       id = "2",
       offenderNo = "G2550VO",
-      prisonId = "LPI",
-      status = "REFERRED",
+      prisonId = "LEI",
+      statusId = SecurityReferralStatus.REFERRED,
       raisedDate = "2019-09-19 13:33:21.123 +0100",
       processedDate = "2019-09-19 13:36:46.335 +0100",
     )
@@ -135,27 +151,23 @@ open class BaseSarUnitTest {
       oldProfile = Profile(
         escape = Escape(
           nomsId = "G0048VL",
-          riskType = "ESCAPE",
           provisionalCategorisation = "C",
         ),
         violence = Violence(
           nomsId = "G0048VL",
-          riskType = "VIOLENCE",
           numberOfAssaults = 0,
           provisionalCategorisation = "C",
           veryHighRiskViolentOffender = false,
         ),
       ),
       newProfile = Profile(
-        soc = RedactedSection(),
+        soc = null,
         escape = Escape(
           nomsId = "G0048VL",
-          riskType = "ESCAPE",
           provisionalCategorisation = "C",
         ),
         violence = Violence(
           nomsId = "G0048VL",
-          riskType = "VIOLENCE",
           numberOfAssaults = 0,
           provisionalCategorisation = "C",
           veryHighRiskViolentOffender = false,

@@ -1,5 +1,9 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.integration
 
+import com.github.tomakehurst.wiremock.client.WireMock
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -28,6 +32,12 @@ abstract class IntegrationTestBase {
 
   companion object {
     private val pgContainer = PostgresContainer.instance
+    internal val prisonerSearchMockServer = PrisonerSearchMockServer()
+    internal val prisonApiMockServer = PrisonApiMockServer()
+    internal val manageAdjudicationsMockServer = ManageAdjudicationsMockServer()
+    internal val assessRisksAndNeedsMockServer = AssessRisksAndNeedsMockServer()
+    internal val manageOffencesMockServer = ManageOffencesMockServer()
+    internal val hmppsAuthMockServer = HmppsAuthMockServer()
 
     @JvmStatic
     @DynamicPropertySource
@@ -43,6 +53,96 @@ abstract class IntegrationTestBase {
         registry.add("spring.flyway.password", pgContainer::getPassword)
       }
     }
+
+    @BeforeAll
+    @JvmStatic
+    fun startMocks() {
+      prisonerSearchMockServer.start()
+      prisonApiMockServer.start()
+      manageAdjudicationsMockServer.start()
+      assessRisksAndNeedsMockServer.start()
+      manageOffencesMockServer.start()
+      hmppsAuthMockServer.start()
+    }
+
+    @AfterAll
+    @JvmStatic
+    fun stopMocks() {
+      prisonerSearchMockServer.stop()
+      prisonApiMockServer.stop()
+      manageAdjudicationsMockServer.stop()
+      assessRisksAndNeedsMockServer.stop()
+      manageOffencesMockServer.stop()
+      hmppsAuthMockServer.stop()
+    }
+
+    fun stubPing(status: Int) {
+      hmppsAuthMockServer.stubFor(
+        WireMock.get("/auth/health/ping").willReturn(
+          WireMock.aResponse()
+            .withHeader("Content-Type", "application/json")
+            .withBody(if (status == 200) "pong" else "some error")
+            .withStatus(status),
+        ),
+      )
+
+      prisonerSearchMockServer.stubFor(
+        WireMock.get("/health/ping").willReturn(
+          WireMock.aResponse()
+            .withHeader("Content-Type", "application/json")
+            .withBody(if (status == 200) "pong" else "some error")
+            .withStatus(status),
+        ),
+      )
+
+      manageAdjudicationsMockServer.stubFor(
+        WireMock.get("/health/ping").willReturn(
+          WireMock.aResponse()
+            .withHeader("Content-Type", "application/json")
+            .withBody(if (status == 200) "pong" else "some error")
+            .withStatus(status),
+        ),
+      )
+
+      prisonApiMockServer.stubFor(
+        WireMock.get("/health/ping").willReturn(
+          WireMock.aResponse()
+            .withHeader("Content-Type", "application/json")
+            .withBody(if (status == 200) "pong" else "some error")
+            .withStatus(status),
+        ),
+      )
+
+      assessRisksAndNeedsMockServer.stubFor(
+        WireMock.get("/health/ping").willReturn(
+          WireMock.aResponse()
+            .withHeader("Content-Type", "application/json")
+            .withBody(if (status == 200) "pong" else "some error")
+            .withStatus(status),
+        ),
+      )
+
+      manageOffencesMockServer.stubFor(
+        WireMock.get("/health/ping").willReturn(
+          WireMock.aResponse()
+            .withHeader("Content-Type", "application/json")
+            .withBody(if (status == 200) "pong" else "some error")
+            .withStatus(status),
+        ),
+      )
+    }
+  }
+
+  @BeforeEach
+  fun resetStubs() {
+    hmppsAuthMockServer.resetAll()
+    prisonerSearchMockServer.resetAll()
+    prisonApiMockServer.resetAll()
+    manageAdjudicationsMockServer.resetAll()
+    assessRisksAndNeedsMockServer.resetAll()
+    manageOffencesMockServer.resetAll()
+
+    hmppsAuthMockServer.stubGrantToken()
   }
 
   protected fun setAuthorisation(

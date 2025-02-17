@@ -6,5 +6,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.
 
 @Repository
 interface SecurityReferralRepository : JpaRepository<SecurityReferralEntity, Long> {
-  fun findByOffenderNoOrderByRaisedDateDesc(offenderNo: String): List<SecurityReferralEntity>?
+  fun findByOffenderNoOrderByRaisedDateDesc(
+    offenderNo: String,
+  ): List<SecurityReferralEntity>
 }

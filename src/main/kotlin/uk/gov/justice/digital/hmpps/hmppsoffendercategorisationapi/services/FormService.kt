@@ -10,7 +10,7 @@ class FormService(
   private val formRepository: FormRepository,
 ) {
   fun saveSecurityReview(bookingId: Long, userId: String, submitted: Boolean, securityReview: String?) {
-    val formEntity = formRepository.findByBookingId(bookingId)
+    val formEntity = formRepository.findFirstByBookingIdAndStatusNotOrderBySequenceNoDesc(bookingId)
       ?: throw FormNotFoundException(bookingId)
     if (securityReview != null) {
       formEntity.updateFormResponse(

@@ -10,7 +10,7 @@ class SarResponseTest : CategorisationToolTest() {
   fun `should build response to match response defined in acceptance criteria`() {
     val response = json.writerWithDefaultPrettyPrinter().writeValueAsString(sarResponse)
 
-    val expectedResult = loadExpectedOutput("sar_response.json")
+    val expectedResult = loadExpectedOutput("sar_response_pretty_printer_formatted.txt")
 
     assertThat(response).isEqualTo(expectedResult)
   }
@@ -24,14 +24,18 @@ class SarResponseTest : CategorisationToolTest() {
 
   protected companion object {
     protected val sarResponse = SarResponse(
-      categorisationTool,
+      catForm = listOf(catForm),
+      security = listOf(security),
+      liteCategory = listOf(liteCategory),
+      nextReviewChangeHistory = listOf(nextReviewChangeHistory),
+      riskChange = listOf(riskChange),
       riskProfiler = RiskProfiler(
         offenderNo = "G2194GK",
-        escape = RedactedSection(),
+        escape = null,
         extremism = RedactedSection(),
-        soc = RedactedSection(),
+        soc = null,
         violence = riskProfilerViolence,
-        executeDateTime = "2021-07-27 02:18:22.10621",
+        dateAndTimeRiskInformationLastUpdated = "2021-07-27 02:18:22.10621",
       ),
     )
   }

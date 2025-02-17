@@ -7,13 +7,38 @@ management.endpoint:
 
 hmpps:
   auth:
-    url: https://sign-in-dev.hmpps.service.justice.gov.uk/auth
+    url: "https://sign-in-dev.hmpps.service.justice.gov.uk/auth"
+    token:
+      url: "https://sign-in-dev.hmpps.service.justice.gov.uk/auth/oauth/token"
 
 prisoner:
   search:
     api:
       endpoint:
         url: "https://prisoner-search-dev.prison.service.justice.gov.uk"
+
+prison:
+  api:
+    endpoint:
+      url: "https://prison-api-dev.prison.service.justice.gov.uk"
+
+manage:
+  adjudications:
+    api:
+      endpoint:
+        url: "https://manage-adjudications-api-dev.prison.service.justice.gov.uk"
+  offences:
+    api:
+      endpoint:
+        url: "https://manage-offences-api-dev.hmpps.service.justice.gov.uk"
+
+assess:
+  risks:
+    and:
+      needs:
+        api:
+          endpoint:
+            url: "https://assess-risks-and-needs-dev.hmpps.service.justice.gov.uk"
 
 # Update to your personal token with correct permissions
 api:

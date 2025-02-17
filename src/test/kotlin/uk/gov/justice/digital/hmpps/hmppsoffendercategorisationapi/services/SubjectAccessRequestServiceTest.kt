@@ -9,14 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.jdbc.Sql
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.ResourceTest
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.BaseSarUnitTest
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.SarResponse
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.FormRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.LiteCategoryRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.NextReviewChangeHistoryRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.RiskChangeRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.SecurityReferralRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.riskprofiler.PreviousProfileRepository
-import java.time.LocalDate.now
 
 class SubjectAccessRequestServiceTest : ResourceTest() {
 
@@ -51,6 +49,8 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
   @Sql("classpath:repository/subject_access_request_service_data.sql")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   fun `should build response to match response defined in acceptance criteria`() {
+    val testPrisonerNumber = "GXXXX"
+
     val subjectAccessRequestService = SubjectAccessRequestService(
       securityReferralRepository,
       nextReviewChangeHistoryRepository,
@@ -60,15 +60,16 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
       previousProfileRepository,
     )
 
-    val response = subjectAccessRequestService.getPrisonContentFor("GXXXX", now(), now())
-    println(json.writeValueAsString(response?.content as SarResponse))
-    assertThat(json.writerWithDefaultPrettyPrinter().writeValueAsString(response.content as SarResponse)).isEqualTo(
-      BaseSarUnitTest.loadExpectedOutput("/subject_access_request_content_v2.json"),
+    val response = subjectAccessRequestService.getPrisonContentFor(testPrisonerNumber, null, null)
+    println(json.writeValueAsString(response?.content))
+    assertThat(json.writerWithDefaultPrettyPrinter().writeValueAsString(response?.content)).isEqualTo(
+      BaseSarUnitTest.loadExpectedOutput("/subject_access_request_content_pretty_printer_formatted.txt"),
     )
   }
 
   @Test
   fun `should build empty response if offender not found in tables`() {
+    val testPrisonerNumber = "GNOTFOUND"
     val subjectAccessRequestService = SubjectAccessRequestService(
       securityReferralRepository,
       nextReviewChangeHistoryRepository,
@@ -78,19 +79,22 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
       previousProfileRepository,
     )
 
-    val response = subjectAccessRequestService.getPrisonContentFor("GNOTFOUND", now(), now())
+    val response = subjectAccessRequestService.getPrisonContentFor(testPrisonerNumber, null, null)
 
     assertThat(response).isEqualTo(null)
   }
 
   @Test
   fun `should build response with empty data`() {
-    whenever(liteCategoryRepositoryMock.findByOffenderNoOrderBySequenceDesc(OFFENDER_NO)).thenReturn(null)
-    whenever(formRepositoryMock.findTopByOffenderNoOrderBySequenceNoAsc(OFFENDER_NO)).thenReturn(null)
+    whenever(liteCategoryRepositoryMock.findAllByOffenderNoOrderBySequenceDesc(OFFENDER_NO)).thenReturn(null)
+    whenever(formRepositoryMock.findAllByOffenderNoOrderBySequenceNoAsc(OFFENDER_NO)).thenReturn(
+      listOf(),
+    )
     whenever(riskChangeRepositoryMock.findByOffenderNoOrderByRaisedDateDesc(OFFENDER_NO)).thenReturn(null)
     whenever(nextReviewChangeHistoryRepositoryMock.findByOffenderNo(OFFENDER_NO)).thenReturn(null)
     whenever(securityReferralRepositoryMock.findByOffenderNoOrderByRaisedDateDesc(OFFENDER_NO)).thenReturn(null)
     whenever(previousProfileRepositoryMock.findByOffenderNo(OFFENDER_NO)).thenReturn(null)
+    val testPrisonerNumber = "GRED"
 
     val subjectAccessRequestService = SubjectAccessRequestService(
       securityReferralRepositoryMock,
@@ -101,7 +105,7 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
       previousProfileRepositoryMock,
     )
 
-    val response = subjectAccessRequestService.getPrisonContentFor("GRED", now(), now())
+    val response = subjectAccessRequestService.getPrisonContentFor(testPrisonerNumber, null, null)
     assertThat(response).isEqualTo(null)
   }
 

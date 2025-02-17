@@ -14,11 +14,29 @@ import com.fasterxml.jackson.annotation.JsonInclude
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Violence(
   val nomsId: String? = null,
-  val riskType: String? = null,
   val numberOfAssaults: Int? = null,
-  val notifySafetyCustodyLead: Boolean? = null,
+  private val notifySafetyCustodyLead: Boolean? = null,
   val numberOfSeriousAssaults: Int? = null,
   val numberOfNonSeriousAssaults: Int? = null,
   val provisionalCategorisation: String? = null,
-  val veryHighRiskViolentOffender: Boolean? = null,
-)
+  private val veryHighRiskViolentOffender: Boolean? = null,
+  private val riskType: String? = null,
+) {
+  val shouldNotifySafetyCustodyLead: String?
+    get() = if (this.notifySafetyCustodyLead == null) {
+      null
+    } else if (this.notifySafetyCustodyLead) {
+      "Yes"
+    } else {
+      "No"
+    }
+
+  val isVeryHighRiskViolentOffender: String?
+    get() = if (this.veryHighRiskViolentOffender == null) {
+      null
+    } else if (this.veryHighRiskViolentOffender) {
+      "Yes"
+    } else {
+      "No"
+    }
+}

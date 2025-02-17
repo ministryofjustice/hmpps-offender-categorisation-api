@@ -31,7 +31,7 @@ fun transformSecurityReferral(securityReferral: List<SecurityReferralEntity>?): 
           prisonId = it.prisonId,
           raisedDate = it.raisedDate.toString(),
           offenderNo = it.offenderNo,
-          status = it.status,
+          statusId = it.status,
           processedDate = it.processedDate.toString(),
         ),
       )
@@ -120,40 +120,70 @@ fun transformLiteCategory(entity: List<LiteCategoryEntity>?): List<LiteCategory>
           placementPrisonId = it.placementPrisonId,
         ),
       )
-
-      return response
     }
+    return response
   }
 
   return null
 }
 
+private fun processCatFormResponseForSubjectAccessRequest(formResponse: Map<String, Any>?): Map<String, Any> {
+  if (formResponse == null) {
+    return emptyMap()
+  }
+  val processedFormResponse = mutableMapOf<String, Any>()
+
+  formResponse.forEach {
+    val key = when (it.key) {
+      "securityBack" -> "categoryDecisionBasedOnSecurityInformation"
+      "catB" -> "categoryBIsWarranted"
+      else -> it.key
+    }
+    if (it.value is Map<*, *>) {
+      processedFormResponse[key] = processCatFormResponseForSubjectAccessRequest(it.value as Map<String, Any>)
+    } else {
+      val value = when (it.value) {
+        true -> "Yes"
+        false -> "No"
+        else -> it.value
+      }
+      processedFormResponse[key] = value
+    }
+  }
+
+  return processedFormResponse
+}
+
 /**
  * userId, cancelledBy is REDACTED
  */
-fun transform(entity: FormEntity?): CatForm? {
-  if (entity != null) {
-    return CatForm(
-      prisonId = entity.prisonId,
-      offenderNo = entity.offenderNo,
-      status = entity.getStatus(),
-      reviewReason = entity.reviewReason.toString(),
-      dueByDate = entity.dueByDate.toString(),
+fun transformAllFromCatForm(entity: List<FormEntity>): List<CatForm> {
+  val response = ArrayList<CatForm>()
+  entity.forEach {
+    response.add(
+      CatForm(
+        prisonId = it.prisonId,
+        offenderNo = it.offenderNo,
+        status = it.getStatus(),
+        reason = it.reviewReason,
+        dueByDate = it.dueByDate?.toString(),
 
-      formResponse = entity.getFormResponse()?.let { objectMapper.readValue<Map<String, Any>>(it) },
-      riskProfile = entity.riskProfile?.let { objectMapper.readValue<RiskProfile>(it) },
+        formResponse = processCatFormResponseForSubjectAccessRequest(
+          it.getFormResponse()?.let { objectMapper.readValue<Map<String, Any>>(it) },
+        ),
+        riskProfile = it.riskProfile?.let { objectMapper.readValue<RiskProfile>(it) },
 
-      cancelledDate = entity.cancelledDate.toString(),
-      approvalDate = entity.approvalDate.toString(),
-      securityReviewedDate = entity.getSecurityReviewedDate().toString(),
-      assessmentDate = entity.assessmentDate.toString(),
-      startDate = entity.startDate.toString(),
-      referredDate = entity.referredDate.toString(),
-      catType = entity.catType.toString(),
+        cancelledDate = it.cancelledDate?.toString(),
+        approvalDate = it.approvalDate?.toString(),
+        securityReviewedDate = it.getSecurityReviewedDate()?.toString(),
+        assessmentDate = it.assessmentDate?.toString(),
+        startDate = it.startDate.toString(),
+        referredDate = it.referredDate?.toString(),
+        catType = it.catType,
+      ),
     )
   }
-
-  return null
+  return response
 }
 
 /**
@@ -163,11 +193,11 @@ fun transform(entity: PreviousProfileEntity?): RiskProfiler? {
   if (entity != null) {
     return RiskProfiler(
       offenderNo = entity.offenderNo,
-      soc = RedactedSection(),
-      escape = RedactedSection(),
+      soc = null,
+      escape = null,
       extremism = RedactedSection(),
       violence = entity.violence.let { objectMapper.readValue<Violence>(it) },
-      executeDateTime = entity.executeDateTime.toString(),
+      dateAndTimeRiskInformationLastUpdated = entity.executeDateTime.toString(),
     )
   }
 
