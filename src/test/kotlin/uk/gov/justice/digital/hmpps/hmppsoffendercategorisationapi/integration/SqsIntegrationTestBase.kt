@@ -20,7 +20,7 @@ class SqsIntegrationTestBase : IntegrationTestBase() {
   protected val domainEventsTopicSnsClient by lazy { domainEventsTopic.snsClient }
   protected val domainEventsTopicArn by lazy { domainEventsTopic.arn }
 
-  protected val prisonerListenerQueue by lazy { hmppsQueueService.findByQueueId("prisoneroffendersearch") as HmppsQueue }
+  protected val prisonerListenerQueue by lazy { hmppsQueueService.findByQueueId("domainevents") as HmppsQueue }
   internal val prisonerListenerQueueUrl by lazy { prisonerListenerQueue.queueUrl }
 
   companion object {

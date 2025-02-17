@@ -46,9 +46,9 @@ hmpps.sqs:
   reactiveApi: true
   provider: localstack
   queues:
-    prisoneroffendersearch:
-      queueName: "prisoneroffendersearch-${random.uuid}"
-      dlqName: "prisoneroffendersearch-dlq-${random.uuid}"
+    domainevents:
+      queueName: ${random.uuid}
+      dlqName: ${random.uuid}
       subscribeTopicId: domainevents
       subscribeFilter: "{\"eventType\":[\"prisoner-offender-search.prisoner.released\", \"prisoner-offender-search.prisoner.received\", \"prison-offender-events.prisoner.merged\"]}"
       dlqMaxReceiveCount: 3
