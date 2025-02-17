@@ -42,7 +42,7 @@ class TransformersTest : ResourceTest() {
     val riskChange = transformRiskChange(riskChangeRepository.findByOffenderNoOrderByRaisedDateDesc("G0048VL"))
 
     val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/risk_change.json")
-    Assertions.assertThat(json.writeValueAsString(riskChange)).isEqualTo(expectedResult)
+    Assertions.assertThat(riskChange).isSameAs(expectedResult)
   }
 
   @Test
