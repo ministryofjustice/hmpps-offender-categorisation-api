@@ -8,6 +8,7 @@ import java.time.LocalDate
 
 class PrisonerPrsEligibilityCalculator(
   private val prisoner: Prisoner,
+  private val sdsExcludedOffenceCodes: List<String>,
 ) {
   private fun isCategoryCOrClosed(): Boolean {
     return this.prisoner.category == Prisoner.CATEGORY_C || this.prisoner.category == Prisoner.CATEGORY_R
@@ -37,6 +38,10 @@ class PrisonerPrsEligibilityCalculator(
     } ?: false
   }
 
+  private fun prisonersSdsExcludedOffenceCodes(): List<String> {
+    return prisoner.convictedOffencesResponse?.allConvictedOffences?.map { it.offenceCode }?.filter { sdsExcludedOffenceCodes.contains(it) } ?: emptyList()
+  }
+
   fun calculate(): PrisonerPrsEligibility {
     val reasonForIneligibility = mutableListOf<PrsIneligibilityReason>()
     if (!isCategoryCOrClosed()) {
@@ -53,6 +58,7 @@ class PrisonerPrsEligibilityCalculator(
     }
     return PrisonerPrsEligibility(
       reasonForIneligibility,
+      prisonersSdsExcludedOffenceCodes(),
     )
   }
 }
