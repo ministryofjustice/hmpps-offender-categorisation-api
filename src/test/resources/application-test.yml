@@ -49,13 +49,11 @@ hmpps.sqs:
     domainevents:
       queueName: ${random.uuid}
       dlqName: ${random.uuid}
-      subscribeTopicId: domainevents
-      subscribeFilter: "{\"eventType\":[\"prisoner-offender-search.prisoner.released\", \"prisoner-offender-search.prisoner.received\", \"prison-offender-events.prisoner.merged\"]}"
-      dlqMaxReceiveCount: 3
-      visibilityTimeout: 120
+      subscribeTopicId: domaineventsqueue
+      dlqMaxReceiveCount: 1
   topics:
-    domainevents:
-      arn: arn:aws:sns:eu-west-2:000000000000:11111111-2222-3333-4444-555555555555
+    domaineventsqueue:
+      arn: arn:aws:sns:eu-west-2:000000000000:domain_events_queue
 
 # Wiremock prison-api
 prison:
