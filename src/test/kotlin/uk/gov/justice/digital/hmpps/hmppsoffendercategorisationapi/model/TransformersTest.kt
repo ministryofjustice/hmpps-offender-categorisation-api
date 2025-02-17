@@ -8,6 +8,7 @@ import org.springframework.test.context.jdbc.Sql
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.ResourceTest
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.RiskChangeEntity
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.BaseSarUnitTest
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.common.RedactedSection
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.Escape
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.Profile
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.RiskChange
@@ -58,38 +59,46 @@ class TransformersTest : ResourceTest() {
             escape = Escape(
               nomsId = "G0048VL",
               provisionalCategorisation = "C",
+              riskType = "ESCAPE",
             ),
             violence = Violence(
               nomsId = "G0048VL",
               numberOfAssaults = 0,
-              numberOfNonSeriousAssaults = 0,
+              numberOfSeriousAssaults = 0,
               provisionalCategorisation = "C",
               notifySafetyCustodyLead = false,
               veryHighRiskViolentOffender = false,
+              riskType = "VIOLENCE",
             ),
+            extremism = RedactedSection(),
             soc = Soc(
               nomsId = "G0048VL",
               transferToSecurity = false,
               provisionalCategorisation = "C",
+              riskType = "SOC",
             ),
           ),
           newProfile = Profile(
             escape = Escape(
               nomsId = "G0048VL",
               provisionalCategorisation = "C",
+              riskType = "ESCAPE",
             ),
             violence = Violence(
               nomsId = "G0048VL",
               numberOfAssaults = 1,
-              numberOfNonSeriousAssaults = 0,
+              numberOfSeriousAssaults = 0,
               provisionalCategorisation = "C",
               notifySafetyCustodyLead = false,
               veryHighRiskViolentOffender = false,
+              riskType = "VIOLENCE",
             ),
+            extremism = RedactedSection(),
             soc = Soc(
               nomsId = "G0048VL",
               transferToSecurity = false,
               provisionalCategorisation = "C",
+              riskType = "SOC",
             ),
           ),
         ),
