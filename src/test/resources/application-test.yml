@@ -47,8 +47,8 @@ hmpps.sqs:
   provider: localstack
   queues:
     domainevents:
-      queueName: ${random.uuid}
-      dlqName: ${random.uuid}
+      queueName: "domainevents_${random.uuid}"
+      dlqName: "domainevents_${random.uuid}"
       subscribeTopicId: domaineventsqueue
       dlqMaxReceiveCount: 1
   topics:
