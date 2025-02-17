@@ -1,14 +1,14 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.jdbc.Sql
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.ResourceTest
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.RiskChangeEntity
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.BaseSarUnitTest
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.RiskChange
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.*
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.FormRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.LiteCategoryRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.NextReviewChangeHistoryRepository
@@ -43,8 +43,54 @@ class TransformersTest : ResourceTest() {
   fun `Should transform risk change data to response`() {
     val riskChange = transformRiskChange(riskChangeRepository.findByOffenderNoOrderByRaisedDateDesc("G0048VL"))
 
-    val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/risk_change.json").let { objectMapper.readValue<List<RiskChange>>(it) }
-    Assertions.assertThat(riskChange).isEqualTo(expectedResult)
+    Assertions.assertThat(riskChange).isEqualTo(
+      listOf(
+        RiskChange(
+          offenderNo = "G0048VL",
+          prisonId = "1000",
+          raisedDate = "2019-09-18T09:45:34.166Z",
+          status = RiskChangeEntity.STATUS_NEW,
+          oldProfile = Profile(
+            escape = Escape(
+              nomsId = "G0048VL",
+              provisionalCategorisation = "C",
+            ),
+            violence = Violence(
+              nomsId = "G0048VL",
+              numberOfAssaults = 0,
+              numberOfNonSeriousAssaults = 0,
+              provisionalCategorisation = "C",
+              notifySafetyCustodyLead = false,
+              veryHighRiskViolentOffender = false,
+            ),
+            soc = Soc(
+              nomsId = "G0048VL",
+              transferToSecurity = false,
+              provisionalCategorisation = "C",
+            ),
+          ),
+          newProfile = Profile(
+            escape = Escape(
+              nomsId = "G0048VL",
+              provisionalCategorisation = "C",
+            ),
+            violence = Violence(
+              nomsId = "G0048VL",
+              numberOfAssaults = 1,
+              numberOfNonSeriousAssaults = 0,
+              provisionalCategorisation = "C",
+              notifySafetyCustodyLead = false,
+              veryHighRiskViolentOffender = false,
+            ),
+            soc = Soc(
+              nomsId = "G0048VL",
+              transferToSecurity = false,
+              provisionalCategorisation = "C",
+            ),
+          ),
+        ),
+      ),
+    )
   }
 
   @Test
