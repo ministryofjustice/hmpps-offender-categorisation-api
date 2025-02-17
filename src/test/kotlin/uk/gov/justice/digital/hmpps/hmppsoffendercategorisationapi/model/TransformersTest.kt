@@ -1,12 +1,14 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.jdbc.Sql
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.ResourceTest
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.BaseSarUnitTest
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange.RiskChange
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.FormRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.LiteCategoryRepository
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.NextReviewChangeHistoryRepository
@@ -41,8 +43,8 @@ class TransformersTest : ResourceTest() {
   fun `Should transform risk change data to response`() {
     val riskChange = transformRiskChange(riskChangeRepository.findByOffenderNoOrderByRaisedDateDesc("G0048VL"))
 
-    val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/risk_change.json")
-    Assertions.assertThat(riskChange).isSameAs(expectedResult)
+    val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/risk_change.json").let { objectMapper.readValue<List<RiskChange>>(it) }
+    Assertions.assertThat(riskChange).isEqualTo(expectedResult)
   }
 
   @Test
