@@ -31,7 +31,7 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
 
     assertThat(logCaptor.infoLogs.contains("Handling release of")).isFalse()
     await untilAsserted {
-      assertThat(prisonerListenerQueue.sqsClient.countAllMessagesOnQueue(prisonerListenerQueueUrl).get()).isEqualTo(0)
+      assertThat(prisonerListenerQueue.sqsClient.countAllMessagesOnQueue(prisonerListenerQueue.queueUrl).get()).isEqualTo(0)
     }
   }
 
@@ -51,7 +51,7 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
     ).get()
 
     await untilAsserted {
-      assertThat(prisonerListenerQueue.sqsClient.countAllMessagesOnQueue(prisonerListenerQueueUrl).get()).isEqualTo(0)
+      assertThat(prisonerListenerQueue.sqsClient.countAllMessagesOnQueue(prisonerListenerQueue.queueUrl).get()).isEqualTo(0)
     }
   }
 

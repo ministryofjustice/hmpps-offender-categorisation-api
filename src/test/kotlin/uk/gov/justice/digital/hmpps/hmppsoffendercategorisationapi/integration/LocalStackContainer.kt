@@ -14,8 +14,10 @@ object LocalStackContainer {
   val instance by lazy { startLocalstackIfNotRunning() }
 
   fun setLocalStackProperties(localStackContainer: LocalStackContainer, registry: DynamicPropertyRegistry) {
-    registry.add("hmpps.sqs.localstackUrl") { localStackContainer.getEndpointOverride(LocalStackContainer.Service.SNS) }
-    registry.add("hmpps.sqs.region") { localStackContainer.region }
+    val localstackUrl = localStackContainer.getEndpointOverride(LocalStackContainer.Service.SNS).toString()
+    val region = localStackContainer.region
+    registry.add("hmpps.sqs.localstackUrl") { localstackUrl }
+    registry.add("hmpps.sqs.region") { region }
   }
 
   private fun startLocalstackIfNotRunning(): LocalStackContainer? {

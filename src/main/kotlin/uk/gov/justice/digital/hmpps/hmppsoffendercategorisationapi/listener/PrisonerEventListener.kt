@@ -20,7 +20,7 @@ class PrisonerEventListener(
     val log: Logger = LoggerFactory.getLogger(this::class.java)
   }
 
-  @SqsListener("domainevents", factory = "hmppsQueueContainerFactoryProxy")
+  @SqsListener("domaineventsqueue", factory = "hmppsQueueContainerFactoryProxy")
   @WithSpan(value = "dps-core-oc_api_queue_for_domain_events", kind = SpanKind.SERVER)
   fun onDomainEvent(
     rawMessage: String,
