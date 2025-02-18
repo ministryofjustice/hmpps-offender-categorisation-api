@@ -4,7 +4,9 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonerFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.PrsIneligibilityReason
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.SdsExemptionSchedulePart
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.SdsExcludedOffenceCode
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Alert
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.ConvictedOffence
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.CurrentIncentive
@@ -15,28 +17,18 @@ class PrisonerPrsEligibilityCalculatorTest {
 
   @Test
   fun testCalculateWithEligiblePrisoner() {
-    val testOffenceCode = "SOMETHING"
     val prisonerPrsEligibilityCalculator = PrisonerPrsEligibilityCalculator(
       (TestPrisonerFactory())
         .withCategory(Prisoner.CATEGORY_C)
         .withCurrentIncentive(CurrentIncentive(Level(Prisoner.INCENTIVE_LEVEL_STANDARD, "Standard")))
         .withAlerts(null)
         .withReleaseDate(LocalDate.now().plusMonths(6))
-        .withConvictedOffencesResponse(
-          listOf(
-            ConvictedOffence(
-              offenceCode = testOffenceCode,
-              offenceDescription = "something",
-            ),
-          ),
-        )
         .build(),
-      listOf(testOffenceCode),
+      emptyList(),
     )
     val prisonerPrsEligibility = prisonerPrsEligibilityCalculator.calculate()
     Assertions.assertThat(prisonerPrsEligibility.reasonForIneligibility).isEmpty()
     Assertions.assertThat(prisonerPrsEligibility.isEligible).isTrue()
-    Assertions.assertThat(prisonerPrsEligibility.sdsExcludedOffenceCodes).contains(testOffenceCode)
   }
 
   @Test
@@ -164,5 +156,35 @@ class PrisonerPrsEligibilityCalculatorTest {
     val prisonerPrsEligibility = prisonerPrsEligibilityCalculator.calculate()
     Assertions.assertThat(prisonerPrsEligibility.reasonForIneligibility).isEmpty()
     Assertions.assertThat(prisonerPrsEligibility.isEligible).isTrue()
+  }
+
+  @Test
+  fun testCalculateIsEligibleWithOffenceCodes() {
+    val testOffenceCode = "SOMETHING"
+    val prisonerPrsEligibilityCalculator = PrisonerPrsEligibilityCalculator(
+      (TestPrisonerFactory())
+        .withCategory(Prisoner.CATEGORY_C)
+        .withCurrentIncentive(CurrentIncentive(Level(Prisoner.INCENTIVE_LEVEL_STANDARD, "Standard")))
+        .withAlerts(null)
+        .withReleaseDate(LocalDate.now().plusMonths(6))
+        .withConvictedOffencesResponse(
+          listOf(
+            ConvictedOffence(
+              offenceCode = testOffenceCode,
+              offenceDescription = "something",
+            ),
+          ),
+        )
+        .build(),
+      listOf(
+        SdsExcludedOffenceCode(
+          testOffenceCode,
+          SdsExemptionSchedulePart.SEXUAL,
+        ),
+      ),
+    )
+    val prisonerPrsEligibility = prisonerPrsEligibilityCalculator.calculate()
+    Assertions.assertThat(prisonerPrsEligibility.reasonForIneligibility).contains(PrsIneligibilityReason.OFFENCE_SEXUAL)
+    Assertions.assertThat(prisonerPrsEligibility.isEligible).isFalse()
   }
 }
