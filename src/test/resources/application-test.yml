@@ -41,6 +41,12 @@ assess:
           endpoint:
             url: http://localhost:8095
 
+probation:
+  search:
+    api:
+      endpoint:
+        url: http://localhost:8096
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/form-builder

@@ -27,7 +27,6 @@ class PrsEligibilityService(
     do {
       prisoners = prisonerSearchApiClient.findPrisonersByAgencyId(agencyId, i, PRISONERS_CHUNK_SIZE)
       val sdsExcludedOffenceCodes = manageOffencesApiClient.checkWhichOffenceCodesAreSdsExcluded(getAllOffenceCodes(prisoners))?.map { it.offenceCode } ?: emptyList()
-      println(getAllOffenceCodes(prisoners))
       prisoners.forEach {
         allPrisonersPrsEligibility.addPrisoner(
           (PrisonerPrsEligibilityCalculator(it, sdsExcludedOffenceCodes)).calculate(),
@@ -41,7 +40,7 @@ class PrsEligibilityService(
   private fun getAllOffenceCodes(prisoners: List<Prisoner>): List<String> {
     val offenceCodes = mutableListOf<String>()
     prisoners.forEach { prisoner ->
-      prisoner.convictedOffencesResponse?.allConvictedOffences?.map { it.offenceCode }?.let { offenceCodes.addAll(it) }
+      prisoner.allConvictedOffences?.map { it.offenceCode }?.let { offenceCodes.addAll(it) }
     }
     return offenceCodes.distinct()
   }

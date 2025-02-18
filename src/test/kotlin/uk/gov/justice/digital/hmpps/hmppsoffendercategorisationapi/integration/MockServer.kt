@@ -8,11 +8,13 @@ import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration
 import com.github.tomakehurst.wiremock.http.HttpHeader
 import com.github.tomakehurst.wiremock.http.HttpHeaders
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PageableResult
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonerFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.RiskLevel
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prison
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.adjudication.Adjudication
 
 private const val MAPPINGS_DIRECTORY = "src/testIntegration/resources"
 
@@ -72,6 +74,24 @@ class ManageAdjudicationsMockServer : MockServer(8092) {
                 mapOf(
                   "bookingId" to bookingId,
                   "adjudicationCount" to numberOfAdjudications,
+                ),
+              ),
+            ),
+        ),
+    )
+  }
+  fun stubFindAdjudicationsByAgencyId(result: List<Adjudication>) {
+    stubFor(
+      WireMock.get(WireMock.urlPathEqualTo("/reported-adjudications/reports"))
+        .willReturn(
+          WireMock.aResponse()
+            .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json")))
+            .withBody(
+              jacksonObjectMapper().apply {
+                registerModule(JavaTimeModule())
+              }.writeValueAsString(
+                PageableResult(
+                  content = result,
                 ),
               ),
             ),
