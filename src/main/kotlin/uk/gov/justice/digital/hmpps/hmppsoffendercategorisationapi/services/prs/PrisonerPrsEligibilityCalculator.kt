@@ -1,6 +1,5 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services.prs
 
-import org.slf4j.LoggerFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.PrsIneligibilityReason
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.SdsExemptionSchedulePart
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.prs.PrisonerPrsEligibility
@@ -86,9 +85,5 @@ class PrisonerPrsEligibilityCalculator(
     return PrisonerPrsEligibility(
       reasonForIneligibility,
     )
-  }
-
-  companion object {
-    private val log = LoggerFactory.getLogger(this::class.java)
   }
 }

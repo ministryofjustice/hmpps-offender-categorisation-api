@@ -10,7 +10,6 @@ class AllPrisonersPrsEligibility(
   private var reasonsForIneligibility: MutableMap<PrsIneligibilityReason, Int> = mutableMapOf(),
 ) {
   fun addPrisoner(prisonerPrsEligibility: PrisonerPrsEligibility) {
-    println(prisonerPrsEligibility.reasonForIneligibility)
     prisonerCount++
     if (prisonerPrsEligibility.isEligible) {
       prisonersEligible++
