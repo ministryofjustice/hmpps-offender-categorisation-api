@@ -17,7 +17,6 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.SdsExcludedOffenceCode
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Alert
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.ConvictedOffence
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.ConvictedOffencesResponse
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.CurrentIncentive
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Level
 import java.time.LocalDate
@@ -54,16 +53,14 @@ class PrsEligibilityServiceTest {
           .withAlerts(null)
           .withReleaseDate(LocalDate.now().plusMonths(6))
           .withConvictedOffencesResponse(
-            ConvictedOffencesResponse(
-              allConvictedOffences = listOf(
-                ConvictedOffence(
-                  offenceCode = testOffenceCode,
-                  offenceDescription = "something",
-                ),
-                ConvictedOffence(
-                  offenceCode = testOffenceCode2,
-                  offenceDescription = "something else",
-                ),
+            listOf(
+              ConvictedOffence(
+                offenceCode = testOffenceCode,
+                offenceDescription = "something",
+              ),
+              ConvictedOffence(
+                offenceCode = testOffenceCode2,
+                offenceDescription = "something else",
               ),
             ),
           )
@@ -81,12 +78,10 @@ class PrsEligibilityServiceTest {
             ),
           )
           .withConvictedOffencesResponse(
-            ConvictedOffencesResponse(
-              allConvictedOffences = listOf(
-                ConvictedOffence(
-                  offenceCode = testOffenceCode,
-                  offenceDescription = "something",
-                ),
+            listOf(
+              ConvictedOffence(
+                offenceCode = testOffenceCode,
+                offenceDescription = "something",
               ),
             ),
           )

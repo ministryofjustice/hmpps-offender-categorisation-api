@@ -7,7 +7,6 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.Pr
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Alert
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.ConvictedOffence
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.ConvictedOffencesResponse
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.CurrentIncentive
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Level
 import java.time.LocalDate
@@ -24,12 +23,10 @@ class PrisonerPrsEligibilityCalculatorTest {
         .withAlerts(null)
         .withReleaseDate(LocalDate.now().plusMonths(6))
         .withConvictedOffencesResponse(
-          ConvictedOffencesResponse(
-            allConvictedOffences = listOf(
-              ConvictedOffence(
-                offenceCode = testOffenceCode,
-                offenceDescription = "something",
-              ),
+          listOf(
+            ConvictedOffence(
+              offenceCode = testOffenceCode,
+              offenceDescription = "something",
             ),
           ),
         )

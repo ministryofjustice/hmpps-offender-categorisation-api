@@ -54,3 +54,9 @@ assess:
         api:
           endpoint:
             url: "https://assess-risks-and-needs-dev.hmpps.service.justice.gov.uk"
+
+probation:
+  search:
+    api:
+      endpoint:
+        url: "https://probation-offender-search-dev.hmpps.service.justice.gov.uk"

@@ -39,7 +39,7 @@ class PrisonerPrsEligibilityCalculator(
   }
 
   private fun prisonersSdsExcludedOffenceCodes(): List<String> {
-    return prisoner.convictedOffencesResponse?.allConvictedOffences?.map { it.offenceCode }?.filter { sdsExcludedOffenceCodes.contains(it) } ?: emptyList()
+    return prisoner.allConvictedOffences?.map { it.offenceCode }?.filter { sdsExcludedOffenceCodes.contains(it) } ?: emptyList()
   }
 
   fun calculate(): PrisonerPrsEligibility {
