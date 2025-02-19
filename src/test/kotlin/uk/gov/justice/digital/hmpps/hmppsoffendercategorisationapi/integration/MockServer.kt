@@ -12,6 +12,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.Pageab
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonerFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.RiskLevel
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.SdsExemptionSchedulePart
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prison
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.adjudication.Adjudication
@@ -138,7 +139,7 @@ class ManageOffencesMockServer : MockServer(8093) {
                   listOf(
                     mapOf(
                       "offenceCode" to offenceCodes[0],
-                      "schedulePart" to "violence",
+                      "schedulePart" to SdsExemptionSchedulePart.VIOLENT,
                     ),
                   )
                 },

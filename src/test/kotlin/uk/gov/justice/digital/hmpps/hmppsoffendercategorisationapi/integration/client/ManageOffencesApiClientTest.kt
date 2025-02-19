@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.web.reactive.function.client.WebClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.ManageOffencesApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.integration.IntegrationTestBase
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.SdsExemptionSchedulePart
 
 class ManageOffencesApiClientTest : IntegrationTestBase() {
   private lateinit var manageOffencesApiClient: ManageOffencesApiClient
@@ -26,7 +27,7 @@ class ManageOffencesApiClientTest : IntegrationTestBase() {
       val result = manageOffencesApiClient.checkWhichOffenceCodesAreSdsExcluded(testOffenceCodes)
       Assertions.assertThat(result?.count()).isEqualTo(1)
       Assertions.assertThat(result?.get(0)?.offenceCode).isEqualTo(testOffenceCodes[0])
-      Assertions.assertThat(result?.get(0)?.schedulePart).isEqualTo("violence")
+      Assertions.assertThat(result?.get(0)?.schedulePart).isEqualTo(SdsExemptionSchedulePart.VIOLENT)
     }
   }
 }

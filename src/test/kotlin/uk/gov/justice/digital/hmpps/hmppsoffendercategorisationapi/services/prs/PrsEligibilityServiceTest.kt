@@ -13,6 +13,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.Prison
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonerSearchApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonerFactory
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.SdsExemptionSchedulePart
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.SdsExcludedOffenceCode
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Alert
@@ -58,10 +59,6 @@ class PrsEligibilityServiceTest {
                 offenceCode = testOffenceCode,
                 offenceDescription = "something",
               ),
-              ConvictedOffence(
-                offenceCode = testOffenceCode2,
-                offenceDescription = "something else",
-              ),
             ),
           )
           .build(),
@@ -83,6 +80,10 @@ class PrsEligibilityServiceTest {
                 offenceCode = testOffenceCode,
                 offenceDescription = "something",
               ),
+              ConvictedOffence(
+                offenceCode = testOffenceCode2,
+                offenceDescription = "something else",
+              ),
             ),
           )
           .withReleaseDate(LocalDate.now().plusMonths(13))
@@ -93,13 +94,17 @@ class PrsEligibilityServiceTest {
       listOf(
         SdsExcludedOffenceCode(
           offenceCode = testOffenceCode,
-          schedulePart = "something",
+          schedulePart = SdsExemptionSchedulePart.NONE,
+        ),
+        SdsExcludedOffenceCode(
+          offenceCode = testOffenceCode2,
+          schedulePart = SdsExemptionSchedulePart.SEXUAL,
         ),
       ),
     )
 
     prsEligibilityService.report()
 
-    Assertions.assertThat(output).contains("PRS_ELIGIBILITY_INVESTIGATION: HCI, 2, 1, 0, CATEGORY: 1, TIME_LEFT_TO_SERVE: 1, INCENTIVE_LEVEL: 1, ESCAPE: 1, SOMETHING: 2")
+    Assertions.assertThat(output).contains("PRS_ELIGIBILITY_INVESTIGATION: HCI, 2, 1, CATEGORY: 1, TIME_LEFT_TO_SERVE: 1, INCENTIVE_LEVEL: 1, ESCAPE: 1, OFFENCE_SEXUAL: 1")
   }
 }

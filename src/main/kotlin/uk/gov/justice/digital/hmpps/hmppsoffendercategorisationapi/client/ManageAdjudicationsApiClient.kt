@@ -32,7 +32,7 @@ class ManageAdjudicationsApiClient(
           .path("/reported-adjudications/reports")
           .queryParam("startDate", startDate)
           .queryParam("status", statuses)
-          .queryParam("page", statuses)
+          .queryParam("page", page)
           .queryParam("size", size)
           .build()
       }
