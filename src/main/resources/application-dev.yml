@@ -61,7 +61,6 @@ probation:
       endpoint:
         url: "https://probation-offender-search-dev.hmpps.service.justice.gov.uk"
 
-
 hmpps.sqs:
   provider: localstack
   localstackUrl: http://localhost:4666
