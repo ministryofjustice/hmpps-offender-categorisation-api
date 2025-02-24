@@ -1,6 +1,7 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -41,8 +42,9 @@ class TransformersTest : ResourceTest() {
   fun `Should transform risk change data to response`() {
     val riskChange = transformRiskChange(riskChangeRepository.findByOffenderNoOrderByRaisedDateDesc("G0048VL"))
 
-    val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/risk_change.json")
-    Assertions.assertThat(json.writeValueAsString(riskChange)).isEqualTo(expectedResult)
+    val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/risk_change.json").let { json.readValue<Any>(it) }
+    val jsonRiskChange = json.writeValueAsString(riskChange).let { json.readValue<Any>(it) }
+    Assertions.assertThat(jsonRiskChange).isEqualTo(expectedResult)
   }
 
   @Test
@@ -87,9 +89,10 @@ class TransformersTest : ResourceTest() {
       formRepository.findAllByOffenderNoOrderBySequenceNoAsc("G8105VR"),
     )
 
-    val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/form.json")
+    val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/form.json").let { json.readValue<Any>(it) }
+    val jsonForm = json.writeValueAsString(form).let { json.readValue<Any>(it) }
 
-    Assertions.assertThat(json.writeValueAsString(form)).isEqualTo("[$expectedResult]")
+    Assertions.assertThat(jsonForm).isEqualTo(listOf(expectedResult))
   }
 
   @Test
@@ -98,8 +101,9 @@ class TransformersTest : ResourceTest() {
   fun `Should transform risk profiler data to response`() {
     val riskProfiler = transform(previousProfileRepository.findByOffenderNo("G8105VR"))
 
-    val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/risk_profiler.json")
+    val expectedResult = BaseSarUnitTest.loadExpectedOutput("/transformer/risk_profiler.json").let { json.readValue<Any>(it) }
+    val jsonRiskProfiler = json.writeValueAsString(riskProfiler).let { json.readValue<Any>(it) }
 
-    Assertions.assertThat(json.writeValueAsString(riskProfiler)).isEqualTo(expectedResult)
+    Assertions.assertThat(jsonRiskProfiler).isEqualTo(expectedResult)
   }
 }

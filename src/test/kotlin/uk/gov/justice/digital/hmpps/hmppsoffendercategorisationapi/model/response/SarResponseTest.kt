@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response
 
+import com.fasterxml.jackson.module.kotlin.readValue
 import org.assertj.core.api.AssertionsForClassTypes.assertThat
 import org.junit.jupiter.api.Test
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.common.RedactedSection
@@ -8,11 +9,11 @@ class SarResponseTest : CategorisationToolTest() {
 
   @Test
   fun `should build response to match response defined in acceptance criteria`() {
-    val response = json.writerWithDefaultPrettyPrinter().writeValueAsString(sarResponse)
+    val jsonResponse = json.writeValueAsString(sarResponse).let { json.readValue<Any>(it) }
 
-    val expectedResult = loadExpectedOutput("sar_response_pretty_printer_formatted.txt")
+    val expectedResult = loadExpectedOutput("sar_response.json").let { json.readValue<Any>(it) }
 
-    assertThat(response).isEqualTo(expectedResult)
+    assertThat(jsonResponse).isEqualTo(expectedResult)
   }
 
   @Test

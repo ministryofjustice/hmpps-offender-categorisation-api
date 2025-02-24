@@ -1,6 +1,7 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.mock
@@ -62,8 +63,10 @@ class SubjectAccessRequestServiceTest : ResourceTest() {
 
     val response = subjectAccessRequestService.getPrisonContentFor(testPrisonerNumber, null, null)
     println(json.writeValueAsString(response?.content))
-    assertThat(json.writerWithDefaultPrettyPrinter().writeValueAsString(response?.content)).isEqualTo(
-      BaseSarUnitTest.loadExpectedOutput("/subject_access_request_content_pretty_printer_formatted.txt"),
+    val expectedResult = BaseSarUnitTest.loadExpectedOutput("/subject_access_request_content_2.json").let { json.readValue<Any>(it) }
+    val jsonResponse = json.writeValueAsString(response?.content).let { json.readValue<Any>(it) }
+    assertThat(jsonResponse).isEqualTo(
+      expectedResult,
     )
   }
 
