@@ -55,6 +55,13 @@ assess:
           endpoint:
             url: "https://assess-risks-and-needs-dev.hmpps.service.justice.gov.uk"
 
+probation:
+  search:
+    api:
+      endpoint:
+        url: "https://probation-offender-search-dev.hmpps.service.justice.gov.uk"
+
+
 hmpps.sqs:
   provider: localstack
   localstackUrl: http://localhost:4666
@@ -66,3 +73,4 @@ hmpps.sqs:
   topics:
     domainevents:
       arn: arn:aws:sns:eu-west-2:000000000000:domainevents-topic
+

@@ -3,7 +3,6 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Alert
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.ConvictedOffence
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.ConvictedOffencesResponse
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.CurrentIncentive
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Level
 import java.time.LocalDate
@@ -22,12 +21,10 @@ class TestPrisonerFactory {
   )
   private var sentenceStartDate = LocalDate.now().minusDays(1)
   private var legalStatus = ""
-  private var convictedOffencesResponse = ConvictedOffencesResponse(
-    allConvictedOffences = listOf(
-      ConvictedOffence(
-        offenceCode = "SX56027",
-        offenceDescription = "Indecent assault on woman over 16 years of age",
-      ),
+  private var convictedOffences = listOf(
+    ConvictedOffence(
+      offenceCode = "SX56027",
+      offenceDescription = "Indecent assault on woman over 16 years of age",
     ),
   )
   private var alerts: List<Alert>? = null
@@ -82,8 +79,8 @@ class TestPrisonerFactory {
     return this
   }
 
-  fun withConvictedOffencesResponse(convictedOffencesResponse: ConvictedOffencesResponse): TestPrisonerFactory {
-    this.convictedOffencesResponse = convictedOffencesResponse
+  fun withConvictedOffencesResponse(convictedOffences: List<ConvictedOffence>): TestPrisonerFactory {
+    this.convictedOffences = convictedOffences
     return this
   }
 
@@ -103,7 +100,7 @@ class TestPrisonerFactory {
     currentIncentive = this.currentIncentive,
     sentenceStartDate = this.sentenceStartDate,
     legalStatus = this.legalStatus,
-    convictedOffencesResponse = this.convictedOffencesResponse,
+    allConvictedOffences = this.convictedOffences,
     alerts = this.alerts,
   )
 }

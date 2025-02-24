@@ -6,6 +6,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.Tes
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.PrsIneligibilityReason
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Alert
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.ConvictedOffence
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.CurrentIncentive
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Level
 import java.time.LocalDate
@@ -14,17 +15,28 @@ class PrisonerPrsEligibilityCalculatorTest {
 
   @Test
   fun testCalculateWithEligiblePrisoner() {
+    val testOffenceCode = "SOMETHING"
     val prisonerPrsEligibilityCalculator = PrisonerPrsEligibilityCalculator(
       (TestPrisonerFactory())
         .withCategory(Prisoner.CATEGORY_C)
         .withCurrentIncentive(CurrentIncentive(Level(Prisoner.INCENTIVE_LEVEL_STANDARD, "Standard")))
         .withAlerts(null)
         .withReleaseDate(LocalDate.now().plusMonths(6))
+        .withConvictedOffencesResponse(
+          listOf(
+            ConvictedOffence(
+              offenceCode = testOffenceCode,
+              offenceDescription = "something",
+            ),
+          ),
+        )
         .build(),
+      listOf(testOffenceCode),
     )
     val prisonerPrsEligibility = prisonerPrsEligibilityCalculator.calculate()
     Assertions.assertThat(prisonerPrsEligibility.reasonForIneligibility).isEmpty()
     Assertions.assertThat(prisonerPrsEligibility.isEligible).isTrue()
+    Assertions.assertThat(prisonerPrsEligibility.sdsExcludedOffenceCodes).contains(testOffenceCode)
   }
 
   @Test
@@ -36,6 +48,7 @@ class PrisonerPrsEligibilityCalculatorTest {
         .withAlerts(null)
         .withReleaseDate(LocalDate.now().plusMonths(6))
         .build(),
+      emptyList(),
     )
     val prisonerPrsEligibility = prisonerPrsEligibilityCalculator.calculate()
     Assertions.assertThat(prisonerPrsEligibility.reasonForIneligibility).contains(PrsIneligibilityReason.CATEGORY)
@@ -51,6 +64,7 @@ class PrisonerPrsEligibilityCalculatorTest {
         .withAlerts(null)
         .withReleaseDate(LocalDate.now().plusMonths(6))
         .build(),
+      emptyList(),
     )
     val prisonerPrsEligibility = prisonerPrsEligibilityCalculator.calculate()
     Assertions.assertThat(prisonerPrsEligibility.reasonForIneligibility).contains(PrsIneligibilityReason.INCENTIVE_LEVEL)
@@ -66,6 +80,7 @@ class PrisonerPrsEligibilityCalculatorTest {
         .withAlerts(null)
         .withReleaseDate(LocalDate.now().plusMonths(13))
         .build(),
+      emptyList(),
     )
     val prisonerPrsEligibility = prisonerPrsEligibilityCalculator.calculate()
     Assertions.assertThat(prisonerPrsEligibility.reasonForIneligibility).contains(PrsIneligibilityReason.TIME_LEFT_TO_SERVE)
@@ -89,6 +104,7 @@ class PrisonerPrsEligibilityCalculatorTest {
         )
         .withReleaseDate(LocalDate.now().plusMonths(6))
         .build(),
+      emptyList(),
     )
     val prisonerPrsEligibility = prisonerPrsEligibilityCalculator.calculate()
     Assertions.assertThat(prisonerPrsEligibility.reasonForIneligibility).contains(PrsIneligibilityReason.ESCAPE)
@@ -112,6 +128,7 @@ class PrisonerPrsEligibilityCalculatorTest {
         )
         .withReleaseDate(LocalDate.now().plusMonths(13))
         .build(),
+      emptyList(),
     )
     val prisonerPrsEligibility = prisonerPrsEligibilityCalculator.calculate()
     Assertions.assertThat(prisonerPrsEligibility.reasonForIneligibility).containsAll(
@@ -142,6 +159,7 @@ class PrisonerPrsEligibilityCalculatorTest {
         )
         .withReleaseDate(LocalDate.now().plusMonths(6))
         .build(),
+      emptyList(),
     )
     val prisonerPrsEligibility = prisonerPrsEligibilityCalculator.calculate()
     Assertions.assertThat(prisonerPrsEligibility.reasonForIneligibility).isEmpty()

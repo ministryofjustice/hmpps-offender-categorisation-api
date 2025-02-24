@@ -26,7 +26,7 @@ manage:
   adjudications:
     api:
       endpoint:
-        url: "https://manage-adjudications-api-dev.prison.service.justice.gov.uk"
+        url: "https://manage-adjudications-api-dev.hmpps.service.justice.gov.uk"
   offences:
     api:
       endpoint:
@@ -40,9 +40,15 @@ assess:
           endpoint:
             url: "https://assess-risks-and-needs-dev.hmpps.service.justice.gov.uk"
 
+probation:
+  search:
+    api:
+      endpoint:
+        url: "https://probation-offender-search-dev.hmpps.service.justice.gov.uk"
+
 # Update to your personal token with correct permissions
 api:
   client:
     admin:
-      id: something
-      secret: something
+      id: dummy
+      secret: dummy

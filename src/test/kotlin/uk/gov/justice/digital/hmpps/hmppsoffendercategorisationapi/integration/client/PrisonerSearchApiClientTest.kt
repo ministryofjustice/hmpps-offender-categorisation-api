@@ -10,7 +10,6 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.Tes
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.integration.IntegrationTestBase
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.ConvictedOffence
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.ConvictedOffencesResponse
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.CurrentIncentive
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Level
 import java.time.LocalDate
@@ -35,7 +34,7 @@ class PrisonerSearchApiClientTest : IntegrationTestBase() {
           .withSentenceStartDate(LocalDate.now())
           .withCategory("D")
           .withLegalStatus("SENTENCED")
-          .withConvictedOffencesResponse(ConvictedOffencesResponse(listOf(ConvictedOffence("SX56027", "Indecent assault on woman over 16 years of age"))))
+          .withConvictedOffencesResponse(listOf(ConvictedOffence("SX56027", "Indecent assault on woman over 16 years of age")))
           .withCurrentIncentive(CurrentIncentive(Level("STD", "Standard")))
           .build(),
       )
@@ -47,7 +46,7 @@ class PrisonerSearchApiClientTest : IntegrationTestBase() {
       Assertions.assertThat(result[0].currentIncentive?.level?.code).isEqualTo("STD")
       Assertions.assertThat(result[0].legalStatus).isEqualTo("SENTENCED")
       Assertions.assertThat(result[0].sentenceStartDate).isEqualTo(LocalDate.now())
-      Assertions.assertThat(result[0].convictedOffencesResponse?.allConvictedOffences?.get(0)?.offenceCode).isEqualTo("SX56027")
+      Assertions.assertThat(result[0].allConvictedOffences?.get(0)?.offenceCode).isEqualTo("SX56027")
     }
   }
 }
