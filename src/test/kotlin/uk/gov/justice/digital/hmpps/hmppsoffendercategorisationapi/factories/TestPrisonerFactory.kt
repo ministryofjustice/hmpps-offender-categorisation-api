@@ -9,6 +9,7 @@ import java.time.LocalDate
 
 class TestPrisonerFactory {
   private var prisonerNumber = "123ABC"
+  private var bookingId = 12
   private var status = Prisoner.STATUS_ACTIVE_IN
   private var prisonId = "TEST"
   private var restrictedPatient = false
@@ -31,6 +32,11 @@ class TestPrisonerFactory {
 
   fun withPrisonerNumber(prisonerNumber: String): TestPrisonerFactory {
     this.prisonerNumber = prisonerNumber
+    return this
+  }
+
+  fun withBookingId(bookingId: Int): TestPrisonerFactory {
+    this.bookingId = bookingId
     return this
   }
 
@@ -102,5 +108,6 @@ class TestPrisonerFactory {
     legalStatus = this.legalStatus,
     allConvictedOffences = this.convictedOffences,
     alerts = this.alerts,
+    bookingId = this.bookingId,
   )
 }
