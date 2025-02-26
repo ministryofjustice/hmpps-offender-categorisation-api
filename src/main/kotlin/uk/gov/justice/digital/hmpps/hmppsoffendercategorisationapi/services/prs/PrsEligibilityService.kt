@@ -20,10 +20,10 @@ class PrsEligibilityService(
   private val assessRisksAndNeedsApiClient: AssessRisksAndNeedsApiClient,
   private val manageAdjudicationsApiClient: ManageAdjudicationsApiClient,
 ) {
-  fun report() {
-    val allPrisons = prisonApiClient.findPrisons()
+  fun report(agencyId: String? = null) {
+    val allPrisons = if (agencyId == null) prisonApiClient.findPrisons().map { it.agencyId } else listOf(agencyId)
     allPrisons.forEach {
-      reportPrisonerEligibilityForPrison(it.agencyId)
+      reportPrisonerEligibilityForPrison(it)
     }
   }
 
