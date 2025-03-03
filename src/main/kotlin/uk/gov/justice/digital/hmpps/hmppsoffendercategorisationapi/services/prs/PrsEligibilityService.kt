@@ -26,7 +26,7 @@ class PrsEligibilityService(
     var i = 0
     do {
       prisoners = prisonerSearchApiClient.findPrisonersByAgencyId(agencyId, i, PRISONERS_CHUNK_SIZE)
-      val sdsExcludedOffenceCodes = manageOffencesApiClient.checkWhichOffenceCodesAreSdsExcluded(getAllOffenceCodes(prisoners))?.map { it.offenceCode } ?: emptyList()
+      val sdsExcludedOffenceCodes = manageOffencesApiClient.checkWhichOffenceCodesAreSdsExcluded(getAllOffenceCodes(prisoners))
       prisoners.forEach {
         allPrisonersPrsEligibility.addPrisoner(
           (PrisonerPrsEligibilityCalculator(it, sdsExcludedOffenceCodes)).calculate(),
