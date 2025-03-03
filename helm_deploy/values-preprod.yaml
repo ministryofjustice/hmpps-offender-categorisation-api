@@ -22,3 +22,6 @@ generic-service:
 # See https://user-guide.cloud-platform.service.justice.gov.uk/documentation/monitoring-an-app/how-to-create-alarms.html#creating-your-own-custom-alerts
 generic-prometheus-alerts:
   alertSeverity: dps-sed-alerts-nonprod
+  sqsAlertsQueueNames:
+    - "offender_categorisation_api_queue_for_domain_events"
+    - "offender_categorisation_api_queue_for_domain_events_dead_letter_queue"
