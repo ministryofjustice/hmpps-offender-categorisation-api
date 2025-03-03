@@ -10,11 +10,9 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 class PrisonApiClient(
   @Qualifier("prisonApiWebClient") private val webClient: WebClient,
 ) {
-  fun findPrisons(): List<Prison> {
-    return webClient.get()
-      .uri("/api/agencies/prisons")
-      .retrieve()
-      .bodyToMono(object : ParameterizedTypeReference<List<Prison>>() {})
-      .block()!!
-  }
+  fun findPrisons(): List<Prison> = webClient.get()
+    .uri("/api/agencies/prisons")
+    .retrieve()
+    .bodyToMono(object : ParameterizedTypeReference<List<Prison>>() {})
+    .block()!!
 }

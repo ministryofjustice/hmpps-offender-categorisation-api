@@ -77,6 +77,5 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
     }
   }
 
-  private fun prisonerReleasedPayload(nomsNumber: String, eventType: String) =
-    """{"eventType":"$eventType", "additionalInformation": {"nomsNumber":"$nomsNumber", "reason": "RELEASED"}}"""
+  private fun prisonerReleasedPayload(nomsNumber: String, eventType: String) = """{"eventType":"$eventType", "additionalInformation": {"nomsNumber":"$nomsNumber", "reason": "RELEASED"}}"""
 }

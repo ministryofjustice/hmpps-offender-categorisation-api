@@ -21,6 +21,5 @@ class PrsEligibility(
       | using the criteria which is currently understood.
     """,
   )
-  fun reportPrsEligibility() =
-    prsEligibilityService.report()
+  fun reportPrsEligibility() = prsEligibilityService.report()
 }

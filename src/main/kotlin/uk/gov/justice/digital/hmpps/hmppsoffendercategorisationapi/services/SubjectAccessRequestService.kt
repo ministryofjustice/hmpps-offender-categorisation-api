@@ -83,8 +83,6 @@ class SubjectAccessRequestService(
     )
   }
 
-  private fun dateIsWithinDates(fromDate: ZonedDateTime?, toDate: ZonedDateTime?, dateInQuestion: ZonedDateTime?): Boolean {
-    return (fromDate == null || (dateInQuestion == null || dateInQuestion.isAfter(fromDate))) &&
-      (toDate == null || (dateInQuestion == null || dateInQuestion.isBefore(toDate)))
-  }
+  private fun dateIsWithinDates(fromDate: ZonedDateTime?, toDate: ZonedDateTime?, dateInQuestion: ZonedDateTime?): Boolean = (fromDate == null || (dateInQuestion == null || dateInQuestion.isAfter(fromDate))) &&
+    (toDate == null || (dateInQuestion == null || dateInQuestion.isBefore(toDate)))
 }
