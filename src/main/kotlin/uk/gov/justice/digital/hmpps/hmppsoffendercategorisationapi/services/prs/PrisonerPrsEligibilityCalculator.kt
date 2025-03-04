@@ -1,9 +1,11 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services.prs
 
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.PrsIneligibilityReason
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.RiskLevel
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.SdsExemptionSchedulePart
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.prs.PrisonerPrsEligibility
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.RiskSummary
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.SdsExcludedOffenceCode
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Alert
 import java.time.LocalDate
@@ -11,6 +13,8 @@ import java.time.LocalDate
 class PrisonerPrsEligibilityCalculator(
   private val prisoner: Prisoner,
   private val sdsExcludedOffenceCodes: List<SdsExcludedOffenceCode>?,
+  private val riskSummary: RiskSummary?,
+  private val hasAdjudication: Boolean,
 ) {
   private fun isCategoryCOrClosed(): Boolean {
     return this.prisoner.category == Prisoner.CATEGORY_C || this.prisoner.category == Prisoner.CATEGORY_R
@@ -82,8 +86,15 @@ class PrisonerPrsEligibilityCalculator(
         reasonForIneligibility.add(ineligibilityReason)
       }
     }
+    if (riskSummary?.overallRiskLevel == RiskLevel.HIGH || riskSummary?.overallRiskLevel == RiskLevel.VERY_HIGH) {
+      reasonForIneligibility.add(PrsIneligibilityReason.HIGH_ROSH)
+    }
+    if (hasAdjudication) {
+      reasonForIneligibility.add(PrsIneligibilityReason.ADJUDICATION)
+    }
     return PrisonerPrsEligibility(
       reasonForIneligibility,
+      riskSummary == null,
     )
   }
 }

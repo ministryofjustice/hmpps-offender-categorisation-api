@@ -2,5 +2,5 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respon
 
 class ProbationOtherIds(
   val crn: String,
-  val prisonerNumber: String,
+  val nomsNumber: String?,
 )
