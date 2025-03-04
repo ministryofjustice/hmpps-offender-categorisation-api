@@ -94,7 +94,7 @@ class PrisonerPrsEligibilityCalculator(
     }
     return PrisonerPrsEligibility(
       reasonForIneligibility,
-      riskSummary == null,
+      riskSummary?.overallRiskLevel == null,
     )
   }
 }
