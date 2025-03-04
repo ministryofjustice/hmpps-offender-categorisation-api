@@ -46,7 +46,6 @@ dependencies {
 
   // Test dependencies
   testImplementation("com.h2database:h2:2.3.232")
-  testImplementation("io.github.hakky54:logcaptor:2.10.0")
   testImplementation("com.github.tomakehurst:wiremock-jre8-standalone:3.0.1")
   testImplementation("org.springframework.security:spring-security-test")
   testImplementation("org.awaitility:awaitility-kotlin:4.2.1")

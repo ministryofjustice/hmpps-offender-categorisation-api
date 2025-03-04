@@ -42,6 +42,7 @@ class ResourceServerConfiguration {
           "/swagger-resources/configuration/security",
           "/released-prisoners-with-active-categorisations/report",
           "/prs-eligibility/report",
+          "/prs-eligibility/report-prison",
         ).forEach { authorize(it, permitAll) }
         authorize(anyRequest, authenticated)
       }
