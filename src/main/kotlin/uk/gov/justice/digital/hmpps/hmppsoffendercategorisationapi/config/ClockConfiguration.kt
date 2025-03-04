@@ -12,9 +12,7 @@ import java.time.ZonedDateTime
 @Profile("test")
 class ClockConfiguration {
   @Bean
-  fun clock(): Clock {
-    return Clock.fixed(TIMESTAMP.toInstant(), ZoneId.systemDefault())
-  }
+  fun clock(): Clock = Clock.fixed(TIMESTAMP.toInstant(), ZoneId.systemDefault())
 
   companion object {
     val TIMESTAMP = ZonedDateTime.of(LocalDateTime.of(2022, 1, 2, 3, 4, 5), ZoneId.systemDefault())

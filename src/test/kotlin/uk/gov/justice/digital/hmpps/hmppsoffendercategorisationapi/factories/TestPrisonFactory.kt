@@ -20,11 +20,9 @@ class TestPrisonFactory {
     return this
   }
 
-  fun build(): Prison {
-    return Prison(
-      agencyId = this.agencyId,
-      description = this.description,
-      active = this.active,
-    )
-  }
+  fun build(): Prison = Prison(
+    agencyId = this.agencyId,
+    description = this.description,
+    active = this.active,
+  )
 }

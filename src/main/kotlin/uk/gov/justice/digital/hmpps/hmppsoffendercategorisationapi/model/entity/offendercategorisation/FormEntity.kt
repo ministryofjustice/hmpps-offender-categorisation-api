@@ -111,18 +111,11 @@ class FormEntity(
   @Column(name = "cancelled_by")
   val cancelledBy: String,
 ) {
-  fun getFormResponse(): String? {
-    return formResponse
-  }
-  fun getStatus(): String {
-    return status
-  }
-  fun getSecurityReviewedDate(): LocalDateTime? {
-    return securityReviewedDate
-  }
-  fun getSecurityReviewedBy(): String? {
-    return securityReviewedBy
-  }
+  fun getFormResponse(): String? = formResponse
+  fun getStatus(): String = status
+  fun getSecurityReviewedDate(): LocalDateTime? = securityReviewedDate
+  fun getSecurityReviewedBy(): String? = securityReviewedBy
+
   fun updateFormResponse(section: String, name: String, value: Map<String, String>) {
     val formResponseMap = formResponse?.let { objectMapper.readValue<MutableMap<String, Any>>(it) }
     if (formResponseMap != null) {

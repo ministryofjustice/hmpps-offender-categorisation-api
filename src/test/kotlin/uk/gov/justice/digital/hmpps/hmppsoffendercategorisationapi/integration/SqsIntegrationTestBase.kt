@@ -40,8 +40,7 @@ class SqsIntegrationTestBase : IntegrationTestBase() {
     } matches { it == 0 }
   }
 
-  fun getNumberOfMessagesCurrentlyOnQueue(): Int? =
-    prisonerListenerQueue.sqsClient.countMessagesOnQueue(prisonerListenerQueue.queueUrl).get()
+  fun getNumberOfMessagesCurrentlyOnQueue(): Int? = prisonerListenerQueue.sqsClient.countMessagesOnQueue(prisonerListenerQueue.queueUrl).get()
 
   companion object {
     private val localStackContainer = LocalStackContainer.instance

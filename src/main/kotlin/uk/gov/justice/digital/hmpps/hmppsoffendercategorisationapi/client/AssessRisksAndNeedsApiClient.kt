@@ -10,11 +10,9 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 class AssessRisksAndNeedsApiClient(
   @Qualifier("assessRisksAndNeedsApiWebClient") private val webClient: WebClient,
 ) {
-  fun findRiskSummary(crn: String): RiskSummary? {
-    return webClient.get()
-      .uri("/risks/crn/$crn/summary")
-      .retrieve()
-      .bodyToMono(object : ParameterizedTypeReference<RiskSummary>() {})
-      .block()
-  }
+  fun findRiskSummary(crn: String): RiskSummary? = webClient.get()
+    .uri("/risks/crn/$crn/summary")
+    .retrieve()
+    .bodyToMono(object : ParameterizedTypeReference<RiskSummary>() {})
+    .block()
 }

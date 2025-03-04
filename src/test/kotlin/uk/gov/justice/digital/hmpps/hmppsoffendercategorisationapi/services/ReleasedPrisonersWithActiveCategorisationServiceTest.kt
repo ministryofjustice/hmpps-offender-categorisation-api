@@ -19,7 +19,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.of
 
 @ExtendWith(OutputCaptureExtension::class)
 @ExtendWith(MockitoExtension::class)
-class ReleasedPrisonersWithActiveCategorisationServiceTest() {
+class ReleasedPrisonersWithActiveCategorisationServiceTest {
   private val mockFormRepository = mock<FormRepository>()
   private val mockPrisonerSearchApiClient = mock<PrisonerSearchApiClient>()
 
