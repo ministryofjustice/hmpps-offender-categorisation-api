@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services.prs
 
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.AssessRisksAndNeedsApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.ManageAdjudicationsApiClient
@@ -70,8 +71,12 @@ class PrsEligibilityService(
     val roshSummaries = mutableMapOf<String, RiskSummary>()
     crns.forEach {
       if (it.key !== null) {
-        assessRisksAndNeedsApiClient.findRiskSummary(it.value)
-          ?.let { roshSummary -> roshSummaries[it.key!!] = roshSummary }
+        try {
+          assessRisksAndNeedsApiClient.findRiskSummary(it.value)
+            ?.let { roshSummary -> roshSummaries[it.key!!] = roshSummary }
+        } catch (e: Exception) {
+          log.error("Failed to load RoSH: ${e.message}")
+        }
       }
     }
     return roshSummaries
@@ -82,9 +87,14 @@ class PrsEligibilityService(
     val prisonerNumbersWithAdjudications = mutableListOf<String>()
     bookingIds.forEach {
       if (it.key !== null) {
-        val adjudicationsSummary = manageAdjudicationsApiClient.findAdjudicationsByBookingId(it.key!!)
-        if (adjudicationsSummary?.adjudicationCount !== null && adjudicationsSummary.adjudicationCount > 0 && it.value !== null) {
-          prisonerNumbersWithAdjudications.add(it.value!!)
+        try {
+          val adjudicationsSummary = manageAdjudicationsApiClient.findAdjudicationsByBookingId(it.key!!)
+
+          if (adjudicationsSummary?.adjudicationCount !== null && adjudicationsSummary.adjudicationCount > 0 && it.value !== null) {
+            prisonerNumbersWithAdjudications.add(it.value!!)
+          }
+        } catch (e: Exception) {
+          log.error("Failed to load Adjudications: ${e.message}")
         }
       }
     }
@@ -93,5 +103,6 @@ class PrsEligibilityService(
 
   companion object {
     private const val PRISONERS_CHUNK_SIZE = 100
+    private val log = LoggerFactory.getLogger(this::class.java)
   }
 }
