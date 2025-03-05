@@ -13,4 +13,6 @@ enum class PrsIneligibilityReason {
   OFFENCE_DOMESTIC_ABUSE,
   OFFENCE_SEXUAL_T3,
   OFFENCE_SEXUAL,
+  HIGH_ROSH,
+  ADJUDICATION,
 }

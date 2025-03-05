@@ -5,6 +5,7 @@ import org.springframework.http.MediaType
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services.prs.PrsEligibilityService
 
@@ -22,4 +23,15 @@ class PrsEligibility(
     """,
   )
   fun reportPrsEligibility() = prsEligibilityService.report()
+
+  @GetMapping("/report-prison")
+  @Operation(
+    summary = "Report PRS eligibility for investigation purposes",
+    description = """Checks all prisoners at specified prison to see what number would be eligible for PRS
+      | using the criteria which is currently understood.
+    """,
+  )
+  fun reportPrsEligibilityForPrison(
+    @RequestParam(required = true) agencyId: String,
+  ) = prsEligibilityService.report(agencyId)
 }

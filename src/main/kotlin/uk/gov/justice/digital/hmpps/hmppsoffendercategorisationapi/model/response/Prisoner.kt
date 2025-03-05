@@ -10,6 +10,7 @@ import java.time.LocalDate
 @Schema(description = "Prisoner")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Prisoner(
+  val bookingId: Int? = null,
   val prisonerNumber: String? = null,
   val status: String? = null,
   val prisonId: String? = null,

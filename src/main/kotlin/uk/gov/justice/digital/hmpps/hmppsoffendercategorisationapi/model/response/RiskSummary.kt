@@ -5,5 +5,5 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.Ri
 
 @Schema(description = "RiskSummary")
 class RiskSummary(
-  val overallRiskLevel: RiskLevel,
+  val overallRiskLevel: RiskLevel? = null,
 )
