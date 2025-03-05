@@ -21,11 +21,9 @@ class TestAdjudicationFactory {
     return this
   }
 
-  fun build(): Adjudication {
-    return Adjudication(
-      prisonerNumber = this.prisonerNumber,
-      status = this.status,
-      createdDateTime = this.createdDateTime,
-    )
-  }
+  fun build(): Adjudication = Adjudication(
+    prisonerNumber = this.prisonerNumber,
+    status = this.status,
+    createdDateTime = this.createdDateTime,
+  )
 }

@@ -104,17 +104,15 @@ class HmppsOffenderCategorisationApiExceptionHandler {
   }
 
   @ExceptionHandler(FormNotFoundException::class)
-  fun handleFormNotFoundException(e: FormNotFoundException): ResponseEntity<ErrorResponse> {
-    return ResponseEntity
-      .status(NOT_FOUND)
-      .body(
-        ErrorResponse(
-          status = BAD_REQUEST,
-          userMessage = "Form record not found for booking ID: ${e.message}",
-          developerMessage = e.message,
-        ),
-      )
-  }
+  fun handleFormNotFoundException(e: FormNotFoundException): ResponseEntity<ErrorResponse> = ResponseEntity
+    .status(NOT_FOUND)
+    .body(
+      ErrorResponse(
+        status = BAD_REQUEST,
+        userMessage = "Form record not found for booking ID: ${e.message}",
+        developerMessage = e.message,
+      ),
+    )
 
   @ExceptionHandler(NoResourceFoundException::class)
   fun handleValidationException(e: NoResourceFoundException): ResponseEntity<ErrorResponse> = ResponseEntity

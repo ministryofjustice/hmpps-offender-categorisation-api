@@ -28,5 +28,4 @@ class FormService(
   }
 }
 
-class FormNotFoundException(bookingId: Long) :
-  Exception("Unable to find form record for $bookingId")
+class FormNotFoundException(bookingId: Long) : Exception("Unable to find form record for $bookingId")

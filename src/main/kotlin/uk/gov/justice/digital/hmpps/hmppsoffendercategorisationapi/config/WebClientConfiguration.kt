@@ -25,9 +25,7 @@ class WebClientConfiguration(
   private val webClientBuilder: WebClient.Builder,
 ) {
   @Bean
-  fun oauthApiHealthWebClient(): WebClient {
-    return WebClient.builder().baseUrl(oauthApiUrl).build()
-  }
+  fun oauthApiHealthWebClient(): WebClient = WebClient.builder().baseUrl(oauthApiUrl).build()
 
   @Bean
   fun authorizedClientManager(
@@ -132,7 +130,5 @@ class WebClientConfiguration(
   }
 
   @Bean
-  fun prisonerSearchApiHealthWebClient(): WebClient {
-    return webClientBuilder.baseUrl(prisonerSearchApiBaseUrl).build()
-  }
+  fun prisonerSearchApiHealthWebClient(): WebClient = webClientBuilder.baseUrl(prisonerSearchApiBaseUrl).build()
 }
