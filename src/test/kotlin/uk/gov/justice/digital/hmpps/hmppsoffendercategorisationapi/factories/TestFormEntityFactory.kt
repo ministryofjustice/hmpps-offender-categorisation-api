@@ -104,24 +104,22 @@ class TestFormEntityFactory {
     return this
   }
 
-  fun build(): FormEntity {
-    return FormEntity(
-      bookingId = this.bookingId,
-      formResponse = formResponse,
-      status = this.status,
-      prisonId = this.prisonId,
-      offenderNo = this.offenderNo,
-      startDate = this.startDate,
-      securityReviewedDate = this.securityReviewedDate,
-      securityReviewedBy = this.securityReviewedBy,
-      approvalDate = this.approvalDate,
-      catType = this.catType,
-      nomisSequenceNo = this.nomisSequenceNo,
-      assessmentDate = this.assessmentDate,
-      reviewReason = this.reviewReason,
-      dueByDate = this.dueByDate,
-      cancelledDate = this.cancelledDate,
-      cancelledBy = this.cancelledBy,
-    )
-  }
+  fun build(): FormEntity = FormEntity(
+    bookingId = this.bookingId,
+    formResponse = formResponse,
+    status = this.status,
+    prisonId = this.prisonId,
+    offenderNo = this.offenderNo,
+    startDate = this.startDate,
+    securityReviewedDate = this.securityReviewedDate,
+    securityReviewedBy = this.securityReviewedBy,
+    approvalDate = this.approvalDate,
+    catType = this.catType,
+    nomisSequenceNo = this.nomisSequenceNo,
+    assessmentDate = this.assessmentDate,
+    reviewReason = this.reviewReason,
+    dueByDate = this.dueByDate,
+    cancelledDate = this.cancelledDate,
+    cancelledBy = this.cancelledBy,
+  )
 }

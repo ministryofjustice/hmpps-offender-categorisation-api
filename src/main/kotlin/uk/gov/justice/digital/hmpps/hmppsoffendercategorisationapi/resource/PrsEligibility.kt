@@ -22,8 +22,7 @@ class PrsEligibility(
       | using the criteria which is currently understood.
     """,
   )
-  fun reportPrsEligibility() =
-    prsEligibilityService.report()
+  fun reportPrsEligibility() = prsEligibilityService.report()
 
   @GetMapping("/report-prison")
   @Operation(
@@ -34,6 +33,5 @@ class PrsEligibility(
   )
   fun reportPrsEligibilityForPrison(
     @RequestParam(required = true) agencyId: String,
-  ) =
-    prsEligibilityService.report(agencyId)
+  ) = prsEligibilityService.report(agencyId)
 }

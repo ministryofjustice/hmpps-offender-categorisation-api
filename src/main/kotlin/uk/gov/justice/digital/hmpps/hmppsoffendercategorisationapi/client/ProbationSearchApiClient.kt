@@ -13,13 +13,11 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 class ProbationSearchApiClient(
   @Qualifier("probationSearchApiWebClient") private val webClient: WebClient,
 ) {
-  fun findProbationPersonsFromPrisonNumbers(prisonNumbers: List<String>): List<ProbationPerson> {
-    return webClient.post()
-      .uri("/nomsNumbers")
-      .contentType(MediaType.APPLICATION_JSON)
-      .body(BodyInserters.fromValue(jacksonObjectMapper().writeValueAsString(prisonNumbers)))
-      .retrieve()
-      .bodyToMono(object : ParameterizedTypeReference<List<ProbationPerson>>() {})
-      .block()!!
-  }
+  fun findProbationPersonsFromPrisonNumbers(prisonNumbers: List<String>): List<ProbationPerson> = webClient.post()
+    .uri("/nomsNumbers")
+    .contentType(MediaType.APPLICATION_JSON)
+    .body(BodyInserters.fromValue(jacksonObjectMapper().writeValueAsString(prisonNumbers)))
+    .retrieve()
+    .bodyToMono(object : ParameterizedTypeReference<List<ProbationPerson>>() {})
+    .block()!!
 }
