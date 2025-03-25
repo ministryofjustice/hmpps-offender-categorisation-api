@@ -85,6 +85,9 @@ class PrisonerPrsEligibilityCalculator(
     if (hasAdjudication) {
       reasonForIneligibility.add(PrsIneligibilityReason.ADJUDICATION)
     }
+    if (riskSummary?.overallRiskLevel == null && reasonForIneligibility.isEmpty()) {
+      reasonForIneligibility.add(PrsIneligibilityReason.NO_ROSH_DESPITE_BEING_OTHERWISE_ELIGIBLE)
+    }
     return PrisonerPrsEligibility(
       reasonForIneligibility,
       riskSummary?.overallRiskLevel == null,
