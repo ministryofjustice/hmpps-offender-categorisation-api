@@ -27,13 +27,15 @@ class PrisonerPrsEligibilityCalculatorTest {
         .withReleaseDate(LocalDate.now().plusMonths(6))
         .build(),
       emptyList(),
-      null,
+      RiskSummary(
+        RiskLevel.LOW,
+      ),
       false,
     )
     val prisonerPrsEligibility = prisonerPrsEligibilityCalculator.calculate()
     Assertions.assertThat(prisonerPrsEligibility.reasonForIneligibility).isEmpty()
     Assertions.assertThat(prisonerPrsEligibility.isEligible).isTrue()
-    Assertions.assertThat(prisonerPrsEligibility.unknownRosh).isTrue()
+    Assertions.assertThat(prisonerPrsEligibility.unknownRosh).isFalse()
   }
 
   @Test
@@ -167,7 +169,9 @@ class PrisonerPrsEligibilityCalculatorTest {
         .withReleaseDate(LocalDate.now().plusMonths(6))
         .build(),
       emptyList(),
-      null,
+      RiskSummary(
+        RiskLevel.LOW,
+      ),
       false,
     )
     val prisonerPrsEligibility = prisonerPrsEligibilityCalculator.calculate()

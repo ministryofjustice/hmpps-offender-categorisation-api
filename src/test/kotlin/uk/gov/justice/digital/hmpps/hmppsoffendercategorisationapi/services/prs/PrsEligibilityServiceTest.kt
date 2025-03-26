@@ -145,6 +145,6 @@ class PrsEligibilityServiceTest {
 
     prsEligibilityService.report()
 
-    Assertions.assertThat(output).contains("PRS_ELIGIBILITY_INVESTIGATION: HCI, 2, 1, UnknownRosh: 1, CATEGORY: 1, TIME_LEFT_TO_SERVE: 1, INCENTIVE_LEVEL: 1, ESCAPE: 1, OFFENCE_SEXUAL: 1, HIGH_ROSH: 1, ADJUDICATION: 1")
+    Assertions.assertThat(output).contains("PRS_ELIGIBILITY_INVESTIGATION: HCI, 2, 0, UnknownRosh: 1, NO_ROSH_DESPITE_BEING_OTHERWISE_ELIGIBLE: 1, CATEGORY: 1, TIME_LEFT_TO_SERVE: 1, INCENTIVE_LEVEL: 1, ESCAPE: 1, OFFENCE_SEXUAL: 1, HIGH_ROSH: 1, ADJUDICATION: 1")
   }
 }
