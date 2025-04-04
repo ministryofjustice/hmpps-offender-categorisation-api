@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.system.CapturedOutput
 import org.springframework.boot.test.system.OutputCaptureExtension
 import org.springframework.jdbc.core.JdbcTemplate
+import org.springframework.test.context.jdbc.Sql
 import org.springframework.transaction.annotation.Transactional
 import software.amazon.awssdk.services.sns.model.MessageAttributeValue
 import software.amazon.awssdk.services.sns.model.PublishRequest
@@ -28,6 +29,7 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
 
   @ParameterizedTest
   @MethodSource("statusesWhichShouldBeUpdated")
+  @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   @Transactional
   fun handleReleased(status: String) {
     val testForm = "{\"something\": \"else\"}"
@@ -84,6 +86,7 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
         assessmentDate = null,
       )
     }
+    println(formEntities)
     assertThat(formEntities.count()).isEqualTo(1)
     assertThat(formEntities[0].getStatus()).isEqualTo(FormEntity.STATUS_CANCELLED_AFTER_RELEASE)
   }

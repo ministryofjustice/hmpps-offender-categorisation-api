@@ -79,7 +79,7 @@ class FormServiceTest {
   fun testCancelAnyInProgressReviewsDueToPrisonerRelease() {
     val testOffenderNo = "ABC123"
     val testFormResponse = "{\"something\": \"something\"}"
-    whenever(mockFormRepository.findAllByOffenderNoAndStatusNotIn(testOffenderNo, listOf(FormEntity.STATUS_APPROVED, FormEntity.STATUS_CANCELLED)))
+    whenever(mockFormRepository.findAllByOffenderNoAndStatusNotIn(testOffenderNo, listOf(FormEntity.STATUS_APPROVED, FormEntity.STATUS_CANCELLED, FormEntity.STATUS_CANCELLED_AFTER_RELEASE)))
       .thenReturn(
         listOf(
           TestFormEntityFactory()
@@ -90,7 +90,7 @@ class FormServiceTest {
       )
     formService.cancelAnyInProgressReviewsDueToPrisonerRelease(testOffenderNo)
 
-    verify(mockFormRepository, times(1)).findAllByOffenderNoAndStatusNotIn(testOffenderNo, listOf(FormEntity.STATUS_APPROVED, FormEntity.STATUS_CANCELLED))
+    verify(mockFormRepository, times(1)).findAllByOffenderNoAndStatusNotIn(testOffenderNo, listOf(FormEntity.STATUS_APPROVED, FormEntity.STATUS_CANCELLED, FormEntity.STATUS_CANCELLED_AFTER_RELEASE))
     verify(mockFormRepository, times(1)).save(
       argThat { entity ->
         entity.getStatus() == FormEntity.STATUS_CANCELLED_AFTER_RELEASE &&
