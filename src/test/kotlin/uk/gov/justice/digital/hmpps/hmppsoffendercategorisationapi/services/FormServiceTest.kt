@@ -13,6 +13,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.FormRepository
 import java.time.Clock
 import java.time.Instant
+import java.time.LocalDateTime
 import java.time.ZoneId
 
 @ExtendWith(MockitoExtension::class)
@@ -89,11 +90,11 @@ class FormServiceTest {
       )
     formService.cancelAnyInProgressReviewsDueToPrisonerRelease(testOffenderNo)
 
+    verify(mockFormRepository, times(1)).findAllByOffenderNoAndStatusNotIn(testOffenderNo, listOf(FormEntity.STATUS_APPROVED, FormEntity.STATUS_CANCELLED))
     verify(mockFormRepository, times(1)).save(
       argThat { entity ->
-        entity.getStatus() == FormEntity.STATUS_STARTED &&
-          entity.getSecurityReviewedBy() == null &&
-          entity.getCancelledDate().toString() == frozenDateTime &&
+        entity.getStatus() == FormEntity.STATUS_CANCELLED_AFTER_RELEASE &&
+          entity.getCancelledDate() == LocalDateTime.ofInstant(Instant.parse(frozenDateTime), ZoneId.of("UTC")) &&
           entity.getFormResponse() == testFormResponse
       },
     )

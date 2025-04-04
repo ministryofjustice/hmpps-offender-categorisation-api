@@ -32,7 +32,7 @@ class FormService(
   fun cancelAnyInProgressReviewsDueToPrisonerRelease(offenderNo: String) {
     val formEntities = formRepository.findAllByOffenderNoAndStatusNotIn(
       offenderNo,
-      listOf(FormEntity.STATUS_APPROVED, FormEntity.STATUS_CANCELLED),
+      listOf(FormEntity.STATUS_APPROVED, FormEntity.STATUS_CANCELLED, FormEntity.STATUS_CANCELLED_AFTER_RELEASE),
     )
     formEntities.forEach {
       it.setStatus(FormEntity.STATUS_CANCELLED_AFTER_RELEASE)

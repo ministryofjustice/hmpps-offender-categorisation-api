@@ -17,7 +17,7 @@ class FormRepositoryTest : ResourceTest() {
     val formRecords = repository.findAllByOffenderNoOrderBySequenceNoAsc("G8105VR")
 
     Assertions.assertThat(formRecords.count()).isEqualTo(1)
-    Assertions.assertThat(formRecords.first().getCancelledDate()).isEqualTo("SRENDELL_GEN")
+    Assertions.assertThat(formRecords.first().cancelledBy).isEqualTo("SRENDELL_GEN")
   }
 
   @Test
