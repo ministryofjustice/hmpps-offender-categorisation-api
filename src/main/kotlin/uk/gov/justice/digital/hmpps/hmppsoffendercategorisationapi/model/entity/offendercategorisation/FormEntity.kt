@@ -103,7 +103,7 @@ class FormEntity(
   val dueByDate: LocalDate?,
 
   @Column(name = "cancelled_date")
-  val cancelledDate: LocalDateTime?,
+  private var cancelledDate: LocalDateTime?,
 
   /**
    * REDACTED
@@ -115,6 +115,7 @@ class FormEntity(
   fun getStatus(): String = status
   fun getSecurityReviewedDate(): LocalDateTime? = securityReviewedDate
   fun getSecurityReviewedBy(): String? = securityReviewedBy
+  fun getCancelledDate(): LocalDateTime? = cancelledDate
 
   fun updateFormResponse(section: String, name: String, value: Map<String, String>) {
     val formResponseMap = formResponse?.let { objectMapper.readValue<MutableMap<String, Any>>(it) }
@@ -133,6 +134,10 @@ class FormEntity(
     securityReviewedBy = newSecurityReviewedBy
   }
 
+  fun setCancelledDate(newCancelledDate: LocalDateTime) {
+    cancelledDate = newCancelledDate
+  }
+
   companion object {
     const val STATUS_APPROVED = "APPROVED"
     const val STATUS_CANCELLED = "CANCELLED"
@@ -143,6 +148,7 @@ class FormEntity(
     const val STATUS_SECURITY_FLAGGED = "SECURITY_FLAGGED"
     const val STATUS_SUPERVISOR_BACK = "SUPERVISOR_BACK"
     const val STATUS_AWAITING_APPROVAL = "AWAITING_APPROVAL"
+    const val STATUS_CANCELLED_AFTER_RELEASE = "CANCELLED_AFTER_RELEASE"
 
     const val FORM_RESPONSE_SECTION_SECURITY = "security"
     const val FORM_RESPONSE_FIELD_NAME = "review"

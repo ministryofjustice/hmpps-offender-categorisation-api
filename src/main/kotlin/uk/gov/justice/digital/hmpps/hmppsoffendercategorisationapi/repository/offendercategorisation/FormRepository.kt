@@ -14,4 +14,6 @@ interface FormRepository : JpaRepository<FormEntity, Long> {
   ): List<FormEntity>
 
   fun findAllByStatusNotIn(notInStatuses: List<String>, pageable: Pageable): List<FormEntity>
+
+  fun findAllByOffenderNoAndStatusNotIn(offenderNo: String, notInStatuses: List<String>): List<FormEntity>
 }
