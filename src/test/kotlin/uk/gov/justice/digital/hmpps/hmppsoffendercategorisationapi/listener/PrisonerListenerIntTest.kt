@@ -2,7 +2,9 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.listener
 
 import org.assertj.core.api.Assertions.assertThat
 import org.awaitility.kotlin.await
+import org.awaitility.kotlin.matches
 import org.awaitility.kotlin.untilAsserted
+import org.awaitility.kotlin.untilCallTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.params.ParameterizedTest
@@ -59,9 +61,10 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
         ).build(),
     ).get()
 
-    await untilAsserted {
-      assertThat(prisonerListenerQueue.sqsClient.countAllMessagesOnQueue(prisonerListenerQueue.queueUrl).get()).isEqualTo(0)
-    }
+    await untilCallTo {
+      prisonerListenerQueue.sqsClient.countAllMessagesOnQueue(prisonerListenerQueue.queueUrl).get()
+    } matches { it == 0 }
+
     val formEntities = jdbcTemplate.query(
       "SELECT * FROM public.form",
     ) { rs, _ ->
