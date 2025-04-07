@@ -22,6 +22,9 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.CatType
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.ReviewReason
 import uk.gov.justice.hmpps.sqs.countAllMessagesOnQueue
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 
 @ExtendWith(OutputCaptureExtension::class)
 @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
@@ -32,13 +35,22 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
 
   @ParameterizedTest
   @MethodSource("statusesWhichShouldBeUpdated")
-  @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-  @Transactional
   fun handleReleased(status: String) {
+    createEventThenTestStatus(status, FormEntity.STATUS_CANCELLED_AFTER_RELEASE, now)
+  }
+
+  @ParameterizedTest
+  @MethodSource("statusesWhichShouldNotBeUpdated")
+  @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+  fun handleReleasedForStatusesWhichShouldNotBeUpdated(status: String) {
+    createEventThenTestStatus(status, status, null)
+  }
+
+  private fun createEventThenTestStatus(initialStatus: String, expectedStatus: String, expectedCancelledDate: LocalDateTime?) {
     val testForm = "{\"something\": \"else\"}"
     val testUsername = "TEST_GEN"
-    val testDateTime = "2025-01-25 11:24:12.768"
+    val testDateTime = "2025-01-25T11:24:12Z"
     val testRiskProfile = "{\"risk\": \"profile\"}"
     val testPrisonId = "BMI"
     val testOffenderNo = "ABC123"
@@ -46,13 +58,13 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
 
     jdbcTemplate.execute(
       "INSERT INTO form (form_response,booking_id,user_id,status,assigned_user_id,referred_date,referred_by,sequence_no,risk_profile,prison_id,offender_no,start_date,security_reviewed_by,cat_type,nomis_sequence_no,assessment_date,approved_by,assessed_by,review_reason,due_by_date,cancelled_by) " +
-        "VALUES ('$testForm',0,'$testUsername','$status','$testUsername','$testDateTime','',1,'$testRiskProfile','$testPrisonId','$testOffenderNo','$testDateTime','','RECAT',1,'$testDateTime','','','MANUAL','$testDate','')",
+        "VALUES ('$testForm',0,'$testUsername','$initialStatus','$testUsername','$testDateTime','',1,'$testRiskProfile','$testPrisonId','$testOffenderNo','$testDateTime','','RECAT',1,'$testDateTime','','','MANUAL','$testDate','')",
     )
 
     val eventType = "prisoner-offender-search.prisoner.released"
     domainEventsTopicSnsClient.publish(
       PublishRequest.builder().topicArn(domainEventsTopicArn)
-        .message(prisonerReleasedPayload("BCDEFG", eventType))
+        .message(prisonerReleasedPayload(testOffenderNo, eventType))
         .messageAttributes(
           mapOf(
             "eventType" to MessageAttributeValue.builder().dataType("String")
@@ -91,9 +103,15 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
         assessmentDate = null,
       )
     }
-    println(formEntities)
+
     assertThat(formEntities.count()).isEqualTo(1)
-    assertThat(formEntities[0].getStatus()).isEqualTo(FormEntity.STATUS_CANCELLED_AFTER_RELEASE)
+    assertThat(formEntities[0].getStatus()).isEqualTo(expectedStatus)
+    assertThat(formEntities[0].getFormResponse()).isEqualTo(testForm)
+    assertThat(formEntities[0].cancelledBy).isEmpty()
+    assertThat(formEntities[0].getCancelledDate()).isEqualTo(expectedCancelledDate)
+    assertThat(formEntities[0].prisonId).isEqualTo(testPrisonId)
+    assertThat(formEntities[0].offenderNo).isEqualTo(testOffenderNo)
+    assertThat(formEntities[0].startDate).isEqualTo(LocalDateTime.ofInstant(Instant.parse(testDateTime), ZoneId.of("UTC")))
   }
 
   @Test
@@ -114,7 +132,7 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
     await untilAsserted {
       assertThat(prisonerListenerQueue.sqsClient.countAllMessagesOnQueue(prisonerListenerQueue.queueUrl).get()).isEqualTo(0)
     }
-    assertThat(output).doesNotContain("Handling release of")
+    assertThat(output).doesNotContain("Handling release")
   }
 
   @Test
@@ -149,6 +167,13 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
       FormEntity.STATUS_AWAITING_APPROVAL,
       FormEntity.STATUS_SECURITY_FLAGGED,
       FormEntity.STATUS_SUPERVISOR_BACK,
+    )
+
+    @JvmStatic
+    fun statusesWhichShouldNotBeUpdated(): List<String> = listOf(
+      FormEntity.STATUS_APPROVED,
+      FormEntity.STATUS_CANCELLED,
+      FormEntity.STATUS_CANCELLED_AFTER_RELEASE,
     )
   }
 }

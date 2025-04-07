@@ -5,6 +5,7 @@ import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.kotlin.whenever
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
@@ -13,15 +14,23 @@ import org.springframework.http.MediaType
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.reactive.server.WebTestClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.JwtAuthHelper
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.PostgresContainer
+import java.time.Clock
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @ActiveProfiles("test")
 abstract class IntegrationTestBase {
+
+  private val frozenDateTime = "2025-01-01T10:40:34Z"
+  val now = LocalDateTime.ofInstant(Instant.parse(frozenDateTime), ZoneId.of("UTC"))
 
   @Suppress("SpringJavaInjectionPointsAutowiringInspection")
   @Autowired
@@ -29,6 +38,16 @@ abstract class IntegrationTestBase {
 
   @Autowired
   protected lateinit var jwtAuthHelper: JwtAuthHelper
+
+  @MockitoSpyBean
+  lateinit var clock: Clock
+
+  @BeforeEach
+  fun mockClock() {
+    val fixedClock = Clock.fixed(Instant.parse(frozenDateTime), ZoneId.of("UTC"))
+    whenever(clock.instant()).thenReturn(fixedClock.instant())
+    whenever(clock.zone).thenReturn(fixedClock.zone)
+  }
 
   companion object {
     private val pgContainer = PostgresContainer.instance
