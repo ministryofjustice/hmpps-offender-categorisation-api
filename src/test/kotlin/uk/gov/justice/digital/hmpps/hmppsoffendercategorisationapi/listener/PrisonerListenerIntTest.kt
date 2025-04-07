@@ -22,6 +22,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.Re
 import uk.gov.justice.hmpps.sqs.countAllMessagesOnQueue
 
 @ExtendWith(OutputCaptureExtension::class)
+@Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
 class PrisonerListenerIntTest : SqsIntegrationTestBase() {
 
   @Autowired
@@ -29,6 +30,7 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
 
   @ParameterizedTest
   @MethodSource("statusesWhichShouldBeUpdated")
+  @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   @Transactional
   fun handleReleased(status: String) {
