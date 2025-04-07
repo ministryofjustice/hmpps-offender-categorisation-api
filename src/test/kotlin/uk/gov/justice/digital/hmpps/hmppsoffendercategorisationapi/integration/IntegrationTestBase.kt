@@ -22,6 +22,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.Postgr
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @ActiveProfiles("test")
 abstract class IntegrationTestBase {
+
   @Suppress("SpringJavaInjectionPointsAutowiringInspection")
   @Autowired
   lateinit var webTestClient: WebTestClient
