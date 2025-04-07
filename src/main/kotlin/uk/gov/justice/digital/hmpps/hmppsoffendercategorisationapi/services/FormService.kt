@@ -34,9 +34,6 @@ class FormService(
       offenderNo,
       listOf(FormEntity.STATUS_APPROVED, FormEntity.STATUS_CANCELLED, FormEntity.STATUS_CANCELLED_AFTER_RELEASE),
     )
-    println(offenderNo)
-    println(formEntities)
-    println(formRepository.findAllByOffenderNo(offenderNo))
     formEntities.forEach {
       it.setStatus(FormEntity.STATUS_CANCELLED_AFTER_RELEASE)
       it.setCancelledDate(ZonedDateTime.now(clock).toLocalDateTime())
