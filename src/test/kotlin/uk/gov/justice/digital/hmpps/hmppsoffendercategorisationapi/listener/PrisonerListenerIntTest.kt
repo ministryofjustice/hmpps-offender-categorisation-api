@@ -17,6 +17,7 @@ import org.springframework.test.context.jdbc.Sql
 import org.springframework.transaction.annotation.Transactional
 import software.amazon.awssdk.services.sns.model.MessageAttributeValue
 import software.amazon.awssdk.services.sns.model.PublishRequest
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.ClockConfiguration.Companion.TIMESTAMP
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.integration.SqsIntegrationTestBase
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.FormEntity
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.CatType
@@ -37,7 +38,7 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
   @MethodSource("statusesWhichShouldBeUpdated")
   @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
   fun handleReleased(status: String) {
-    createEventThenTestStatus(status, FormEntity.STATUS_CANCELLED_AFTER_RELEASE, now)
+    createEventThenTestStatus(status, FormEntity.STATUS_CANCELLED_AFTER_RELEASE, TIMESTAMP.toLocalDateTime())
   }
 
   @ParameterizedTest
