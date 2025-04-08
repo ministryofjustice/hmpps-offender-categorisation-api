@@ -10,16 +10,14 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 class ManageOffencesApiClient(
   @Qualifier("manageOffencesApiWebClient") private val webClient: WebClient,
 ) {
-  fun checkWhichOffenceCodesAreSdsExcluded(offenceCodes: List<String>): List<SdsExcludedOffenceCode>? {
-    return webClient.get()
-      .uri { uriBuilder ->
-        uriBuilder
-          .path("/schedule/sds-early-release-exclusions")
-          .queryParam("offenceCodes", offenceCodes)
-          .build()
-      }
-      .retrieve()
-      .bodyToMono(object : ParameterizedTypeReference<List<SdsExcludedOffenceCode>>() {})
-      .block()
-  }
+  fun checkWhichOffenceCodesAreSdsExcluded(offenceCodes: List<String>): List<SdsExcludedOffenceCode>? = webClient.get()
+    .uri { uriBuilder ->
+      uriBuilder
+        .path("/schedule/sds-early-release-exclusions")
+        .queryParam("offenceCodes", offenceCodes)
+        .build()
+    }
+    .retrieve()
+    .bodyToMono(object : ParameterizedTypeReference<List<SdsExcludedOffenceCode>>() {})
+    .block()
 }

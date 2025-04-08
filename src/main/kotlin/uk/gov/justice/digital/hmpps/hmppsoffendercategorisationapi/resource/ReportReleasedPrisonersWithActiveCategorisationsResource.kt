@@ -21,6 +21,5 @@ class ReportReleasedPrisonersWithActiveCategorisationsResource(
       or cancelled) categorisation / recategorisation in progress to see if they have actually been released
       already""",
   )
-  fun reportReleasedPrisonersWithActiveCategorisations() =
-    releasedPrisonersWithActiveCategorisationService.report()
+  fun reportReleasedPrisonersWithActiveCategorisations() = releasedPrisonersWithActiveCategorisationService.report()
 }

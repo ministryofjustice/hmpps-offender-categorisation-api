@@ -84,6 +84,7 @@ data class CatForm(
         FormEntity.STATUS_STARTED -> "Review started"
         FormEntity.STATUS_SUPERVISOR_BACK -> "Review back from supervisor"
         FormEntity.STATUS_AWAITING_APPROVAL -> "Review awaiting approval"
+        FormEntity.STATUS_CANCELLED_AFTER_RELEASE -> "Review cancelled (prisoner released)"
         else -> this.status
       }
     }

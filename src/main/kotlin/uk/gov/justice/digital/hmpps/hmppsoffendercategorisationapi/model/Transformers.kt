@@ -173,7 +173,7 @@ fun transformAllFromCatForm(entity: List<FormEntity>): List<CatForm> {
         ),
         riskProfile = it.riskProfile?.let { objectMapper.readValue<RiskProfile>(it) },
 
-        cancelledDate = it.cancelledDate?.toString(),
+        cancelledDate = it.getCancelledDate()?.toString(),
         approvalDate = it.approvalDate?.toString(),
         securityReviewedDate = it.getSecurityReviewedDate()?.toString(),
         assessmentDate = it.assessmentDate?.toString(),
