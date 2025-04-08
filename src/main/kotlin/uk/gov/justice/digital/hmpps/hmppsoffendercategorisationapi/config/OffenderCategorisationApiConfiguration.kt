@@ -9,5 +9,5 @@ import java.time.Clock
 class OffenderCategorisationApiConfiguration {
   @Bean
   @Profile("!test")
-  fun clock(): Clock? = Clock.systemDefaultZone()
+  fun clock(): Clock = Clock.systemUTC()
 }
