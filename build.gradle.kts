@@ -1,7 +1,7 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "7.1.4"
-  kotlin("plugin.spring") version "2.1.0"
-  kotlin("plugin.jpa") version "2.1.0"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "8.0.0"
+  kotlin("plugin.spring") version "2.1.20"
+  kotlin("plugin.jpa") version "2.1.20"
   kotlin("plugin.serialization") version "1.9.25"
 }
 
@@ -28,7 +28,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-cache")
   implementation("io.opentelemetry:opentelemetry-api:1.34.1")
-  implementation("io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations:2.1.0")
+  implementation("io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations:2.14.0")
   implementation("io.hypersistence:hypersistence-utils-hibernate-60:3.7.3")
 
   implementation("com.vladmihalcea:hibernate-types-60:2.21.1")
@@ -36,13 +36,13 @@ dependencies {
 
   implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.2")
 
-  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.1.1")
+  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.4.2")
   implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.2.2")
 
   implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
   // OpenAPI
-  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.3")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6")
 
   // Test dependencies
   testImplementation("com.h2database:h2:2.3.232")
@@ -53,7 +53,7 @@ dependencies {
   testImplementation("io.jsonwebtoken:jjwt-impl:0.12.5")
   testImplementation("io.jsonwebtoken:jjwt-orgjson:0.12.5")
   testImplementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.7")
-  testImplementation("io.swagger.parser.v3:swagger-parser-v2-converter:2.1.16")
+  testImplementation("io.swagger.parser.v3:swagger-parser-v2-converter:2.1.26")
   testImplementation("org.mockito:mockito-inline:5.2.0")
   testImplementation("io.projectreactor:reactor-test")
   testImplementation("com.h2database:h2")
