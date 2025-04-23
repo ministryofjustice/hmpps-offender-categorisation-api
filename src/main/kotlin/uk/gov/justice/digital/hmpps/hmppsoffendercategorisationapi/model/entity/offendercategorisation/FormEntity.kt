@@ -124,6 +124,9 @@ class FormEntity(
       formResponse = JSONObject(formResponseMap).toString()
     }
   }
+  fun setFormResponse(formResponse: String) {
+    this.formResponse = formResponse
+  }
   fun setStatus(newStatus: String) {
     status = newStatus
   }

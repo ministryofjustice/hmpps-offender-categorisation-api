@@ -95,7 +95,7 @@ class FormServiceTest {
       argThat { entity ->
         entity.getStatus() == FormEntity.STATUS_CANCELLED_AFTER_RELEASE &&
           entity.getCancelledDate() == LocalDateTime.ofInstant(Instant.parse(frozenDateTime), ZoneId.of("UTC")) &&
-          entity.getFormResponse() == testFormResponse
+          entity.getFormResponse() == "{}"
       },
     )
   }

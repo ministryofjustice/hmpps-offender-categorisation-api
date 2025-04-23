@@ -37,6 +37,7 @@ class FormService(
     formEntities.forEach {
       it.setStatus(FormEntity.STATUS_CANCELLED_AFTER_RELEASE)
       it.setCancelledDate(ZonedDateTime.now(clock).toLocalDateTime())
+      it.setFormResponse("{}")
       formRepository.save(it)
     }
   }
