@@ -13,6 +13,7 @@ hmpps:
 
 prisoner:
   search:
+    timeout: 10s
     api:
       endpoint:
         url: http://localhost:8091

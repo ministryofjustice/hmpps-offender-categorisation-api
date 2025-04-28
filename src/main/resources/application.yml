@@ -140,3 +140,7 @@ hmpps.sqs:
   queues:
     domaineventsqueue:
       asyncQueueClient: true
+
+prisoner:
+  search:
+    timeout: 10s

@@ -12,6 +12,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.ConvictedOffence
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.CurrentIncentive
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.prisoner.Level
+import java.time.Duration
 import java.time.LocalDate
 
 class PrisonerSearchApiClientTest : IntegrationTestBase() {
@@ -20,7 +21,7 @@ class PrisonerSearchApiClientTest : IntegrationTestBase() {
   @BeforeEach
   fun beforeEach() {
     val webClient = WebClient.create("http://localhost:${prisonerSearchMockServer.port()}")
-    prisonerSearchApiClient = PrisonerSearchApiClient(webClient)
+    prisonerSearchApiClient = PrisonerSearchApiClient(webClient, Duration.parse("10s"))
   }
 
   @Nested
