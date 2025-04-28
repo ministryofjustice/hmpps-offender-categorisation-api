@@ -21,7 +21,7 @@ class PrisonerSearchApiClientTest : IntegrationTestBase() {
   @BeforeEach
   fun beforeEach() {
     val webClient = WebClient.create("http://localhost:${prisonerSearchMockServer.port()}")
-    prisonerSearchApiClient = PrisonerSearchApiClient(webClient, Duration.parse("10s"))
+    prisonerSearchApiClient = PrisonerSearchApiClient(webClient, Duration.ofSeconds(10))
   }
 
   @Nested
