@@ -18,10 +18,12 @@ import org.springframework.transaction.annotation.Transactional
 import software.amazon.awssdk.services.sns.model.MessageAttributeValue
 import software.amazon.awssdk.services.sns.model.PublishRequest
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.ClockConfiguration.Companion.TIMESTAMP
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonerFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.integration.SqsIntegrationTestBase
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.FormEntity
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.CatType
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.ReviewReason
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
 import uk.gov.justice.hmpps.sqs.countAllMessagesOnQueue
 import java.time.Instant
 import java.time.LocalDateTime
@@ -30,6 +32,13 @@ import java.time.ZoneId
 @ExtendWith(OutputCaptureExtension::class)
 @Sql(scripts = ["classpath:repository/reset.sql"], executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
 class PrisonerListenerIntTest : SqsIntegrationTestBase() {
+  val testForm = "{\"something\": \"else\"}"
+  val testUsername = "TEST_GEN"
+  val testDateTime = "2025-01-25T11:24:12Z"
+  val testRiskProfile = "{\"risk\": \"profile\"}"
+  val testPrisonId = "BMI"
+  val testOffenderNo = "ABC123"
+  val testDate = "2025-01-20"
 
   @Autowired
   private lateinit var jdbcTemplate: JdbcTemplate
@@ -49,19 +58,41 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
   }
 
   private fun createEventThenTestStatus(initialStatus: String, expectedStatus: String, expectedCancelledDate: LocalDateTime?) {
-    val testForm = "{\"something\": \"else\"}"
-    val testUsername = "TEST_GEN"
-    val testDateTime = "2025-01-25T11:24:12Z"
-    val testRiskProfile = "{\"risk\": \"profile\"}"
-    val testPrisonId = "BMI"
-    val testOffenderNo = "ABC123"
-    val testDate = "2025-01-20"
+    prisonerSearchMockServer.stubFindPrisoner(
+      TestPrisonerFactory()
+        .withPrisonerNumber(testOffenderNo)
+        .withStatus(Prisoner.STATUS_INACTIVE_OUT)
+        .build(),
+    )
 
+    insertExistingFormDbRecord(initialStatus)
+    fireReleasedEvent()
+    checkFormDbRecord(expectedStatus, expectedCancelledDate)
+  }
+
+  @Test
+  @Transactional
+  fun handleReleasedForPrisonerWhoHasAbscondedSoIsActiveOutOnPrisonerSearch() {
+    prisonerSearchMockServer.stubFindPrisoner(
+      TestPrisonerFactory()
+        .withPrisonerNumber(testOffenderNo)
+        .withStatus(Prisoner.STATUS_ACTIVE_OUT)
+        .build(),
+    )
+
+    insertExistingFormDbRecord(FormEntity.STATUS_STARTED)
+    fireReleasedEvent()
+    checkFormDbRecord(FormEntity.STATUS_STARTED, null)
+  }
+
+  private fun insertExistingFormDbRecord(initialStatus: String) {
     jdbcTemplate.execute(
       "INSERT INTO form (form_response,booking_id,user_id,status,assigned_user_id,referred_date,referred_by,sequence_no,risk_profile,prison_id,offender_no,start_date,security_reviewed_by,cat_type,nomis_sequence_no,assessment_date,approved_by,assessed_by,review_reason,due_by_date,cancelled_by) " +
         "VALUES ('$testForm',0,'$testUsername','$initialStatus','$testUsername','$testDateTime','',1,'$testRiskProfile','$testPrisonId','$testOffenderNo','$testDateTime','','RECAT',1,'$testDateTime','','','MANUAL','$testDate','')",
     )
+  }
 
+  private fun fireReleasedEvent() {
     val eventType = "prisoner-offender-search.prisoner.released"
     domainEventsTopicSnsClient.publish(
       PublishRequest.builder().topicArn(domainEventsTopicArn)
@@ -77,7 +108,9 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
     await untilCallTo {
       prisonerListenerQueue.sqsClient.countAllMessagesOnQueue(prisonerListenerQueue.queueUrl).get()
     } matches { it == 0 }
+  }
 
+  private fun checkFormDbRecord(expectedStatus: String, expectedCancelledDate: LocalDateTime?) {
     val formEntities = jdbcTemplate.query(
       "SELECT * FROM public.form",
     ) { rs, _ ->
