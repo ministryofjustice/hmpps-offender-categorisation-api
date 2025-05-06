@@ -33,6 +33,7 @@ data class Prisoner(
     const val CATEGORY_R = "R"
     const val STATUS_ACTIVE_IN = "ACTIVE IN"
     const val STATUS_INACTIVE_OUT = "INACTIVE OUT"
+    const val STATUS_ACTIVE_OUT = "ACTIVE OUT"
 
     const val INCENTIVE_LEVEL_BASIC = "BAS"
     const val INCENTIVE_LEVEL_STANDARD = "STD"

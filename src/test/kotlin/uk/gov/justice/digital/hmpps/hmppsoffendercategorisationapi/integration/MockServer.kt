@@ -42,6 +42,21 @@ class PrisonerSearchMockServer : MockServer(8091) {
         ),
     )
   }
+
+  fun stubFindPrisoner(prisoner: Prisoner = (TestPrisonerFactory()).build()) {
+    stubFor(
+      WireMock.get(WireMock.urlEqualTo("/prisoner/${prisoner.prisonerNumber}"))
+        .willReturn(
+          WireMock.aResponse()
+            .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json")))
+            .withBody(
+              jacksonObjectMapper().apply {
+                registerModule(JavaTimeModule())
+              }.writeValueAsString(prisoner),
+            ),
+        ),
+    )
+  }
 }
 
 class PrisonApiMockServer : MockServer(8094) {
