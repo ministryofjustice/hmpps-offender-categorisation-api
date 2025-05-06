@@ -57,7 +57,7 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
     createEventThenTestStatus(status, status, null, false)
   }
 
-  private fun createEventThenTestStatus(initialStatus: String, expectedStatus: String, expectedCancelledDate: LocalDateTime?) {
+  private fun createEventThenTestStatus(initialStatus: String, expectedStatus: String, expectedCancelledDate: LocalDateTime?, expectingFormResponseToBeEmpty: Boolean) {
     prisonerSearchMockServer.stubFindPrisoner(
       TestPrisonerFactory()
         .withPrisonerNumber(testOffenderNo)
@@ -67,7 +67,7 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
 
     insertExistingFormDbRecord(initialStatus)
     fireReleasedEvent()
-    checkFormDbRecord(expectedStatus, expectedCancelledDate)
+    checkFormDbRecord(expectedStatus, expectedCancelledDate, expectingFormResponseToBeEmpty)
   }
 
   @Test
@@ -82,7 +82,7 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
 
     insertExistingFormDbRecord(FormEntity.STATUS_STARTED)
     fireReleasedEvent()
-    checkFormDbRecord(FormEntity.STATUS_STARTED, null)
+    checkFormDbRecord(FormEntity.STATUS_STARTED, null, false)
   }
 
   private fun insertExistingFormDbRecord(initialStatus: String) {
@@ -110,7 +110,7 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
     } matches { it == 0 }
   }
 
-  private fun checkFormDbRecord(expectedStatus: String, expectedCancelledDate: LocalDateTime?) {
+  private fun checkFormDbRecord(expectedStatus: String, expectedCancelledDate: LocalDateTime?, expectingFormResponseToBeEmpty: Boolean) {
     val formEntities = jdbcTemplate.query(
       "SELECT * FROM public.form",
     ) { rs, _ ->
