@@ -1,7 +1,5 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services
 
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonerSearchApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner.Companion.STATUS_INACTIVE_OUT
@@ -16,14 +14,9 @@ class PrisonerEventService(
       val nomsNumber = event.additionalInformation.nomsNumber
       val prisoner = prisonerSearchApiClient.findPrisoner(nomsNumber)
       if (prisoner.status == STATUS_INACTIVE_OUT) {
-        log.info("Handling release")
         formService.cancelAnyInProgressReviewsDueToPrisonerRelease(nomsNumber)
       }
     }
-  }
-
-  private companion object {
-    val log: Logger = LoggerFactory.getLogger(PrisonerEventService::class.java)
   }
 }
 
