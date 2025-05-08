@@ -22,4 +22,13 @@ class ReportReleasedPrisonersWithActiveCategorisationsResource(
       already""",
   )
   fun reportReleasedPrisonersWithActiveCategorisations() = releasedPrisonersWithActiveCategorisationService.report()
+
+  @GetMapping("/update")
+  @Operation(
+    summary = "Report active categorisations for prisoners from prisoner search who have been released",
+    description = """Calls prisoner search for each of the prisoners who have an active (e.g. non approved
+      or cancelled) categorisation / recategorisation in progress to see if they have actually been released
+      already""",
+  )
+  fun updateReleasedPrisonersWithActiveCategorisations() = releasedPrisonersWithActiveCategorisationService.update()
 }
