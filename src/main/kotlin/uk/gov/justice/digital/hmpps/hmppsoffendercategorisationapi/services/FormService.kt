@@ -29,7 +29,7 @@ class FormService(
     formRepository.save(formEntity)
   }
 
-  fun cancelAnyInProgressReviewsDueToPrisonerRelease(offenderNo: String) {
+  fun cancelAnyInProgressReviewsDueToPrisonerRelease(offenderNo: String, deleteFormResponse: Boolean = true) {
     val formEntities = formRepository.findAllByOffenderNoAndStatusNotIn(
       offenderNo,
       listOf(FormEntity.STATUS_APPROVED, FormEntity.STATUS_CANCELLED, FormEntity.STATUS_CANCELLED_AFTER_RELEASE),
@@ -37,7 +37,9 @@ class FormService(
     formEntities.forEach {
       it.setStatus(FormEntity.STATUS_CANCELLED_AFTER_RELEASE)
       it.setCancelledDate(ZonedDateTime.now(clock).toLocalDateTime())
-      it.setFormResponse("{}")
+      if (deleteFormResponse) {
+        it.setFormResponse("{}")
+      }
       formRepository.save(it)
     }
   }

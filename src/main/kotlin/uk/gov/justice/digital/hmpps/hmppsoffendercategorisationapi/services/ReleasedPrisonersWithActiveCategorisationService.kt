@@ -12,17 +12,26 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.of
 class ReleasedPrisonersWithActiveCategorisationService(
   private val formRepository: FormRepository,
   private val prisonerSearchApiClient: PrisonerSearchApiClient,
+  private val formService: FormService,
 ) {
   fun report() {
+    processAllReleasedPrisonersWithActiveCategorisations(false)
+  }
+
+  fun update() {
+    processAllReleasedPrisonersWithActiveCategorisations(true)
+  }
+
+  private fun processAllReleasedPrisonersWithActiveCategorisations(update: Boolean) {
     var index = 0
     do {
-      val activeCategorisations = formRepository.findAllByStatusNotIn(listOf(FormEntity.STATUS_APPROVED, FormEntity.STATUS_CANCELLED), PageRequest.of(index, CHUNK_SIZE))
-      processChunkOfActiveCategorisations(activeCategorisations)
+      val activeCategorisations = formRepository.findAllByStatusNotIn(listOf(FormEntity.STATUS_APPROVED, FormEntity.STATUS_CANCELLED, FormEntity.STATUS_CANCELLED_AFTER_RELEASE), PageRequest.of(index, CHUNK_SIZE))
+      processChunkOfActiveCategorisations(activeCategorisations, update)
       index++
     } while (activeCategorisations.count() >= CHUNK_SIZE)
   }
 
-  private fun processChunkOfActiveCategorisations(activeCategorisations: List<FormEntity>) {
+  private fun processChunkOfActiveCategorisations(activeCategorisations: List<FormEntity>, update: Boolean) {
     if (activeCategorisations.isEmpty()) {
       return
     }
@@ -40,6 +49,9 @@ class ReleasedPrisonersWithActiveCategorisationService(
       }
       if (!prisoner.currentlyInPrison) {
         log.info("Prisoner $prisonerNumber has active categorisation of type ${activeCategorisation.catType} but prisoner search shows them to have status ${prisoner.status} and restricted patient value ${prisoner.restrictedPatient}")
+        if (update) {
+          formService.cancelAnyInProgressReviewsDueToPrisonerRelease(prisonerNumber, false)
+        }
       }
     }
   }
