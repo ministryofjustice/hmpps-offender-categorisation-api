@@ -16,19 +16,20 @@ services:
   localstack:
     image: localstack/localstack:3.0.0
     ports:
-      - "4566:4566"
+      - "4566-4597:4566-4597"
     networks:
       - hmpps
     container_name: localstack
     environment:
       - SERVICES=${SERVICES-sqs,s3,sns}
       - DEBUG=${DEBUG- }
+      - DATA_DIR=/tmp/localstack/data
       - PERSISTENCE=${DATA_DIR- }
       - KINESIS_ERROR_PROBABILITY=${KINESIS_ERROR_PROBABILITY- }
       - AWS_DEFAULT_REGION=eu-west-2
       - DOCKER_HOST=unix:///var/run/docker.sock
     volumes:
-      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
 
   setup-localstack-resources:

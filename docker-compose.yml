@@ -32,10 +32,12 @@ services:
       - hmpps
     container_name: localstack-oc-api
     ports:
-      - "4666:4666"
+      - "4566-4597:4566-4597"
       - "4610-4659:4610-4659"
     environment:
+      - SERVICES=s3
       - DEBUG=${DEBUG- }
+      - DATA_DIR=/tmp/localstack/data
       - DOCKER_HOST=unix:///var/run/docker.sock
       - GATEWAY_LISTEN=0.0.0.0:4666
       - EXTERNAL_SERVICE_PORTS_START=4610
@@ -43,7 +45,7 @@ services:
       - MAIN_CONTAINER_NAME=localstack-api
       - AWS_ENDPOINT_URL=http://localhost:4666
     volumes:
-      - "${TMPDIR:-/tmp/localstack}:/var/lib/localstack"
+      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
     healthcheck:
       test: awslocal sqs list-queues

@@ -1,0 +1,85 @@
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services.file
+
+import org.junit.runner.RunWith
+import org.mockito.junit.MockitoJUnitRunner
+
+@RunWith(MockitoJUnitRunner::class)
+class S3FileServiceTest {
+  private lateinit var service: S3FileService
+
+//  @Mock
+//  private lateinit var amazonS3Client: AmazonS3Client
+//
+//  @Mock
+//  private lateinit var result: ListObjectsV2Result
+//
+//  @Before
+//  fun setup() {
+//    service = S3FileService(
+//      amazonS3Client,
+//    )
+//  }
+//
+//  @Test
+//  fun testProcessingViperFile() {
+//    val viperFile = loadTestData("VIPER_2_2024_10_29.csv")
+//
+//    amazonS3Client = mockS3Client("viper/VIPER_2_file.csv", viperFile)
+//    service = S3FileService(amazonS3Client)
+//
+//    val pendingFile = service.getLatestFile("risk-profiler/viper/VIPER_2_file.csv", FileType.VIPER)
+//    Assertions.assertThat(convertToString(pendingFile?.data!!)).isEqualTo(viperFile)
+//  }
+//
+//  fun convertToString(inputStream: InputStream): String {
+//    return IOUtils.toString(inputStream, StandardCharsets.UTF_8.name())
+//  }
+//
+//  fun loadTestData(filename: String): String {
+//    val inputStream: InputStream = File("src/test/resources/testdata/$filename").inputStream()
+//    return inputStream.bufferedReader().use { it.readText() }
+//  }
+//
+//  @Test
+//  fun testDeleteHistoricalFiles() {
+//    val s3ObjectSummary1 = S3ObjectSummary()
+//    s3ObjectSummary1.lastModified = Timestamp.valueOf(LocalDateTime.of(2019, 10, 1, 1, 1))
+//    s3ObjectSummary1.key = "s3Ob1"
+//    val s3ObjectSummary2 = S3ObjectSummary()
+//    s3ObjectSummary2.lastModified = Timestamp.valueOf(LocalDateTime.of(2019, 10, 2, 2, 2))
+//    s3ObjectSummary2.key = "s3Ob2"
+//    val s3ObjectSummary3 = S3ObjectSummary()
+//    s3ObjectSummary3.lastModified = Timestamp.valueOf(LocalDateTime.of(2019, 10, 3, 3, 3))
+//    s3ObjectSummary3.key = "s3Ob3"
+//    val s3ObjectSummary4 = S3ObjectSummary()
+//    s3ObjectSummary4.lastModified = Timestamp.valueOf(LocalDateTime.of(2019, 10, 4, 4, 4))
+//    s3ObjectSummary4.key = "s3Ob4"
+//    Mockito.`when`(amazonS3Client.listObjectsV2("risk-profiler", "gg")).thenReturn(result)
+//    Mockito.`when`(result.objectSummaries)
+//      .thenReturn(ImmutableList.of(s3ObjectSummary1, s3ObjectSummary3, s3ObjectSummary4, s3ObjectSummary2))
+//    service.deleteHistoricalFiles("risk-profiler/gg")
+//    Mockito.verify(amazonS3Client).deleteObject("risk-profiler", "s3Ob1")
+//    Mockito.verify(amazonS3Client).deleteObject("risk-profiler", "s3Ob2")
+//    Mockito.verify(amazonS3Client, Mockito.never()).deleteObject("risk-profiler", "s3Ob3")
+//    Mockito.verify(amazonS3Client, Mockito.never()).deleteObject("risk-profiler", "s3Ob4")
+//  }
+//
+//  private fun mockS3Client(key: String, fileToProcess: String): AmazonS3Client {
+//    amazonS3Client = Mockito.mock(AmazonS3Client::class.java)
+//    val listObjectsV2Result = Mockito.mock(ListObjectsV2Result::class.java)
+//    val s3ObjectSummary = S3ObjectSummary()
+//    s3ObjectSummary.lastModified = Timestamp.valueOf(LocalDateTime.of(2019, 10, 1, 1, 1))
+//    s3ObjectSummary.key = key
+//
+//    Mockito.`when`(listObjectsV2Result.objectSummaries).thenReturn(ImmutableList.of(s3ObjectSummary))
+//    Mockito.`when`(amazonS3Client.listObjectsV2(ArgumentMatchers.any(), ArgumentMatchers.any()))
+//      .thenReturn(listObjectsV2Result)
+//
+//    val testInputStream: InputStream = StringInputStream(fileToProcess)
+//    val s3Object = S3Object()
+//    s3Object.setObjectContent(testInputStream)
+//    Mockito.`when`(amazonS3Client.getObject(ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+//      .thenReturn(s3Object)
+//    return amazonS3Client
+//  }
+}
