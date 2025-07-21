@@ -46,6 +46,9 @@ dependencies {
 
   implementation("com.opencsv:opencsv:5.9")
   implementation("aws.sdk.kotlin:s3:1.4.111")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.10.2")
+  implementation("io.opentelemetry:opentelemetry-extension-kotlin:1.51.0")
 
   // Test dependencies
   testImplementation("com.h2database:h2:2.3.232")
