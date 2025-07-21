@@ -45,7 +45,7 @@ class CsvProcessorService(
 
     var values: Array<String?>? = csvReader.readNext()
     while (values != null) {
-      records.add(values.toList() as List<String>)
+      records.add(values.toList().filterIsInstance<String>())
       values = csvReader.readNext()
     }
     return records

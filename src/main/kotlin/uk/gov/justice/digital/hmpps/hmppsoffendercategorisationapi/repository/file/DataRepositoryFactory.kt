@@ -10,10 +10,16 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.file.Vi
 class DataRepositoryFactory(
   viperRepository: ViperRepository,
 ) {
-  private val viperRepository: DataRepository<Viper>
+
+  private var viperRepository: DataRepository<Viper>? = null
+
+  init {
+    this.viperRepository = viperRepository
+  }
+
   fun <T : RiskDataSet> getRepository(type: Class<T>): DataRepository<Viper> {
     return when (byDataSet(type)) {
-      FileType.VIPER -> viperRepository
+      FileType.VIPER -> viperRepository ?: throw Exception()
     }
   }
 
@@ -21,9 +27,5 @@ class DataRepositoryFactory(
     return listOf(
       getRepository(Viper::class.java),
     )
-  }
-
-  init {
-    this.viperRepository = viperRepository
   }
 }
