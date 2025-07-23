@@ -26,7 +26,7 @@ class ViperRepository : DataRepository<Viper>() {
         try {
           val key = p[Viper.nomisIdPosition]
           if (StringUtils.isNotBlank(key)) {
-            if (!NOMS_ID_REGEX.matcher(key).matches()) {
+            if (!nomisIdRegex.matcher(key).matches()) {
               log.warn("Invalid Key in line {} for Key {}", data.index.get(), key)
               data.linesInvalid.incrementAndGet()
             } else {

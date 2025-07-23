@@ -25,9 +25,7 @@ class DataService(private val factory: DataRepositoryFactory) {
     }
   }
 
-  private fun isFileShouldBeProcessed(data: DataRepository<out RiskDataSet>, timestamp: LocalDateTime?): Boolean {
-    return data.fileTimestamp == null || data.fileTimestamp!! < timestamp
-  }
+  private fun isFileShouldBeProcessed(data: DataRepository<out RiskDataSet>, timestamp: LocalDateTime?): Boolean = data.fileTimestamp == null || data.fileTimestamp!! < timestamp
 
   companion object {
     private val log = LoggerFactory.getLogger(DataService::class.java)

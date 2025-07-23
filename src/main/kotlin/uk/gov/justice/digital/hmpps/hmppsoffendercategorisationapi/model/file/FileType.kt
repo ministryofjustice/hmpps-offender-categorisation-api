@@ -8,10 +8,8 @@ enum class FileType(val type: Class<out RiskDataSet?>) {
 
   companion object {
     @JvmStatic
-    fun byDataSet(clazz: Class<out RiskDataSet?>): FileType {
-      return Arrays.stream(entries.toTypedArray())
-        .filter { ft: FileType -> ft.type == clazz }
-        .findFirst().orElse(null)
-    }
+    fun byDataSet(clazz: Class<out RiskDataSet?>): FileType = Arrays.stream(entries.toTypedArray())
+      .filter { ft: FileType -> ft.type == clazz }
+      .findFirst().orElse(null)
   }
 }

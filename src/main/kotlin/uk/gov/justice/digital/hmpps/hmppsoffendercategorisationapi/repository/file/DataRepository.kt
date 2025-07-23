@@ -10,7 +10,7 @@ import java.util.regex.Pattern
 
 abstract class DataRepository<F : RiskDataSet> {
   @JvmField
-  val NOMS_ID_REGEX = Pattern.compile("^[A-Z]\\d{4}[A-Z]{2}$")
+  val nomisIdRegex = Pattern.compile("^[A-Z]\\d{4}[A-Z]{2}$")
   internal open val dataA = ImportedFile<F>()
   internal open val dataB = ImportedFile<F>()
   internal open val isA = AtomicBoolean(true)
@@ -28,12 +28,10 @@ abstract class DataRepository<F : RiskDataSet> {
     data: ImportedFile<F>,
   )
 
-  open fun getByKey(key: String?): Optional<F> {
-    return if (data.dataSet != null) {
-      Optional.ofNullable(data.dataSet!![key!!])
-    } else {
-      Optional.empty()
-    }
+  open fun getByKey(key: String?): Optional<F> = if (data.dataSet != null) {
+    Optional.ofNullable(data.dataSet!![key!!])
+  } else {
+    Optional.empty()
   }
 
   val fileTimestamp: LocalDateTime?

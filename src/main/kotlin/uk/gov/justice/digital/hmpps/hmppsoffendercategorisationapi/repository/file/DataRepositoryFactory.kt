@@ -17,15 +17,11 @@ class DataRepositoryFactory(
     this.viperRepository = viperRepository
   }
 
-  fun <T : RiskDataSet> getRepository(type: Class<T>): DataRepository<Viper> {
-    return when (byDataSet(type)) {
-      FileType.VIPER -> viperRepository ?: throw Exception()
-    }
+  fun <T : RiskDataSet> getRepository(type: Class<T>): DataRepository<Viper> = when (byDataSet(type)) {
+    FileType.VIPER -> viperRepository ?: throw Exception()
   }
 
-  fun getRepositories(): List<DataRepository<out RiskDataSet>> {
-    return listOf(
-      getRepository(Viper::class.java),
-    )
-  }
+  fun getRepositories(): List<DataRepository<out RiskDataSet>> = listOf(
+    getRepository(Viper::class.java),
+  )
 }
