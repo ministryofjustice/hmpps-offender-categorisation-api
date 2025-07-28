@@ -36,7 +36,7 @@ class S3Config(private val s3Properties: S3Properties) {
     }
   }
 
-  @Bean
+  @Bean("s3Client")
   @ConditionalOnProperty(name = ["s3.provider"], havingValue = "localstack")
   fun s3ClientLocalstack(): S3Client? = runBlocking {
     S3Client.fromEnvironment {
