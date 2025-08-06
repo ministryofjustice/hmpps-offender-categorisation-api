@@ -66,13 +66,17 @@ class S3FileService(
     }
   }
 
-  private suspend fun deleteFile(bucketAndPrefix: BucketAndPrefix, key: String) {
-    val deleteObjectRequest = DeleteObjectRequest {
-      bucket = bucketAndPrefix.bucketName
-      key
+  private suspend fun deleteFile(bucketAndPrefix: BucketAndPrefix, objectKey: String) {
+    try {
+      val deleteObjectRequest = DeleteObjectRequest {
+        bucket = bucketAndPrefix.bucketName
+        key = objectKey
+      }
+      s3Client.deleteObject(deleteObjectRequest)
+    } catch (e: IOException) {
+      log.error(e.message)
     }
-    s3Client.deleteObject(deleteObjectRequest)
-    log.info("Deleted s3 data file: {} from bucket {}", key, bucketAndPrefix.bucketName)
+    log.info("Deleted s3 data file: {} from bucket {}", objectKey, bucketAndPrefix.bucketName)
   }
 
   private suspend fun list(bucketAndPrefix: BucketAndPrefix): List<FileInfo>? = s3Client.listObjectsV2 {

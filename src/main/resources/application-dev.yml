@@ -73,3 +73,9 @@ hmpps.sqs:
     domainevents:
       arn: arn:aws:sns:eu-west-2:000000000000:domainevents-topic
 
+s3:
+  provider: localstack
+  region: eu-west-2
+  serviceEndpointOverride: http://localhost:4566
+  bucket-name: test-bucket
+

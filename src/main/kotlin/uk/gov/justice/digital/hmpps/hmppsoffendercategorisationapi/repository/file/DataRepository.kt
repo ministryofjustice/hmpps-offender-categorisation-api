@@ -28,10 +28,14 @@ abstract class DataRepository<F : RiskDataSet> {
     data: ImportedFile<F>,
   )
 
-  open fun getByKey(key: String?): Optional<F> = if (data.dataSet != null) {
-    Optional.ofNullable(data.dataSet!![key!!])
-  } else {
-    Optional.empty()
+  open fun getByKey(key: String?): Optional<F> {
+    log.info(data.toString())
+    log.info(data.dataSet.toString())
+    if (data.dataSet != null) {
+      return Optional.ofNullable(data.dataSet!![key!!])
+    } else {
+      return Optional.empty()
+    }
   }
 
   val fileTimestamp: LocalDateTime?
