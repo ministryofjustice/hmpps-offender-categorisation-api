@@ -148,6 +148,9 @@ prisoner:
 s3:
   provider: aws
   region: eu-west-2
+  bucket-name: ${S3_BUCKET_NAME}
+  path:
+    viper: ${s3.bucketName}/viper
 
 # every 6 hours
 viper:
