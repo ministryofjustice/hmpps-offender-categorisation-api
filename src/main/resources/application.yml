@@ -150,7 +150,7 @@ s3:
   region: eu-west-2
   bucket-name: ${S3_BUCKET_NAME}
   path:
-    viper: ${s3.bucketName}/viper
+    viper: ${S3_BUCKET_NAME}/viper
 
 # every 6 hours
 viper:
