@@ -80,3 +80,6 @@ s3:
   path:
     viper: ${s3.bucketName}/viper
 
+viper:
+  period: '*/10 * * * *'
+
