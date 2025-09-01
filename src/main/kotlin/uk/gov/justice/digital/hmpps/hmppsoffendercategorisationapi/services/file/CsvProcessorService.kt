@@ -30,7 +30,6 @@ class CsvProcessorService(
 
   @Scheduled(cron = "\${viper.period}")
   final suspend fun startViperScheduler() {
-    initialise()
     log.info("Starting VIPER Scheduler - Checking for csv")
     val file = fileService.getLatestViper2File(viperPath, FileType.VIPER)
 
