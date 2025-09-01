@@ -1,6 +1,6 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "8.1.0"
-  kotlin("plugin.spring") version "2.1.20"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "9.0.0"
+  kotlin("plugin.spring") version "2.2.10"
   kotlin("plugin.jpa") version "2.1.20"
   kotlin("plugin.serialization") version "1.9.25"
 }
@@ -42,16 +42,16 @@ dependencies {
   implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
   // OpenAPI
-  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.11")
 
   // Test dependencies
   testImplementation("com.h2database:h2:2.3.232")
   testImplementation("com.github.tomakehurst:wiremock-jre8-standalone:3.0.1")
   testImplementation("org.springframework.security:spring-security-test")
   testImplementation("org.awaitility:awaitility-kotlin:4.2.1")
-  testImplementation("io.jsonwebtoken:jjwt-api:0.12.5")
-  testImplementation("io.jsonwebtoken:jjwt-impl:0.12.5")
-  testImplementation("io.jsonwebtoken:jjwt-orgjson:0.12.5")
+  testImplementation("io.jsonwebtoken:jjwt-api:0.13.0")
+  testImplementation("io.jsonwebtoken:jjwt-impl:0.13.0")
+  testImplementation("io.jsonwebtoken:jjwt-orgjson:0.13.0")
   testImplementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.7")
   testImplementation("io.swagger.parser.v3:swagger-parser-v2-converter:2.1.26")
   testImplementation("org.mockito:mockito-inline:5.2.0")
@@ -67,8 +67,6 @@ kotlin {
 
 tasks {
   withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions {
-      jvmTarget = "21"
-    }
+    compilerOptions.jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21
   }
 }
