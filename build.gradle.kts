@@ -17,7 +17,7 @@ dependencies {
 
   runtimeOnly("org.flywaydb:flyway-core")
   runtimeOnly("org.flywaydb:flyway-database-postgresql")
-  runtimeOnly("org.postgresql:postgresql:42.7.5")
+  runtimeOnly("org.postgresql:postgresql:42.7.7")
 
   // Spring boot dependencies
   implementation("org.springframework.boot:spring-boot-starter-security")
