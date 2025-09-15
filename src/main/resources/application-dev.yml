@@ -76,6 +76,9 @@ hmpps.sqs:
 s3:
   provider: localstack
   region: eu-west-2
-  serviceEndpointOverride: http://localhost:4566
-  bucket-name: test-bucket
+  path:
+    viper: ${s3.bucketName}/viper
+
+viper:
+  period: '0 */5 * * * *'
 

@@ -56,7 +56,7 @@ services:
     image: localstack/localstack:0.10.5
     networks:
       - hmpps
-    container_name: pcms-api-localstack-s3
+    container_name: cat-api-localstack-s3
     ports:
       - 4572:4572
     environment:
