@@ -151,4 +151,4 @@ s3:
 
 # every 6 hours
 viper:
-  period: '0 */5 * * * *'
+  period: '0 0 */6 * * *'
