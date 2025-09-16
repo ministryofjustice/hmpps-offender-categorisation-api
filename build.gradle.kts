@@ -44,6 +44,12 @@ dependencies {
   // OpenAPI
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.11")
 
+  implementation("com.opencsv:opencsv:5.9")
+  implementation("aws.sdk.kotlin:s3:1.4.111")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.10.2")
+  implementation("io.opentelemetry:opentelemetry-extension-kotlin:1.51.0")
+
   // Test dependencies
   testImplementation("com.h2database:h2:2.3.232")
   testImplementation("com.github.tomakehurst:wiremock-jre8-standalone:3.0.1")

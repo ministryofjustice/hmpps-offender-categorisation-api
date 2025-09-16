@@ -19,7 +19,7 @@ generic-service:
   env:
     JAVA_OPTS: "-Xmx512m"
     SERVER_PORT: "8080"
-    SPRING_PROFILES_ACTIVE: "logstash"
+    SPRING_PROFILES_ACTIVE: "logstash,s3"
     APPLICATIONINSIGHTS_CONNECTION_STRING: "InstrumentationKey=$(APPINSIGHTS_INSTRUMENTATIONKEY)"
     APPLICATIONINSIGHTS_CONFIGURATION_FILE: applicationinsights.json
     HMPPS_SQS_USE_WEB_TOKEN: "true"
@@ -43,6 +43,8 @@ generic-service:
       HMPPS_SQS_QUEUES_DOMAINEVENTSQUEUE_QUEUE_NAME: "sqs_queue_name"
     domain-events-offender-categorisation-api-dlq:
       HMPPS_SQS_QUEUES_DOMAINEVENTSQUEUE_DLQ_NAME: "sqs_queue_name"
+    risk-profiler-s3-bucket-output:
+      S3_BUCKET_NAME: "bucket_name"
 
   allowlist:
     groups:

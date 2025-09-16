@@ -73,3 +73,5 @@ sonar-project.properties
 
 volume/
 .kotlin/
+
+.localstack/
