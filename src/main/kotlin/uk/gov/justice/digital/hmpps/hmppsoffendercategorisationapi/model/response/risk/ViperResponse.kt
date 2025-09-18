@@ -9,4 +9,5 @@ import java.math.BigDecimal
 data class ViperResponse(
   @Schema(description = "prisoner number") val prisonerNumber: String,
   @Schema(description = "viper score") val score: BigDecimal? = null,
+  @Schema(description = "prisoner's viper score is above the threshold") val aboveThreshold: Boolean = false,
 )

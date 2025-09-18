@@ -74,8 +74,5 @@ class RiskController(
     )
     @PathVariable
     prisonerNumber: String,
-  ): ViperResponse = ViperResponse(
-    prisonerNumber,
-    viperService.getViperScore(prisonerNumber),
-  )
+  ): ViperResponse = viperService.getViperData(prisonerNumber)
 }
