@@ -27,7 +27,7 @@ class S3FileService(
 
     val latestViperFile = s3Result
       ?.filter { o -> o.key?.contains("VIPER_2_") == true }
-      ?.maxByOrNull { o -> o.lastModified }
+      ?.maxByOrNull { o -> o.lastModified!! }
 
     if (latestViperFile == null) {
       return null

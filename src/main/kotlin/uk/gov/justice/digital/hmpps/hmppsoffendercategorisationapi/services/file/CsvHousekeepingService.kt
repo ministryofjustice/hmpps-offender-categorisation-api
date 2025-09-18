@@ -6,10 +6,10 @@ import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
 
 @Service
-class CsvHousekeepingService(private val fileService: S3FileService) {
-
-  @Value("\${s3.path.viper}")
-  private val viperPath: String = "/viper"
+class CsvHousekeepingService(
+  private val fileService: S3FileService,
+  @Value("\${s3.path.viper}") private val viperPath: String = "/viper",
+) {
 
   @Scheduled(fixedRate = DateUtils.MILLIS_PER_DAY)
   suspend fun cleanupHistoricalCsvFiles() {
