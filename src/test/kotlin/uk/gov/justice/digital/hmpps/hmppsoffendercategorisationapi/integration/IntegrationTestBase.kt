@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.integration
 
+import aws.sdk.kotlin.services.s3.S3Client
 import com.github.tomakehurst.wiremock.client.WireMock
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
+import org.springframework.context.annotation.Import
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.test.context.ActiveProfiles
@@ -15,12 +17,15 @@ import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.reactive.server.WebTestClient
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.S3TestUtil
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.JwtAuthHelper
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.PostgresContainer
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.S3Properties
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @ActiveProfiles("test")
+@Import(S3TestUtil::class)
 abstract class IntegrationTestBase {
 
   @Suppress("SpringJavaInjectionPointsAutowiringInspection")
@@ -29,6 +34,15 @@ abstract class IntegrationTestBase {
 
   @Autowired
   protected lateinit var jwtAuthHelper: JwtAuthHelper
+
+  @Autowired
+  protected lateinit var s3: S3Client
+
+  @Autowired
+  protected lateinit var s3Properties: S3Properties
+
+  @Autowired
+  protected lateinit var s3TestUtil: S3TestUtil
 
   companion object {
     private val pgContainer = PostgresContainer.instance
@@ -131,6 +145,10 @@ abstract class IntegrationTestBase {
         ),
       )
     }
+
+    @JvmStatic
+    protected val fileContent =
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   }
 
   @BeforeEach
@@ -154,4 +172,6 @@ abstract class IntegrationTestBase {
     it.setBearerAuth(jwtAuthHelper.createJwt(subject = username, roles = roles))
     it.contentType = contentType
   }
+
+  data class S3File(val key: String, val content: String = fileContent)
 }

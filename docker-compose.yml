@@ -51,5 +51,28 @@ services:
       timeout: 3s
       retries: 5
 
+  localstack-s3:
+    # Localstack version 0.10.5 required for S3:
+    image: localstack/localstack:0.10.5
+    networks:
+      - hmpps
+    container_name: cat-api-localstack-s3
+    ports:
+      - 4572:4572
+    environment:
+      - SERVICES=s3
+      - DEBUG=${DEBUG- }
+      - DATA_DIR=${DATA_DIR- }
+      - PORT_WEB_UI=${PORT_WEB_UI-8088}
+      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR- }
+      - AWS_EXECUTION_ENV=True
+      - DEFAULT_REGION=eu-west-2
+      - HOSTNAME_EXTERNAL=localstack-s3
+      - SETUP_FOLDER=/docker-entrypoint-initaws.d
+    volumes:
+      - ./.localstack:/tmp/localstack
+      - $PWD/localstack/setup/s3:/docker-entrypoint-initaws.d/s3
+      - $PWD/localstack/setup/setup-bucket.sh:/docker-entrypoint-initaws.d/setup-bucket.sh
+
 networks:
   hmpps:
