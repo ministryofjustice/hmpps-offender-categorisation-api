@@ -50,6 +50,14 @@ generic-service:
     groups:
       - internal
 
+  resources:
+    requests:
+      cpu: 10m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 1000Mi
+
 generic-prometheus-alerts:
   targetApplication: hmpps-offender-categorisation-api
 

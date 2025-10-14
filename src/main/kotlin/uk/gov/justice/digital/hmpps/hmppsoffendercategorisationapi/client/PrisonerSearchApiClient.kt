@@ -33,7 +33,7 @@ class PrisonerSearchApiClient(
     }
     .blockOptional(apiTimeout).orElseThrow { NotFoundException("Prisoner with id - $prisonerNumber not found on prisoner search") }
 
-  private fun findPrisonerByIdAsMono(prisonerId: String): Mono<Prisoner> = webClient.get().uri("/prisoner/$prisonerId")
+  private fun findPrisonerByIdAsMono(prisonerId: String): Mono<Prisoner> = webClient.get().uri("/prisoner/{prisonerId}", prisonerId)
     .retrieve()
     .bodyToMono()
 
