@@ -17,6 +17,10 @@ prisoner:
     api:
       endpoint:
         url: http://localhost:8091
+  alerts:
+    api:
+      endpoint:
+        url: http://localhost:8097
 
 prison:
   api:
@@ -47,6 +51,11 @@ probation:
     api:
       endpoint:
         url: http://localhost:8096
+
+pathfinder:
+  api:
+    endpoint:
+      url: http://localhost:8098
 
 spring:
   security:

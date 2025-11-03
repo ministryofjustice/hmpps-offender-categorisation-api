@@ -16,6 +16,10 @@ prisoner:
     api:
       endpoint:
         url: "https://prisoner-search-dev.prison.service.justice.gov.uk"
+  alerts:
+    api:
+      endpoint:
+        url: "https://alerts-api-dev.hmpps.service.justice.gov.uk"
 
 prison:
   api:
@@ -45,6 +49,11 @@ probation:
     api:
       endpoint:
         url: "https://probation-offender-search-dev.hmpps.service.justice.gov.uk"
+
+pathfinder:
+  api:
+    endpoint:
+      url: "https://dev-api.pathfinder.service.justice.gov.uk"
 
 # Update to your personal token with correct permissions
 api:
