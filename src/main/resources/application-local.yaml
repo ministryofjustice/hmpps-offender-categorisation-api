@@ -50,11 +50,6 @@ probation:
       endpoint:
         url: "https://probation-offender-search-dev.hmpps.service.justice.gov.uk"
 
-pathfinder:
-  api:
-    endpoint:
-      url: "https://dev-api.pathfinder.service.justice.gov.uk"
-
 # Update to your personal token with correct permissions
 api:
   client:

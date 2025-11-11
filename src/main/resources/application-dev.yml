@@ -51,11 +51,6 @@ manage:
       endpoint:
         url: "https://manage-offences-api-dev.hmpps.service.justice.gov.uk"
 
-pathfinder:
-  api:
-    endpoint:
-      url: "https://dev-api.pathfinder.service.justice.gov.uk"
-
 assess:
   risks:
     and:

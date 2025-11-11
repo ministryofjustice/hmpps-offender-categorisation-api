@@ -52,11 +52,6 @@ probation:
       endpoint:
         url: http://localhost:8096
 
-pathfinder:
-  api:
-    endpoint:
-      url: http://localhost:8098
-
 spring:
   security:
     oauth2:
