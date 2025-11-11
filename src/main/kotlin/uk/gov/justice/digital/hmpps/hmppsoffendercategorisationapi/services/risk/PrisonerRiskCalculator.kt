@@ -41,14 +41,19 @@ class PrisonerRiskCalculator(
 
   private fun numberOfAssaultIncidentsConsideredARisk(assaultIncidents: List<IncidentDto>): Boolean {
     val nonDuplicateAssaultIncidents = assaultIncidents.filter { it.incidentStatus != IncidentDto.INCIDENT_STATUS_DUP }
-    if (nonDuplicateAssaultIncidents.length > 5) {
+    if (nonDuplicateAssaultIncidents.count() > 5) {
       return true
     }
     val recentNonDuplicateSeriousAssaults = nonDuplicateAssaultIncidents
       .filter { LocalDateTime.parse(it.reportTime).isAfter(ZonedDateTime.now(clock).minusMonths(RECENT_ASSAULT_MONTHS).toLocalDateTime()) }
       .count { incident: IncidentDto ->
         incident.responses.any { response: IncidentResponseDto ->
-          IncidentDto.SERIOUS_ASSAULT_QUESTIONS.contains(response.question) && response.answer == IncidentDto.QUESTION_ANSWER_YES
+          listOf(
+            IncidentDto.INCIDENT_RESPONSE_QUESTION_SEXUAL_ASSAULT,
+            IncidentDto.INCIDENT_RESPONSE_QUESTION_MEDICAL_TREATMENT_CONCUSSION_INTERNAL_INJURIES,
+            IncidentDto.INCIDENT_RESPONSE_QUESTION_SERIOUS_INJURY_SUSTAINED,
+            IncidentDto.INCIDENT_RESPONSE_QUESTION_INJURIES_RESULTED_IN_DETENTION_IN_OUTSIDE_HOSPITAL_AS_INPATIENT,
+          ).contains(response.question) && response.answer == IncidentDto.QUESTION_ANSWER_YES
         }
       }
     return recentNonDuplicateSeriousAssaults > 0

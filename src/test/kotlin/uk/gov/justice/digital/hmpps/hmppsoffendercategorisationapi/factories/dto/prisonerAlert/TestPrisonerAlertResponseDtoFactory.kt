@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.riskprofiler.factories.dto.prisonerAlert
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.dto.prisonerAlert
 
 import uk.gov.justice.digital.hmpps.riskprofiler.dto.prisonerAlert.PrisonerAlertCodeSummaryDto
 import uk.gov.justice.digital.hmpps.riskprofiler.dto.prisonerAlert.PrisonerAlertResponseDto
@@ -38,7 +38,7 @@ class TestPrisonerAlertResponseDtoFactory {
       this.createdAt,
       this.activeTo,
       this.activeFrom,
-      this.active
+      this.active,
     )
   }
 }

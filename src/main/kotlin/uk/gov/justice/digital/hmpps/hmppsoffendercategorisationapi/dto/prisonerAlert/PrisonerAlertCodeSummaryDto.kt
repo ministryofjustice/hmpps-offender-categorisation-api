@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.riskprofiler.dto.prisonerAlert
+package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert
 
 import io.swagger.v3.oas.annotations.media.Schema
 

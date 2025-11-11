@@ -10,10 +10,9 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.pathfinde
 class PathfinderApiClient(
   @Qualifier("pathfinderWebClient") private val webClient: WebClient,
 ) {
-  fun getNominalData(prisonerNumber: String): NominalDataDto? =
-    webClient.get()
-      .uri("pathfinder/nominal/noms-id/$prisonerNumber")
-      .retrieve()
-      .bodyToMono<NominalDataDto>()
-      .block()
+  fun getNominalData(prisonerNumber: String): NominalDataDto? = webClient.get()
+    .uri("pathfinder/nominal/noms-id/$prisonerNumber")
+    .retrieve()
+    .bodyToMono<NominalDataDto>()
+    .block()
 }

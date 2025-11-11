@@ -10,12 +10,10 @@ data class EscapeAlert(
   val active: Boolean,
 ) {
   companion object {
-    fun mapFromDto(dto: PrisonerAlertResponseDto, clock: Clock): EscapeAlert {
-      return EscapeAlert(
-        dateCreated = dto.createdAt.toString(),
-        expired = dto.activeTo?.isBefore(ZonedDateTime.now(clock).toLocalDate()) ?: false,
-        active = dto.active,
-      )
-    }
+    fun mapFromDto(dto: PrisonerAlertResponseDto, clock: Clock): EscapeAlert = EscapeAlert(
+      dateCreated = dto.createdAt.toString(),
+      expired = dto.activeTo?.isBefore(ZonedDateTime.now(clock).toLocalDate()) ?: false,
+      active = dto.active,
+    )
   }
 }
