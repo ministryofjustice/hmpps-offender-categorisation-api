@@ -1,7 +1,7 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.dto.prisonerAlert
 
-import uk.gov.justice.digital.hmpps.riskprofiler.dto.prisonerAlert.PrisonerAlertCodeSummaryDto
-import uk.gov.justice.digital.hmpps.riskprofiler.dto.prisonerAlert.PrisonerAlertResponseDto
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert.PrisonerAlertCodeSummaryDto
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert.PrisonerAlertResponseDto
 import java.time.LocalDate
 
 class TestPrisonerAlertResponseDtoFactory {
@@ -32,13 +32,11 @@ class TestPrisonerAlertResponseDtoFactory {
     return this
   }
 
-  fun build(): PrisonerAlertResponseDto {
-    return PrisonerAlertResponseDto(
-      this.alertCodeSummary,
-      this.createdAt,
-      this.activeTo,
-      this.activeFrom,
-      this.active,
-    )
-  }
+  fun build(): PrisonerAlertResponseDto = PrisonerAlertResponseDto(
+    this.alertCodeSummary,
+    this.createdAt,
+    this.activeTo,
+    this.activeFrom,
+    this.active,
+  )
 }

@@ -1,6 +1,6 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.risk
 
-import uk.gov.justice.digital.hmpps.riskprofiler.dto.prisonerAlert.PrisonerAlertResponseDto
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert.PrisonerAlertResponseDto
 import java.time.Clock
 import java.time.ZonedDateTime
 

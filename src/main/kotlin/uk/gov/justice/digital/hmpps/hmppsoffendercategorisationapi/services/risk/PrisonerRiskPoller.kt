@@ -1,15 +1,22 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services.risk
 
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.springframework.stereotype.Service
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonerSearchApiClient
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.PrisonerRiskProfileEntity
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.PrisonerRiskProfileRepository
+import java.time.Clock
+import java.time.ZonedDateTime
 
 @Service
 class PrisonerRiskPoller(
   private val prisonApiClient: PrisonApiClient,
   private val prisonerSearchApiClient: PrisonerSearchApiClient,
   private val prisonerRiskCalculator: PrisonerRiskCalculator,
+  private val PrisonerRiskProfileRepository: PrisonerRiskProfileRepository,
+  private val clock: Clock,
 ) {
 
   fun pollPrisonersRisk() {
@@ -20,7 +27,7 @@ class PrisonerRiskPoller(
     }
   }
 
-  fun pollPrisonersRisk(prisonId: String) {
+  private fun pollPrisonersRisk(prisonId: String) {
     var prisoners: List<Prisoner>
     var i = 0
     do {
@@ -30,7 +37,15 @@ class PrisonerRiskPoller(
         PRISONERS_CHUNK_SIZE,
       )
       prisoners.forEach { prisoner ->
-        prisonerRiskCalculator.calculateRisk(prisoner.prisonerNumber!!)
+        val riskProfile = prisonerRiskCalculator.calculateRisk(prisoner.prisonerNumber!!)
+        val jsonRiskProfile = jacksonObjectMapper().writeValueAsString(riskProfile)
+        PrisonerRiskProfileRepository.save(
+          PrisonerRiskProfileEntity(
+            offenderNo = prisoner.prisonerNumber,
+            riskProfile = jsonRiskProfile,
+            calculatedAt = ZonedDateTime.now(clock),
+          ),
+        )
       }
       i++
     } while (prisoners.count() >= PRISONERS_CHUNK_SIZE)

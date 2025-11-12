@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.bodyToMono
 import reactor.core.publisher.Mono
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert.PrisonerAlertResponseDto
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.RestPage
-import uk.gov.justice.digital.hmpps.riskprofiler.dto.prisonerAlert.PrisonerAlertResponseDto
 import java.util.stream.Collectors
 
 @Service
@@ -16,8 +16,7 @@ class PrisonerAlertsApiClient(
 ) {
 
   fun findPrisonerAlerts(prisonerId: String, alertCodes: List<String>): RestPage<PrisonerAlertResponseDto> = getPrisonerAlertsAsMono(prisonerId, alertCodes).block()
-      ?: throw IllegalStateException("Unable to retrieve alerts for prisoner, possibly due to timeout $prisonerId")
-  }
+    ?: throw IllegalStateException("Unable to retrieve alerts for prisoner, possibly due to timeout $prisonerId")
 
   private fun getPrisonerAlertsAsMono(prisonerNumber: String, alertCodes: List<String>): Mono<RestPage<PrisonerAlertResponseDto>> {
     val commaSeparatedAlertCodes = alertCodes.stream().collect(Collectors.joining(","))

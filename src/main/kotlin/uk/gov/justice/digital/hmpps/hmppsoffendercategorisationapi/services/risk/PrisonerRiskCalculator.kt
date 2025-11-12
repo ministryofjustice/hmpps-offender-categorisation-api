@@ -5,12 +5,12 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.Prison
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonerAlertsApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentDto
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentResponseDto
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert.PrisonerAlertResponseDto.Companion.ALERT_CODE_ESCAPE_LIST
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert.PrisonerAlertResponseDto.Companion.ALERT_CODE_ESCAPE_LIST_HEIGHTENED
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert.PrisonerAlertResponseDto.Companion.ALERT_CODE_ESCAPE_RISK
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert.PrisonerAlertResponseDto.Companion.ALERT_CODE_OCGM
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.risk.EscapeAlert
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.risk.PrisonerRiskProfile
-import uk.gov.justice.digital.hmpps.riskprofiler.dto.prisonerAlert.PrisonerAlertResponseDto.Companion.ALERT_CODE_ESCAPE_LIST
-import uk.gov.justice.digital.hmpps.riskprofiler.dto.prisonerAlert.PrisonerAlertResponseDto.Companion.ALERT_CODE_ESCAPE_LIST_HEIGHTENED
-import uk.gov.justice.digital.hmpps.riskprofiler.dto.prisonerAlert.PrisonerAlertResponseDto.Companion.ALERT_CODE_ESCAPE_RISK
-import uk.gov.justice.digital.hmpps.riskprofiler.dto.prisonerAlert.PrisonerAlertResponseDto.Companion.ALERT_CODE_OCGM
 import java.time.Clock
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
@@ -23,7 +23,7 @@ class PrisonerRiskCalculator(
   val clock: Clock,
 ) {
 
-  fun calculateRisk(prisonerNumber: String) {
+  fun calculateRisk(prisonerNumber: String): PrisonerRiskProfile {
     val alerts = prisonerAlertsApiClient.findPrisonerAlerts(
       prisonerNumber,
       listOf(ALERT_CODE_ESCAPE_RISK, ALERT_CODE_ESCAPE_LIST, ALERT_CODE_ESCAPE_LIST_HEIGHTENED, ALERT_CODE_OCGM),
@@ -31,7 +31,7 @@ class PrisonerRiskCalculator(
     val assaultIncidents = prisonApiClient.getAssaultIncidents(prisonerNumber)
     val viperData = viperService.getViperData(prisonerNumber)
 
-    val prisonerRiskProfile = PrisonerRiskProfile(
+    return PrisonerRiskProfile(
       alerts.filter { it.alertCode.code == ALERT_CODE_ESCAPE_RISK }.map { EscapeAlert.mapFromDto(it, clock) }.toList(),
       alerts.filter { it.alertCode.code == ALERT_CODE_ESCAPE_LIST || it.alertCode.code == ALERT_CODE_ESCAPE_LIST_HEIGHTENED }.map { EscapeAlert.mapFromDto(it, clock) }.toList(),
       !alerts.filter { it.alertCode.code == ALERT_CODE_OCGM }.isEmpty,
@@ -53,7 +53,8 @@ class PrisonerRiskCalculator(
             IncidentDto.INCIDENT_RESPONSE_QUESTION_MEDICAL_TREATMENT_CONCUSSION_INTERNAL_INJURIES,
             IncidentDto.INCIDENT_RESPONSE_QUESTION_SERIOUS_INJURY_SUSTAINED,
             IncidentDto.INCIDENT_RESPONSE_QUESTION_INJURIES_RESULTED_IN_DETENTION_IN_OUTSIDE_HOSPITAL_AS_INPATIENT,
-          ).contains(response.question) && response.answer == IncidentDto.QUESTION_ANSWER_YES
+          ).contains(response.question) &&
+            response.answer == IncidentDto.QUESTION_ANSWER_YES
         }
       }
     return recentNonDuplicateSeriousAssaults > 0

@@ -1,6 +1,6 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.dto.prisonerAlert
 
-import uk.gov.justice.digital.hmpps.riskprofiler.dto.prisonerAlert.PrisonerAlertCodeSummaryDto
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert.PrisonerAlertCodeSummaryDto
 
 class TestPrisonerAlertCodeSummaryDtoFactory {
 
@@ -17,10 +17,8 @@ class TestPrisonerAlertCodeSummaryDtoFactory {
     return this
   }
 
-  fun build(): PrisonerAlertCodeSummaryDto {
-    return PrisonerAlertCodeSummaryDto(
-      this.alertCode,
-      this.alertDescription,
-    )
-  }
+  fun build(): PrisonerAlertCodeSummaryDto = PrisonerAlertCodeSummaryDto(
+    this.alertCode,
+    this.alertDescription,
+  )
 }
