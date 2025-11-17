@@ -1,10 +1,11 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.dto.prisonerAlert
 
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert.PrisonerAlertCodeSummaryDto
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert.PrisonerAlertResponseDto.Companion.ALERT_CODE_ESCAPE_RISK
 
 class TestPrisonerAlertCodeSummaryDtoFactory {
 
-  private var alertCode = PrisonerAlertCodeSummaryDto.ALERT_CODE_ESCAPE_RISK
+  private var alertCode = ALERT_CODE_ESCAPE_RISK
   private var alertDescription = "Test alert description"
 
   fun withAlertCode(alertCode: String): TestPrisonerAlertCodeSummaryDtoFactory {

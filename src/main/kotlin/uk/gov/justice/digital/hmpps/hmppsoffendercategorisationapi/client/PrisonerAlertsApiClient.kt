@@ -15,8 +15,10 @@ class PrisonerAlertsApiClient(
   @Qualifier("prisonerAlertsSystemWebClient") private val webClient: WebClient,
 ) {
 
-  fun findPrisonerAlerts(prisonerId: String, alertCodes: List<String>): RestPage<PrisonerAlertResponseDto> = getPrisonerAlertsAsMono(prisonerId, alertCodes).block()
-    ?: throw IllegalStateException("Unable to retrieve alerts for prisoner, possibly due to timeout $prisonerId")
+  fun findPrisonerAlerts(prisonerId: String, alertCodes: List<String>): List<PrisonerAlertResponseDto> = (
+    getPrisonerAlertsAsMono(prisonerId, alertCodes).block()
+      ?: throw IllegalStateException("Unable to retrieve alerts for prisoner, possibly due to timeout $prisonerId")
+    ).content
 
   private fun getPrisonerAlertsAsMono(prisonerNumber: String, alertCodes: List<String>): Mono<RestPage<PrisonerAlertResponseDto>> {
     val commaSeparatedAlertCodes = alertCodes.stream().collect(Collectors.joining(","))

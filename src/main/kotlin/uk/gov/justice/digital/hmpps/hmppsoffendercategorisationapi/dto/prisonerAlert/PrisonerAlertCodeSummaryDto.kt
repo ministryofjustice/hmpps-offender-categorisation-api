@@ -1,6 +1,7 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert
 
 import io.swagger.v3.oas.annotations.media.Schema
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert.PrisonerAlertResponseDto.Companion.ALERT_CODE_ESCAPE_RISK
 
 @Schema(description = "A summary of the alert")
 data class PrisonerAlertCodeSummaryDto(
@@ -9,9 +10,4 @@ data class PrisonerAlertCodeSummaryDto(
 
   @Schema(required = true, description = "Alert Code Description", example = "Escape Risk")
   val description: String,
-) {
-  companion object {
-    const val ALERT_CODE_ESCAPE_RISK = "XER"
-    const val ALERT_CODE_ESCAPE_LIST = "XEL"
-  }
-}
+)

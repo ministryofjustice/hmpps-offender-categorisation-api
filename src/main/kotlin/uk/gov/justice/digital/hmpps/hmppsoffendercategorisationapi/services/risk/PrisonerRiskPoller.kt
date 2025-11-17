@@ -15,7 +15,7 @@ class PrisonerRiskPoller(
   private val prisonApiClient: PrisonApiClient,
   private val prisonerSearchApiClient: PrisonerSearchApiClient,
   private val prisonerRiskCalculator: PrisonerRiskCalculator,
-  private val PrisonerRiskProfileRepository: PrisonerRiskProfileRepository,
+  private val prisonerRiskProfileRepository: PrisonerRiskProfileRepository,
   private val clock: Clock,
 ) {
 
@@ -39,7 +39,7 @@ class PrisonerRiskPoller(
       prisoners.forEach { prisoner ->
         val riskProfile = prisonerRiskCalculator.calculateRisk(prisoner.prisonerNumber!!)
         val jsonRiskProfile = jacksonObjectMapper().writeValueAsString(riskProfile)
-        PrisonerRiskProfileRepository.save(
+        prisonerRiskProfileRepository.save(
           PrisonerRiskProfileEntity(
             offenderNo = prisoner.prisonerNumber,
             riskProfile = jsonRiskProfile,
