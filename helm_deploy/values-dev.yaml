@@ -17,7 +17,7 @@ generic-service:
     ASSESS_RISKS_AND_NEEDS_API_ENDPOINT_URL: https://assess-risks-and-needs-dev.hmpps.service.justice.gov.uk
     MANAGE_OFFENCES_API_ENDPOINT_URL: https://manage-offences-api-dev.hmpps.service.justice.gov.uk
     PROBATION_SEARCH_API_ENDPOINT_URL: https://probation-offender-search-dev.hmpps.service.justice.gov.uk
-    ALERTS_API_ENDPOINT_URL: https://alerts-api-dev.hmpps.service.justice.gov.uk
+    PRISONER_ALERTS_API_ENDPOINT_URL: https://alerts-api-dev.hmpps.service.justice.gov.uk
 
 # CloudPlatform AlertManager receiver to route prometheus alerts to slack
 # See https://user-guide.cloud-platform.service.justice.gov.uk/documentation/monitoring-an-app/how-to-create-alarms.html#creating-your-own-custom-alerts
