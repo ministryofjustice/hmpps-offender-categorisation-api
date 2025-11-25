@@ -17,6 +17,7 @@ generic-service:
     ASSESS_RISKS_AND_NEEDS_API_ENDPOINT_URL: https://assess-risks-and-needs-preprod.hmpps.service.justice.gov.uk
     MANAGE_OFFENCES_API_ENDPOINT_URL: https://manage-offences-api-preprod.hmpps.service.justice.gov.uk
     PROBATION_SEARCH_API_ENDPOINT_URL: https://probation-offender-search-preprod.hmpps.service.justice.gov.uk
+    ALERTS_API_ENDPOINT_URL: https://alerts-api-preprod.hmpps.service.justice.gov.uk
 
   resources:
     limits:
