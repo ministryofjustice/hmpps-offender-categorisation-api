@@ -67,6 +67,12 @@ spring:
             client-secret: ${api.client.admin.secret}
             authorization-grant-type: client_credentials
             scope: read
+          prisoner-alerts-api:
+            provider: hmpps-auth
+            client-id: ${api.client.admin.id}
+            client-secret: ${api.client.admin.secret}
+            authorization-grant-type: client_credentials
+            scope: read
         provider:
           hmpps-auth:
             token-uri: ${hmpps.auth.token.url}
@@ -87,13 +93,19 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
     show-sql: false
     generate-ddl: false
     hibernate:
       ddl-auto: none
 
   flyway:
-    enabled: false
+    enabled: true
+    locations: classpath:/db/migration/common
+    baselineOnMigrate: true
+
   sql:
     init:
       continue-on-error: true

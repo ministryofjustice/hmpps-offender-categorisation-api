@@ -44,6 +44,7 @@ class ResourceServerConfiguration {
           "/released-prisoners-with-active-categorisations/update",
           "/prs-eligibility/report",
           "/prs-eligibility/report-prison",
+          "/prisoner-risk-calculation/poll-prisons",
         ).forEach { authorize(it, permitAll) }
         authorize(anyRequest, authenticated)
       }
