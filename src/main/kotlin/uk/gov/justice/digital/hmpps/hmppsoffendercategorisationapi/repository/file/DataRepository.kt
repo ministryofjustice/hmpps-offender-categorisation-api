@@ -29,8 +29,6 @@ abstract class DataRepository<F : RiskDataSet> {
   )
 
   open fun getByKey(key: String?): Optional<F> {
-    log.info(data.toString())
-    log.info(data.dataSet.toString())
     if (data.dataSet != null) {
       return Optional.ofNullable(data.dataSet!![key!!])
     } else {
