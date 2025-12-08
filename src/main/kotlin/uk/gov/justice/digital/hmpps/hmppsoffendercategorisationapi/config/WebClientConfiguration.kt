@@ -56,7 +56,7 @@ class WebClientConfiguration(
   }
 
   @Bean
-  fun prisonerAlertsSystemWebClient(authorizedClientManager: OAuth2AuthorizedClientManager?): WebClient {
+  fun prisonerAlertsSystemWebClient(authorizedClientManager: OAuth2AuthorizedClientManager): WebClient {
     val oauth2Client = ServletOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager)
     oauth2Client.setDefaultClientRegistrationId("prisoner-alerts-api")
     return WebClient.builder()
