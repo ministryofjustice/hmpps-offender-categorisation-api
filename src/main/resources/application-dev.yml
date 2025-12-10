@@ -31,6 +31,10 @@ prisoner:
     api:
       endpoint:
         url: "https://prisoner-search-dev.prison.service.justice.gov.uk"
+  alerts:
+    api:
+      endpoint:
+        url: "https://alerts-api-dev.hmpps.service.justice.gov.uk"
 
 prison:
   api:

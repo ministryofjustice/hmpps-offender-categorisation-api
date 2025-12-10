@@ -22,6 +22,7 @@ class WebClientConfiguration(
   @Value("\${assess.risks.and.needs.api.endpoint.url}") private val assessRisksAndNeedsApiBaseUrl: String,
   @Value("\${manage.offences.api.endpoint.url}") private val manageOffencesApiBaseUrl: String,
   @Value("\${probation.search.api.endpoint.url}") private val probationSearchApiBaseUrl: String,
+  @Value("\${prisoner.alerts.api.endpoint.url}") private val prisonerAlertsApiBaseUri: String,
   private val webClientBuilder: WebClient.Builder,
 ) {
   @Bean
@@ -51,6 +52,16 @@ class WebClientConfiguration(
       .baseUrl(prisonerSearchApiBaseUrl)
       .apply(oauth2Client.oauth2Configuration())
       .exchangeStrategies(exchangeStrategies)
+      .build()
+  }
+
+  @Bean
+  fun prisonerAlertsSystemWebClient(authorizedClientManager: OAuth2AuthorizedClientManager): WebClient {
+    val oauth2Client = ServletOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager)
+    oauth2Client.setDefaultClientRegistrationId("prisoner-alerts-api")
+    return WebClient.builder()
+      .baseUrl(prisonerAlertsApiBaseUri)
+      .apply(oauth2Client.oauth2Configuration())
       .build()
   }
 
