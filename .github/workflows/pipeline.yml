@@ -45,12 +45,15 @@ jobs:
         uses: ministryofjustice/hmpps-github-actions/.github/actions/build-test-and-deploy/create_app_version@v2 # WORKFLOW_VERSION
   kotlin_validate:
     name: Validate the kotlin
-    uses: ministryofjustice/hmpps-github-actions/.github/workflows/gradle_postgres_verify.yml@v2 # WORKFLOW_VERSION
+    uses: ministryofjustice/hmpps-github-actions/.github/workflows/gradle_verify.yml@v2 # WORKFLOW_VERSION
     secrets: inherit
     with:
       postgres-tag: '16'
-      postgres-username: 'admin'
-      postgres-password: 'admin_password'
+      postgres-db: 'form-builder'
+      postgres-username: 'form-builder'
+      postgres-password: 'form-builder'
+      localstack-tag: '3'
+      localstack-services: 'sqs,sns,s3'
       java-version: "21"
   build:
     name: Build docker image from hmpps-github-actions
