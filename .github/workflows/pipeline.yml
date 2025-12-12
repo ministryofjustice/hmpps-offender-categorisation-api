@@ -57,7 +57,7 @@ jobs:
       java-version: "21"
   build:
     name: Build docker image from hmpps-github-actions
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main'
     uses: ministryofjustice/hmpps-github-actions/.github/workflows/docker_build.yml@v2 # WORKFLOW_VERSION
     needs:
       - kotlin_validate
@@ -70,6 +70,7 @@ jobs:
       download_build_artifacts: true
   deploy_dev:
     name: Deploy to the development environment
+    if: github.ref == 'refs/heads/develop'
     needs:
       - build
       - helm_lint
@@ -78,9 +79,10 @@ jobs:
     with:
       environment: 'dev'
       app_version: '${{ needs.build.outputs.app_version }}'
-      slack_notification: 'false' # if 'true', it needs a valid NONPROD_RELEASES_SLACK_CHANNEL variable to be set
+      slack_notification: 'false'
   deploy_preprod:
     name: Deploy to pre-production environment
+    if: github.ref == 'refs/heads/main'
     needs:
       - build
       - helm_lint
@@ -92,6 +94,7 @@ jobs:
       slack_notification: 'false'
   deploy_prod:
     name: Deploy to production environment
+    if: github.ref == 'refs/heads/main'
     needs:
       - build
       - deploy_preprod
