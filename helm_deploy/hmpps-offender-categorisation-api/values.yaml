@@ -6,7 +6,7 @@ generic-service:
   replicaCount: 4
 
   image:
-    repository: quay.io/hmpps/hmpps-offender-categorisation-api
+    repository: ghcr.io/ministryofjustice/hmpps-offender-categorisation-api
     tag: latest # override at deployment time
     port: 8080
 
