@@ -10,7 +10,6 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.Prison
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonerAlertsApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.ResourceTest
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentDto
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentDto.Companion.INCIDENT_STATUS_DUP
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentResponseDto.Companion.INCIDENT_RESPONSE_ANSWER_YES
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentResponseDto.Companion.INCIDENT_RESPONSE_QUESTION_SEXUAL_ASSAULT
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert.PrisonerAlertResponseDto
@@ -209,74 +208,6 @@ class PrisonerRiskCalculatorTest : ResourceTest() {
             .build(),
         ),
         emptyList<IncidentDto>(),
-        emptyList<EscapeAlert>(),
-        emptyList<EscapeAlert>(),
-        false,
-        false,
-      ),
-      // 6 assault incidents
-      Arguments.of(
-        emptyList<PrisonerAlertResponseDto>(),
-        listOf(
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-        ),
-        emptyList<EscapeAlert>(),
-        emptyList<EscapeAlert>(),
-        false,
-        true,
-      ),
-      // 6 assault incidents but one is a duplicate
-      Arguments.of(
-        emptyList<PrisonerAlertResponseDto>(),
-        listOf(
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus(INCIDENT_STATUS_DUP)
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-        ),
         emptyList<EscapeAlert>(),
         emptyList<EscapeAlert>(),
         false,
