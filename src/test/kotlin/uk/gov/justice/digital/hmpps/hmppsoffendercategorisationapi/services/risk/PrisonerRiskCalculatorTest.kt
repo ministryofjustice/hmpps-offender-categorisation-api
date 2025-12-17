@@ -10,7 +10,6 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.Prison
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonerAlertsApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.ResourceTest
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentDto
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentDto.Companion.INCIDENT_STATUS_DUP
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentResponseDto.Companion.INCIDENT_RESPONSE_ANSWER_YES
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentResponseDto.Companion.INCIDENT_RESPONSE_QUESTION_SEXUAL_ASSAULT
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert.PrisonerAlertResponseDto
@@ -22,9 +21,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.dto
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.dto.incidents.TestIncidentResponseDtoFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.dto.prisonerAlert.TestPrisonerAlertCodeSummaryDtoFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.dto.prisonerAlert.TestPrisonerAlertResponseDtoFactory
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.response.TestViperResponseFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.risk.TestEscapeAlertFactory
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.risk.ViperResponse
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.risk.EscapeAlert
 import java.time.Clock
 import java.time.Instant
@@ -35,13 +32,11 @@ import java.util.stream.Stream
 class PrisonerRiskCalculatorTest : ResourceTest() {
   private val mockPrisonerAlertsApiClient = mock<PrisonerAlertsApiClient>()
   private val mockPrisonApiClient = mock<PrisonApiClient>()
-  private val mockViperService = mock<ViperService>()
   private val frozenDateTime = "2025-01-01T10:40:34Z"
   private val fixedClock = Clock.fixed(Instant.parse(frozenDateTime), ZoneId.of("UTC"))
   private val prisonerRiskCalculator = PrisonerRiskCalculator(
     mockPrisonerAlertsApiClient,
     mockPrisonApiClient,
-    mockViperService,
     fixedClock,
   )
 
@@ -57,7 +52,6 @@ class PrisonerRiskCalculatorTest : ResourceTest() {
   fun calculateRisk(
     alerts: List<PrisonerAlertResponseDto>,
     incidents: List<IncidentDto>,
-    viperResponse: ViperResponse,
     expectedEscapeRiskAlerts: List<EscapeAlert>,
     expectedEscapeListAlerts: List<EscapeAlert>,
     expectedRiskDueToSoc: Boolean,
@@ -70,7 +64,6 @@ class PrisonerRiskCalculatorTest : ResourceTest() {
       ),
     ).thenReturn(alerts)
     whenever(mockPrisonApiClient.getAssaultIncidents(TEST_PRISONER_NUMBER)).thenReturn(incidents)
-    whenever(mockViperService.getViperData(TEST_PRISONER_NUMBER)).thenReturn(viperResponse)
 
     val riskProfile = prisonerRiskCalculator.calculateRisk(TEST_PRISONER_NUMBER)
     Assertions.assertThat(riskProfile.escapeRiskAlerts).isEqualTo(expectedEscapeRiskAlerts)
@@ -82,10 +75,6 @@ class PrisonerRiskCalculatorTest : ResourceTest() {
   companion object {
     private const val TEST_PRISONER_NUMBER = "ABC123"
     private const val ALERT_CREATED_AT_DATE = "2024-12-15"
-    private val falseViperResponse = TestViperResponseFactory()
-      .withAboveThreshold(false)
-      .withPrisonerNumber(TEST_PRISONER_NUMBER)
-      .build()
 
     @JvmStatic
     fun calculateRiskArguments(): Stream<Arguments> = Stream.of(
@@ -108,7 +97,6 @@ class PrisonerRiskCalculatorTest : ResourceTest() {
             .build(),
         ),
         emptyList<IncidentDto>(),
-        falseViperResponse,
         listOf(
           TestEscapeAlertFactory()
             .withActive(true)
@@ -145,7 +133,6 @@ class PrisonerRiskCalculatorTest : ResourceTest() {
             .build(),
         ),
         emptyList<IncidentDto>(),
-        falseViperResponse,
         emptyList<EscapeAlert>(),
         emptyList<EscapeAlert>(),
         false,
@@ -170,7 +157,6 @@ class PrisonerRiskCalculatorTest : ResourceTest() {
             .build(),
         ),
         emptyList<IncidentDto>(),
-        falseViperResponse,
         emptyList<EscapeAlert>(),
         emptyList<EscapeAlert>(),
         false,
@@ -188,7 +174,6 @@ class PrisonerRiskCalculatorTest : ResourceTest() {
             .build(),
         ),
         emptyList<IncidentDto>(),
-        falseViperResponse,
         emptyList<EscapeAlert>(),
         emptyList<EscapeAlert>(),
         true,
@@ -206,7 +191,6 @@ class PrisonerRiskCalculatorTest : ResourceTest() {
             .build(),
         ),
         emptyList<IncidentDto>(),
-        falseViperResponse,
         emptyList<EscapeAlert>(),
         emptyList<EscapeAlert>(),
         false,
@@ -224,90 +208,6 @@ class PrisonerRiskCalculatorTest : ResourceTest() {
             .build(),
         ),
         emptyList<IncidentDto>(),
-        falseViperResponse,
-        emptyList<EscapeAlert>(),
-        emptyList<EscapeAlert>(),
-        false,
-        false,
-      ),
-      // viper response above threshold
-      Arguments.of(
-        emptyList<PrisonerAlertResponseDto>(),
-        emptyList<IncidentDto>(),
-        TestViperResponseFactory()
-          .withAboveThreshold(true)
-          .withPrisonerNumber(TEST_PRISONER_NUMBER)
-          .build(),
-        emptyList<EscapeAlert>(),
-        emptyList<EscapeAlert>(),
-        false,
-        true,
-      ),
-      // 6 assault incidents
-      Arguments.of(
-        emptyList<PrisonerAlertResponseDto>(),
-        listOf(
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-        ),
-        falseViperResponse,
-        emptyList<EscapeAlert>(),
-        emptyList<EscapeAlert>(),
-        false,
-        true,
-      ),
-      // 6 assault incidents but one is a duplicate
-      Arguments.of(
-        emptyList<PrisonerAlertResponseDto>(),
-        listOf(
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus(INCIDENT_STATUS_DUP)
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-          TestIncidentDtoFactory()
-            .withReportTime("2024-12-15T10:00:00")
-            .withIncidentStatus("SOMETHING")
-            .build(),
-        ),
-        falseViperResponse,
         emptyList<EscapeAlert>(),
         emptyList<EscapeAlert>(),
         false,
@@ -330,7 +230,6 @@ class PrisonerRiskCalculatorTest : ResourceTest() {
             )
             .build(),
         ),
-        falseViperResponse,
         emptyList<EscapeAlert>(),
         emptyList<EscapeAlert>(),
         false,
@@ -353,7 +252,6 @@ class PrisonerRiskCalculatorTest : ResourceTest() {
             )
             .build(),
         ),
-        falseViperResponse,
         emptyList<EscapeAlert>(),
         emptyList<EscapeAlert>(),
         false,
