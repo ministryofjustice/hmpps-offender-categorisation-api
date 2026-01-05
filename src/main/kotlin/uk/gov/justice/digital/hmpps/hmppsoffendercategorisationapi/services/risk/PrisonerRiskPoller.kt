@@ -42,16 +42,20 @@ class PrisonerRiskPoller(
         PRISONERS_CHUNK_SIZE,
       )
       prisoners.forEach { prisoner ->
-        val riskProfile = prisonerRiskCalculator.calculateRisk(prisoner.prisonerNumber!!)
-        val jsonRiskProfile = jacksonObjectMapper().writeValueAsString(riskProfile)
-        compareRiskProfiles(prisoner, riskProfile)
-        prisonerRiskProfileRepository.save(
-          PrisonerRiskProfileEntity(
-            offenderNo = prisoner.prisonerNumber,
-            riskProfile = jsonRiskProfile,
-            calculatedAt = ZonedDateTime.now(clock),
-          ),
-        )
+        try {
+          val riskProfile = prisonerRiskCalculator.calculateRisk(prisoner.prisonerNumber!!)
+          val jsonRiskProfile = jacksonObjectMapper().writeValueAsString(riskProfile)
+          compareRiskProfiles(prisoner, riskProfile)
+          prisonerRiskProfileRepository.save(
+            PrisonerRiskProfileEntity(
+              offenderNo = prisoner.prisonerNumber,
+              riskProfile = jsonRiskProfile,
+              calculatedAt = ZonedDateTime.now(clock),
+            ),
+          )
+        } catch (e: Exception) {
+          log.error("Error calculating risk profile for prisoner ${prisoner.prisonerNumber}", e)
+        }
       }
       i++
     } while (prisoners.count() >= PRISONERS_CHUNK_SIZE)
