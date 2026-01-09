@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: report-prs-eligibility-investigation
+  name: poll-prisoners-risk-profile
 spec:
   schedule: "{{ .Values.cron.poll_prisoners_risk_profile_schedule }}"
   concurrencyPolicy: Replace
