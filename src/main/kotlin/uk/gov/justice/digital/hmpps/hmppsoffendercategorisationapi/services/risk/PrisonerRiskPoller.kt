@@ -67,7 +67,7 @@ class PrisonerRiskPoller(
       val existingRiskProfileObj = jacksonObjectMapper().readValue(existingRiskProfile.riskProfile, PrisonerRiskProfile::class.java)
       if (existingRiskProfileObj != newRiskProfile) {
         if (listOf(CATEGORY_C, CATEGORY_D, CATEGORY_J).contains(prisoner.category)) {
-          log.info("Risk profile changed for prisoner ${prisoner.prisonerNumber} in category ${prisoner.category}")
+          log.info("Risk profile changed for prisoner ${prisoner.prisonerNumber} in category ${prisoner.category}. existing = $existingRiskProfileObj, new = $newRiskProfile")
         }
       }
     }
