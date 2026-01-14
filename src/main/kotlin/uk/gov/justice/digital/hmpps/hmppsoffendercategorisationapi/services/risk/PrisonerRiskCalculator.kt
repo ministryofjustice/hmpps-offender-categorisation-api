@@ -44,8 +44,8 @@ class PrisonerRiskCalculator(
   }
 
   private fun numberOfAssaultIncidentsConsideredARisk(assaultIncidents: List<IncidentDto>): Boolean {
-    val recentNonDuplicateSeriousAssaults = assaultIncidents
-      .filter { it.incidentStatus != IncidentDto.INCIDENT_STATUS_DUP }
+    val nonDuplicateAssaultIncidents = assaultIncidents.filter { it.incidentStatus != IncidentDto.INCIDENT_STATUS_DUP }
+    val recentNonDuplicateSeriousAssaults = nonDuplicateAssaultIncidents
       .filter { LocalDateTime.parse(it.reportTime).isAfter(ZonedDateTime.now(clock).minusMonths(RECENT_ASSAULT_MONTHS).toLocalDateTime()) }
       .count { incident: IncidentDto ->
         incident.responses.any { response: IncidentResponseDto ->
@@ -54,11 +54,11 @@ class PrisonerRiskCalculator(
             INCIDENT_RESPONSE_QUESTION_CONCUSSION,
             INCIDENT_RESPONSE_QUESTION_SERIOUS_INJURY,
             INCIDENT_RESPONSE_QUESTION_RESULT_IN_HOSPITAL,
-          ).contains(response.question) &&
-            response.answer == INCIDENT_RESPONSE_ANSWER_YES
+          ).contains(response.question.uppercase()) &&
+            response.answer.uppercase() == INCIDENT_RESPONSE_ANSWER_YES
         }
       }
-    return recentNonDuplicateSeriousAssaults > 0
+    return nonDuplicateAssaultIncidents.count() > 5 && recentNonDuplicateSeriousAssaults > 0
   }
 
   fun alertIsActiveAndNotExpired(alert: PrisonerAlertResponseDto): Boolean {
