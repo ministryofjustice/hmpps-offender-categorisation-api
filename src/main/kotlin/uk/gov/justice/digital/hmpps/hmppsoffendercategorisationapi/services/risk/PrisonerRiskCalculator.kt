@@ -58,7 +58,7 @@ class PrisonerRiskCalculator(
             response.answer.uppercase() == INCIDENT_RESPONSE_ANSWER_YES
         }
       }
-    return nonDuplicateAssaultIncidents.count() > 5 && recentNonDuplicateSeriousAssaults > 0
+    return nonDuplicateAssaultIncidents.count() >= MINIMUM_NUMBER_OF_ASSAULTS_TO_CONSIDER_RISK && recentNonDuplicateSeriousAssaults > 0
   }
 
   fun alertIsActiveAndNotExpired(alert: PrisonerAlertResponseDto): Boolean {
@@ -68,5 +68,6 @@ class PrisonerRiskCalculator(
 
   companion object {
     const val RECENT_ASSAULT_MONTHS = 6L
+    const val MINIMUM_NUMBER_OF_ASSAULTS_TO_CONSIDER_RISK = 5
   }
 }
