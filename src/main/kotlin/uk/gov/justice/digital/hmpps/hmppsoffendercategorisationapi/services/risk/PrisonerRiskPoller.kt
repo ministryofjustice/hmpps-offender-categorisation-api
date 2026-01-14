@@ -25,14 +25,17 @@ class PrisonerRiskPoller(
 ) {
 
   fun pollPrisonersRisk() {
+    log.info("Starting poll of prisoner risk profiles")
     val prisonIds = prisonApiClient.findPrisons().map { it.agencyId }
 
     prisonIds.forEach { prisonId: String ->
       pollPrisonersRisk(prisonId)
     }
+    log.info("finished poll of prisoner risk profiles")
   }
 
   private fun pollPrisonersRisk(prisonId: String) {
+    log.info("Polling prisoners risk profiles for prison $prisonId")
     var prisoners: List<Prisoner>
     var i = 0
     do {
@@ -65,7 +68,12 @@ class PrisonerRiskPoller(
     val existingRiskProfile = prisonerRiskProfileRepository.findByOffenderNo(prisoner.prisonerNumber!!)
     if (existingRiskProfile != null) {
       val existingRiskProfileObj = jacksonObjectMapper().readValue(existingRiskProfile.riskProfile, PrisonerRiskProfile::class.java)
-      if (existingRiskProfileObj != newRiskProfile) {
+      if (
+        existingRiskProfileObj.escapeRiskAlerts != newRiskProfile.escapeRiskAlerts ||
+        existingRiskProfileObj.escapeListAlerts != newRiskProfile.escapeListAlerts ||
+        (!existingRiskProfileObj.riskDueToViolence && newRiskProfile.riskDueToViolence) ||
+        (!existingRiskProfileObj.riskDueToSeriousOrganisedCrime && newRiskProfile.riskDueToSeriousOrganisedCrime)
+      ) {
         if (listOf(CATEGORY_C, CATEGORY_D, CATEGORY_J).contains(prisoner.category)) {
           log.info("Risk profile changed for prisoner ${prisoner.prisonerNumber} in category ${prisoner.category}. existing = $existingRiskProfileObj, new = $newRiskProfile")
         }

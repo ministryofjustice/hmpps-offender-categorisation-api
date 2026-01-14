@@ -10,6 +10,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.Prison
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonerAlertsApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.ResourceTest
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentDto
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentDto.Companion.INCIDENT_STATUS_DUP
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentResponseDto.Companion.INCIDENT_RESPONSE_ANSWER_YES
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentResponseDto.Companion.INCIDENT_RESPONSE_QUESTION_SEXUAL_ASSAULT
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert.PrisonerAlertResponseDto
@@ -213,10 +214,26 @@ class PrisonerRiskCalculatorTest : ResourceTest() {
         false,
         false,
       ),
-      // one serious assault in last 6 months
+      // 5 assaults total including one serious assault in last 6 months
       Arguments.of(
         emptyList<PrisonerAlertResponseDto>(),
         listOf(
+          TestIncidentDtoFactory()
+            .withReportTime("2023-12-15T10:00:00")
+            .withIncidentStatus("SOMETHING")
+            .build(),
+          TestIncidentDtoFactory()
+            .withReportTime("2022-12-15T10:00:00")
+            .withIncidentStatus("SOMETHING")
+            .build(),
+          TestIncidentDtoFactory()
+            .withReportTime("2024-12-15T10:00:00")
+            .withIncidentStatus("SOMETHING")
+            .build(),
+          TestIncidentDtoFactory()
+            .withReportTime("2024-10-15T10:00:00")
+            .withIncidentStatus("SOMETHING")
+            .build(),
           TestIncidentDtoFactory()
             .withReportTime("2024-12-15T10:00:00")
             .withIncidentStatus("SOMETHING")
@@ -235,10 +252,64 @@ class PrisonerRiskCalculatorTest : ResourceTest() {
         false,
         true,
       ),
-      // one serious assault more than 6 months ago
+      // 5 assaults including one serious but one is a duplicate
       Arguments.of(
         emptyList<PrisonerAlertResponseDto>(),
         listOf(
+          TestIncidentDtoFactory()
+            .withReportTime("2024-12-15T10:00:00")
+            .withIncidentStatus(INCIDENT_STATUS_DUP)
+            .build(),
+          TestIncidentDtoFactory()
+            .withReportTime("2024-12-15T10:00:00")
+            .withIncidentStatus("SOMETHING")
+            .build(),
+          TestIncidentDtoFactory()
+            .withReportTime("2024-12-15T10:00:00")
+            .withIncidentStatus("SOMETHING")
+            .build(),
+          TestIncidentDtoFactory()
+            .withReportTime("2024-12-15T10:00:00")
+            .withIncidentStatus("SOMETHING")
+            .build(),
+          TestIncidentDtoFactory()
+            .withReportTime("2024-12-15T10:00:00")
+            .withIncidentStatus("SOMETHING")
+            .withResponses(
+              listOf(
+                TestIncidentResponseDtoFactory()
+                  .withQuestion(INCIDENT_RESPONSE_QUESTION_SEXUAL_ASSAULT)
+                  .withAnswer(INCIDENT_RESPONSE_ANSWER_YES)
+                  .build(),
+              ),
+            )
+            .build(),
+        ),
+        emptyList<EscapeAlert>(),
+        emptyList<EscapeAlert>(),
+        false,
+        false,
+      ),
+      // 5 assaults total including one serious assault that is more than 6 months ago
+      Arguments.of(
+        emptyList<PrisonerAlertResponseDto>(),
+        listOf(
+          TestIncidentDtoFactory()
+            .withReportTime("2024-12-15T10:00:00")
+            .withIncidentStatus("SOMETHING")
+            .build(),
+          TestIncidentDtoFactory()
+            .withReportTime("2024-12-15T10:00:00")
+            .withIncidentStatus("SOMETHING")
+            .build(),
+          TestIncidentDtoFactory()
+            .withReportTime("2024-12-15T10:00:00")
+            .withIncidentStatus("SOMETHING")
+            .build(),
+          TestIncidentDtoFactory()
+            .withReportTime("2024-12-15T10:00:00")
+            .withIncidentStatus("SOMETHING")
+            .build(),
           TestIncidentDtoFactory()
             .withReportTime("2023-12-30T10:00:00")
             .withIncidentStatus("SOMETHING")
