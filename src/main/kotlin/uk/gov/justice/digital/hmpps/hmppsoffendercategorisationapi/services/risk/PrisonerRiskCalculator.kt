@@ -25,6 +25,7 @@ import java.time.ZonedDateTime
 class PrisonerRiskCalculator(
   val prisonerAlertsApiClient: PrisonerAlertsApiClient,
   val prisonApiClient: PrisonApiClient,
+  val viperService: ViperService,
   val clock: Clock,
 ) {
 
@@ -34,12 +35,13 @@ class PrisonerRiskCalculator(
       listOf(ALERT_CODE_ESCAPE_RISK, ALERT_CODE_ESCAPE_LIST, ALERT_CODE_ESCAPE_LIST_HEIGHTENED, ALERT_CODE_OCGM),
     )
     val assaultIncidents = prisonApiClient.getAssaultIncidents(prisonerNumber)
+    val viperData = viperService.getViperData(prisonerNumber)
 
     return PrisonerRiskProfile(
       alerts.filter { it.alertCode.code == ALERT_CODE_ESCAPE_RISK && alertIsActiveAndNotExpired(it) }.map { EscapeAlert.mapFromDto(it, clock) }.toList(),
       alerts.filter { (it.alertCode.code == ALERT_CODE_ESCAPE_LIST || it.alertCode.code == ALERT_CODE_ESCAPE_LIST_HEIGHTENED) && alertIsActiveAndNotExpired(it) }.map { EscapeAlert.mapFromDto(it, clock) }.toList(),
       !alerts.filter { it.alertCode.code == ALERT_CODE_OCGM && alertIsActiveAndNotExpired(it) }.isEmpty(),
-      numberOfAssaultIncidentsConsideredARisk(assaultIncidents),
+      viperData.aboveThreshold && numberOfAssaultIncidentsConsideredARisk(assaultIncidents),
     )
   }
 
