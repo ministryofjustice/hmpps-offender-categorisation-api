@@ -23,7 +23,7 @@ class RiskChangeEntity(
 
   @Type(JsonType::class)
   @Column(columnDefinition = "jsonb", name = "new_profile")
-  val newProfile: String? = null,
+  var newProfile: String? = null,
 
   @Column(name = "offender_no")
   val offenderNo: String,
@@ -40,7 +40,7 @@ class RiskChangeEntity(
   val status: String,
 
   @Column(name = "raised_date")
-  val raisedDate: ZonedDateTime? = null,
+  var raisedDate: ZonedDateTime? = null,
 ) {
   companion object {
     const val STATUS_REVIEW_REQUIRED = "REVIEW_REQUIRED"
