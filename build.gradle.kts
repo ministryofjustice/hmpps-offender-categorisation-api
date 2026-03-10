@@ -1,8 +1,8 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "9.0.0"
-  kotlin("plugin.spring") version "2.2.10"
-  kotlin("plugin.jpa") version "2.1.20"
-  kotlin("plugin.serialization") version "1.9.25"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "10.0.0"
+  kotlin("plugin.spring") version "2.3.0"
+  kotlin("plugin.jpa") version "2.3.0"
+  kotlin("plugin.serialization") version "2.3.0"
 }
 
 configurations {
@@ -27,14 +27,12 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-cache")
+  implementation("org.springframework.boot:spring-boot-starter-flyway")
   implementation("io.opentelemetry:opentelemetry-api:1.34.1")
   implementation("io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations:2.14.0")
   implementation("io.hypersistence:hypersistence-utils-hibernate-60:3.7.3")
 
   implementation("com.vladmihalcea:hibernate-types-60:2.21.1")
-  implementation("io.hypersistence:hypersistence-utils-hibernate-60:3.5.1")
-
-  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.2")
 
   implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.4.2")
   implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.2.2")
@@ -62,7 +60,6 @@ dependencies {
   testImplementation("io.swagger.parser.v3:swagger-parser-v2-converter:2.1.26")
   testImplementation("org.mockito:mockito-inline:5.2.0")
   testImplementation("io.projectreactor:reactor-test")
-  testImplementation("com.h2database:h2")
   testImplementation("org.testcontainers:postgresql:1.19.7")
   testImplementation("org.testcontainers:localstack:1.19.7")
 }

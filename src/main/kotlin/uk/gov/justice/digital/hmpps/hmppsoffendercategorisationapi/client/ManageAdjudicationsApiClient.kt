@@ -28,7 +28,7 @@ class ManageAdjudicationsApiClient(
       uriBuilder
         .path("/reported-adjudications/reports")
         .queryParam("startDate", startDate)
-        .queryParam("status", statuses)
+        .queryParam("status", *statuses.toTypedArray())
         .queryParam("page", page)
         .queryParam("size", size)
         .build()

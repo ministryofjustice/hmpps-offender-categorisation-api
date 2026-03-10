@@ -30,18 +30,16 @@ class PrisonApiClient(
     .uri { uriBuilder ->
       uriBuilder
         .path("api/offenders/$prisonerNumber/incidents")
-        .queryParam("incidentType", listOf(INCIDENT_TYPE_ASSAULT, INCIDENT_TYPE_ASSAULTS3))
+        .queryParam("incidentType", INCIDENT_TYPE_ASSAULT, INCIDENT_TYPE_ASSAULTS3)
         .queryParam(
           "participationRoles",
-          listOf(
-            PARTICIPATION_ROLE_ACTINV,
-            PARTICIPATION_ROLE_ASSIAL,
-            PARTICIPATION_ROLE_FIGHT,
-            PARTICIPATION_ROLE_IMPED,
-            PARTICIPATION_ROLE_PERP,
-            PARTICIPATION_ROLE_SUSASS,
-            PARTICIPATION_ROLE_SUSINV,
-          ),
+          PARTICIPATION_ROLE_ACTINV,
+          PARTICIPATION_ROLE_ASSIAL,
+          PARTICIPATION_ROLE_FIGHT,
+          PARTICIPATION_ROLE_IMPED,
+          PARTICIPATION_ROLE_PERP,
+          PARTICIPATION_ROLE_SUSASS,
+          PARTICIPATION_ROLE_SUSINV,
         )
         .build()
     }
