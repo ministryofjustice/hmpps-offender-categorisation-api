@@ -16,6 +16,6 @@ class LiteCategoryRepositoryTest : ResourceTest() {
   fun `Should Find by Offender No`() {
     val lightCategoryRecords = repository.findAllByOffenderNoOrderBySequenceDesc("G0089UO")
 
-    Assertions.assertThat(lightCategoryRecords?.first()?.assessedBy).isEqualTo("LBENNETT_GEN")
+    Assertions.assertThat(lightCategoryRecords.first().assessedBy).isEqualTo("LBENNETT_GEN")
   }
 }

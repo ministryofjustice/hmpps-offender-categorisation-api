@@ -1,12 +1,13 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.health
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Before
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.Mockito
-import org.mockito.junit.MockitoJUnitRunner
-import org.springframework.boot.actuate.health.Status
+import org.mockito.junit.jupiter.MockitoExtension
+import org.springframework.boot.health.contributor.Status
 import org.springframework.boot.info.BuildProperties
 import org.springframework.test.util.ReflectionTestUtils
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.file.DataRepositoryFactory
@@ -14,7 +15,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.fi
 import java.util.Properties
 import java.util.concurrent.atomic.AtomicBoolean
 
-@RunWith(MockitoJUnitRunner::class)
+@ExtendWith(MockitoExtension::class)
 class HealthInfoTest {
   @Mock
   private val buildProperties: BuildProperties? = null
@@ -25,7 +26,7 @@ class HealthInfoTest {
   private lateinit var healthInfo: HealthInfo
   private lateinit var viperAvailable: AtomicBoolean
 
-  @Before
+  @BeforeEach
   fun setup() {
     val properties = Properties().apply { setProperty("version", "somever") }
     healthInfo = HealthInfo(BuildProperties(properties))
@@ -40,7 +41,7 @@ class HealthInfoTest {
     Mockito.`when`(buildProperties!!.version).thenReturn("1.2.3")
   }
 
-  @org.junit.Test
+  @Test
   fun testHealthUp() {
     viperAvailable.set(true)
     val health = healthInfo.health()
@@ -48,7 +49,7 @@ class HealthInfoTest {
     assertThat(health.details).extracting("version").isEqualTo("1.2.3")
   }
 
-  @org.junit.Test
+  @Test
   fun testHealthOutOfService() {
     viperAvailable.set(false)
     val health = healthInfo.health()

@@ -18,8 +18,10 @@ class PrisonerPrsEligibilityCalculator(
 ) {
   private fun isCategoryCOrClosed(): Boolean = this.prisoner.category == Prisoner.CATEGORY_C || this.prisoner.category == Prisoner.CATEGORY_R
 
-  private fun hasOneToTwelveMonthsLeftToServeBeforeCrd(): Boolean = prisoner.releaseDate?.isAfter(LocalDate.now().plusMonths(1)) ?: false &&
-    prisoner.releaseDate?.isBefore(LocalDate.now().plusMonths(12)) ?: false
+  private fun hasOneToTwelveMonthsLeftToServeBeforeCrd(): Boolean = prisoner.releaseDate?.let { releaseDate ->
+    val now = LocalDate.now()
+    releaseDate.isAfter(now.plusMonths(1)) && releaseDate.isBefore(now.plusMonths(12))
+  } ?: false
 
   private fun hasEnhancedOrStandardIncentiveLevel(): Boolean = listOf(
     Prisoner.INCENTIVE_LEVEL_STANDARD,
