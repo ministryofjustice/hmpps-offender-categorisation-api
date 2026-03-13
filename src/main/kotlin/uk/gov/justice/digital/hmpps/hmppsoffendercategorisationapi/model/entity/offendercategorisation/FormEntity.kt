@@ -1,7 +1,7 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation
 
 import com.fasterxml.jackson.module.kotlin.readValue
-import com.vladmihalcea.hibernate.type.json.JsonType
+import io.hypersistence.utils.hibernate.type.json.JsonType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
