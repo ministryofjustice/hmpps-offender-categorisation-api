@@ -10,6 +10,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito
+import org.mockito.Mockito.lenient
 import org.mockito.junit.jupiter.MockitoExtension
 import org.mockito.kotlin.any
 import software.amazon.awssdk.utils.StringInputStream
@@ -132,24 +133,22 @@ class S3FileServiceTest {
     val listObjectsV2Result = Mockito.mock(ListObjectsV2Response::class.java)
 
     val mockS3Object = Mockito.mock(S3Object::class.java)
-    Mockito.`when`(mockS3Object.key).thenReturn(key)
+    lenient().`when`(mockS3Object.key).thenReturn(key)
 
     val s3ObjectSummary = listOf<S3Object>(
       mockS3Object,
     )
 
-    Mockito.`when`(listObjectsV2Result.contents).thenReturn(s3ObjectSummary)
-    Mockito.`when`(s3Client.listObjectsV2(any()))
-      .thenReturn(listObjectsV2Result)
+    lenient().`when`(listObjectsV2Result.contents).thenReturn(s3ObjectSummary)
+    lenient().`when`(s3Client.listObjectsV2(any())).thenReturn(listObjectsV2Result)
 
     val testInputStream = StringInputStream(fileToProcess).string
-    Mockito.`when`(
+    lenient().`when`(
       s3Client.getObject(
         any(),
         any<suspend (GetObjectResponse) -> String>(),
       ),
-    )
-      .thenReturn(testInputStream)
+    ).thenReturn(testInputStream)
     return s3Client
   }
 }
