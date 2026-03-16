@@ -9,6 +9,7 @@ import org.mockito.Mockito
 import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.boot.health.contributor.Status
 import org.springframework.boot.info.BuildProperties
+import org.springframework.boot.webtestclient.autoconfigure.AutoConfigureWebTestClient
 import org.springframework.test.util.ReflectionTestUtils
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.file.DataRepositoryFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.file.ViperRepository
@@ -16,6 +17,7 @@ import java.util.Properties
 import java.util.concurrent.atomic.AtomicBoolean
 
 @ExtendWith(MockitoExtension::class)
+@AutoConfigureWebTestClient
 class HealthInfoTest {
   @Mock
   private val buildProperties: BuildProperties? = null

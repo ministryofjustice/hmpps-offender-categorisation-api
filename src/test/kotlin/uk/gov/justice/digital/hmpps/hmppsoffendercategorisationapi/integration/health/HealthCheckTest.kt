@@ -2,11 +2,13 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.integration.
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.springframework.boot.webtestclient.autoconfigure.AutoConfigureWebTestClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.integration.IntegrationTestBase
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.function.Consumer
 
+@AutoConfigureWebTestClient
 class HealthCheckTest : IntegrationTestBase() {
 
   @Test

@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.springframework.boot.webtestclient.autoconfigure.AutoConfigureWebTestClient
 import org.springframework.web.reactive.function.client.WebClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.ManageAdjudicationsApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestAdjudicationFactory
@@ -12,6 +13,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 import java.time.LocalDate
 import java.time.LocalDateTime
 
+@AutoConfigureWebTestClient
 class ManageAdjudicationsApiClientTest : IntegrationTestBase() {
   private lateinit var manageAdjudicationsApiClient: ManageAdjudicationsApiClient
 
