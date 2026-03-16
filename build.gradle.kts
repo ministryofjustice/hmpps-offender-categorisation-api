@@ -41,6 +41,9 @@ dependencies {
 
   implementation("io.hypersistence:hypersistence-utils-hibernate-71:3.15.2")
 
+  implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.2")
+
   implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
   // OpenAPI
