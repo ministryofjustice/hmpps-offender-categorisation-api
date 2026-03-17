@@ -1,5 +1,5 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "10.0.0"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "10.0.5"
   kotlin("plugin.spring") version "2.3.0"
   kotlin("plugin.jpa") version "2.3.0"
   kotlin("plugin.serialization") version "2.3.0"
@@ -59,9 +59,6 @@ dependencies {
   testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
   testImplementation("org.springframework.boot:spring-boot-webtestclient")
   testImplementation("org.springframework.boot:spring-boot-jpa-test")
-//  testImplementation("org.springframework.boot:spring-boot-starter-test")
-//  testImplementation("org.springframework.boot:spring-boot-test-autoconfigure")
-//  testImplementation("org.springframework.boot:spring-boot-test-webflux") // for WebTestClient
   testImplementation("com.h2database:h2:2.3.232")
   testImplementation("com.github.tomakehurst:wiremock-jre8-standalone:3.0.1")
   testImplementation("org.springframework.security:spring-security-test")
