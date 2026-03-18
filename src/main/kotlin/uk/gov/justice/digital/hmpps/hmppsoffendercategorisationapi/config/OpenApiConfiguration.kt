@@ -13,7 +13,7 @@ const val ROLE_HDC_ADMIN = "HDC_ADMIN"
 class OpenApiConfiguration(
   buildProperties: BuildProperties,
 ) {
-  private val version: String = buildProperties.version
+  private val version: String = buildProperties.version ?: "1.0.0"
 
   @Bean
   fun customOpenAPI(): OpenAPI = OpenAPI()

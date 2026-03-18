@@ -1,8 +1,10 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.integration.health
 
 import org.junit.jupiter.api.Test
+import org.springframework.boot.webtestclient.autoconfigure.AutoConfigureWebTestClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.integration.IntegrationTestBase
 
+@AutoConfigureWebTestClient
 class S3HealthTest : IntegrationTestBase() {
 
   @Test

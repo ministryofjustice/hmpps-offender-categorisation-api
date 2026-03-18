@@ -17,6 +17,6 @@ class SecurityReferralRepositoryTest : ResourceTest() {
   fun `Should Find by Offender No`() {
     val securityReferral = repository.findByOffenderNoOrderByRaisedDateDesc("G2550VO")
 
-    assertThat(securityReferral?.first()?.userId).isEqualTo("LBENNETT_GEN")
+    assertThat(securityReferral.first().userId).isEqualTo("LBENNETT_GEN")
   }
 }

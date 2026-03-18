@@ -3,9 +3,11 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.integration
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.springframework.boot.webtestclient.autoconfigure.AutoConfigureWebTestClient
 import org.springframework.test.context.jdbc.Sql
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.BaseSarUnitTest
 
+@AutoConfigureWebTestClient
 class SubjectAccessRequestIntegrationTest : IntegrationTestBase() {
   @Nested
   @DisplayName("/subject-access-request")

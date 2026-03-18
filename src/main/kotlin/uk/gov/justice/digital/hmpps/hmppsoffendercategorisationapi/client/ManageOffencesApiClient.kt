@@ -14,7 +14,7 @@ class ManageOffencesApiClient(
     .uri { uriBuilder ->
       uriBuilder
         .path("/schedule/sds-early-release-exclusions")
-        .queryParam("offenceCodes", offenceCodes)
+        .queryParam("offenceCodes", *offenceCodes.toTypedArray())
         .build()
     }
     .retrieve()

@@ -217,16 +217,18 @@ class PrisonerRiskPollerTest {
       .build(),
   )
 
-  private fun verifyPrisonerRiskProfileSaved(newProfile: PrisonerRiskProfile) = verify(
-    mockPrisonerRiskProfileRepository,
-    times(1),
-  ).save(
-    argThat { entity ->
-      entity.offenderNo == "A1234BC" &&
-        entity.riskProfile == jacksonObjectMapper().writeValueAsString(newProfile) &&
-        entity.calculatedAt == Instant.parse(frozenDateTime).atZone(ZoneId.of("UTC"))
-    },
-  )
+  private fun verifyPrisonerRiskProfileSaved(newProfile: PrisonerRiskProfile) {
+    verify(
+      mockPrisonerRiskProfileRepository,
+      times(1),
+    ).save(
+      argThat { entity ->
+        entity.offenderNo == "A1234BC" &&
+          entity.riskProfile == jacksonObjectMapper().writeValueAsString(newProfile) &&
+          entity.calculatedAt == Instant.parse(frozenDateTime).atZone(ZoneId.of("UTC"))
+      },
+    )
+  }
 
   private fun mockFindPrisoners(category: String) = whenever(
     mockPrisonerSearchApiClient.findPrisonersByAgencyId(TEST_AGENCY_ID, 0, 100),

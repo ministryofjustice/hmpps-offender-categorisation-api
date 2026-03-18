@@ -4,11 +4,13 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.springframework.boot.webtestclient.autoconfigure.AutoConfigureWebTestClient
 import org.springframework.web.reactive.function.client.WebClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.AssessRisksAndNeedsApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.integration.IntegrationTestBase
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.RiskLevel
 
+@AutoConfigureWebTestClient
 class AssessRisksAndNeedsApiClientTest : IntegrationTestBase() {
   private lateinit var assessRisksAndNeedsApiClient: AssessRisksAndNeedsApiClient
 

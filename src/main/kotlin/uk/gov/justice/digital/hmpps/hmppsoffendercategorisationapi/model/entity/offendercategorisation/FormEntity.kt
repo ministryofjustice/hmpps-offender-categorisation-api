@@ -1,7 +1,7 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation
 
 import com.fasterxml.jackson.module.kotlin.readValue
-import com.vladmihalcea.hibernate.type.json.JsonType
+import io.hypersistence.utils.hibernate.type.json.JsonType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -13,7 +13,7 @@ import jakarta.persistence.Table
 import net.minidev.json.JSONObject
 import org.hibernate.annotations.JdbcType
 import org.hibernate.annotations.Type
-import org.hibernate.dialect.PostgreSQLEnumJdbcType
+import org.hibernate.dialect.type.PostgreSQLEnumJdbcType
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.CatType
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.ReviewReason
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.objectMapper
@@ -124,15 +124,19 @@ class FormEntity(
       formResponse = JSONObject(formResponseMap).toString()
     }
   }
+
   fun setFormResponse(formResponse: String) {
     this.formResponse = formResponse
   }
+
   fun setStatus(newStatus: String) {
     status = newStatus
   }
+
   fun setSecurityReviewedDate(newSecurityReviewedDate: LocalDateTime) {
     securityReviewedDate = newSecurityReviewedDate
   }
+
   fun setSecurityReviewedBy(newSecurityReviewedBy: String) {
     securityReviewedBy = newSecurityReviewedBy
   }
