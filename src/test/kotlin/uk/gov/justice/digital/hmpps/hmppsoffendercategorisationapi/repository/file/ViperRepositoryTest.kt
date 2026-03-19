@@ -1,15 +1,15 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.file
 
 import org.assertj.core.api.Assertions
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
 class ViperRepositoryTest {
   private val repository = ViperRepository()
 
-  @Before
+  @BeforeEach
   fun setup() {
     val header = listOf(
       "offender_id_display",

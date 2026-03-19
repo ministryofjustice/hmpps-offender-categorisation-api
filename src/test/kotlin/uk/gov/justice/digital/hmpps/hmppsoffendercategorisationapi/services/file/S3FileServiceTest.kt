@@ -8,9 +8,10 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito
-import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.Mockito.lenient
+import org.mockito.junit.jupiter.MockitoExtension
 import org.mockito.kotlin.any
 import software.amazon.awssdk.utils.StringInputStream
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.file.FileType
@@ -22,7 +23,7 @@ import java.time.Duration
 import java.time.LocalDateTime
 import aws.sdk.kotlin.services.s3.model.Object as S3Object
 
-@RunWith(MockitoJUnitRunner::class)
+@ExtendWith(MockitoExtension::class)
 class S3FileServiceTest {
   @Test
   internal fun `process viper file`() {
@@ -99,7 +100,7 @@ class S3FileServiceTest {
 
     Mockito.`when`(s3Client.listObjectsV2(any())).thenReturn(result)
     Mockito.`when`(result.contents)
-      .thenReturn(s3ObjectSummary as List<S3Object>)
+      .thenReturn(s3ObjectSummary)
     service.deleteHistoricalFiles("risk-profiler/gg")
     Mockito.verify(s3Client).deleteObject(
       DeleteObjectRequest {
@@ -132,24 +133,22 @@ class S3FileServiceTest {
     val listObjectsV2Result = Mockito.mock(ListObjectsV2Response::class.java)
 
     val mockS3Object = Mockito.mock(S3Object::class.java)
-    Mockito.`when`(mockS3Object.key).thenReturn(key)
+    lenient().`when`(mockS3Object.key).thenReturn(key)
 
     val s3ObjectSummary = listOf<S3Object>(
       mockS3Object,
     )
 
-    Mockito.`when`(listObjectsV2Result.contents).thenReturn(s3ObjectSummary)
-    Mockito.`when`(s3Client.listObjectsV2(any()))
-      .thenReturn(listObjectsV2Result)
+    lenient().`when`(listObjectsV2Result.contents).thenReturn(s3ObjectSummary)
+    lenient().`when`(s3Client.listObjectsV2(any())).thenReturn(listObjectsV2Result)
 
     val testInputStream = StringInputStream(fileToProcess).string
-    Mockito.`when`(
+    lenient().`when`(
       s3Client.getObject(
         any(),
         any<suspend (GetObjectResponse) -> String>(),
       ),
-    )
-      .thenReturn(testInputStream)
+    ).thenReturn(testInputStream)
     return s3Client
   }
 }

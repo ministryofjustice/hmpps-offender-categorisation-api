@@ -30,6 +30,8 @@ data class Prisoner(
   companion object {
     const val CATEGORY_B = "B"
     const val CATEGORY_C = "C"
+    const val CATEGORY_D = "D"
+    const val CATEGORY_J = "J"
     const val CATEGORY_R = "R"
     const val STATUS_ACTIVE_IN = "ACTIVE IN"
     const val STATUS_INACTIVE_OUT = "INACTIVE OUT"

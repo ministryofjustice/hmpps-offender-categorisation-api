@@ -41,15 +41,12 @@ class PrisonerRiskCalculator(
       alerts.filter { it.alertCode.code == ALERT_CODE_ESCAPE_RISK && alertIsActiveAndNotExpired(it) }.map { EscapeAlert.mapFromDto(it, clock) }.toList(),
       alerts.filter { (it.alertCode.code == ALERT_CODE_ESCAPE_LIST || it.alertCode.code == ALERT_CODE_ESCAPE_LIST_HEIGHTENED) && alertIsActiveAndNotExpired(it) }.map { EscapeAlert.mapFromDto(it, clock) }.toList(),
       !alerts.filter { it.alertCode.code == ALERT_CODE_OCGM && alertIsActiveAndNotExpired(it) }.isEmpty(),
-      viperData.aboveThreshold || numberOfAssaultIncidentsConsideredARisk(assaultIncidents),
+      viperData.aboveThreshold && numberOfAssaultIncidentsConsideredARisk(assaultIncidents),
     )
   }
 
   private fun numberOfAssaultIncidentsConsideredARisk(assaultIncidents: List<IncidentDto>): Boolean {
     val nonDuplicateAssaultIncidents = assaultIncidents.filter { it.incidentStatus != IncidentDto.INCIDENT_STATUS_DUP }
-    if (nonDuplicateAssaultIncidents.count() > 5) {
-      return true
-    }
     val recentNonDuplicateSeriousAssaults = nonDuplicateAssaultIncidents
       .filter { LocalDateTime.parse(it.reportTime).isAfter(ZonedDateTime.now(clock).minusMonths(RECENT_ASSAULT_MONTHS).toLocalDateTime()) }
       .count { incident: IncidentDto ->
@@ -59,11 +56,11 @@ class PrisonerRiskCalculator(
             INCIDENT_RESPONSE_QUESTION_CONCUSSION,
             INCIDENT_RESPONSE_QUESTION_SERIOUS_INJURY,
             INCIDENT_RESPONSE_QUESTION_RESULT_IN_HOSPITAL,
-          ).contains(response.question) &&
-            response.answer == INCIDENT_RESPONSE_ANSWER_YES
+          ).contains(response.question.uppercase()) &&
+            response.answer.uppercase() == INCIDENT_RESPONSE_ANSWER_YES
         }
       }
-    return recentNonDuplicateSeriousAssaults > 0
+    return nonDuplicateAssaultIncidents.count() >= MINIMUM_NUMBER_OF_ASSAULTS_TO_CONSIDER_RISK && recentNonDuplicateSeriousAssaults > 0
   }
 
   fun alertIsActiveAndNotExpired(alert: PrisonerAlertResponseDto): Boolean {
@@ -73,5 +70,6 @@ class PrisonerRiskCalculator(
 
   companion object {
     const val RECENT_ASSAULT_MONTHS = 6L
+    const val MINIMUM_NUMBER_OF_ASSAULTS_TO_CONSIDER_RISK = 5
   }
 }

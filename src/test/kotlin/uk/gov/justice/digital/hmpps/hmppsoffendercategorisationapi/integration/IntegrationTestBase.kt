@@ -41,7 +41,7 @@ abstract class IntegrationTestBase {
   @Autowired
   protected lateinit var s3Properties: S3Properties
 
-  @Autowired
+  @Autowired(required = false)
   protected lateinit var s3TestUtil: S3TestUtil
 
   companion object {

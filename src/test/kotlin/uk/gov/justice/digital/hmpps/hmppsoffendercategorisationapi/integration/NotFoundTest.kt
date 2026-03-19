@@ -1,8 +1,10 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.integration
 
 import org.junit.jupiter.api.Test
+import org.springframework.boot.webtestclient.autoconfigure.AutoConfigureWebTestClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.ROLE_HDC_ADMIN
 
+@AutoConfigureWebTestClient
 class NotFoundTest : IntegrationTestBase() {
 
   @Test
