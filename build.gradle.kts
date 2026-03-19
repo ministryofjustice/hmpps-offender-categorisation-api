@@ -9,9 +9,6 @@ configurations {
   testImplementation { exclude(group = "org.junit.vintage") }
 }
 
-// https://mojdt.slack.com/archives/C69NWE339/p1734943189790819
-ext["logback.version"] = "1.5.14"
-
 dependencies {
   annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
@@ -49,7 +46,7 @@ dependencies {
   // OpenAPI
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.2")
 
-  implementation("com.opencsv:opencsv:5.9")
+  implementation("com.opencsv:opencsv:5.12.0")
   implementation("aws.sdk.kotlin:s3:1.4.111")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.10.2")
