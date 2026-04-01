@@ -33,6 +33,7 @@ fun transformSecurityReferral(securityReferral: List<SecurityReferralEntity>?): 
           offenderNo = it.offenderNo,
           statusId = it.status,
           processedDate = it.processedDate.toString(),
+          referredBy = it.userId,
         ),
       )
     }
