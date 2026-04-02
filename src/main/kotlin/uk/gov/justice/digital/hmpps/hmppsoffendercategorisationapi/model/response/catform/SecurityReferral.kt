@@ -21,7 +21,7 @@ class SecurityReferral(
   @JsonProperty("processed_date")
   val processedDate: String,
 
-  val referredBy: String? = null,
+  val referredBy: String,
 ) {
   val status: String
     get() = when (this.statusId) {

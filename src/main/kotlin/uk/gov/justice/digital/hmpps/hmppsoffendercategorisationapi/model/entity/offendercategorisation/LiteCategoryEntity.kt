@@ -38,7 +38,7 @@ class LiteCategoryEntity(
   val assessedBy: String = "",
 
   @Column(name = "approved_by")
-  val approvedBy: String = "",
+  val approvedBy: String? = null,
 
   @Column(name = "assessment_committee")
   val assessmentCommittee: String,

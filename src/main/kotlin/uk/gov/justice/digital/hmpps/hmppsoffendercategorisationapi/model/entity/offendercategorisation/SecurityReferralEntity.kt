@@ -26,9 +26,6 @@ class SecurityReferralEntity(
   @Column(name = "offender_no")
   val offenderNo: String,
 
-  /**
-   * REDACTED
-   */
   @Column(name = "user_id")
   val userId: String = "",
 

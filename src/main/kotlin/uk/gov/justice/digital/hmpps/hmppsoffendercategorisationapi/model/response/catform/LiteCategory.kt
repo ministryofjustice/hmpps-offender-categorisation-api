@@ -27,7 +27,7 @@ data class LiteCategory(
   val approvedBy: String? = null,
 
   @JsonProperty("assessed_by")
-  val assessedBy: String? = null,
+  val assessedBy: String,
 
   @JsonProperty("assessment_committee")
   val assessmentCommittee: String? = null,

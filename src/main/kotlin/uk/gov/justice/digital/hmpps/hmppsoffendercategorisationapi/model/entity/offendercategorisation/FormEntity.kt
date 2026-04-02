@@ -46,7 +46,7 @@ class FormEntity(
   val referredDate: LocalDateTime? = null,
 
   @Column(name = "referred_by")
-  val referredBy: String? = "",
+  val referredBy: String? = null,
 
   /**
    * REDACTED
@@ -71,7 +71,7 @@ class FormEntity(
   private var securityReviewedDate: LocalDateTime?,
 
   @Column(name = "security_reviewed_by")
-  var securityReviewedBy: String?,
+  var securityReviewedBy: String? = null,
 
   @Column(name = "approval_date")
   val approvalDate: LocalDate?,
@@ -108,7 +108,7 @@ class FormEntity(
   private var cancelledDate: LocalDateTime?,
 
   @Column(name = "cancelled_by")
-  val cancelledBy: String,
+  val cancelledBy: String? = null,
 ) {
   fun getFormResponse(): String? = formResponse
   fun getStatus(): String = status
