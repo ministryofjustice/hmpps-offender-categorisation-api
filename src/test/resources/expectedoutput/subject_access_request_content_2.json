@@ -215,6 +215,8 @@
       "prison_id": "LPI",
       "created_date": "2020-05-18T12:58:42.435Z",
       "approved_date": "2020-05-18T00:00Z",
+      "approved_by":"CT_SUP",
+      "assessed_by":"LBENNETT_GEN",
       "assessment_committee": "OCA",
       "assessment_comment": "Testing the creation of an unsentenced",
       "next_review_date": "2020-11-18",

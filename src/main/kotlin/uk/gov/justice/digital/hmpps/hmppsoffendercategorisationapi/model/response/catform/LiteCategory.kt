@@ -23,6 +23,12 @@ data class LiteCategory(
   @JsonProperty("approved_date")
   val approvedDate: String? = null,
 
+  @JsonProperty("approved_by")
+  val approvedBy: String? = null,
+
+  @JsonProperty("assessed_by")
+  val assessedBy: String? = null,
+
   @JsonProperty("assessment_committee")
   val assessmentCommittee: String? = null,
 

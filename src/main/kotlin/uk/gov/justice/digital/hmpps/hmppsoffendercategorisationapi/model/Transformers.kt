@@ -106,9 +106,11 @@ fun transformLiteCategory(entity: List<LiteCategoryEntity>?): List<LiteCategory>
           sequence = it.sequence,
 
           approvedDate = it.approvedDate.toString(),
+          approvedBy = it.approvedBy,
           approvedComment = it.approvedComment,
           approvedCommittee = it.approvedCommittee,
 
+          assessedBy = it.assessedBy,
           assessmentComment = it.assessmentComment,
           assessmentCommittee = it.assessmentCommittee,
 
