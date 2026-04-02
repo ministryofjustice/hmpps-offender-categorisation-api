@@ -20,10 +20,6 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.objectM
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-/**
- *  assigned_user_id, user_id referred_by, approved_by,
- *  assessed_by, cancelled_by all ** REACTED **
- */
 @Entity
 @Table(name = "form", schema = "public")
 class FormEntity(
@@ -41,9 +37,6 @@ class FormEntity(
   @Column(name = "booking_id")
   val bookingId: Long = 0,
 
-  /**
-   * REDACTED
-   */
   @Column(name = "user_id")
   val userId: String = "",
 
@@ -51,6 +44,9 @@ class FormEntity(
 
   @Column(name = "referred_date")
   val referredDate: LocalDateTime? = null,
+
+  @Column(name = "referred_by")
+  val referredBy: String? = "",
 
   /**
    * REDACTED
@@ -75,7 +71,7 @@ class FormEntity(
   private var securityReviewedDate: LocalDateTime?,
 
   @Column(name = "security_reviewed_by")
-  private var securityReviewedBy: String?,
+  var securityReviewedBy: String?,
 
   @Column(name = "approval_date")
   val approvalDate: LocalDate?,
@@ -94,6 +90,12 @@ class FormEntity(
   @Column(name = "assessment_date")
   val assessmentDate: LocalDate?,
 
+  @Column(name = "assessed_by")
+  val assessedBy: String? = null,
+
+  @Column(name = "approved_by")
+  val approvedBy: String? = null,
+
   @Enumerated(EnumType.STRING)
   @JdbcType(PostgreSQLEnumJdbcType::class)
   @Column(name = "review_reason")
@@ -105,16 +107,12 @@ class FormEntity(
   @Column(name = "cancelled_date")
   private var cancelledDate: LocalDateTime?,
 
-  /**
-   * REDACTED
-   */
   @Column(name = "cancelled_by")
   val cancelledBy: String,
 ) {
   fun getFormResponse(): String? = formResponse
   fun getStatus(): String = status
   fun getSecurityReviewedDate(): LocalDateTime? = securityReviewedDate
-  fun getSecurityReviewedBy(): String? = securityReviewedBy
   fun getCancelledDate(): LocalDateTime? = cancelledDate
 
   fun updateFormResponse(section: String, name: String, value: Map<String, String>) {
@@ -135,10 +133,6 @@ class FormEntity(
 
   fun setSecurityReviewedDate(newSecurityReviewedDate: LocalDateTime) {
     securityReviewedDate = newSecurityReviewedDate
-  }
-
-  fun setSecurityReviewedBy(newSecurityReviewedBy: String) {
-    securityReviewedBy = newSecurityReviewedBy
   }
 
   fun setCancelledDate(newCancelledDate: LocalDateTime) {
