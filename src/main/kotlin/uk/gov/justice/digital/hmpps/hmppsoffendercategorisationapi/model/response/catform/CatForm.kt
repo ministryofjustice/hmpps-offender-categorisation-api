@@ -14,7 +14,7 @@ data class CatForm(
   val formResponse: Map<String, Any>? = null,
 
   @JsonProperty("user_id")
-  val userId: String = "",
+  val userId: String? = null,
 
   private val status: String? = null,
 

@@ -120,6 +120,7 @@ open class BaseSarUnitTest {
     protected val security = SecurityReferral(
       id = "2",
       offenderNo = "G2550VO",
+      referredBy = "ABCDEF123",
       prisonId = "LEI",
       statusId = SecurityReferralStatus.REFERRED,
       raisedDate = "2019-09-19 13:33:21.123 +0100",
@@ -135,6 +136,7 @@ open class BaseSarUnitTest {
       prisonId = "LPI",
       createdDate = "2020-05-18 13:58:42.435 +0100",
       approvedDate = "2020-05-18 01:00:00.000 +0100",
+      assessedBy = "ABCDEF123",
       assessmentCommittee = "OCA",
       assessmentComment = "Testing the creation of an unsentenced",
       nextReviewDate = "2020-11-18",

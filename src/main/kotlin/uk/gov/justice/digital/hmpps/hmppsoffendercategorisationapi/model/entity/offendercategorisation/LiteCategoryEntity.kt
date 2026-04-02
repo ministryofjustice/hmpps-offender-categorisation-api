@@ -35,7 +35,7 @@ class LiteCategoryEntity(
   val approvedDate: ZonedDateTime? = null,
 
   @Column(name = "assessed_by")
-  val assessedBy: String = "",
+  val assessedBy: String,
 
   @Column(name = "approved_by")
   val approvedBy: String? = null,
