@@ -72,7 +72,13 @@
       "cancelled_date": "2019-11-25T11:24:12.768",
       "reviewReason": "Review due",
       "typeOfCategorisationAssessment": "Initial",
-      "reviewStatus": "Review approved"
+      "reviewStatus": "Review approved",
+      "approved_by": "SRENDELL_GEN",
+      "assessed_by": "SRENDELL_GEN",
+      "cancelled_by": "SRENDELL_GEN",
+      "user_id": "SRENDELL_GEN",
+      "security_reviewed_by": "LBENNETT_GEN",
+      "referred_by": ""
     },
     {
       "form_response": {
@@ -146,7 +152,13 @@
       "cancelled_date": "2019-11-25T11:24:12.768",
       "reviewReason": "Review due",
       "typeOfCategorisationAssessment": "Initial",
-      "reviewStatus": "Review approved"
+      "reviewStatus": "Review approved",
+      "approved_by": "SRENDELL_GEN",
+      "assessed_by": "SRENDELL_GEN",
+      "cancelled_by": "SRENDELL_GEN",
+      "user_id": "SRENDELL_GEN",
+      "security_reviewed_by": "LBENNETT_GEN",
+      "referred_by": ""
     }
   ],
   "riskChange": [
@@ -195,6 +207,7 @@
       "prisonId": "LPI",
       "raised_date": "2019-09-19T12:33:21.123Z",
       "processed_date": "2019-09-19T12:36:46.335Z",
+      "referredBy": "LBENNETT_GEN",
       "status": "Referred"
     }
   ],
@@ -214,6 +227,8 @@
       "prison_id": "LPI",
       "created_date": "2020-05-18T12:58:42.435Z",
       "approved_date": "2020-05-18T00:00Z",
+      "approved_by":"CT_SUP",
+      "assessed_by":"LBENNETT_GEN",
       "assessment_committee": "OCA",
       "assessment_comment": "Testing the creation of an unsentenced",
       "next_review_date": "2020-11-18",

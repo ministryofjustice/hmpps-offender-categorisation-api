@@ -182,6 +182,7 @@
   "security": [
     {
       "id": "2",
+      "referredBy": "ABCDEF123",
       "offender_no": "G2550VO",
       "prisonId": "LEI",
       "raised_date": "2019-09-19 13:33:21.123 +0100",
@@ -206,6 +207,7 @@
       "prison_id": "LPI",
       "created_date": "2020-05-18 13:58:42.435 +0100",
       "approved_date": "2020-05-18 01:00:00.000 +0100",
+      "assessed_by": "ABCDEF123",
       "assessment_committee": "OCA",
       "assessment_comment": "Testing the creation of an unsentenced",
       "next_review_date": "2020-11-18",

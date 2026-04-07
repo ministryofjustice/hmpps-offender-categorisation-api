@@ -45,7 +45,7 @@ class FormServiceTest {
       argThat { entity ->
         entity.bookingId == testBookingId &&
           entity.getStatus() == FormEntity.STATUS_SECURITY_BACK &&
-          entity.getSecurityReviewedBy() == testUserId
+          entity.securityReviewedBy == testUserId
         entity.getFormResponse()!!.contains("{\"security\":{\"review\":{\"securityReview\":\"Test security review\"}}}")
       },
     )
@@ -69,7 +69,7 @@ class FormServiceTest {
       argThat { entity ->
         entity.bookingId == testBookingId &&
           entity.getStatus() == FormEntity.STATUS_STARTED &&
-          entity.getSecurityReviewedBy() == null
+          entity.securityReviewedBy == null
         entity.getFormResponse()!!.contains("{\"security\":{\"review\":{\"securityReview\":\"Test security review\"}}}")
       },
     )
