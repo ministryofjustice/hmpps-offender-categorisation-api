@@ -11,6 +11,14 @@ hmpps:
       url: http://localhost:8090/auth/oauth/token
     url: http://localhost:8090/auth
 
+    sar:
+      tests:
+        expected-api-response:
+          path: /sar/test-app-response.json
+        expected-render-result:
+          path: /sar/test-app-expected.html
+        attachments-expected: false
+
 prisoner:
   search:
     timeout: 10s
