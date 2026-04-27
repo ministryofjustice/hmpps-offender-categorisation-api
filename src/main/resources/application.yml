@@ -167,4 +167,4 @@ hmpps:
   sar:
     template:
       enabled: true
-      path: /templates/template_offender_categorisation.mustache
+      path: /templates/template_hmpps-offender-categorisation-api.mustache
