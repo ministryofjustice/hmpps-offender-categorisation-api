@@ -6,6 +6,9 @@ management.endpoint:
   info.cache.time-to-live: 0
 
 hmpps:
+  test:
+    jwt-helper-enabled: false
+
   auth:
     token:
       url: http://localhost:8090/auth/oauth/token
@@ -13,8 +16,6 @@ hmpps:
 
     sar:
       tests:
-        expected-api-response:
-          path: /sar/test-app-response.json
         expected-render-result:
           path: /sar/test-app-expected.html
         attachments-expected: false
