@@ -66,7 +66,7 @@ dependencies {
   testImplementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.7")
   testImplementation("io.swagger.parser.v3:swagger-parser-v2-converter:2.1.26")
   testImplementation("org.mockito:mockito-inline:5.2.0")
-  testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
+  testImplementation("org.mockito.kotlin:mockito-kotlin:6.3.0")
   testImplementation("io.projectreactor:reactor-test")
   testImplementation("org.testcontainers:postgresql:1.19.7")
   testImplementation("org.testcontainers:localstack:1.19.7")
