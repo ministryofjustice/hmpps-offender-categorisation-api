@@ -25,7 +25,9 @@ import uk.gov.justice.digital.hmpps.subjectaccessrequest.SarReportTest
   scripts = ["classpath:repository/subject_access_request_service_data.sql"],
   executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS,
 )
-class SubjectAccessRequestReportTest : IntegrationTestBase(), SarReportTest {
+class SubjectAccessRequestReportTest :
+  IntegrationTestBase(),
+  SarReportTest {
 
   @Autowired
   lateinit var sarIntegrationTestHelper: SarIntegrationTestHelper
