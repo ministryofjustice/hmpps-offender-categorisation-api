@@ -51,14 +51,21 @@ class PrisonerRiskPoller(
         try {
           val riskProfile = prisonerRiskCalculator.calculateRisk(prisoner.prisonerNumber!!)
           val jsonRiskProfile = jacksonObjectMapper().writeValueAsString(riskProfile)
-          compareRiskProfiles(prisoner, riskProfile)
-          prisonerRiskProfileRepository.save(
-            PrisonerRiskProfileEntity(
-              offenderNo = prisoner.prisonerNumber,
-              riskProfile = jsonRiskProfile,
-              calculatedAt = ZonedDateTime.now(clock),
-            ),
-          )
+          val existingRiskProfile = prisonerRiskProfileRepository.findByOffenderNo(prisoner.prisonerNumber!!)
+          compareRiskProfiles(prisoner, existingRiskProfile, riskProfile)
+          if (existingRiskProfile == null) {
+            prisonerRiskProfileRepository.save(
+              PrisonerRiskProfileEntity(
+                offenderNo = prisoner.prisonerNumber,
+                riskProfile = jsonRiskProfile,
+                calculatedAt = ZonedDateTime.now(clock),
+              ),
+            )
+          } else {
+            existingRiskProfile.riskProfile = jsonRiskProfile
+            existingRiskProfile.calculatedAt = ZonedDateTime.now(clock)
+            prisonerRiskProfileRepository.save(existingRiskProfile)
+          }
         } catch (e: Exception) {
           log.error("Error calculating risk profile for prisoner ${prisoner.prisonerNumber}", e)
         }
@@ -67,8 +74,7 @@ class PrisonerRiskPoller(
     } while (prisoners.count() >= PRISONERS_CHUNK_SIZE)
   }
 
-  private fun compareRiskProfiles(prisoner: Prisoner, newRiskProfile: PrisonerRiskProfile) {
-    val existingRiskProfile = prisonerRiskProfileRepository.findByOffenderNo(prisoner.prisonerNumber!!)
+  private fun compareRiskProfiles(prisoner: Prisoner, existingRiskProfile: PrisonerRiskProfileEntity?, newRiskProfile: PrisonerRiskProfile) {
     if (existingRiskProfile != null) {
       val existingRiskProfileObj = jacksonObjectMapper().readValue(existingRiskProfile.riskProfile, PrisonerRiskProfile::class.java)
       if (
@@ -81,7 +87,7 @@ class PrisonerRiskPoller(
           log.info("Risk profile changed for prisoner ${prisoner.prisonerNumber} in category ${prisoner.category}. existing = $existingRiskProfileObj, new = $newRiskProfile")
 
           val newRiskProfileString = jacksonObjectMapper().writeValueAsString(newRiskProfile)
-          val existingNewRiskChange = riskChangeRepository.findByStatusAndOffenderNo(RiskChangeEntity.STATUS_NEW, prisoner.prisonerNumber)
+          val existingNewRiskChange = riskChangeRepository.findByStatusAndOffenderNo(RiskChangeEntity.STATUS_NEW, prisoner.prisonerNumber!!)
           if (existingNewRiskChange == null) {
             riskChangeRepository.save(
               RiskChangeEntity(

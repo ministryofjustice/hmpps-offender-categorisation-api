@@ -1,0 +1,2 @@
+INSERT INTO prisoner_risk_profile
+    (offender_no, risk_profile, calculated_at) VALUES ('ABC123', '{"escapeListAlerts": [], "escapeRiskAlerts": [{"active": true, "expired": false, "dateCreated": "2025-12-31"}], "riskDueToViolence": false, "riskDueToSeriousOrganisedCrime": true}', '2025-12-31 00:00:00');
