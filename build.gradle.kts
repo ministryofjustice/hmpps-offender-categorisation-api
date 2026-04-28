@@ -72,6 +72,7 @@ dependencies {
   testImplementation("org.testcontainers:localstack:1.19.7")
   testImplementation("org.flywaydb:flyway-core")
   testImplementation("com.h2database:h2")
+  testImplementation("javax.xml.bind:jaxb-api:2.3.1")
   testImplementation("uk.gov.justice.service.hmpps:hmpps-subject-access-request-test-support:2.2.1")
 }
 
