@@ -22,8 +22,8 @@
         <tr>
             <td>{{ getPrisonName prisonId }}</td>
             <td>{{ optionalValue (formatDate start_date) }}</td>
-            <td>{{ optionalValue referred_by }}</td>
-            <td>{{ optionalValue user_id }}</td>
+            <td>{{ getUserLastName user_id }}</td>
+            <td>{{ optionalValue (getUserLastName referred_by) }}</td>
         </tr>
     </table>
 
@@ -36,9 +36,9 @@
         </tr>
         <tr>
             <td>{{ optionalValue (formatDate security_reviewed_date) }}</td>
-            <td>{{ optionalValue security_reviewed_by }}</td>
+            <td>{{ optionalValue (getUserLastName security_reviewed_by) }}</td>
             <td>{{ optionalValue (formatDate approval_date) }}</td>
-            <td>{{ optionalValue approved_by }}</td>
+            <td>{{ optionalValue (getUserLastName approved_by) }}</td>
         </tr>
     </table>
 
@@ -51,7 +51,7 @@
         </tr>
         <tr>
             <td>{{ optionalValue (formatDate assessment_date) }}</td>
-            <td>{{ optionalValue assessed_by }}</td>
+            <td>{{ optionalValue (getUserLastName assessed_by) }}</td>
             <td>{{ optionalValue (formatDate due_by_date) }}</td>
             <td>{{ optionalValue typeOfCategorisationAssessment }}</td>
         </tr>
@@ -64,7 +64,7 @@
         </tr>
         <tr>
             <td>{{ optionalValue (formatDate cancelled_date) }}</td>
-            <td>{{ optionalValue cancelled_by }}</td>
+            <td>{{ optionalValue (getUserLastName cancelled_by) }}</td>
         </tr>
     </table>
     <table class="data-table">
@@ -669,7 +669,7 @@
         <tr>
             <td>{{ getPrisonName prisonId }}</td>
             <td>{{ optionalValue (formatDate raised_date) }}</td>
-            <td>{{ optionalValue referredBy }}</td>
+            <td>{{ optionalValue (getUserLastName referredBy) }}</td>
             <td>{{ optionalValue (formatDate processed_date) }}</td>
             <td>{{ optionalValue status }}</td>
         </tr>
@@ -728,7 +728,7 @@
         <tr>
             <td>{{ optionalValue (formatDate created_date) }}</td>
             <td>{{ optionalValue (formatDate approved_date) }}</td>
-            <td>{{ optionalValue approved_by }}</td>
+            <td>{{ optionalValue (getUserLastName approved_by) }}</td>
             <td>{{ optionalValue (formatDate next_review_date) }}</td>
         </tr>
     </table>
