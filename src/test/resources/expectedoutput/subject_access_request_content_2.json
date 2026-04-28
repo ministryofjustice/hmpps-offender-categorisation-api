@@ -78,7 +78,7 @@
       "cancelled_by": "SRENDELL_GEN",
       "user_id": "SRENDELL_GEN",
       "security_reviewed_by": "LBENNETT_GEN",
-      "referred_by": ""
+      "referred_by": "LBENNETT_GEN"
     },
     {
       "form_response": {
@@ -158,7 +158,7 @@
       "cancelled_by": "SRENDELL_GEN",
       "user_id": "SRENDELL_GEN",
       "security_reviewed_by": "LBENNETT_GEN",
-      "referred_by": ""
+      "referred_by": "LBENNETT_GEN"
     }
   ],
   "riskChange": [
