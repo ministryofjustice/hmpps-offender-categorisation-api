@@ -6,10 +6,19 @@ management.endpoint:
   info.cache.time-to-live: 0
 
 hmpps:
+  test:
+    jwt-helper-enabled: false
+
   auth:
     token:
       url: http://localhost:8090/auth/oauth/token
     url: http://localhost:8090/auth
+
+  sar:
+    tests:
+      expected-render-result:
+          path: /sar/sar-generated-report.html
+          attachments-expected: false
 
 prisoner:
   search:

@@ -29,7 +29,7 @@ VALUES('{"recat":{"decision":{"category":"B"},"securityBack":{},"securityInput":
        'APPROVED',
        'SRENDELL_GEN',
        '2019-11-25 11:24:12.768+00',
-       '',
+       'LBENNETT_GEN',
        1,
        '{"history":{},"socProfile":{},"escapeProfile":{"nomsId":"G4143VX","riskType":"ESCAPE","provisionalCategorisation":"C"},"violenceProfile":{"nomsId":"G4143VX","riskType":"VIOLENCE","displayAssaults":false,"numberOfAssaults":0,"notifySafetyCustodyLead":false,"numberOfSeriousAssaults":0,"provisionalCategorisation":"C","veryHighRiskViolentOffender":false},"extremismProfile":{}}',
        'NMI'::character varying,
