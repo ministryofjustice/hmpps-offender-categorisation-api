@@ -33,6 +33,7 @@ fun transformSecurityReferral(securityReferral: List<SecurityReferralEntity>?): 
           offenderNo = it.offenderNo,
           statusId = it.status,
           processedDate = it.processedDate.toString(),
+          referredBy = it.userId,
         ),
       )
     }
@@ -105,9 +106,11 @@ fun transformLiteCategory(entity: List<LiteCategoryEntity>?): List<LiteCategory>
           sequence = it.sequence,
 
           approvedDate = it.approvedDate.toString(),
+          approvedBy = it.approvedBy,
           approvedComment = it.approvedComment,
           approvedCommittee = it.approvedCommittee,
 
+          assessedBy = it.assessedBy,
           assessmentComment = it.assessmentComment,
           assessmentCommittee = it.assessmentCommittee,
 
@@ -162,6 +165,7 @@ fun transformAllFromCatForm(entity: List<FormEntity>): List<CatForm> {
   entity.forEach {
     response.add(
       CatForm(
+        userId = it.userId,
         prisonId = it.prisonId,
         offenderNo = it.offenderNo,
         status = it.getStatus(),
@@ -174,11 +178,22 @@ fun transformAllFromCatForm(entity: List<FormEntity>): List<CatForm> {
         riskProfile = it.riskProfile?.let { objectMapper.readValue<RiskProfile>(it) },
 
         cancelledDate = it.getCancelledDate()?.toString(),
+        cancelledBy = it.cancelledBy,
+
         approvalDate = it.approvalDate?.toString(),
+        approvedBy = it.approvedBy,
+
         securityReviewedDate = it.getSecurityReviewedDate()?.toString(),
-        assessmentDate = it.assessmentDate?.toString(),
-        startDate = it.startDate.toString(),
+        securityReviewedBy = it.securityReviewedBy,
+
         referredDate = it.referredDate?.toString(),
+        referredBy = it.referredBy,
+
+        assessmentDate = it.assessmentDate?.toString(),
+        assessedBy = it.assessedBy,
+
+        startDate = it.startDate.toString(),
+
         catType = it.catType,
       ),
     )

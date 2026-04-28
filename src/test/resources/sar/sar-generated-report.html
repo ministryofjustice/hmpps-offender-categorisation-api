@@ -1,0 +1,1116 @@
+<style>
+  * {
+    font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+    font-size: 12pt;
+    color: #0b0c0c;
+  }
+  /* --- HEADINGS --- */
+
+  .title {
+    font-size: 20pt;
+    text-align: center;
+  }
+
+  h1, h2, h3 {
+    color: #0b0c0c;
+    font-weight: 700;
+    display: block;
+    margin-top: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+  }
+
+  h1 {
+    font-size: 18pt;
+    line-height: 1.09375;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+  }
+
+  h2 {
+    font-size: 17pt;
+    line-height: 1.0416666667;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+  }
+
+  h3 {
+    font-size: 16pt;
+    line-height: 1.0416666667;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+  }
+
+  h4 {
+    font-size: 15pt;
+    line-height: 1.0416666667;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+  }
+
+  h5 {
+    font-size: 14pt;
+    line-height: 1.0416666667;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+  }
+
+  /* --- SUMMARY LIST --- */
+
+  table.summary-list {
+    display: table;
+    width: 700px;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin: 0 0 5px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+  }
+
+  table.summary-list tr {
+    display: table-row;
+    margin: 0 0 20px;
+  }
+
+  table.summary-list tr td {
+    border-bottom: 1px solid #b1b4b6;
+    /*margin-bottom: 5px;*/
+    overflow-wrap: break-word;
+    display: table-cell;
+    /*padding-top: 2px;*/
+    /*padding-bottom: 2px;*/
+    /*padding-right: 0;*/
+    margin-inline-start: 40px;
+    width: 70%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    line-height: 1.25;
+    font-weight: 400;
+    white-space: normal;
+    vertical-align: top;
+  }
+
+  table.summary-list tr td:first-child {
+    font-size: 12pt;
+    width: 30%;
+    font-weight: 700;
+    padding-right: 20px;
+    vertical-align: top;
+  }
+
+  /* --- DATA TABLE --- */
+
+  table.data-table {
+    display: table;
+    width: 700px;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin: 0 0 5px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+  }
+
+  table.data-table tr {
+    display: table-row;
+    margin: 0 0 20px;
+  }
+
+  table.data-table tr td {
+    border-bottom: 1px solid #b1b4b6;
+    margin-bottom: 5px;
+    overflow-wrap: break-word;
+    display: table-cell;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-right: 0;
+    margin-inline-start: 40px;
+    table-layout: fixed;
+    border-collapse: collapse;
+    line-height: 1.25;
+    font-weight: 400;
+    white-space: pre-wrap;
+    vertical-align: top;
+  }
+
+  table.data-table tr:first-child td {
+    font-size: 12pt;
+    width: 30%;
+    font-weight: 700;
+    padding-right: 20px;
+    border-bottom: none;
+    vertical-align: top;
+  }
+
+  table.data-table tr td.data-column-5 { width: 5% }
+  table.data-table tr td.data-column-10 { width: 10% }
+  table.data-table tr td.data-column-15 { width: 15% }
+  table.data-table tr td.data-column-20 { width: 20% }
+  table.data-table tr td.data-column-25 { width: 25% }
+  table.data-table tr td.data-column-30 { width: 30% }
+  table.data-table tr td.data-column-35 { width: 35% }
+  table.data-table tr td.data-column-40 { width: 40% }
+  table.data-table tr td.data-column-45 { width: 45% }
+  table.data-table tr td.data-column-50 { width: 50% }
+  table.data-table tr td.data-column-55 { width: 55% }
+  table.data-table tr td.data-column-60 { width: 60% }
+  table.data-table tr td.data-column-65 { width: 65% }
+  table.data-table tr td.data-column-70 { width: 70% }
+  table.data-table tr td.data-column-75 { width: 75% }
+  table.data-table tr td.data-column-80 { width: 80% }
+  table.data-table tr td.data-column-85 { width: 85% }
+  table.data-table tr td.data-column-90 { width: 90% }
+  table.data-table tr td.data-column-95 { width: 95% }
+
+  table tr td.data-column-5 { width: 5% }
+  table tr td.data-column-10 { width: 10% }
+  table tr td.data-column-15 { width: 15% }
+  table tr td.data-column-20 { width: 20% }
+  table tr td.data-column-25 { width: 25% }
+  table tr td.data-column-30 { width: 30% }
+  table tr td.data-column-35 { width: 35% }
+  table tr td.data-column-40 { width: 40% }
+  table tr td.data-column-45 { width: 45% }
+  table tr td.data-column-50 { width: 50% }
+  table tr td.data-column-55 { width: 55% }
+  table tr td.data-column-60 { width: 60% }
+  table tr td.data-column-65 { width: 65% }
+  table tr td.data-column-70 { width: 70% }
+  table tr td.data-column-75 { width: 75% }
+  table tr td.data-column-80 { width: 80% }
+  table tr td.data-column-85 { width: 85% }
+  table tr td.data-column-90 { width: 90% }
+  table tr td.data-column-95 { width: 95% }
+
+  table.summary-list tr td.data-column-5 { width: 5% }
+  table.summary-list tr td.data-column-10 { width: 10% }
+  table.summary-list tr td.data-column-15 { width: 15% }
+  table.summary-list tr td.data-column-20 { width: 20% }
+  table.summary-list tr td.data-column-25 { width: 25% }
+  table.summary-list tr td.data-column-30 { width: 30% }
+  table.summary-list tr td.data-column-35 { width: 35% }
+  table.summary-list tr td.data-column-40 { width: 40% }
+  table.summary-list tr td.data-column-45 { width: 45% }
+  table.summary-list tr td.data-column-50 { width: 50% }
+  table.summary-list tr td.data-column-55 { width: 55% }
+  table.summary-list tr td.data-column-60 { width: 60% }
+  table.summary-list tr td.data-column-65 { width: 65% }
+  table.summary-list tr td.data-column-70 { width: 70% }
+  table.summary-list tr td.data-column-75 { width: 75% }
+  table.summary-list tr td.data-column-80 { width: 80% }
+  table.summary-list tr td.data-column-85 { width: 85% }
+  table.summary-list tr td.data-column-90 { width: 90% }
+  table.summary-list tr td.data-column-95 { width: 95% }
+
+  ul {
+    padding: 0 0 0 10px;
+  }
+
+</style>
+
+<!-- The following keys have been left out of this template because they appear to be redacted: -->
+<!-- (content > categorisationTool > catForm > risk_profile > ) history -->
+<!-- (content > categorisationTool > catForm > risk_profile > ) offences -->
+<!-- (content > categorisationTool > catForm > risk_profile > ) socProfile -->
+<!-- (content > categorisationTool > catForm > risk_profile > ) extremismProfile -->
+<!-- (content > riskProfiler > ) escape -->
+<!-- (content > riskProfiler > ) extremism -->
+<!-- (content > riskProfiler > ) soc -->
+
+<h1 class="title">Prisoner categorisation</h1>
+
+<h2>Categorisation forms</h2>
+
+<h3>Categorisation form</h3>
+<table class="data-table">
+  <tr>
+    <td class="data-column-25">Prison name</td>
+    <td class="data-column-25">Start date</td>
+    <td class="data-column-25">Referred by</td>
+    <td class="data-column-25">User ID</td>
+  </tr>
+  <tr>
+    <td>Moorland (HMP &amp; YOI)</td>
+    <td>25 November 2019, 11:24:12 am</td>
+    <td>LBENNETT_GEN</td>
+    <td>SRENDELL_GEN</td>
+  </tr>
+</table>
+
+<table class="data-table">
+  <tr>
+    <td class="data-column-25">Security reviewed date</td>
+    <td class="data-column-25">Security reviewed by</td>
+    <td class="data-column-25">Approval date</td>
+    <td class="data-column-25">Approved by</td>
+  </tr>
+  <tr>
+    <td>25 November 2019, 11:24:12 am</td>
+    <td>LBENNETT_GEN</td>
+    <td>25 June 2019</td>
+    <td>SRENDELL_GEN</td>
+  </tr>
+</table>
+
+<table class="data-table">
+  <tr>
+    <td class="data-column-25">Assessment date</td>
+    <td class="data-column-25">Assessed by</td>
+    <td class="data-column-25">Due by date</td>
+    <td class="data-column-25">Type of categorisation assessment</td>
+  </tr>
+  <tr>
+    <td>16 July 2019</td>
+    <td>SRENDELL_GEN</td>
+    <td>01 April 2017</td>
+    <td>Initial</td>
+  </tr>
+</table>
+
+<table class="data-table">
+  <tr>
+    <td class="data-column-50">Cancelled date</td>
+    <td class="data-column-50">Cancelled by</td>
+  </tr>
+  <tr>
+    <td>25 November 2019, 11:24:12 am</td>
+    <td>SRENDELL_GEN</td>
+  </tr>
+</table>
+<table class="data-table">
+  <tr>
+    <td class="data-column-50">Review status</td>
+    <td class="data-column-50">Review reason</td>
+  </tr>
+  <tr>
+    <td>Review approved</td>
+    <td>Review due</td>
+  </tr>
+</table>
+
+<h4>Form Response</h4>
+
+
+<h5>Ratings</h5>
+
+
+<p>No Data Held</p>
+
+
+<h5>Recategorisation</h5>
+
+
+<p><b>Decision</b></p>
+
+<table class="summary-list">
+  <tr><td>Category</td><td>B</td></tr>
+</table>
+
+
+
+<p><b>Offender Assessment System Input</b></p>
+
+
+<p>No Data Held</p>
+
+
+<p><b>Category decision based on security information</b></p>
+
+<table class="summary-list">
+  <tr><td>Category B is warranted</td><td>No Data Held</td></tr>
+</table>
+
+
+
+<p><b>Next review date</b></p>
+
+<table class="summary-list">
+  <tr><td>Date</td><td>2/8/2019</td></tr>
+  <tr><td>Indeterminate</td><td>No Data Held</td></tr>
+</table>
+
+
+
+<p><b>Risk assessment</b></p>
+
+<table class="summary-list">
+  <tr><td>Lower category</td><td>lower text</td></tr>
+  <tr><td>Other relevant</td><td>Yes</td></tr>
+  <tr><td>Higher category</td><td>higher text</td></tr>
+  <tr><td>Other relevant text</td><td>rel info</td></tr>
+</table>
+
+
+
+<p><b>Prisoner background</b></p>
+
+<table class="summary-list">
+  <tr><td>Offence details</td><td>offence details text</td></tr>
+</table>
+
+
+
+<p><b>Higher security review</b></p>
+
+<table class="summary-list">
+  <tr><td>Behaviour</td><td>higher security text</td></tr>
+  <tr><td>Steps</td><td>steps text</td></tr>
+  <tr><td>Transfer</td><td>Yes</td></tr>
+  <tr><td>Transfer text</td><td>manage text</td></tr>
+  <tr><td>Conditions</td><td>security conditions</td></tr>
+</table>
+
+
+
+<p><b>Mini higher security review</b></p>
+
+
+<p>No Data Held</p>
+
+
+<p><b>Security input</b></p>
+
+<table class="summary-list">
+  <tr><td>Security note needed</td><td>No Data Held</td></tr>
+  <tr><td>Security input needed</td><td>Yes</td></tr>
+  <tr><td>Security input needed text</td><td>text from recat</td></tr>
+</table>
+
+
+
+<p><b>Security back</b></p>
+
+
+<p>No Data Held</p>
+
+
+<p><b>Risk profile change detail</b></p>
+
+
+<p>No Data Held</p>
+
+
+<p><b>Fast track eligibility</b></p>
+
+
+<p>No Data Held</p>
+
+
+<p><b>Fast track remain</b></p>
+
+
+<p>No Data Held</p>
+
+
+<p><b>Fast track progress</b></p>
+
+
+<p>No Data Held</p>
+
+
+
+
+
+<h5>Security</h5>
+
+<p><b>Review</b></p>
+
+<table class="summary-list">
+  <tr><td>Security review</td><td>security review text</td></tr>
+</table>
+
+
+
+
+
+<h5>Supervisor</h5>
+
+<p><b>Review</b></p>
+
+<table class="summary-list">
+  <tr><td>Proposed category</td><td>B</td></tr>
+  <tr><td>Other information text</td><td>other rel info</td></tr>
+  <tr><td>Supervisor overridden category</td><td>No Data Held</td></tr>
+  <tr><td>Supervisor category appropriate</td><td>Yes</td></tr>
+  <tr><td>Supervisor overridden category text</td><td>No Data Held</td></tr>
+  <tr><td>Previous override category text</td><td>No Data Held</td></tr>
+</table>
+
+
+
+<p><b>Confirm back</b></p>
+
+
+<p>No Data Held</p>
+
+
+
+
+<h5>Categoriser</h5>
+
+
+<p>No Data Held</p>
+
+
+
+
+
+<h4>Risk profile</h4>
+
+<br>
+<table class="data-table">
+  <tr>
+    <td class="data-column-50">Provisional categorisation</td>
+    <td class="data-column-50">Transfer to security</td>
+  </tr>
+  <tr>
+    <td>No Data Held</td>
+    <td>No Data Held</td>
+  </tr>
+</table>
+
+<h5>Life profile</h5>
+
+
+<p>No Data Held</p>
+
+
+<h5>Escape profile</h5>
+
+<br>
+<table class="data-table">
+  <tr>
+    <td class="data-column-25">Risk type</td>
+    <td class="data-column-75">Provisional categorisation</td>
+  </tr>
+  <tr>
+    <td>No Data Held</td>
+    <td>C</td>
+  </tr>
+</table>
+
+
+
+<h5>Violence profile</h5>
+
+<br>
+<table class="data-table">
+  <tr>
+    <td class="data-column-25">Risk type</td>
+    <td class="data-column-25">Display assaults</td>
+    <td class="data-column-25">Number of assaults</td>
+    <td class="data-column-25">Number of serious assaults</td>
+  </tr>
+  <tr>
+    <td>No Data Held</td>
+    <td>No Data Held</td>
+    <td>0</td>
+    <td>0</td>
+  </tr>
+</table>
+
+<table class="data-table">
+  <tr>
+    <td class="data-column-25">Number of non-serious assaults</td>
+    <td class="data-column-25">Very high risk offender</td>
+    <td class="data-column-25">Provisional categorisation</td>
+    <td class="data-column-25">Notify safety custody lead</td>
+  </tr>
+  <tr>
+    <td>No Data Held</td>
+    <td>No Data Held</td>
+    <td>C</td>
+    <td>No Data Held</td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+<h3>Categorisation form</h3>
+<table class="data-table">
+  <tr>
+    <td class="data-column-25">Prison name</td>
+    <td class="data-column-25">Start date</td>
+    <td class="data-column-25">Referred by</td>
+    <td class="data-column-25">User ID</td>
+  </tr>
+  <tr>
+    <td>Moorland (HMP &amp; YOI)</td>
+    <td>25 November 2019, 11:24:12 am</td>
+    <td>LBENNETT_GEN</td>
+    <td>SRENDELL_GEN</td>
+  </tr>
+</table>
+
+<table class="data-table">
+  <tr>
+    <td class="data-column-25">Security reviewed date</td>
+    <td class="data-column-25">Security reviewed by</td>
+    <td class="data-column-25">Approval date</td>
+    <td class="data-column-25">Approved by</td>
+  </tr>
+  <tr>
+    <td>25 November 2019, 11:24:12 am</td>
+    <td>LBENNETT_GEN</td>
+    <td>25 June 2019</td>
+    <td>SRENDELL_GEN</td>
+  </tr>
+</table>
+
+<table class="data-table">
+  <tr>
+    <td class="data-column-25">Assessment date</td>
+    <td class="data-column-25">Assessed by</td>
+    <td class="data-column-25">Due by date</td>
+    <td class="data-column-25">Type of categorisation assessment</td>
+  </tr>
+  <tr>
+    <td>16 July 2019</td>
+    <td>SRENDELL_GEN</td>
+    <td>01 April 2017</td>
+    <td>Initial</td>
+  </tr>
+</table>
+
+<table class="data-table">
+  <tr>
+    <td class="data-column-50">Cancelled date</td>
+    <td class="data-column-50">Cancelled by</td>
+  </tr>
+  <tr>
+    <td>25 November 2019, 11:24:12 am</td>
+    <td>SRENDELL_GEN</td>
+  </tr>
+</table>
+<table class="data-table">
+  <tr>
+    <td class="data-column-50">Review status</td>
+    <td class="data-column-50">Review reason</td>
+  </tr>
+  <tr>
+    <td>Review approved</td>
+    <td>Review due</td>
+  </tr>
+</table>
+
+<h4>Form Response</h4>
+
+
+<h5>Ratings</h5>
+
+
+<p>No Data Held</p>
+
+
+<h5>Recategorisation</h5>
+
+
+<p><b>Decision</b></p>
+
+<table class="summary-list">
+  <tr><td>Category</td><td>B</td></tr>
+</table>
+
+
+
+<p><b>Offender Assessment System Input</b></p>
+
+
+<p>No Data Held</p>
+
+
+<p><b>Category decision based on security information</b></p>
+
+<table class="summary-list">
+  <tr><td>Category B is warranted</td><td>No Data Held</td></tr>
+</table>
+
+
+
+<p><b>Next review date</b></p>
+
+<table class="summary-list">
+  <tr><td>Date</td><td>2/8/2019</td></tr>
+  <tr><td>Indeterminate</td><td>No Data Held</td></tr>
+</table>
+
+
+
+<p><b>Risk assessment</b></p>
+
+<table class="summary-list">
+  <tr><td>Lower category</td><td>lower text</td></tr>
+  <tr><td>Other relevant</td><td>Yes</td></tr>
+  <tr><td>Higher category</td><td>higher text</td></tr>
+  <tr><td>Other relevant text</td><td>rel info</td></tr>
+</table>
+
+
+
+<p><b>Prisoner background</b></p>
+
+<table class="summary-list">
+  <tr><td>Offence details</td><td>offence details text</td></tr>
+</table>
+
+
+
+<p><b>Higher security review</b></p>
+
+<table class="summary-list">
+  <tr><td>Behaviour</td><td>higher security text</td></tr>
+  <tr><td>Steps</td><td>steps text</td></tr>
+  <tr><td>Transfer</td><td>Yes</td></tr>
+  <tr><td>Transfer text</td><td>manage text</td></tr>
+  <tr><td>Conditions</td><td>security conditions</td></tr>
+</table>
+
+
+
+<p><b>Mini higher security review</b></p>
+
+
+<p>No Data Held</p>
+
+
+<p><b>Security input</b></p>
+
+<table class="summary-list">
+  <tr><td>Security note needed</td><td>No Data Held</td></tr>
+  <tr><td>Security input needed</td><td>Yes</td></tr>
+  <tr><td>Security input needed text</td><td>text from recat</td></tr>
+</table>
+
+
+
+<p><b>Security back</b></p>
+
+
+<p>No Data Held</p>
+
+
+<p><b>Risk profile change detail</b></p>
+
+
+<p>No Data Held</p>
+
+
+<p><b>Fast track eligibility</b></p>
+
+
+<p>No Data Held</p>
+
+
+<p><b>Fast track remain</b></p>
+
+
+<p>No Data Held</p>
+
+
+<p><b>Fast track progress</b></p>
+
+
+<p>No Data Held</p>
+
+
+
+
+
+<h5>Security</h5>
+
+<p><b>Review</b></p>
+
+<table class="summary-list">
+  <tr><td>Security review</td><td>security review text</td></tr>
+</table>
+
+
+
+
+
+<h5>Supervisor</h5>
+
+<p><b>Review</b></p>
+
+<table class="summary-list">
+  <tr><td>Proposed category</td><td>B</td></tr>
+  <tr><td>Other information text</td><td>other rel info</td></tr>
+  <tr><td>Supervisor overridden category</td><td>No Data Held</td></tr>
+  <tr><td>Supervisor category appropriate</td><td>Yes</td></tr>
+  <tr><td>Supervisor overridden category text</td><td>No Data Held</td></tr>
+  <tr><td>Previous override category text</td><td>No Data Held</td></tr>
+</table>
+
+
+
+<p><b>Confirm back</b></p>
+
+
+<p>No Data Held</p>
+
+
+
+
+<h5>Categoriser</h5>
+
+
+<p>No Data Held</p>
+
+
+
+
+
+<h4>Risk profile</h4>
+
+<br>
+<table class="data-table">
+  <tr>
+    <td class="data-column-50">Provisional categorisation</td>
+    <td class="data-column-50">Transfer to security</td>
+  </tr>
+  <tr>
+    <td>No Data Held</td>
+    <td>No Data Held</td>
+  </tr>
+</table>
+
+<h5>Life profile</h5>
+
+
+<p>No Data Held</p>
+
+
+<h5>Escape profile</h5>
+
+<br>
+<table class="data-table">
+  <tr>
+    <td class="data-column-25">Risk type</td>
+    <td class="data-column-75">Provisional categorisation</td>
+  </tr>
+  <tr>
+    <td>No Data Held</td>
+    <td>C</td>
+  </tr>
+</table>
+
+
+
+<h5>Violence profile</h5>
+
+<br>
+<table class="data-table">
+  <tr>
+    <td class="data-column-25">Risk type</td>
+    <td class="data-column-25">Display assaults</td>
+    <td class="data-column-25">Number of assaults</td>
+    <td class="data-column-25">Number of serious assaults</td>
+  </tr>
+  <tr>
+    <td>No Data Held</td>
+    <td>No Data Held</td>
+    <td>0</td>
+    <td>0</td>
+  </tr>
+</table>
+
+<table class="data-table">
+  <tr>
+    <td class="data-column-25">Number of non-serious assaults</td>
+    <td class="data-column-25">Very high risk offender</td>
+    <td class="data-column-25">Provisional categorisation</td>
+    <td class="data-column-25">Notify safety custody lead</td>
+  </tr>
+  <tr>
+    <td>No Data Held</td>
+    <td>No Data Held</td>
+    <td>C</td>
+    <td>No Data Held</td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+<h4>Risk Changes</h4>
+
+<h5>Risk Change</h5>
+<table class="data-table">
+  <tr>
+    <td class="data-column-30">Prison name</td>
+    <td class="data-column-30">Raised date</td>
+    <td class="data-column-30">Risk change status</td>
+  </tr>
+  <tr>
+    <td>Moorland (HMP &amp; YOI)</td>
+    <td>18 September 2019, 10:45:34 am</td>
+    <td>New risk change alert</td>
+  </tr>
+</table>
+
+<p><b>Old profile</b></p>
+
+<table class="data-table">
+  <tr>
+    <td class="data-column-50">Provisional categorisation</td>
+    <td class="data-column-50">Transfer to security</td>
+  </tr>
+  <tr>
+    <td>C</td>
+    <td>No</td>
+  </tr>
+</table>
+<br>
+<b>Escape</b>
+<table class="data-table">
+  <tr><td>Provisional categorisation</td></tr><tr><td>C</td>
+</tr>
+</table>
+<br>
+<b>Violence</b>
+<table class="data-table">
+  <tr>
+    <td class="data-column-30">Number of assaults</td>
+    <td class="data-column-30">Number of serious assaults</td>
+    <td class="data-column-30">Number of non-serious assaults</td>
+  </tr>
+  <tr>
+    <td>No Data Held</td>
+    <td>No Data Held</td>
+    <td>No Data Held</td>
+  </tr>
+</table>
+<table class="data-table">
+  <tr>
+    <td class="data-column-30">Provisional categorisation</td>
+    <td class="data-column-30">Should notify safety custody lead</td>
+    <td class="data-column-30">Is very high risk violent offender</td>
+  </tr>
+  <tr>
+    <td>C</td>
+    <td>No Data Held</td>
+    <td>No Data Held</td>
+  </tr>
+</table>
+
+
+
+<p><b>New profile</b></p>
+
+<table class="data-table">
+  <tr>
+    <td class="data-column-50">Provisional categorisation</td>
+    <td class="data-column-50">Transfer to security</td>
+  </tr>
+  <tr>
+    <td>C</td>
+    <td>Yes</td>
+  </tr>
+</table>
+<br>
+<b>Escape</b>
+<table class="data-table">
+  <tr><td>Provisional categorisation</td></tr><tr><td>C</td>
+</tr>
+</table>
+<br>
+<b>Violence</b>
+<table class="data-table">
+  <tr>
+    <td class="data-column-30">Number of assaults</td>
+    <td class="data-column-30">Number of serious assaults</td>
+    <td class="data-column-30">Number of non-serious assaults</td>
+  </tr>
+  <tr>
+    <td>No Data Held</td>
+    <td>No Data Held</td>
+    <td>No Data Held</td>
+  </tr>
+</table>
+<table class="data-table">
+  <tr>
+    <td class="data-column-30">Provisional categorisation</td>
+    <td class="data-column-30">Should notify safety custody lead</td>
+    <td class="data-column-30">Is very high risk violent offender</td>
+  </tr>
+  <tr>
+    <td>C</td>
+    <td>No Data Held</td>
+    <td>No Data Held</td>
+  </tr>
+</table>
+
+
+
+
+
+
+<h4>Security</h4>
+
+<table class="data-table">
+  <tr>
+    <td class="data-column-25">Prison name</td>
+    <td class="data-column-25">Raised date</td>
+    <td class="data-column-20">Referred by</td>
+    <td class="data-column-25">Processed date</td>
+    <td class="data-column-25">Status</td>
+  </tr>
+  <tr>
+    <td>Moorland (HMP &amp; YOI)</td>
+    <td>19 September 2019, 1:33:21 pm</td>
+    <td>LBENNETT_GEN</td>
+    <td>19 September 2019, 1:36:46 pm</td>
+    <td>Referred</td>
+  </tr>
+</table>
+<b>
+
+
+
+  <h4>Next review change history</h4>
+
+  <table class="data-table">
+    <tr>
+      <td class="data-column-30">Next review date</td>
+      <td class="data-column-30">Reason</td>
+      <td class="data-column-30">Change date</td>
+    </tr>
+    <tr>
+      <td>12 December 2021</td>
+      <td>testing</td>
+      <td>22 September 2021, 10:25:44 am</td>
+    </tr>
+  </table>
+  <b>
+
+
+
+    <h4>Lite categories</h4>
+
+    <h5>Lite category</h5>
+    <table class="data-table">
+      <tr>
+        <td class="data-column-25">Category</td>
+        <td class="data-column-25">Supervisor category</td>
+        <td class="data-column-25">Prison name</td>
+        <td class="data-column-25">Placement prison</td>
+      </tr>
+      <tr>
+        <td>U</td>
+        <td>U</td>
+        <td>Moorland (HMP &amp; YOI)</td>
+        <td>Moorland (HMP &amp; YOI)</td>
+      </tr>
+    </table>
+
+    <table class="data-table">
+      <tr>
+        <td class="data-column-25">Created date</td>
+        <td class="data-column-25">Approved date</td>
+        <td class="data-column-25">Approved by</td>
+        <td class="data-column-25">Next review date</td>
+      </tr>
+      <tr>
+        <td>18 May 2020, 1:58:42 pm</td>
+        <td>18 May 2020, 1:00 am</td>
+        <td>CT_SUP</td>
+        <td>18 November 2020</td>
+      </tr>
+    </table>
+
+    <table class="data-table">
+      <tr>
+        <td class="data-column-25">Assessed by</td>
+        <td class="data-column-25">Assessment committee</td>
+        <td class="data-column-50">Assessment comment</td>
+      </tr>
+      <tr>
+        <td>LBENNETT_GEN</td>
+        <td>OCA</td>
+        <td>Testing the creation of an unsentenced</td>
+      </tr>
+    </table>
+
+    <table class="data-table">
+      <tr>
+        <td class="data-column-25">Approved committee</td>
+        <td class="data-column-75">Approved comment</td>
+      </tr>
+      <tr>
+        <td>OCA</td>
+        <td>approval comment</td>
+      </tr>
+    </table>
+
+    <table class="data-table">
+      <tr>
+        <td class="data-column-25">Approved placement prison name</td>
+        <td class="data-column-75">Approved placement comment</td>
+      </tr>
+      <tr>
+        <td>Moorland (HMP &amp; YOI)</td>
+        <td>approved placement comment</td>
+      </tr>
+    </table>
+
+
+
+
+
+    <h3>Risk profiler</h3>
+    <table class="summary-list">
+      <tr><td>Risk information last updated</td><td>22 September 2021, 11:25:44 am</td></tr>
+    </table>
+
+
+    <h4>Violence</h4>
+    <table class="data-table">
+      <tr>
+        <td class="data-column-30">Number of assaults</td>
+        <td class="data-column-30">Number of serious assaults</td>
+        <td class="data-column-30">Number of non-serious assaults</td>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+    </table>
+    <table class="data-table">
+      <tr>
+        <td class="data-column-30">Provisional categorisation</td>
+        <td class="data-column-30">Should notify safety custody lead</td>
+        <td class="data-column-30">Is very high risk violent offender</td>
+      </tr>
+      <tr>
+        <td>C</td>
+        <td>No</td>
+        <td>No</td>
+      </tr>
+    </table>
+
+
+
+

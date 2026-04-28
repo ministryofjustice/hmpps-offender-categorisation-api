@@ -23,7 +23,7 @@ class FormService(
     }
     if (submitted) {
       formEntity.setStatus(FormEntity.STATUS_SECURITY_BACK)
-      formEntity.setSecurityReviewedBy(userId)
+      formEntity.securityReviewedBy = userId
       formEntity.setSecurityReviewedDate(ZonedDateTime.now().toLocalDateTime())
     }
     formRepository.save(formEntity)

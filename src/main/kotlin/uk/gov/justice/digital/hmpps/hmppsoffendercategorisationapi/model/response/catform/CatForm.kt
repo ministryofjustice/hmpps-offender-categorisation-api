@@ -13,10 +13,16 @@ data class CatForm(
   @JsonProperty("form_response")
   val formResponse: Map<String, Any>? = null,
 
+  @JsonProperty("user_id")
+  val userId: String? = null,
+
   private val status: String? = null,
 
   @JsonProperty("referred_date")
   val referredDate: String? = null,
+
+  @JsonProperty("referred_by")
+  val referredBy: String? = null,
 
   @JsonProperty("risk_profile")
   val riskProfile: RiskProfile? = null,
@@ -32,13 +38,22 @@ data class CatForm(
   @JsonProperty("security_reviewed_date")
   val securityReviewedDate: String? = null,
 
+  @JsonProperty("security_reviewed_by")
+  val securityReviewedBy: String? = null,
+
   @JsonProperty("approval_date")
   val approvalDate: String? = null,
+
+  @JsonProperty("approved_by")
+  val approvedBy: String? = null,
 
   private val catType: CatType? = null,
 
   @JsonProperty("assessment_date")
   val assessmentDate: String? = null,
+
+  @JsonProperty("assessed_by")
+  val assessedBy: String? = null,
 
   private val reason: ReviewReason? = null,
 
@@ -47,6 +62,9 @@ data class CatForm(
 
   @JsonProperty("cancelled_date")
   val cancelledDate: String? = null,
+
+  @JsonProperty("cancelled_by")
+  val cancelledBy: String? = null,
 ) {
   val reviewReason: String?
     get() = if (this.reason == null) {
