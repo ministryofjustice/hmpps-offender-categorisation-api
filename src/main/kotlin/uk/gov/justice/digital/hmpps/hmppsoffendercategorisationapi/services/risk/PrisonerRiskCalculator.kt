@@ -60,19 +60,6 @@ class PrisonerRiskCalculator(
 
     return incidentIds.map { incidentId ->
       incidentApiClient.getDetailedIncidentReport(incidentId)
-    }.filter { incident ->
-      incident.prisonersInvolved.any { prisonerInvolvement ->
-        prisonerInvolvement.prisonerNumber == prisonerNumber &&
-          prisonerInvolvement.prisonerRole in listOf(
-            "ACTIVE_INVOLVEMENT",
-            "ASSAILANT",
-            "FIGHTER",
-            "IMPEDED_STAFF",
-            "PERPETRATOR",
-            "SUSPECTED_ASSAILANT",
-            "SUSPECTED_INVOLVED",
-          )
-      }
     }
       .map { incident ->
         IncidentDto(

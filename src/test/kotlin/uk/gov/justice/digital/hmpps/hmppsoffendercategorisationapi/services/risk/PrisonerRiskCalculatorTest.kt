@@ -1,7 +1,6 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services.risk
 
 import org.assertj.core.api.Assertions
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -114,67 +113,6 @@ class PrisonerRiskCalculatorTest : ResourceTest() {
     Assertions.assertThat(riskProfile.escapeListAlerts).isEqualTo(expectedEscapeListAlerts)
     Assertions.assertThat(riskProfile.riskDueToSeriousOrganisedCrime).isEqualTo(expectedRiskDueToSoc)
     Assertions.assertThat(riskProfile.riskDueToViolence).isEqualTo(expectedRiskDueToViolence)
-  }
-
-  @Test
-  fun `incident where prisoner has a non-active role is excluded from serious assault count`() {
-    val witnessIncidentId = UUID.randomUUID()
-    whenever(mockPrisonerAlertsApiClient.findPrisonerAlerts(TEST_PRISONER_NUMBER, alertCodes)).thenReturn(emptyList())
-    whenever(mockIncidentApiClient.getTotalNumberOfIncidents(TEST_PRISONER_NUMBER)).thenReturn(5L)
-    whenever(mockIncidentApiClient.getIncidentIds(TEST_PRISONER_NUMBER, 6L, 5L)).thenReturn(listOf(witnessIncidentId))
-    whenever(mockIncidentApiClient.getDetailedIncidentReport(witnessIncidentId)).thenReturn(
-      IncidentReport(
-        id = witnessIncidentId,
-        type = "ASSAULT_5",
-        status = "CLOSED",
-        questions = listOf(
-          Question(
-            code = INCIDENT_RESPONSE_QUESTION_SEXUAL_ASSAULT,
-            question = INCIDENT_RESPONSE_QUESTION_SEXUAL_ASSAULT,
-            responses = listOf(Response(code = INCIDENT_RESPONSE_ANSWER_YES, response = INCIDENT_RESPONSE_ANSWER_YES)),
-          ),
-        ),
-        prisonersInvolved = listOf(
-          PrisonerInvolvement(prisonerNumber = TEST_PRISONER_NUMBER, prisonerRole = "WITNESS"),
-        ),
-      ),
-    )
-    whenever(mockViperService.getViperData(TEST_PRISONER_NUMBER)).thenReturn(trueViperResponse)
-
-    val riskProfile = prisonerRiskCalculator.calculateRisk(TEST_PRISONER_NUMBER)
-
-    Assertions.assertThat(riskProfile.riskDueToViolence).isFalse()
-  }
-
-  @Test
-  fun `incident where active role belongs to a different prisoner is excluded from serious assault count`() {
-    val incidentId = UUID.randomUUID()
-    whenever(mockPrisonerAlertsApiClient.findPrisonerAlerts(TEST_PRISONER_NUMBER, alertCodes)).thenReturn(emptyList())
-    whenever(mockIncidentApiClient.getTotalNumberOfIncidents(TEST_PRISONER_NUMBER)).thenReturn(5L)
-    whenever(mockIncidentApiClient.getIncidentIds(TEST_PRISONER_NUMBER, 6L, 5L)).thenReturn(listOf(incidentId))
-    whenever(mockIncidentApiClient.getDetailedIncidentReport(incidentId)).thenReturn(
-      IncidentReport(
-        id = incidentId,
-        type = "ASSAULT_5",
-        status = "CLOSED",
-        questions = listOf(
-          Question(
-            code = INCIDENT_RESPONSE_QUESTION_SEXUAL_ASSAULT,
-            question = INCIDENT_RESPONSE_QUESTION_SEXUAL_ASSAULT,
-            responses = listOf(Response(code = INCIDENT_RESPONSE_ANSWER_YES, response = INCIDENT_RESPONSE_ANSWER_YES)),
-          ),
-        ),
-        prisonersInvolved = listOf(
-          PrisonerInvolvement(prisonerNumber = "DEF456", prisonerRole = "ASSAILANT"),
-          PrisonerInvolvement(prisonerNumber = TEST_PRISONER_NUMBER, prisonerRole = "WITNESS"),
-        ),
-      ),
-    )
-    whenever(mockViperService.getViperData(TEST_PRISONER_NUMBER)).thenReturn(trueViperResponse)
-
-    val riskProfile = prisonerRiskCalculator.calculateRisk(TEST_PRISONER_NUMBER)
-
-    Assertions.assertThat(riskProfile.riskDueToViolence).isFalse()
   }
 
   companion object {
