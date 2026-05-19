@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS public.lite_category;
 DROP TABLE IF EXISTS public.security_referral;
 DROP TABLE IF EXISTS public.risk_change;
 DROP TABLE IF EXISTS public.next_review_change_history;
+DROP TABLE IF EXISTS public.prisoner_risk_profile;
 DROP TABLE IF EXISTS risk_profiler.PREVIOUS_PROFILE;
 
 DROP TYPE IF EXISTS public.review_reason_enum;
@@ -122,6 +123,14 @@ CREATE TABLE public.security_referral (
                                           CONSTRAINT security_referral_pkey PRIMARY KEY (id)
 );
 CREATE INDEX security_referral_prison_id_index ON public.security_referral USING btree (prison_id);
+
+CREATE TABLE prisoner_risk_profile
+(
+    offender_no   varchar(255) not null
+        primary key,
+    risk_profile  jsonb,
+    calculated_at timestamp with time zone
+);
 
 --DELETE FROM risk_change;
 --DELETE FROM form;

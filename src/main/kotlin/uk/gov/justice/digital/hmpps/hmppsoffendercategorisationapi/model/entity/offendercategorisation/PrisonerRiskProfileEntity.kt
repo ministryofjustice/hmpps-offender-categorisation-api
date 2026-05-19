@@ -20,8 +20,8 @@ class PrisonerRiskProfileEntity(
 
   @Type(JsonType::class)
   @Column(columnDefinition = "jsonb", name = "risk_profile")
-  val riskProfile: String? = null,
+  var riskProfile: String? = null,
 
   @Column(name = "calculated_at")
-  val calculatedAt: ZonedDateTime? = null,
+  var calculatedAt: ZonedDateTime? = null,
 )
