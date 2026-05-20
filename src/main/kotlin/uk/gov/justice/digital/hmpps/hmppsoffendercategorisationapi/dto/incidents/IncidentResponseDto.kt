@@ -2,7 +2,7 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incident
 
 import io.swagger.v3.oas.annotations.media.Schema
 
-@Schema(description = "Incident response object nested within the incident dto from prison API")
+@Schema(description = "Incident response question and answer")
 data class IncidentResponseDto(
   @Schema(description = "Question asked within the incident", example = INCIDENT_RESPONSE_QUESTION_SEXUAL_ASSAULT)
   val question: String,

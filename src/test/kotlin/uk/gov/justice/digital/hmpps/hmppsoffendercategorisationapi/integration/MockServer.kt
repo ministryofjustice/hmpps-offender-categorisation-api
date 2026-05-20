@@ -8,9 +8,12 @@ import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration
 import com.github.tomakehurst.wiremock.http.HttpHeader
 import com.github.tomakehurst.wiremock.http.HttpHeaders
+import org.springframework.data.jpa.domain.AbstractPersistable_.id
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PageableResult
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.SearchResult
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentDto
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentReport
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentReportResponse
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.ReportBasic
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert.PrisonerAlertResponseDto
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonerFactory
@@ -20,6 +23,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.Sd
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prison
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.adjudication.Adjudication
+import java.util.UUID
 import java.util.stream.Collectors
 
 private const val MAPPINGS_DIRECTORY = "src/testIntegration/resources"
@@ -81,6 +85,66 @@ class PrisonerSearchMockServer : MockServer(8091) {
   }
 }
 
+class IncidentApiMockServer : MockServer(8098) {
+
+  fun stubCountAssaultIncidents(numberOfIncidents: Long) {
+    stubFor(
+      WireMock.get(WireMock.urlPathEqualTo("/incident-reports"))
+        .willReturn(
+          WireMock.aResponse()
+            .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json")))
+            .withBody(
+              jacksonObjectMapper().apply {
+                registerModule(JavaTimeModule())
+              }.writeValueAsString(
+                IncidentReportResponse(
+                  totalElements = numberOfIncidents,
+                  content = listOf(),
+                ),
+              ),
+            ),
+        ),
+    )
+  }
+
+  fun stubSearchAssaultIncidents(assaultIncidentIds: List<UUID>) {
+    stubFor(
+      WireMock.get(WireMock.urlPathEqualTo("/incident-reports"))
+        .willReturn(
+          WireMock.aResponse()
+            .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json")))
+            .withBody(
+              jacksonObjectMapper().apply {
+                registerModule(JavaTimeModule())
+              }.writeValueAsString(
+                IncidentReportResponse(
+                  totalElements = assaultIncidentIds.size.toLong(),
+                  content = assaultIncidentIds.map { id ->
+                    ReportBasic(id = id)
+                  },
+                ),
+              ),
+            ),
+        ),
+    )
+  }
+
+  fun stubGetAssaultIncidentById(id: UUID, incidentReport: IncidentReport) {
+    stubFor(
+      WireMock.get(WireMock.urlPathEqualTo("/incident-reports/$id/with-details"))
+        .willReturn(
+          WireMock.aResponse()
+            .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json")))
+            .withBody(
+              jacksonObjectMapper().apply {
+                registerModule(JavaTimeModule())
+              }.writeValueAsString(incidentReport),
+            ),
+        ),
+    )
+  }
+}
+
 class PrisonApiMockServer : MockServer(8094) {
   fun stubFindPrisons(prisons: List<Prison> = listOf((TestPrisonFactory()).build())) {
     stubFor(
@@ -92,21 +156,6 @@ class PrisonApiMockServer : MockServer(8094) {
               jacksonObjectMapper().apply {
                 registerModule(JavaTimeModule())
               }.writeValueAsString(prisons),
-            ),
-        ),
-    )
-  }
-
-  fun stubGetAssaultIncidents(prisonerNumber: String, assaultIncidents: List<IncidentDto>) {
-    stubFor(
-      WireMock.get(WireMock.urlPathEqualTo("/api/offenders/$prisonerNumber/incidents"))
-        .willReturn(
-          WireMock.aResponse()
-            .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json")))
-            .withBody(
-              jacksonObjectMapper().apply {
-                registerModule(JavaTimeModule())
-              }.writeValueAsString(assaultIncidents),
             ),
         ),
     )

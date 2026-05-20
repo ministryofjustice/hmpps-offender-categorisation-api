@@ -15,14 +15,15 @@ import org.springframework.web.reactive.function.client.WebClient
 
 @Configuration
 class WebClientConfiguration(
-  @Value("\${hmpps.auth.url}") private val oauthApiUrl: String,
-  @Value("\${prisoner.search.api.endpoint.url}") private val prisonerSearchApiBaseUrl: String,
-  @Value("\${manage.adjudications.api.endpoint.url}") private val manageAdjudicationsApiBaseUrl: String,
-  @Value("\${prison.api.endpoint.url}") private val prisonApiBaseUrl: String,
-  @Value("\${assess.risks.and.needs.api.endpoint.url}") private val assessRisksAndNeedsApiBaseUrl: String,
-  @Value("\${manage.offences.api.endpoint.url}") private val manageOffencesApiBaseUrl: String,
-  @Value("\${probation.search.api.endpoint.url}") private val probationSearchApiBaseUrl: String,
-  @Value("\${prisoner.alerts.api.endpoint.url}") private val prisonerAlertsApiBaseUri: String,
+  @Value($$"${hmpps.auth.url}") private val oauthApiUrl: String,
+  @Value($$"${prisoner.search.api.endpoint.url}") private val prisonerSearchApiBaseUrl: String,
+  @Value($$"${manage.adjudications.api.endpoint.url}") private val manageAdjudicationsApiBaseUrl: String,
+  @Value($$"${prison.api.endpoint.url}") private val prisonApiBaseUrl: String,
+  @Value($$"${incident.api.endpoint.url}") private val incidentApiBaseUrl: String,
+  @Value($$"${assess.risks.and.needs.api.endpoint.url}") private val assessRisksAndNeedsApiBaseUrl: String,
+  @Value($$"${manage.offences.api.endpoint.url}") private val manageOffencesApiBaseUrl: String,
+  @Value($$"${probation.search.api.endpoint.url}") private val probationSearchApiBaseUrl: String,
+  @Value($$"${prisoner.alerts.api.endpoint.url}") private val prisonerAlertsApiBaseUri: String,
   private val webClientBuilder: WebClient.Builder,
 ) {
   @Bean
@@ -75,6 +76,21 @@ class WebClientConfiguration(
         .build()
     return webClientBuilder
       .baseUrl(prisonApiBaseUrl)
+      .apply(oauth2Client.oauth2Configuration())
+      .exchangeStrategies(exchangeStrategies)
+      .build()
+  }
+
+  @Bean
+  fun incidentApiWebClient(authorizedClientManager: OAuth2AuthorizedClientManager): WebClient {
+    val oauth2Client = ServletOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager)
+    oauth2Client.setDefaultClientRegistrationId("incident-api")
+    val exchangeStrategies =
+      ExchangeStrategies.builder()
+        .codecs { configurer: ClientCodecConfigurer -> configurer.defaultCodecs().maxInMemorySize(-1) }
+        .build()
+    return webClientBuilder
+      .baseUrl(incidentApiBaseUrl)
       .apply(oauth2Client.oauth2Configuration())
       .exchangeStrategies(exchangeStrategies)
       .build()
