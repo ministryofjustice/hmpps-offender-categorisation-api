@@ -54,7 +54,7 @@ jobs:
       postgres-password: 'form-builder'
       localstack-tag: '3'
       localstack-services: 'sqs,sns,s3'
-      java-version: "21"
+      java-version: "25"
   build:
     name: Build docker image from hmpps-github-actions
     if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main'
