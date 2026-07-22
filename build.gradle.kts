@@ -1,8 +1,8 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "10.3.1"
-  kotlin("plugin.spring") version "2.3.0"
-  kotlin("plugin.jpa") version "2.3.0"
-  kotlin("plugin.serialization") version "2.3.0"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "11.0.1"
+  kotlin("plugin.spring") version "2.4.10"
+  kotlin("plugin.jpa") version "2.4.10"
+  kotlin("plugin.serialization") version "2.4.10"
 }
 
 configurations {
@@ -14,10 +14,10 @@ dependencies {
 
   runtimeOnly("org.flywaydb:flyway-core")
   runtimeOnly("org.flywaydb:flyway-database-postgresql")
-  runtimeOnly("org.postgresql:postgresql:42.7.11")
+  runtimeOnly("org.postgresql:postgresql")
 
   // Spring boot dependencies
-  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:2.0.1")
+  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:3.0.0")
   implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:6.0.0")
   implementation("org.springframework.boot:spring-boot-starter-webmvc")
   implementation("org.springframework.boot:spring-boot-starter-security")
@@ -39,7 +39,7 @@ dependencies {
   implementation("io.hypersistence:hypersistence-utils-hibernate-71:3.15.2")
 
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.2")
+  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 
   implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
@@ -56,15 +56,14 @@ dependencies {
   testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
   testImplementation("org.springframework.boot:spring-boot-webtestclient")
   testImplementation("org.springframework.boot:spring-boot-jpa-test")
-  testImplementation("com.h2database:h2:2.3.232")
   testImplementation("com.github.tomakehurst:wiremock-jre8-standalone:3.0.1")
   testImplementation("org.springframework.security:spring-security-test")
   testImplementation("org.awaitility:awaitility-kotlin:4.2.1")
   testImplementation("io.jsonwebtoken:jjwt-api:0.13.0")
   testImplementation("io.jsonwebtoken:jjwt-impl:0.13.0")
   testImplementation("io.jsonwebtoken:jjwt-orgjson:0.13.0")
-  testImplementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.7")
-  testImplementation("io.swagger.parser.v3:swagger-parser-v2-converter:2.1.26")
+  testImplementation("net.javacrumbs.json-unit:json-unit-assertj:6.0.1")
+  testImplementation("io.swagger.parser.v3:swagger-parser-v2-converter:2.1.45")
   testImplementation("org.mockito:mockito-inline:5.2.0")
   testImplementation("org.mockito.kotlin:mockito-kotlin:6.3.0")
   testImplementation("io.projectreactor:reactor-test")
