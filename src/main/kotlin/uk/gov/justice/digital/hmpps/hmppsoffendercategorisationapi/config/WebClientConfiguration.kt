@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.web.reactive.function.client.ServletOAuth2AuthorizedClientExchangeFilterFunction
 import org.springframework.web.reactive.function.client.ExchangeStrategies
 import org.springframework.web.reactive.function.client.WebClient
+import uk.gov.justice.hmpps.kotlin.auth.ServletRequestResponseNonNullFilterFunction
 
 @Configuration
 class WebClientConfiguration(
@@ -51,6 +52,7 @@ class WebClientConfiguration(
         .build()
     return webClientBuilder
       .baseUrl(prisonerSearchApiBaseUrl)
+      .filter(ServletRequestResponseNonNullFilterFunction())
       .apply(oauth2Client.oauth2Configuration())
       .exchangeStrategies(exchangeStrategies)
       .build()
@@ -62,6 +64,7 @@ class WebClientConfiguration(
     oauth2Client.setDefaultClientRegistrationId("prisoner-alerts-api")
     return WebClient.builder()
       .baseUrl(prisonerAlertsApiBaseUri)
+      .filter(ServletRequestResponseNonNullFilterFunction())
       .apply(oauth2Client.oauth2Configuration())
       .build()
   }
@@ -76,6 +79,7 @@ class WebClientConfiguration(
         .build()
     return webClientBuilder
       .baseUrl(prisonApiBaseUrl)
+      .filter(ServletRequestResponseNonNullFilterFunction())
       .apply(oauth2Client.oauth2Configuration())
       .exchangeStrategies(exchangeStrategies)
       .build()
@@ -91,6 +95,7 @@ class WebClientConfiguration(
         .build()
     return webClientBuilder
       .baseUrl(incidentApiBaseUrl)
+      .filter(ServletRequestResponseNonNullFilterFunction())
       .apply(oauth2Client.oauth2Configuration())
       .exchangeStrategies(exchangeStrategies)
       .build()
@@ -106,6 +111,7 @@ class WebClientConfiguration(
         .build()
     return webClientBuilder
       .baseUrl(manageAdjudicationsApiBaseUrl)
+      .filter(ServletRequestResponseNonNullFilterFunction())
       .apply(oauth2Client.oauth2Configuration())
       .exchangeStrategies(exchangeStrategies)
       .build()
@@ -121,6 +127,7 @@ class WebClientConfiguration(
         .build()
     return webClientBuilder
       .baseUrl(assessRisksAndNeedsApiBaseUrl)
+      .filter(ServletRequestResponseNonNullFilterFunction())
       .apply(oauth2Client.oauth2Configuration())
       .exchangeStrategies(exchangeStrategies)
       .build()
@@ -136,6 +143,7 @@ class WebClientConfiguration(
         .build()
     return webClientBuilder
       .baseUrl(manageOffencesApiBaseUrl)
+      .filter(ServletRequestResponseNonNullFilterFunction())
       .apply(oauth2Client.oauth2Configuration())
       .exchangeStrategies(exchangeStrategies)
       .build()
@@ -151,6 +159,7 @@ class WebClientConfiguration(
         .build()
     return webClientBuilder
       .baseUrl(probationSearchApiBaseUrl)
+      .filter(ServletRequestResponseNonNullFilterFunction())
       .apply(oauth2Client.oauth2Configuration())
       .exchangeStrategies(exchangeStrategies)
       .build()
