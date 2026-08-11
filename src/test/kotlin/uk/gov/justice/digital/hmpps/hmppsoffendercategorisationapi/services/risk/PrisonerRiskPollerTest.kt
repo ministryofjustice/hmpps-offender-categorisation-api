@@ -1,7 +1,9 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services.risk
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -12,6 +14,9 @@ import org.mockito.kotlin.argThat
 import org.mockito.kotlin.never
 import org.mockito.kotlin.times
 import org.mockito.kotlin.whenever
+import org.springframework.boot.test.system.CapturedOutput
+import org.springframework.boot.test.system.OutputCaptureExtension
+import org.springframework.dao.InvalidDataAccessResourceUsageException
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonerSearchApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonFactory
@@ -29,6 +34,7 @@ import java.time.Instant
 import java.time.ZoneId
 import java.util.stream.Stream
 
+@ExtendWith(OutputCaptureExtension::class)
 class PrisonerRiskPollerTest {
   private val mockPrisonApiClient = mock<PrisonApiClient>()
   private val mockPrisonerSearchApiClient = mock<PrisonerSearchApiClient>()
@@ -205,6 +211,40 @@ class PrisonerRiskPollerTest {
           entity.status == RiskChangeEntity.STATUS_NEW
       },
     )
+  }
+
+  @Test
+  fun `should log database error when saving risk change fails with jsonb varchar mismatch`(output: CapturedOutput) {
+    val testOldProfile = TestPrisonerRiskProfileFactory()
+      .withEscapeRiskAlerts(emptyList())
+      .withEscapeListAlerts(emptyList())
+      .withRiskDueToViolence(false)
+      .withRiskDueToSeriousOrganisedCrime(false)
+      .build()
+    val testNewProfile = TestPrisonerRiskProfileFactory()
+      .withEscapeRiskAlerts(emptyList())
+      .withEscapeListAlerts(emptyList())
+      .withRiskDueToSeriousOrganisedCrime(false)
+      .withRiskDueToViolence(true)
+      .build()
+
+    mockFindPrisons()
+    mockFindPrisoners("C")
+    whenever(mockPrisonerRiskCalculator.calculateRisk("A1234BC")).thenReturn(testNewProfile)
+    val testOldRiskProfileString = jacksonObjectMapper().writeValueAsString(testOldProfile)
+    mockGetPrisonerRiskProfile(testOldRiskProfileString)
+    whenever(mockRiskChangeRepository.findByStatusAndOffenderNo(RiskChangeEntity.STATUS_NEW, "A1234BC")).thenReturn(null)
+    whenever(mockRiskChangeRepository.save(any<RiskChangeEntity>())).thenThrow(
+      InvalidDataAccessResourceUsageException(
+        "could not execute statement [ERROR: column \"new_profile\" is of type jsonb but expression is of type character varying]",
+      ),
+    )
+
+    prisonerRiskPoller.pollPrisonersRisk()
+
+    verify(mockRiskChangeRepository, times(1)).save(any<RiskChangeEntity>())
+    assertThat(output.out).contains("Error calculating risk profile for prisoner A1234BC")
+    assertThat(output.out).contains("column \"new_profile\" is of type jsonb but expression is of type character varying")
   }
 
   private fun mockGetPrisonerRiskProfile(testOldRiskProfileString: String?) = whenever(
