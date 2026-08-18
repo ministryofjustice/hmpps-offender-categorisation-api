@@ -4,8 +4,7 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentResponseDto
 
 class TestIncidentDtoFactory {
-  private var incidentStatus: String = IncidentDto.INCIDENT_STATUS_DUP
-  private var reportTime: String = "2020-01-01T10:00:00"
+  private var incidentStatus: String = "CLOSED"
   private var responses: List<IncidentResponseDto> = emptyList()
 
   fun withResponses(responses: List<IncidentResponseDto>): TestIncidentDtoFactory {
@@ -18,14 +17,9 @@ class TestIncidentDtoFactory {
     return this
   }
 
-  fun withReportTime(reportTime: String): TestIncidentDtoFactory {
-    this.reportTime = reportTime
-    return this
-  }
-
   fun build(): IncidentDto = IncidentDto(
+    incidentType = "ASSAULT_5",
     incidentStatus = this.incidentStatus,
-    reportTime = this.reportTime,
     responses = this.responses,
   )
 }

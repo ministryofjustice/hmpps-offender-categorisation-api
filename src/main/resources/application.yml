@@ -35,6 +35,11 @@ spring:
             client-secret: ${api.client.admin.secret}
             authorization-grant-type: client_credentials
             scope: read
+          incident-api:
+              provider: hmpps-auth
+              client-id: ${api.client.admin.id}
+              client-secret: ${api.client.admin.secret}
+              authorization-grant-type: client_credentials
           prison-api:
             provider: hmpps-auth
             client-id: ${api.client.admin.id}
@@ -79,7 +84,7 @@ spring:
           jwk-set-uri: ${hmpps.auth.url}/.well-known/jwks.json
 
   datasource:
-    url: 'jdbc:postgresql://${DB_SERVER}/${DB_NAME}'
+    url: "jdbc:postgresql://${DB_SERVER}/${DB_NAME}"
     username: ${DB_USER}
     password: ${DB_PASS}
     hikari:
@@ -103,6 +108,7 @@ spring:
     enabled: true
     locations: classpath:/db/migration/common
     baselineOnMigrate: true
+    validateMigrationNaming: true
 
   sql:
     init:
@@ -133,7 +139,7 @@ management:
     web:
       base-path: /
       exposure:
-        include: 'info, health'
+        include: "info, health"
   endpoint:
     health:
       cache:
@@ -161,4 +167,10 @@ s3:
 
 # every 6 hours
 viper:
-  period: '0 0 */6 * * *'
+  period: "0 0 */6 * * *"
+
+hmpps:
+  sar:
+    template:
+      enabled: true
+      path: /templates/template_hmpps-offender-categorisation-api.mustache

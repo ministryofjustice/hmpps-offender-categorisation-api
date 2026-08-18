@@ -15,8 +15,7 @@ class OpenApiDocsTest : IntegrationTestBase() {
   @Test
   fun `open api docs are available`() {
     webTestClient.get()
-      .uri("/swagger-ui/index.html?configUrl=/v3/api-docs")
-      .accept(MediaType.APPLICATION_JSON)
+      .uri("/v3/api-docs")
       .exchange()
       .expectStatus().isOk
   }

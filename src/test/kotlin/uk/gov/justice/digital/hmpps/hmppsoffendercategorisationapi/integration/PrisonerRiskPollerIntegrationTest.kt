@@ -38,9 +38,10 @@ class PrisonerRiskPollerIntegrationTest : IntegrationTestBase() {
           PrisonerAlertResponseDto.ALERT_CODE_ESCAPE_LIST_HEIGHTENED,
           PrisonerAlertResponseDto.ALERT_CODE_OCGM,
         ),
-        mutableListOf<PrisonerAlertResponseDto>(),
+        mutableListOf(),
       )
-      prisonApiMockServer.stubGetAssaultIncidents("ABC123", emptyList())
+      incidentApiMockServer.stubCountAssaultIncidents(0)
+      incidentApiMockServer.stubSearchAssaultIncidents(emptyList())
       webTestClient.get().uri("/prisoner-risk-calculation/poll-prisons")
         .accept(MediaType.APPLICATION_JSON)
         .exchange()

@@ -48,6 +48,7 @@ abstract class IntegrationTestBase {
     private val pgContainer = PostgresContainer.instance
     internal val prisonerSearchMockServer = PrisonerSearchMockServer()
     internal val prisonApiMockServer = PrisonApiMockServer()
+    internal val incidentApiMockServer = IncidentApiMockServer()
     internal val manageAdjudicationsMockServer = ManageAdjudicationsMockServer()
     internal val assessRisksAndNeedsMockServer = AssessRisksAndNeedsMockServer()
     internal val manageOffencesMockServer = ManageOffencesMockServer()
@@ -73,6 +74,7 @@ abstract class IntegrationTestBase {
     @JvmStatic
     fun startMocks() {
       prisonerSearchMockServer.start()
+      incidentApiMockServer.start()
       prisonApiMockServer.start()
       manageAdjudicationsMockServer.start()
       assessRisksAndNeedsMockServer.start()
@@ -86,6 +88,7 @@ abstract class IntegrationTestBase {
     fun stopMocks() {
       prisonerSearchMockServer.stop()
       prisonApiMockServer.stop()
+      incidentApiMockServer.stop()
       manageAdjudicationsMockServer.stop()
       assessRisksAndNeedsMockServer.stop()
       manageOffencesMockServer.stop()
@@ -122,6 +125,15 @@ abstract class IntegrationTestBase {
       )
 
       prisonApiMockServer.stubFor(
+        WireMock.get("/health/ping").willReturn(
+          WireMock.aResponse()
+            .withHeader("Content-Type", "application/json")
+            .withBody(if (status == 200) "pong" else "some error")
+            .withStatus(status),
+        ),
+      )
+
+      incidentApiMockServer.stubFor(
         WireMock.get("/health/ping").willReturn(
           WireMock.aResponse()
             .withHeader("Content-Type", "application/json")
@@ -168,6 +180,7 @@ abstract class IntegrationTestBase {
     hmppsAuthMockServer.resetAll()
     prisonerSearchMockServer.resetAll()
     prisonApiMockServer.resetAll()
+    incidentApiMockServer.resetAll()
     manageAdjudicationsMockServer.resetAll()
     assessRisksAndNeedsMockServer.resetAll()
     manageOffencesMockServer.resetAll()
