@@ -1,10 +1,9 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation
 
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.assertj.core.api.Assertions.assertThatCode
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.dao.InvalidDataAccessResourceUsageException
 import org.springframework.test.context.jdbc.Sql
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.ResourceTest
@@ -25,8 +24,8 @@ class RiskChangeRepositoryTest : ResourceTest() {
   }
 
   @Test
-  fun `should throw invalid data access when saving string into jsonb columns`() {
-    assertThatThrownBy {
+  fun `should not throw any exception when saving string into jsonb columns`() {
+    assertThatCode {
       repository.save(
         RiskChangeEntity(
           oldProfile = """{"escapeRiskAlerts":[],"escapeListAlerts":[],"riskDueToViolence":false,"riskDueToSeriousOrganisedCrime":false}""",
@@ -37,8 +36,6 @@ class RiskChangeRepositoryTest : ResourceTest() {
           raisedDate = ZonedDateTime.now(),
         ),
       )
-    }
-      .isInstanceOf(InvalidDataAccessResourceUsageException::class.java)
-      .hasMessageContaining("column \"new_profile\" is of type jsonb but expression is of type character varying")
+    }.doesNotThrowAnyException()
   }
 }
