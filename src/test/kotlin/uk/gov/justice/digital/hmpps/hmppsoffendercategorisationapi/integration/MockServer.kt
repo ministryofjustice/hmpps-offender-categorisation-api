@@ -8,9 +8,9 @@ import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration
 import com.github.tomakehurst.wiremock.http.HttpHeader
 import com.github.tomakehurst.wiremock.http.HttpHeaders
+import org.springframework.data.jpa.domain.AbstractPersistable_.id
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PageableResult
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.SearchResult
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentDto
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentReport
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentReportResponse
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.ReportBasic
@@ -156,21 +156,6 @@ class PrisonApiMockServer : MockServer(8094) {
               jacksonObjectMapper().apply {
                 registerModule(JavaTimeModule())
               }.writeValueAsString(prisons),
-            ),
-        ),
-    )
-  }
-
-  fun stubGetAssaultIncidents(prisonerNumber: String, assaultIncidents: List<IncidentDto>) {
-    stubFor(
-      WireMock.get(WireMock.urlPathEqualTo("/api/offenders/$prisonerNumber/incidents"))
-        .willReturn(
-          WireMock.aResponse()
-            .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json")))
-            .withBody(
-              jacksonObjectMapper().apply {
-                registerModule(JavaTimeModule())
-              }.writeValueAsString(assaultIncidents),
             ),
         ),
     )
