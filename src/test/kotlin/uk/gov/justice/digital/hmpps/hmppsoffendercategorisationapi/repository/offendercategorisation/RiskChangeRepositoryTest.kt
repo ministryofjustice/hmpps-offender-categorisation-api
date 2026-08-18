@@ -2,10 +2,8 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.o
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatCode
-import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.dao.InvalidDataAccessResourceUsageException
 import org.springframework.test.context.jdbc.Sql
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.config.ResourceTest
