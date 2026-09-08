@@ -499,25 +499,33 @@
                     <td class="data-column-25">Risk type</td>
                     <td class="data-column-25">Display assaults</td>
                     <td class="data-column-25">Number of assaults</td>
-                    <td class="data-column-25">Number of serious assaults</td>
                 </tr>
                 <tr>
                     <td>{{ optionalValue riskType }}</td>
                     <td>{{ convertBoolean displayAssaults }}</td>
                     <td>{{ optionalValue numberOfAssaults }}</td>
-                    <td>{{ optionalValue numberOfSeriousAssaults }}</td>
                 </tr>
             </table>
 
             <table class="data-table">
                 <tr>
+                    <td class="data-column-25">Number of serious assaults</td>
                     <td class="data-column-25">Number of non-serious assaults</td>
+                    <td class="data-column-30">Risk due to violence</td>
+                </tr>
+                <tr>
+                    <td>{{ optionalValue numberOfSeriousAssaults }}</td>
+                    <td>{{ optionalValue numberOfNonSeriousAssaults }}</td>
+                    <td>{{ convertBoolean riskDueToViolence }}</td>
+                </tr>
+            </table>
+            <table class="data-table">
+                <tr>
                     <td class="data-column-25">Very high risk offender</td>
                     <td class="data-column-25">Provisional categorisation</td>
                     <td class="data-column-25">Notify safety custody lead</td>
                 </tr>
                 <tr>
-                    <td>{{ optionalValue numberOfNonSeriousAssaults }}</td>
                     <td>{{ convertBoolean veryHighRiskViolentOffender }}</td>
                     <td>{{ optionalValue provisionalCategorisation }}</td>
                     <td>{{ convertBoolean notifySafetyCustodyLead }}</td>
@@ -579,11 +587,13 @@
                 <td class="data-column-30">Number of assaults</td>
                 <td class="data-column-30">Number of serious assaults</td>
                 <td class="data-column-30">Number of non-serious assaults</td>
+                <td class="data-column-30">Risk due to violence</td>
             </tr>
             <tr>
                 <td>{{ optionalValue numberOfAssaults }}</td>
                 <td>{{ optionalValue numberOfSeriousAssaults }}</td>
                 <td>{{ optionalValue numberOfNonSeriousAssaults }}</td>
+                <td>{{ convertBoolean riskDueToViolence }}</td>
             </tr>
         </table>
         <table class="data-table">
@@ -628,11 +638,13 @@
                 <td class="data-column-30">Number of assaults</td>
                 <td class="data-column-30">Number of serious assaults</td>
                 <td class="data-column-30">Number of non-serious assaults</td>
+                <td class="data-column-30">Risk due to violence</td>
             </tr>
             <tr>
                 <td>{{ optionalValue numberOfAssaults }}</td>
                 <td>{{ optionalValue numberOfSeriousAssaults }}</td>
                 <td>{{ optionalValue numberOfNonSeriousAssaults }}</td>
+                <td>{{ convertBoolean riskDueToViolence }}</td>
             </tr>
         </table>
         <table class="data-table">
@@ -740,7 +752,7 @@
             <td class="data-column-50">Assessment comment</td>
         </tr>
         <tr>
-            <td>{{ optionalValue assessed_by }}</td>
+            <td>{{ optionalValue (getUserLastName assessed_by) }}</td>
             <td>{{ optionalValue assessment_committee }}</td>
             <td>{{ optionalValue assessment_comment }}</td>
         </tr>
@@ -786,11 +798,13 @@
             <td class="data-column-30">Number of assaults</td>
             <td class="data-column-30">Number of serious assaults</td>
             <td class="data-column-30">Number of non-serious assaults</td>
+            <td class="data-column-30">Risk due to violence</td>
         </tr>
         <tr>
             <td>{{ optionalValue numberOfAssaults }}</td>
             <td>{{ optionalValue numberOfSeriousAssaults }}</td>
             <td>{{ optionalValue numberOfNonSeriousAssaults }}</td>
+            <td>{{ convertBoolean riskDueToViolence }}</td>
         </tr>
     </table>
     <table class="data-table">
