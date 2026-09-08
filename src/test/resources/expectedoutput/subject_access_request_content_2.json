@@ -6,6 +6,10 @@
           "decision": {
             "category": "B"
           },
+          "bcstInput": {
+            "bcstInputText":"Test",
+            "bcstRelevantInfo":"Yes"
+          },
           "categoryDecisionBasedOnSecurityInformation": {},
           "securityInput": {
             "securityInputNeeded": "Yes",
