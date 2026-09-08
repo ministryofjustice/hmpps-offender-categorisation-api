@@ -1,9 +1,11 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.riskchange
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.common.RedactedSection
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Profile(
   private val soc: Soc? = null,
 
@@ -12,6 +14,8 @@ data class Profile(
   val violence: Violence? = null,
 
   private val extremism: RedactedSection? = null,
+
+  val riskDueToViolence: Boolean? = null,
 ) {
   // removing any reference to the word 'soc' but leaving in the actual data because it is not soc specific
   val transferToSecurity: Boolean?
