@@ -217,6 +217,17 @@
                 <p>No Data Held</p>
             {{/decision}}
 
+            <p><b>Basic Custody Screening Tool Input</b></p>
+            {{#bcstInput}}
+                <table class="summary-list">
+                    <tr><td>Basic Custody Screening Tool Part 1 relevant info</td><td>{{ optionalValue (convertBoolean bcstRelevantInfo) }}</td></tr>
+                    <tr><td>Basic Custody Screening Tool Part 1 input text</td><td>{{ optionalValue bcstInputText }}</td></tr>
+                </table>
+            {{/bcstInput}}
+            {{^bcstInput}}
+                <p>No Data Held</p>
+            {{/bcstInput}}
+
             <p><b>Offender Assessment System Input</b></p>
             {{#oasysInput}}
                 <table class="summary-list">
