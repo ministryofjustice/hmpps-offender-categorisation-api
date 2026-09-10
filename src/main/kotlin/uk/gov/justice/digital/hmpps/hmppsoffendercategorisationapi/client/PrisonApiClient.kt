@@ -19,10 +19,17 @@ class PrisonApiClient(
 
   fun setPendingCategorisationsInactive(bookingId: Long) = webClient.put()
     .uri("/api/offender-assessments/category/$bookingId/inactive?status=PENDING")
-    .retrieve()
-    .toBodilessEntity()
-    .doOnNext { response ->
-      log.info("Response status: {}", response.statusCode)
+    .exchangeToMono { response ->
+      response.bodyToMono(String::class.java)
+        .defaultIfEmpty("")
+        .doOnNext { body ->
+          log.info(
+            "Status: {}, Body: {}",
+            response.statusCode(),
+            body,
+          )
+        }
+        .then()
     }
 
   companion object {
