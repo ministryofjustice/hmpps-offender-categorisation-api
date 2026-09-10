@@ -31,6 +31,7 @@ class PrisonApiClient(
         }
         .then()
     }
+    .block()
 
   companion object {
     private val log = LoggerFactory.getLogger(this::class.java)
