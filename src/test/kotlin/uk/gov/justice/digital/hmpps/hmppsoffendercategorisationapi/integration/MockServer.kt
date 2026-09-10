@@ -160,6 +160,13 @@ class PrisonApiMockServer : MockServer(8094) {
         ),
     )
   }
+  fun stubPutCategorisationInactive(bookingId: Long) = stubFor(
+    WireMock.put(WireMock.urlEqualTo("/api/offender-assessments/category/$bookingId/inactive?status=PENDING"))
+      .willReturn(
+        WireMock.aResponse()
+          .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json"))),
+      ),
+  )
 }
 
 class ManageAdjudicationsMockServer : MockServer(8092) {
