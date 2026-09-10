@@ -3,13 +3,12 @@ package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services
 import org.springframework.stereotype.Service
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.FormEntity
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.repository.offendercategorisation.FormRepository
-import java.time.Clock
 import java.time.ZonedDateTime
 
 @Service
 class FormService(
   private val formRepository: FormRepository,
-  private val clock: Clock,
+  private val categorisationCancellationService: CategorisationCancellationService,
 ) {
   fun saveSecurityReview(bookingId: Long, userId: String, submitted: Boolean, securityReview: String?) {
     val formEntity = formRepository.findFirstByBookingIdAndStatusNotOrderBySequenceNoDesc(bookingId)
@@ -35,12 +34,7 @@ class FormService(
       listOf(FormEntity.STATUS_APPROVED, FormEntity.STATUS_CANCELLED, FormEntity.STATUS_CANCELLED_AFTER_RELEASE),
     )
     formEntities.forEach {
-      it.setStatus(FormEntity.STATUS_CANCELLED_AFTER_RELEASE)
-      it.setCancelledDate(ZonedDateTime.now(clock).toLocalDateTime())
-      if (deleteFormResponse) {
-        it.setFormResponse("{}")
-      }
-      formRepository.save(it)
+      categorisationCancellationService.cancelCategorisation(it, deleteFormResponse)
     }
   }
 }

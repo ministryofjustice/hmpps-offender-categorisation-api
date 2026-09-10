@@ -15,4 +15,9 @@ class PrisonApiClient(
     .retrieve()
     .bodyToMono(object : ParameterizedTypeReference<List<Prison>>() {})
     .block()!!
+
+  fun setPendingCategorisationsInactive(bookingId: Long) = webClient.post()
+    .uri("/api/offender-assessments/category/$bookingId/inactive?status=PENDING")
+    .retrieve()
+    .toBodilessEntity()
 }
