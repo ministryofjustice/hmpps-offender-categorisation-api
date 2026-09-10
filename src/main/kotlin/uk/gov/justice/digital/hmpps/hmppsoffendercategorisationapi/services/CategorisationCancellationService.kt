@@ -1,6 +1,7 @@
 package uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.services
 
 import jakarta.transaction.Transactional
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.FormEntity
@@ -22,6 +23,11 @@ class CategorisationCancellationService(
       formEntity.setFormResponse("{}")
     }
     formRepository.save(formEntity)
+    log.info("Categorisation cancelled for ${formEntity.bookingId}")
     prisonApiClient.setPendingCategorisationsInactive(formEntity.bookingId)
+  }
+
+  companion object {
+    private val log = LoggerFactory.getLogger(this::class.java)
   }
 }
