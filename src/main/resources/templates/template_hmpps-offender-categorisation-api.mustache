@@ -22,8 +22,8 @@
         <tr>
             <td>{{ getPrisonName prisonId }}</td>
             <td>{{ optionalValue (formatDate start_date) }}</td>
-            <td>{{ getUserLastName user_id }}</td>
             <td>{{ optionalValue (getUserLastName referred_by) }}</td>
+            <td>{{ getUserLastName user_id }}</td>
         </tr>
     </table>
 
@@ -126,9 +126,6 @@
                 <table class="summary-list">
                     <tr><td>Previous convictions</td><td>{{ optionalValue previousConvictions }}</td></tr>
                     <tr><td>Previous convictions text</td><td>{{ optionalValue previousConvictionsText }}</td></tr>
-                    <tr><td>Further charges</td><td>{{ optionalValue this.furtherCharges }}</td></tr>
-                    <tr><td>Further charges text</td><td>{{ optionalValue furtherChargesText }}</td></tr>
-                    <tr><td>Category B offending history</td><td>{{ optionalValue offendingHistoryCatB }}</td></tr>
                 </table>
             {{/offendingHistory}}
             {{^offendingHistory}}
@@ -145,16 +142,6 @@
             {{^securityInput}}
                 <p>No Data Held</p>
             {{/securityInput}}
-
-            <p><b>Security back</b></p>
-            {{#securityBack}}
-                <table class="summary-list">
-                    <tr><td>Cat B</td><td>{{ optionalValue catB }}</td></tr>
-                </table>
-            {{/securityBack}}
-            {{^securityBack}}
-                <p>No Data Held</p>
-            {{/securityBack}}
 
             <p><b>Decision</b></p>
             {{#decision}}
