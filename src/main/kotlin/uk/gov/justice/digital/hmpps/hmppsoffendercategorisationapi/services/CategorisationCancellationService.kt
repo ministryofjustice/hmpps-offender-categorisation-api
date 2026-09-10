@@ -15,7 +15,7 @@ class CategorisationCancellationService(
   private val prisonApiClient: PrisonApiClient,
 ) {
   @Transactional
-  fun cancelCategorisation(formEntity: FormEntity, deleteFormResponse: Boolean) {
+  fun cancelCategorisationAfterRelease(formEntity: FormEntity, deleteFormResponse: Boolean) {
     formEntity.setStatus(FormEntity.STATUS_CANCELLED_AFTER_RELEASE)
     formEntity.setCancelledDate(ZonedDateTime.now(clock).toLocalDateTime())
     if (deleteFormResponse) {

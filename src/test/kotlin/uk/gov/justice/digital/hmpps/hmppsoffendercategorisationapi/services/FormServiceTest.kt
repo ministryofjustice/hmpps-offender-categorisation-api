@@ -87,6 +87,6 @@ class FormServiceTest {
     formService.cancelAnyInProgressReviewsDueToPrisonerRelease(testOffenderNo)
 
     verify(mockFormRepository, times(1)).findAllByOffenderNoAndStatusNotIn(testOffenderNo, listOf(FormEntity.STATUS_APPROVED, FormEntity.STATUS_CANCELLED, FormEntity.STATUS_CANCELLED_AFTER_RELEASE))
-    verify(mockCategorisationCancellationServiceTest, times(1)).cancelCategorisation(testFormEntity, true)
+    verify(mockCategorisationCancellationServiceTest, times(1)).cancelCategorisationAfterRelease(testFormEntity, true)
   }
 }

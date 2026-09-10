@@ -34,7 +34,7 @@ class FormService(
       listOf(FormEntity.STATUS_APPROVED, FormEntity.STATUS_CANCELLED, FormEntity.STATUS_CANCELLED_AFTER_RELEASE),
     )
     formEntities.forEach {
-      categorisationCancellationService.cancelCategorisation(it, deleteFormResponse)
+      categorisationCancellationService.cancelCategorisationAfterRelease(it, deleteFormResponse)
     }
   }
 }

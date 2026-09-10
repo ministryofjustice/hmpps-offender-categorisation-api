@@ -30,7 +30,7 @@ class CategorisationCancellationServiceTest {
       .withStatus(FormEntity.STATUS_STARTED)
       .withBookingId(testBookingId)
       .build()
-    categorisationCancellationService.cancelCategorisation(testFormEntity, true)
+    categorisationCancellationService.cancelCategorisationAfterRelease(testFormEntity, true)
 
     verify(mockFormRepository, times(1)).save(
       argThat { entity ->
