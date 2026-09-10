@@ -307,15 +307,15 @@
                 <p>No Data Held</p>
             {{/securityInput}}
 
-            <p><b>Security back</b></p>
-            {{#securityBack}}
+            <p><b>Category decision based on security information</b></p>
+            {{#categoryDecisionBasedOnSecurityInformation}}
                 <table class="summary-list">
-                    <tr><td>Cat B</td><td>{{ optionalValue catB }}</td></tr>
+                    <tr><td>Category B is warranted</td><td>{{ optionalValue categoryBIsWarranted }}</td></tr>
                 </table>
-            {{/securityBack}}
-            {{^securityBack}}
+            {{/categoryDecisionBasedOnSecurityInformation}}
+            {{^categoryDecisionBasedOnSecurityInformation}}
                 <p>No Data Held</p>
-            {{/securityBack}}
+            {{/categoryDecisionBasedOnSecurityInformation}}
 
             <p><b>Risk profile change detail</b></p>
             {{#riskProfileChangeDetail}}
