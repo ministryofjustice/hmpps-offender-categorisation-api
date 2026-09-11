@@ -5,6 +5,7 @@ import org.awaitility.kotlin.await
 import org.awaitility.kotlin.matches
 import org.awaitility.kotlin.untilAsserted
 import org.awaitility.kotlin.untilCallTo
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.params.ParameterizedTest
@@ -41,6 +42,12 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
   val testPrisonId = "BMI"
   val testOffenderNo = "ABC123"
   val testDate = "2025-01-20"
+  val testBookingId = 35L
+
+  @BeforeEach
+  fun beforeEach() {
+    prisonApiMockServer.stubPutCategorisationInactive(testBookingId)
+  }
 
   @Autowired
   private lateinit var jdbcTemplate: JdbcTemplate
@@ -90,7 +97,7 @@ class PrisonerListenerIntTest : SqsIntegrationTestBase() {
   private fun insertExistingFormDbRecord(initialStatus: String) {
     jdbcTemplate.execute(
       "INSERT INTO form (form_response,booking_id,user_id,status,assigned_user_id,referred_date,referred_by,sequence_no,risk_profile,prison_id,offender_no,start_date,security_reviewed_by,cat_type,nomis_sequence_no,assessment_date,approved_by,assessed_by,review_reason,due_by_date,cancelled_by) " +
-        "VALUES ('$testForm',0,'$testUsername','$initialStatus','$testUsername','$testDateTime','',1,'$testRiskProfile','$testPrisonId','$testOffenderNo','$testDateTime','','RECAT',1,'$testDateTime','','','MANUAL','$testDate','')",
+        "VALUES ('$testForm',$testBookingId,'$testUsername','$initialStatus','$testUsername','$testDateTime','',1,'$testRiskProfile','$testPrisonId','$testOffenderNo','$testDateTime','','RECAT',1,'$testDateTime','','','MANUAL','$testDate','')",
     )
   }
 
