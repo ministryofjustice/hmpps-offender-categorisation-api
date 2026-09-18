@@ -252,9 +252,9 @@
             {{#riskAssessment}}
                 <table class="summary-list">
                     <tr><td>Lower category</td><td>{{ optionalValue lowerCategory }}</td></tr>
-                    <tr><td>Other relevant</td><td>{{ convertBoolean otherRelevant }}</td></tr>
-                    <tr><td>Higher category</td><td>{{ convertBoolean higherCategory }}</td></tr>
-                    <tr><td>Other relevant text</td><td>{{ convertBoolean otherRelevantText }}</td></tr>
+                    <tr><td>Other relevant</td><td>{{ optionalValue (convertBoolean otherRelevant) }}</td></tr>
+                    <tr><td>Higher category</td><td>{{ optionalValue (convertBoolean higherCategory) }}</td></tr>
+                    <tr><td>Other relevant text</td><td>{{ optionalValue (convertBoolean otherRelevantText) }}</td></tr>
                 </table>
             {{/riskAssessment}}
             {{^riskAssessment}}
@@ -451,8 +451,8 @@
             </tr>
         </table>
 
-        <h5>Life profile</h5>
-        {{#lifeProfile}}
+        <h5>Court Issued Life Sentence</h5>
+        {{#courtIssuedLifeSentence}}
         <br>
         <table class="data-table">
             <tr>
@@ -466,10 +466,10 @@
                 <td>{{ optionalValue provisionalCategorisation }}</td>
             </tr>
         </table>
-        {{/lifeProfile}}
-        {{^lifeProfile}}
+        {{/courtIssuedLifeSentence}}
+        {{^courtIssuedLifeSentence}}
             <p>No Data Held</p>
-        {{/lifeProfile}}
+        {{/courtIssuedLifeSentence}}
 
         <h5>Escape profile</h5>
         {{#escapeProfile}}
@@ -666,15 +666,15 @@
     <p>No Data Held</p>
 {{/riskChange}}
 
-<h4>Security</h4>
+<h4>Security Referral</h4>
 {{#security}}
     <table class="data-table">
         <tr>
-            <td class="data-column-25">Prison name</td>
-            <td class="data-column-25">Raised date</td>
+            <td class="data-column-20">Prison name</td>
+            <td class="data-column-20">Raised date</td>
             <td class="data-column-20">Referred by</td>
-            <td class="data-column-25">Processed date</td>
-            <td class="data-column-25">Status</td>
+            <td class="data-column-20">Processed date</td>
+            <td class="data-column-20">Status</td>
         </tr>
         <tr>
             <td>{{ getPrisonName prisonId }}</td>
