@@ -11,8 +11,6 @@ RUN ./gradlew --no-daemon assemble
 
 FROM ${BASE_IMAGE}
 
-USER root
-
 RUN mkdir -p /home/appuser/.postgresql
 
 ADD --chown=appuser:appgroup \
