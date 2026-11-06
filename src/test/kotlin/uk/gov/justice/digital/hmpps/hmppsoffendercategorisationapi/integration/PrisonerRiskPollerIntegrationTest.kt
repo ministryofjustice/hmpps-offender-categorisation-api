@@ -9,8 +9,8 @@ import org.springframework.http.MediaType
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.test.context.jdbc.Sql
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert.PrisonerAlertResponseDto
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonerFactory
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.dto.prisonRegister.TestPrisonRegisterPrisonFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.PrisonerRiskProfileEntity
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -28,7 +28,7 @@ class PrisonerRiskPollerIntegrationTest : IntegrationTestBase() {
     @Test
     fun `successfully polls prisoner risk and updates record`() {
       val testPrisonId = "LEI"
-      prisonApiMockServer.stubFindPrisons(listOf(TestPrisonFactory().withAgencyId(testPrisonId).build()))
+      prisonRegisterApiMockServer.stubGetPrisons(listOf(TestPrisonRegisterPrisonFactory().withPrisonId(testPrisonId).build()))
       prisonerSearchMockServer.stubFindPrisonersByPrisonId(testPrisonId, listOf(TestPrisonerFactory().withPrisonerNumber("ABC123").build()))
       prisonerAlertsApiMockServer.stubFindPrisonerAlerts(
         "ABC123",

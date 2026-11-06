@@ -4,6 +4,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonApiClient
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonRegisterApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonerSearchApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.PrisonerRiskProfileEntity
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.entity.offendercategorisation.RiskChangeEntity
@@ -20,6 +21,7 @@ import java.time.ZonedDateTime
 @Service
 class PrisonerRiskPoller(
   private val prisonApiClient: PrisonApiClient,
+  private val prisonRegisterApiClient: PrisonRegisterApiClient,
   private val prisonerSearchApiClient: PrisonerSearchApiClient,
   private val prisonerRiskCalculator: PrisonerRiskCalculator,
   private val prisonerRiskProfileRepository: PrisonerRiskProfileRepository,
@@ -29,7 +31,7 @@ class PrisonerRiskPoller(
 
   fun pollPrisonersRisk() {
     log.info("Starting poll of prisoner risk profiles")
-    val prisonIds = prisonApiClient.findPrisons().map { it.agencyId }
+    val prisonIds = prisonRegisterApiClient.getPrisons().map { it.prisonId }
 
     prisonIds.forEach { prisonId: String ->
       pollPrisonersRisk(prisonId)

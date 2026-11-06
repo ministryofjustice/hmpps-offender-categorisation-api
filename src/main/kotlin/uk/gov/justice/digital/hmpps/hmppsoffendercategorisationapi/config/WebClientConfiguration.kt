@@ -25,6 +25,7 @@ class WebClientConfiguration(
   @Value($$"${manage.offences.api.endpoint.url}") private val manageOffencesApiBaseUrl: String,
   @Value($$"${probation.search.api.endpoint.url}") private val probationSearchApiBaseUrl: String,
   @Value($$"${prisoner.alerts.api.endpoint.url}") private val prisonerAlertsApiBaseUri: String,
+  @Value($$"${prison.register.api.url}") private val prisonRegisterApiBaseUri: String,
   private val webClientBuilder: WebClient.Builder,
 ) {
   @Bean
@@ -167,4 +168,23 @@ class WebClientConfiguration(
 
   @Bean
   fun prisonerSearchApiHealthWebClient(): WebClient = webClientBuilder.baseUrl(prisonerSearchApiBaseUrl).build()
+
+  @Bean
+  fun prisonRegisterApiWebClient(authorizedClientManager: OAuth2AuthorizedClientManager): WebClient {
+    val oauth2Client = ServletOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager)
+    oauth2Client.setDefaultClientRegistrationId("prison-register-api")
+    val exchangeStrategies =
+      ExchangeStrategies.builder()
+        .codecs { configurer: ClientCodecConfigurer -> configurer.defaultCodecs().maxInMemorySize(-1) }
+        .build()
+    return webClientBuilder
+      .baseUrl(prisonRegisterApiBaseUri)
+      .filter(ServletRequestResponseNonNullFilterFunction())
+      .apply(oauth2Client.oauth2Configuration())
+      .exchangeStrategies(exchangeStrategies)
+      .build()
+  }
+
+  @Bean
+  fun prisonRegisterApiHealthWebClient(): WebClient = webClientBuilder.baseUrl(prisonRegisterApiBaseUri).build()
 }
