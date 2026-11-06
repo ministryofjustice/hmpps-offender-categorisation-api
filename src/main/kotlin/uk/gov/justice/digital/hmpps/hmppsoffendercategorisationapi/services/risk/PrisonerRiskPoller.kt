@@ -53,7 +53,7 @@ class PrisonerRiskPoller(
         try {
           val riskProfile = prisonerRiskCalculator.calculateRisk(prisoner.prisonerNumber!!)
           val jsonRiskProfile = jacksonObjectMapper().writeValueAsString(riskProfile)
-          val existingRiskProfile = prisonerRiskProfileRepository.findByOffenderNo(prisoner.prisonerNumber!!)
+          val existingRiskProfile = prisonerRiskProfileRepository.findByOffenderNo(prisoner.prisonerNumber)
           compareRiskProfiles(prisoner, existingRiskProfile, riskProfile)
           if (existingRiskProfile == null) {
             prisonerRiskProfileRepository.save(
