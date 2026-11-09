@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.AssessRisksAndNeedsApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.ManageAdjudicationsApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.ManageOffencesApiClient
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonApiClient
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonRegisterApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonerSearchApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.ProbationSearchApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.prs.AllPrisonersPrsEligibility
@@ -15,14 +15,14 @@ import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.respons
 @Service
 class PrsEligibilityService(
   private val prisonerSearchApiClient: PrisonerSearchApiClient,
-  private val prisonApiClient: PrisonApiClient,
+  private val prisonRegisterApiClient: PrisonRegisterApiClient,
   private val manageOffencesApiClient: ManageOffencesApiClient,
   private val probationSearchApiClient: ProbationSearchApiClient,
   private val assessRisksAndNeedsApiClient: AssessRisksAndNeedsApiClient,
   private val manageAdjudicationsApiClient: ManageAdjudicationsApiClient,
 ) {
   fun report(agencyId: String? = null) {
-    val allPrisons = if (agencyId == null) prisonApiClient.findPrisons().map { it.agencyId } else listOf(agencyId)
+    val allPrisons = if (agencyId == null) prisonRegisterApiClient.getPrisons().map { it.prisonId } else listOf(agencyId)
     allPrisons.forEach {
       reportPrisonerEligibilityForPrison(it)
     }

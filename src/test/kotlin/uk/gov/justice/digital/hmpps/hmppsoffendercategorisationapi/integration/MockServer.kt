@@ -8,19 +8,18 @@ import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration
 import com.github.tomakehurst.wiremock.http.HttpHeader
 import com.github.tomakehurst.wiremock.http.HttpHeaders
-import org.springframework.data.jpa.domain.AbstractPersistable_.id
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PageableResult
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.SearchResult
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentReport
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.IncidentReportResponse
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.incidents.ReportBasic
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonRegister.PrisonRegisterPrison
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.dto.prisonerAlert.PrisonerAlertResponseDto
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonerFactory
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.dto.prisonRegister.TestPrisonRegisterPrisonFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.RestPage
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.RiskLevel
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.SdsExemptionSchedulePart
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prison
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.adjudication.Adjudication
 import java.util.UUID
@@ -146,20 +145,6 @@ class IncidentApiMockServer : MockServer(8098) {
 }
 
 class PrisonApiMockServer : MockServer(8094) {
-  fun stubFindPrisons(prisons: List<Prison> = listOf((TestPrisonFactory()).build())) {
-    stubFor(
-      WireMock.get(WireMock.urlEqualTo("/api/agencies/prisons"))
-        .willReturn(
-          WireMock.aResponse()
-            .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json")))
-            .withBody(
-              jacksonObjectMapper().apply {
-                registerModule(JavaTimeModule())
-              }.writeValueAsString(prisons),
-            ),
-        ),
-    )
-  }
   fun stubPutCategorisationInactive(bookingId: Long) = stubFor(
     WireMock.put(WireMock.urlEqualTo("/api/offender-assessments/category/$bookingId/inactive?status=PENDING"))
       .willReturn(
@@ -293,6 +278,23 @@ class HmppsAuthMockServer : MockServer(8090) {
           WireMock.aResponse()
             .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json")))
             .withBody(mapper.writeValueAsString(mapOf("access_token" to "ABCDE", "token_type" to "bearer"))),
+        ),
+    )
+  }
+}
+
+class PrisonRegisterApiMockServer : MockServer(8096) {
+  fun stubGetPrisons(prisons: List<PrisonRegisterPrison> = listOf((TestPrisonRegisterPrisonFactory()).build())) {
+    stubFor(
+      WireMock.get(WireMock.urlEqualTo("/prisons"))
+        .willReturn(
+          WireMock.aResponse()
+            .withHeaders(HttpHeaders(HttpHeader("Content-Type", "application/json")))
+            .withBody(
+              jacksonObjectMapper().apply {
+                registerModule(JavaTimeModule())
+              }.writeValueAsString(prisons),
+            ),
         ),
     )
   }
