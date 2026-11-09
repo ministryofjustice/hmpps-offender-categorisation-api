@@ -9,6 +9,7 @@ class S3HealthTest : IntegrationTestBase() {
 
   @Test
   fun `S3 Health check returns OK`() {
+    stubPing(200)
     webTestClient.get()
       .uri("/health")
       .exchange()

@@ -13,6 +13,7 @@ class HealthCheckTest : IntegrationTestBase() {
 
   @Test
   fun `Health page reports ok`() {
+    stubPing(200)
     webTestClient.get()
       .uri("/health")
       .exchange()
@@ -24,6 +25,7 @@ class HealthCheckTest : IntegrationTestBase() {
 
   @Test
   fun `Health info reports version`() {
+    stubPing(200)
     webTestClient.get().uri("/health")
       .exchange()
       .expectStatus().isOk
