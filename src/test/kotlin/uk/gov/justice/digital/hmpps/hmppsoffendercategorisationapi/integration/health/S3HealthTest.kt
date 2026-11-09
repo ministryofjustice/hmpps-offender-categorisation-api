@@ -9,17 +9,15 @@ class S3HealthTest : IntegrationTestBase() {
 
   @Test
   fun `S3 Health check returns OK`() {
-    stubPing(200)
     webTestClient.get()
-      .uri("/health")
+      .uri("/health/s3Health")
       .exchange()
       .expectStatus()
       .isOk()
       .expectBody()
       .jsonPath("status").isEqualTo("UP")
-      .jsonPath("components.s3Health.status").isEqualTo("UP")
-      .jsonPath("components.s3Health.details.bucket").isEqualTo(s3Properties.bucketName)
-      .jsonPath("components.s3Health.details.region").isEqualTo(s3Properties.region)
+      .jsonPath("details.bucket").isEqualTo(s3Properties.bucketName)
+      .jsonPath("details.region").isEqualTo(s3Properties.region)
       .returnResult()
   }
 }
