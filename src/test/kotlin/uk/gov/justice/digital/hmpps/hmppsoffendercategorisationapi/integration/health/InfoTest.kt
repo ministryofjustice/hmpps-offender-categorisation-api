@@ -12,6 +12,7 @@ class InfoTest : IntegrationTestBase() {
 
   @Test
   fun `Info page is accessible`() {
+    stubPing(200)
     webTestClient.get()
       .uri("/info")
       .exchange()
@@ -23,6 +24,7 @@ class InfoTest : IntegrationTestBase() {
 
   @Test
   fun `Info page reports version`() {
+    stubPing(200)
     webTestClient.get().uri("/info")
       .exchange()
       .expectStatus().isOk

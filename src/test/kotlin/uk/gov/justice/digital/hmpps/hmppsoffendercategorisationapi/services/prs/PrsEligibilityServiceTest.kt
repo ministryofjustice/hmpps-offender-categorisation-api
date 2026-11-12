@@ -11,11 +11,11 @@ import org.springframework.boot.test.system.OutputCaptureExtension
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.AssessRisksAndNeedsApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.ManageAdjudicationsApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.ManageOffencesApiClient
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonApiClient
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonRegisterApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonerSearchApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.ProbationSearchApiClient
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonerFactory
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.dto.prisonRegister.TestPrisonRegisterPrisonFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.RiskLevel
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.enum.SdsExemptionSchedulePart
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.model.response.Prisoner
@@ -34,7 +34,7 @@ import java.time.LocalDate
 @ExtendWith(MockitoExtension::class)
 class PrsEligibilityServiceTest {
   private val mockPrisonerSearchApiClient = Mockito.mock<PrisonerSearchApiClient>()
-  private val mockPrisonApiClient = Mockito.mock<PrisonApiClient>()
+  private val mockPrisonRegisterApiClient = Mockito.mock<PrisonRegisterApiClient>()
   private val mockManageOffencesApiClient = Mockito.mock<ManageOffencesApiClient>()
   private val mockProbationSearchApiClient = Mockito.mock<ProbationSearchApiClient>()
   private val mockAssessRisksAndNeedsApiClient = Mockito.mock<AssessRisksAndNeedsApiClient>()
@@ -42,7 +42,7 @@ class PrsEligibilityServiceTest {
 
   private val prsEligibilityService = PrsEligibilityService(
     mockPrisonerSearchApiClient,
-    mockPrisonApiClient,
+    mockPrisonRegisterApiClient,
     mockManageOffencesApiClient,
     mockProbationSearchApiClient,
     mockAssessRisksAndNeedsApiClient,
@@ -60,9 +60,9 @@ class PrsEligibilityServiceTest {
     val testBookingId = 12
     val testBookingId2 = 13
 
-    whenever(mockPrisonApiClient.findPrisons()).thenReturn(
+    whenever(mockPrisonRegisterApiClient.getPrisons()).thenReturn(
       listOf(
-        (TestPrisonFactory()).withAgencyId(testAgencyId).build(),
+        (TestPrisonRegisterPrisonFactory()).withPrisonId(testAgencyId).build(),
       ),
     )
     whenever(mockPrisonerSearchApiClient.findPrisonersByAgencyId(testAgencyId, 0, 100)).thenReturn(

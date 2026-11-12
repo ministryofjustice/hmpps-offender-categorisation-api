@@ -42,6 +42,10 @@ prison:
     endpoint:
       url:
         http://localhost:8094
+  register:
+    api:
+      url:
+        http://localhost:8096
 
 manage:
   adjudications:

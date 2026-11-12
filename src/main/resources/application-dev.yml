@@ -45,6 +45,9 @@ prison:
   api:
     endpoint:
       url: "https://prison-api-dev.prison.service.justice.gov.uk"
+  register:
+    api:
+      url: "https://prison-register-dev.hmpps.service.justice.gov.uk"
 
 manage:
   adjudications:

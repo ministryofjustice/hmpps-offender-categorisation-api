@@ -54,6 +54,7 @@ abstract class IntegrationTestBase {
     internal val manageOffencesMockServer = ManageOffencesMockServer()
     internal val hmppsAuthMockServer = HmppsAuthMockServer()
     internal val prisonerAlertsApiMockServer = PrisonerAlertsMockServer()
+    internal val prisonRegisterApiMockServer = PrisonRegisterApiMockServer()
 
     @JvmStatic
     @DynamicPropertySource
@@ -81,6 +82,7 @@ abstract class IntegrationTestBase {
       manageOffencesMockServer.start()
       hmppsAuthMockServer.start()
       prisonerAlertsApiMockServer.start()
+      prisonRegisterApiMockServer.start()
     }
 
     @AfterAll
@@ -94,6 +96,7 @@ abstract class IntegrationTestBase {
       manageOffencesMockServer.stop()
       hmppsAuthMockServer.stop()
       prisonerAlertsApiMockServer.stop()
+      prisonRegisterApiMockServer.stop()
     }
 
     fun stubPing(status: Int) {
@@ -168,6 +171,15 @@ abstract class IntegrationTestBase {
             .withStatus(status),
         ),
       )
+
+      prisonRegisterApiMockServer.stubFor(
+        WireMock.get("/health/ping").willReturn(
+          WireMock.aResponse()
+            .withHeader("Content-Type", "application/json")
+            .withBody(if (status == 200) "pong" else "some error")
+            .withStatus(status),
+        ),
+      )
     }
 
     @JvmStatic
@@ -185,6 +197,7 @@ abstract class IntegrationTestBase {
     assessRisksAndNeedsMockServer.resetAll()
     manageOffencesMockServer.resetAll()
     prisonerAlertsApiMockServer.resetAll()
+    prisonRegisterApiMockServer.resetAll()
 
     hmppsAuthMockServer.stubGrantToken()
   }
