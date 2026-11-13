@@ -43,7 +43,7 @@ INSERT INTO public.form
  due_by_date,
  cancelled_date,
  cancelled_by)
-VALUES('{"recat":{"decision":{"category":"B"},"securityBack":{},"securityInput":{"securityInputNeeded":"Yes","securityInputNeededText":"text from recat"},"nextReviewDate":{"date":"2/8/2019"},"riskAssessment":{"lowerCategory":"lower text","otherRelevant":"Yes","higherCategory":"higher text","otherRelevantText":"rel info"},"prisonerBackground":{"offenceDetails":"offence details text"},"higherSecurityReview":{"steps":"steps text","transfer":"Yes","behaviour":"higher security text","conditions":"security conditions","transferText":"manage text"}},"security":{"review":{"securityReview":"security review text"}},"supervisor":{"review":{"proposedCategory":"B","otherInformationText":"other rel info","supervisorCategoryAppropriate":"Yes"}},"openConditionsRequested":false}',
+VALUES('{"recat":{"decision":{"category":"B"},"bcstInput":{"bcstInputText":"Test","bcstRelevantInfo":"Yes"},"securityBack":{},"securityInput":{"securityInputNeeded":"Yes","securityInputNeededText":"text from recat"},"nextReviewDate":{"date":"2/8/2019"},"riskAssessment":{"lowerCategory":"lower text","otherRelevant":"Yes","higherCategory":"higher text","otherRelevantText":"rel info"},"prisonerBackground":{"offenceDetails":"offence details text"},"higherSecurityReview":{"steps":"steps text","transfer":"Yes","behaviour":"higher security text","conditions":"security conditions","transferText":"manage text"}},"security":{"review":{"securityReview":"security review text"}},"supervisor":{"review":{"proposedCategory":"B","otherInformationText":"other rel info","supervisorCategoryAppropriate":"Yes"}},"openConditionsRequested":false}',
        0,
        'SRENDELL_GEN',
        'APPROVED',

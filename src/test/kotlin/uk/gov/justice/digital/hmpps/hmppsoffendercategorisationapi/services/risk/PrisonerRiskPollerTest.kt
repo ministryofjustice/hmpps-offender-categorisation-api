@@ -18,9 +18,10 @@ import org.springframework.boot.test.system.CapturedOutput
 import org.springframework.boot.test.system.OutputCaptureExtension
 import org.springframework.dao.InvalidDataAccessResourceUsageException
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonApiClient
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonRegisterApiClient
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.client.PrisonerSearchApiClient
-import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.TestPrisonerFactory
+import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.dto.prisonRegister.TestPrisonRegisterPrisonFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.model.entity.PrisonerRiskProfileEntityFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.model.entity.RiskChangeEntityFactory
 import uk.gov.justice.digital.hmpps.hmppsoffendercategorisationapi.factories.risk.TestEscapeAlertFactory
@@ -37,6 +38,7 @@ import java.util.stream.Stream
 @ExtendWith(OutputCaptureExtension::class)
 class PrisonerRiskPollerTest {
   private val mockPrisonApiClient = mock<PrisonApiClient>()
+  private val mockPrisonRegisterApiClient = mock<PrisonRegisterApiClient>()
   private val mockPrisonerSearchApiClient = mock<PrisonerSearchApiClient>()
   private val mockPrisonerRiskCalculator = mock<PrisonerRiskCalculator>()
   private val mockPrisonerRiskProfileRepository = mock<PrisonerRiskProfileRepository>()
@@ -46,6 +48,7 @@ class PrisonerRiskPollerTest {
 
   private val prisonerRiskPoller = PrisonerRiskPoller(
     mockPrisonApiClient,
+    mockPrisonRegisterApiClient,
     mockPrisonerSearchApiClient,
     mockPrisonerRiskCalculator,
     mockPrisonerRiskProfileRepository,
@@ -282,10 +285,10 @@ class PrisonerRiskPollerTest {
   )
 
   private fun mockFindPrisons() = whenever(
-    mockPrisonApiClient.findPrisons(),
+    mockPrisonRegisterApiClient.getPrisons(),
   ).thenReturn(
     listOf(
-      TestPrisonFactory().withAgencyId(TEST_AGENCY_ID).build(),
+      TestPrisonRegisterPrisonFactory().withPrisonId(TEST_AGENCY_ID).build(),
     ),
   )
 

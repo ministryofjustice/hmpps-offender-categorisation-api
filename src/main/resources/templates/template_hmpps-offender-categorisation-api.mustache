@@ -22,8 +22,8 @@
         <tr>
             <td>{{ getPrisonName prisonId }}</td>
             <td>{{ optionalValue (formatDate start_date) }}</td>
-            <td>{{ getUserLastName user_id }}</td>
             <td>{{ optionalValue (getUserLastName referred_by) }}</td>
+            <td>{{ getUserLastName user_id }}</td>
         </tr>
     </table>
 
@@ -126,9 +126,6 @@
                 <table class="summary-list">
                     <tr><td>Previous convictions</td><td>{{ optionalValue previousConvictions }}</td></tr>
                     <tr><td>Previous convictions text</td><td>{{ optionalValue previousConvictionsText }}</td></tr>
-                    <tr><td>Further charges</td><td>{{ optionalValue this.furtherCharges }}</td></tr>
-                    <tr><td>Further charges text</td><td>{{ optionalValue furtherChargesText }}</td></tr>
-                    <tr><td>Category B offending history</td><td>{{ optionalValue offendingHistoryCatB }}</td></tr>
                 </table>
             {{/offendingHistory}}
             {{^offendingHistory}}
@@ -145,16 +142,6 @@
             {{^securityInput}}
                 <p>No Data Held</p>
             {{/securityInput}}
-
-            <p><b>Security back</b></p>
-            {{#securityBack}}
-                <table class="summary-list">
-                    <tr><td>Cat B</td><td>{{ optionalValue catB }}</td></tr>
-                </table>
-            {{/securityBack}}
-            {{^securityBack}}
-                <p>No Data Held</p>
-            {{/securityBack}}
 
             <p><b>Decision</b></p>
             {{#decision}}
@@ -217,6 +204,17 @@
                 <p>No Data Held</p>
             {{/decision}}
 
+            <p><b>Basic Custody Screening Tool Input</b></p>
+            {{#bcstInput}}
+                <table class="summary-list">
+                    <tr><td>Basic Custody Screening Tool Part 1 relevant info</td><td>{{ optionalValue (convertBoolean bcstRelevantInfo) }}</td></tr>
+                    <tr><td>Basic Custody Screening Tool Part 1 input text</td><td>{{ optionalValue bcstInputText }}</td></tr>
+                </table>
+            {{/bcstInput}}
+            {{^bcstInput}}
+                <p>No Data Held</p>
+            {{/bcstInput}}
+
             <p><b>Offender Assessment System Input</b></p>
             {{#oasysInput}}
                 <table class="summary-list">
@@ -254,9 +252,9 @@
             {{#riskAssessment}}
                 <table class="summary-list">
                     <tr><td>Lower category</td><td>{{ optionalValue lowerCategory }}</td></tr>
-                    <tr><td>Other relevant</td><td>{{ convertBoolean otherRelevant }}</td></tr>
-                    <tr><td>Higher category</td><td>{{ convertBoolean higherCategory }}</td></tr>
-                    <tr><td>Other relevant text</td><td>{{ convertBoolean otherRelevantText }}</td></tr>
+                    <tr><td>Other relevant</td><td>{{ optionalValue (convertBoolean otherRelevant) }}</td></tr>
+                    <tr><td>Higher category</td><td>{{ optionalValue (convertBoolean higherCategory) }}</td></tr>
+                    <tr><td>Other relevant text</td><td>{{ optionalValue (convertBoolean otherRelevantText) }}</td></tr>
                 </table>
             {{/riskAssessment}}
             {{^riskAssessment}}
@@ -309,15 +307,15 @@
                 <p>No Data Held</p>
             {{/securityInput}}
 
-            <p><b>Security back</b></p>
-            {{#securityBack}}
+            <p><b>Category decision based on security information</b></p>
+            {{#categoryDecisionBasedOnSecurityInformation}}
                 <table class="summary-list">
-                    <tr><td>Cat B</td><td>{{ optionalValue catB }}</td></tr>
+                    <tr><td>Category B is warranted</td><td>{{ optionalValue categoryBIsWarranted }}</td></tr>
                 </table>
-            {{/securityBack}}
-            {{^securityBack}}
+            {{/categoryDecisionBasedOnSecurityInformation}}
+            {{^categoryDecisionBasedOnSecurityInformation}}
                 <p>No Data Held</p>
-            {{/securityBack}}
+            {{/categoryDecisionBasedOnSecurityInformation}}
 
             <p><b>Risk profile change detail</b></p>
             {{#riskProfileChangeDetail}}
@@ -453,8 +451,8 @@
             </tr>
         </table>
 
-        <h5>Life profile</h5>
-        {{#lifeProfile}}
+        <h5>Court Issued Life Sentence</h5>
+        {{#courtIssuedLifeSentence}}
         <br>
         <table class="data-table">
             <tr>
@@ -468,10 +466,10 @@
                 <td>{{ optionalValue provisionalCategorisation }}</td>
             </tr>
         </table>
-        {{/lifeProfile}}
-        {{^lifeProfile}}
+        {{/courtIssuedLifeSentence}}
+        {{^courtIssuedLifeSentence}}
             <p>No Data Held</p>
-        {{/lifeProfile}}
+        {{/courtIssuedLifeSentence}}
 
         <h5>Escape profile</h5>
         {{#escapeProfile}}
@@ -496,28 +494,36 @@
             <br>
             <table class="data-table">
                 <tr>
-                    <td class="data-column-25">Risk type</td>
-                    <td class="data-column-25">Display assaults</td>
-                    <td class="data-column-25">Number of assaults</td>
-                    <td class="data-column-25">Number of serious assaults</td>
+                    <td class="data-column-30">Risk type</td>
+                    <td class="data-column-30">Display assaults</td>
+                    <td class="data-column-30">Number of assaults</td>
                 </tr>
                 <tr>
                     <td>{{ optionalValue riskType }}</td>
                     <td>{{ convertBoolean displayAssaults }}</td>
                     <td>{{ optionalValue numberOfAssaults }}</td>
-                    <td>{{ optionalValue numberOfSeriousAssaults }}</td>
                 </tr>
             </table>
 
             <table class="data-table">
                 <tr>
-                    <td class="data-column-25">Number of non-serious assaults</td>
-                    <td class="data-column-25">Very high risk offender</td>
-                    <td class="data-column-25">Provisional categorisation</td>
-                    <td class="data-column-25">Notify safety custody lead</td>
+                    <td class="data-column-30">Number of serious assaults</td>
+                    <td class="data-column-30">Number of non-serious assaults</td>
+                    <td class="data-column-30">Risk due to violence</td>
                 </tr>
                 <tr>
+                    <td>{{ optionalValue numberOfSeriousAssaults }}</td>
                     <td>{{ optionalValue numberOfNonSeriousAssaults }}</td>
+                    <td>{{ convertBoolean riskDueToViolence }}</td>
+                </tr>
+            </table>
+            <table class="data-table">
+                <tr>
+                    <td class="data-column-30">Very high risk offender</td>
+                    <td class="data-column-30">Provisional categorisation</td>
+                    <td class="data-column-30">Notify safety custody lead</td>
+                </tr>
+                <tr>
                     <td>{{ convertBoolean veryHighRiskViolentOffender }}</td>
                     <td>{{ optionalValue provisionalCategorisation }}</td>
                     <td>{{ convertBoolean notifySafetyCustodyLead }}</td>
@@ -576,14 +582,16 @@
         <b>Violence</b>
         <table class="data-table">
             <tr>
-                <td class="data-column-30">Number of assaults</td>
-                <td class="data-column-30">Number of serious assaults</td>
-                <td class="data-column-30">Number of non-serious assaults</td>
+                <td class="data-column-25">Number of assaults</td>
+                <td class="data-column-25">Number of serious assaults</td>
+                <td class="data-column-25">Number of non-serious assaults</td>
+                <td class="data-column-25">Risk due to violence</td>
             </tr>
             <tr>
                 <td>{{ optionalValue numberOfAssaults }}</td>
                 <td>{{ optionalValue numberOfSeriousAssaults }}</td>
                 <td>{{ optionalValue numberOfNonSeriousAssaults }}</td>
+                <td>{{ convertBoolean riskDueToViolence }}</td>
             </tr>
         </table>
         <table class="data-table">
@@ -625,14 +633,16 @@
         <b>Violence</b>
         <table class="data-table">
             <tr>
-                <td class="data-column-30">Number of assaults</td>
-                <td class="data-column-30">Number of serious assaults</td>
-                <td class="data-column-30">Number of non-serious assaults</td>
+                <td class="data-column-25">Number of assaults</td>
+                <td class="data-column-25">Number of serious assaults</td>
+                <td class="data-column-25">Number of non-serious assaults</td>
+                <td class="data-column-25">Risk due to violence</td>
             </tr>
             <tr>
                 <td>{{ optionalValue numberOfAssaults }}</td>
                 <td>{{ optionalValue numberOfSeriousAssaults }}</td>
                 <td>{{ optionalValue numberOfNonSeriousAssaults }}</td>
+                <td>{{ convertBoolean riskDueToViolence }}</td>
             </tr>
         </table>
         <table class="data-table">
@@ -656,15 +666,15 @@
     <p>No Data Held</p>
 {{/riskChange}}
 
-<h4>Security</h4>
+<h4>Security Referral</h4>
 {{#security}}
     <table class="data-table">
         <tr>
-            <td class="data-column-25">Prison name</td>
-            <td class="data-column-25">Raised date</td>
+            <td class="data-column-20">Prison name</td>
+            <td class="data-column-20">Raised date</td>
             <td class="data-column-20">Referred by</td>
-            <td class="data-column-25">Processed date</td>
-            <td class="data-column-25">Status</td>
+            <td class="data-column-20">Processed date</td>
+            <td class="data-column-20">Status</td>
         </tr>
         <tr>
             <td>{{ getPrisonName prisonId }}</td>
@@ -740,7 +750,7 @@
             <td class="data-column-50">Assessment comment</td>
         </tr>
         <tr>
-            <td>{{ optionalValue assessed_by }}</td>
+            <td>{{ optionalValue (getUserLastName assessed_by) }}</td>
             <td>{{ optionalValue assessment_committee }}</td>
             <td>{{ optionalValue assessment_comment }}</td>
         </tr>
@@ -783,14 +793,16 @@
     <h4>Violence</h4>
     <table class="data-table">
         <tr>
-            <td class="data-column-30">Number of assaults</td>
-            <td class="data-column-30">Number of serious assaults</td>
-            <td class="data-column-30">Number of non-serious assaults</td>
+            <td class="data-column-25">Number of assaults</td>
+            <td class="data-column-25">Number of serious assaults</td>
+            <td class="data-column-25">Number of non-serious assaults</td>
+            <td class="data-column-25">Risk due to violence</td>
         </tr>
         <tr>
             <td>{{ optionalValue numberOfAssaults }}</td>
             <td>{{ optionalValue numberOfSeriousAssaults }}</td>
             <td>{{ optionalValue numberOfNonSeriousAssaults }}</td>
+            <td>{{ convertBoolean riskDueToViolence }}</td>
         </tr>
     </table>
     <table class="data-table">
